@@ -16,7 +16,8 @@ class RobotsDiscovery
 {
     private HttpClient    $http;
     private UrlNormalizer $normalizer;
-    private ?callable     $logFn;
+    /** @var callable|null */
+    private $logFn;
 
     public function __construct(HttpClient $http, UrlNormalizer $normalizer, ?callable $logFn = null)
     {

@@ -18,7 +18,8 @@ class SitemapDiscovery
     private HttpClient    $http;
     private UrlNormalizer $normalizer;
     private array         $config;
-    private ?callable     $logFn;
+    /** @var callable|null */
+    private $logFn;
 
     // Max sitemaps to follow per scan to prevent runaway recursion
     private const MAX_SITEMAPS = 100;

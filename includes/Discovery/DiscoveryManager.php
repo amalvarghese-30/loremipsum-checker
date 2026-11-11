@@ -16,7 +16,8 @@ class DiscoveryManager
     private HttpClient    $http;
     private UrlNormalizer $normalizer;
     private array         $config;
-    private ?callable     $logFn;
+    /** @var callable|null */
+    private $logFn;
 
     // Discovered URL record format:
     // ['url' => string, 'normalized_url' => string, 'url_hash' => string,

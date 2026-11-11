@@ -16,7 +16,8 @@ class HtmlSitemapDiscovery
     private HttpClient    $http;
     private UrlNormalizer $normalizer;
     private array         $config;
-    private ?callable     $logFn;
+    /** @var callable|null */
+    private $logFn;
 
     public function __construct(HttpClient $http, UrlNormalizer $normalizer, array $config = [], ?callable $logFn = null)
     {

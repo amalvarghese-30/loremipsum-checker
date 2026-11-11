@@ -16,7 +16,8 @@ class WordPressDiscovery
 {
     private HttpClient    $http;
     private UrlNormalizer $normalizer;
-    private ?callable     $logFn;
+    /** @var callable|null */
+    private $logFn;
 
     // Cap maximum API pages to prevent endless pagination on huge blogs
     private const MAX_PAGES_PER_TYPE = 5;
