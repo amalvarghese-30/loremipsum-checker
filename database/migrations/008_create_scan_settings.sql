@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS `scan_settings` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `scan_id` BIGINT UNSIGNED NOT NULL,
+  `settings_json` LONGTEXT NOT NULL,
+  `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_scan_id` (`scan_id`),
+  CONSTRAINT `fk_ss_scan` FOREIGN KEY (`scan_id`) REFERENCES `scans`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

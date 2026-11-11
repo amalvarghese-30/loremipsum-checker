@@ -1,0 +1,134 @@
+<?php
+/**
+ * Page Result Repository
+ *
+ * Persists and queries individual webpage processing outcomes.
+ */
+
+namespace LoremChecker\Repository;
+
+use PDO;
+
+class PageResultRepository
+{
+    private PDO $db;
+
+    public function __construct(PDO $db)
+    {
+        $this->db = $db;
+    }
+
+    public function saveResult(array $data): int
+    {
+        $stmt = $this->db->prepare('
+            INSERT INTO page_results (
+                scan_id, discovered_url_id, requested_url, final_url,
+                http_status, content_type, processing_status, finding_count,
+                duration_ms, retry_count, error_type, error_message,
+                page_title, word_count, has_lorem_ipsum, started_at, completed_at
+            ) VALUES (
+                ?, ?, ?, ?,
+                ?, ?, ?, ?,
+                ?, ?, ?, ?,
+                ?, ?, ?, NOW(), NOW()
+            )
+        ');
+
+        $stmt->execute([
+            $data['scan_id'],
+            $data['discovered_url_id'],
+            $data['requested_url'],
+            $data['final_url'] ?? null,
+            $data['http_status'] ?? null,
+            $data['content_type'] ?? null,
+            $data['processing_status'] ?? 'clean',
+            (int)($data['finding_count'] ?? 0),
+            $data['duration_ms'] ?? null,
+            (int)($data['retry_count'] ?? 0),
+            $data['error_type'] ?? null,
+            $data['error_message'] ?? null,
+            $data['page_title'] ?? null,
+            $data['word_count'] ?? null,
+            !empty($data['has_lorem_ipsum']) ? 1 : 0
+        ]);
+
+        return (int)$this->db->lastInsertId();
+    }
+
+    public function getById(int $id): ?array
+    {
+        $stmt = $this->db->prepare('SELECT * FROM page_results WHERE id = ?');
+        $stmt->execute([$id]);
+        $row = $stmt->fetch();
+        return $row ?: null;
+    }
+
+    public function listPaginated(int $scanId, int $page = 1, int $pageSize = 50, array $filters = []): array
+    {
+        $offset = ($page - 1) * $pageSize;
+        $sql = 'SELECT * FROM page_results WHERE scan_id = ?';
+        $params = [$scanId];
+
+        if (!empty($filters['status'])) {
+            $sql .= ' AND processing_status = ?';
+            $params[] = $filters['status'];
+        }
+
+        if (isset($filters['has_lorem_ipsum'])) {
+            $sql .= ' AND has_lorem_ipsum = ?';
+            $params[] = $filters['has_lorem_ipsum'] ? 1 : 0;
+        }
+
+        if (!empty($filters['search'])) {
+            $sql .= ' AND (requested_url LIKE ? OR page_title LIKE ?)';
+            $searchWild = '%' . $filters['search'] . '%';
+            $params[] = $searchWild;
+            $params[] = $searchWild;
+        }
+
+        $sortField = 'id';
+        if (!empty($filters['sort_by']) && in_array($filters['sort_by'], ['id', 'duration_ms', 'finding_count', 'http_status'])) {
+            $sortField = $filters['sort_by'];
+        }
+        $sortDir = (!empty($filters['sort_dir']) && strtolower($filters['sort_dir']) === 'asc') ? 'ASC' : 'DESC';
+
+        $sql .= " ORDER BY {$sortField} {$sortDir} LIMIT ? OFFSET ?";
+
+        $stmt = $this->db->prepare($sql);
+        foreach ($params as $i => $val) {
+            $stmt->bindValue($i + 1, $val);
+        }
+        $stmt->bindValue(count($params) + 1, $pageSize, PDO::PARAM_INT);
+        $stmt->bindValue(count($params) + 2, $offset, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
+    public function countFiltered(int $scanId, array $filters = []): int
+    {
+        $sql = 'SELECT COUNT(*) FROM page_results WHERE scan_id = ?';
+        $params = [$scanId];
+
+        if (!empty($filters['status'])) {
+            $sql .= ' AND processing_status = ?';
+            $params[] = $filters['status'];
+        }
+
+        if (isset($filters['has_lorem_ipsum'])) {
+            $sql .= ' AND has_lorem_ipsum = ?';
+            $params[] = $filters['has_lorem_ipsum'] ? 1 : 0;
+        }
+
+        if (!empty($filters['search'])) {
+            $sql .= ' AND (requested_url LIKE ? OR page_title LIKE ?)';
+            $searchWild = '%' . $filters['search'] . '%';
+            $params[] = $searchWild;
+            $params[] = $searchWild;
+        }
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute($params);
+        return (int)$stmt->fetchColumn();
+    }
+}

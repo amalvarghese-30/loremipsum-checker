@@ -1,0 +1,1842 @@
+{
+    "id": "project_6af2276bdddc1_1794254699",
+    "project_name": "test 11",
+    "website_url": "https://www.gaggia.com/",
+    "sitemap_url": null,
+    "use_sitemap": true,
+    "status": "completed",
+    "created_at": "2026-11-10 01:34:59",
+    "updated_at": "2026-11-10 01:50:12",
+    "progress": {
+        "total_urls": 303,
+        "processed": 303,
+        "clean": 300,
+        "lorem_found": 0,
+        "errors": 2,
+        "percentage": 100,
+        "cf_blocked": 0
+    },
+    "results": [
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:16"
+        },
+        {
+            "url": "https://www.gaggia.com/de/truly-italian-emotion-betty-soldi/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:18"
+        },
+        {
+            "url": "https://www.gaggia.com/proudly-made-in-italy-en/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:21"
+        },
+        {
+            "url": "https://www.gaggia.com/welcome-new-classic/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:23"
+        },
+        {
+            "url": "https://www.gaggia.com/gaggia-coffee-line/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:26"
+        },
+        {
+            "url": "https://www.gaggia.com/gaggia-besana-is-here/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:29"
+        },
+        {
+            "url": "https://www.gaggia.com/gaggia-milan-design-week/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:31"
+        },
+        {
+            "url": "https://www.gaggia.com/creative-mornings-milan/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:33"
+        },
+        {
+            "url": "https://www.gaggia.com/the-new-gaggia-milano-websites-are-live-now/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:35"
+        },
+        {
+            "url": "https://www.gaggia.com/gaggias-80th-anniversary/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:38"
+        },
+        {
+            "url": "https://www.gaggia.com/45-years-of-design-the-10s/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:40"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-quality-danilo-taverna/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:43"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-passion-paolo-mezzadri/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:46"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-beauty-rosalba-piccinni/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:48"
+        },
+        {
+            "url": "https://www.gaggia.com/a-sustainable-attitude/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:50"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-authenticity-davide-longoni/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:53"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-rituals-christian-tirro/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:56"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-personality-fabio-giuffrida/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:35:59"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-taste-riccardo-gaspari/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:02"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-heritage-roberto-totti/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:05"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-balance-eve-ensemble/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:10"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-people-editorial-team/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:13"
+        },
+        {
+            "url": "https://www.gaggia.com/each-classic-energy-vibes-has-its-own-personality-mood-world/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:16"
+        },
+        {
+            "url": "https://www.gaggia.com/classic-lobster-red/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:18"
+        },
+        {
+            "url": "https://www.gaggia.com/classic-sunshine-yellow/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:21"
+        },
+        {
+            "url": "https://www.gaggia.com/discover-milan-brera/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:23"
+        },
+        {
+            "url": "https://www.gaggia.com/discover-milan-naviglio/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:27"
+        },
+        {
+            "url": "https://www.gaggia.com/gaggia-magenta-free-your-contemporary-home-barista-spirit/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:29"
+        },
+        {
+            "url": "https://www.gaggia.com/latte-macchiato-what-it-is-and-how-to-prepare-it/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:32"
+        },
+        {
+            "url": "https://www.gaggia.com/cooking-how-to-recycle-coffee-grounds/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:35"
+        },
+        {
+            "url": "https://www.gaggia.com/how-to-taste-coffee-as-an-expert/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:38"
+        },
+        {
+            "url": "https://www.gaggia.com/the-80s-design/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:41"
+        },
+        {
+            "url": "https://www.gaggia.com/45-years-of-design-the-90s/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:43"
+        },
+        {
+            "url": "https://www.gaggia.com/the-home-barista/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:45"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-design-gianluca-pasini/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:48"
+        },
+        {
+            "url": "https://www.gaggia.com/45-years-of-design-the-00s/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:51"
+        },
+        {
+            "url": "https://www.gaggia.com/the-70s-design/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:53"
+        },
+        {
+            "url": "https://www.gaggia.com/cleaning-the-house-how-to-recycle-coffee-grounds/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:57"
+        },
+        {
+            "url": "https://www.gaggia.com/how-to-make-a-cappuccino-the-secrets-to-make-it-in-the-best-way/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:36:59"
+        },
+        {
+            "url": "https://www.gaggia.com/which-varieties-of-coffee-exist-in-the-world/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:01"
+        },
+        {
+            "url": "https://www.gaggia.com/the-cooking-home-barista-i-croissant/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:11"
+        },
+        {
+            "url": "https://www.gaggia.com/the-decaffeinated-coffee/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:14"
+        },
+        {
+            "url": "https://www.gaggia.com/the-most-loved-coffee-and-milk-beverages-at-home-as-in-a-coffee-shop/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:16"
+        },
+        {
+            "url": "https://www.gaggia.com/discover-milan-magenta/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:19"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-art-manuela-metra/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:21"
+        },
+        {
+            "url": "https://www.gaggia.com/the-ultimate-barista-experience-at-home-cadorna/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:23"
+        },
+        {
+            "url": "https://www.gaggia.com/for-the-true-cappuccino-lovers-gaggia-naviglio-milk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:25"
+        },
+        {
+            "url": "https://www.gaggia.com/gaggia-classic-color-vibes/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:28"
+        },
+        {
+            "url": "https://www.gaggia.com/a-special-present-m-o-m-playlist/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:31"
+        },
+        {
+            "url": "https://www.gaggia.com/an-espresso-in-your-garden-how-to-recycle-coffee-grounds/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:33"
+        },
+        {
+            "url": "https://www.gaggia.com/a-more-sustainable-coffee-happy-world-environment-day/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:36"
+        },
+        {
+            "url": "https://www.gaggia.com/beauty-routine-how-to-recycle-coffee-grounds/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:39"
+        },
+        {
+            "url": "https://www.gaggia.com/the-cooking-home-barista-the-panettone-pops/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:42"
+        },
+        {
+            "url": "https://www.gaggia.com/5-winter-drinks-to-make-at-home/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:44"
+        },
+        {
+            "url": "https://www.gaggia.com/painting-and-dyeing-with-coffee/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:47"
+        },
+        {
+            "url": "https://www.gaggia.com/our-gifs-are-available/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:49"
+        },
+        {
+            "url": "https://www.gaggia.com/gaggia-magenta-prestige/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:52"
+        },
+        {
+            "url": "https://www.gaggia.com/which-is-the-best-milk-for-your-drinks/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:54"
+        },
+        {
+            "url": "https://www.gaggia.com/caffe-vs-espresso-the-differences/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:37:57"
+        },
+        {
+            "url": "https://www.gaggia.com/45-years-of-espresso-at-home/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:00"
+        },
+        {
+            "url": "https://www.gaggia.com/your-bar-at-home/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:07"
+        },
+        {
+            "url": "https://www.gaggia.com/sharing-moments/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:09"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-emotion-betty-soldi/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:11"
+        },
+        {
+            "url": "https://www.gaggia.com/take-your-time/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:14"
+        },
+        {
+            "url": "https://www.gaggia.com/continuously-evolving-tradition/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:16"
+        },
+        {
+            "url": "https://www.gaggia.com/?p=8924",
+            "status": "error",
+            "details": "HTTP 404",
+            "checked_at": "2026-11-10 01:38:19"
+        },
+        {
+            "url": "https://www.gaggia.com/85-years-of-heritage-2023/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:22"
+        },
+        {
+            "url": "https://www.gaggia.com/85-years-of-heritage-2018-2022/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:25"
+        },
+        {
+            "url": "https://www.gaggia.com/85-years-of-heritage-1991-1999/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:28"
+        },
+        {
+            "url": "https://www.gaggia.com/85-years-of-heritage-1962-1977/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:30"
+        },
+        {
+            "url": "https://www.gaggia.com/85-years-of-heritage-1950-1955/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:33"
+        },
+        {
+            "url": "https://www.gaggia.com/85-years-of-heritage-1938-1947/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:37"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-in-the-world-milan/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:39"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-in-the-world-istanbul/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:43"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-in-the-world-paris/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:45"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-in-the-world-berlin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:47"
+        },
+        {
+            "url": "https://www.gaggia.com/coffee-granita/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:49"
+        },
+        {
+            "url": "https://www.gaggia.com/coffee-smoothie/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:51"
+        },
+        {
+            "url": "https://www.gaggia.com/coffee-sorbet/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:54"
+        },
+        {
+            "url": "https://www.gaggia.com/cook-with-us-coffee-cheesecake/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:38:57"
+        },
+        {
+            "url": "https://www.gaggia.com/cook-with-us-salmon-bagels/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:03"
+        },
+        {
+            "url": "https://www.gaggia.com/the-home-barista-recipes-irish-coffee/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:06"
+        },
+        {
+            "url": "https://www.gaggia.com/cook-with-us-the-stollen/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:08"
+        },
+        {
+            "url": "https://www.gaggia.com/cook-with-us-gingerbread-cookies/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:11"
+        },
+        {
+            "url": "https://www.gaggia.com/cook-with-us-dulce-de-leche/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:14"
+        },
+        {
+            "url": "https://www.gaggia.com/discover-milan-san-babila/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:17"
+        },
+        {
+            "url": "https://www.gaggia.com/history-of-coffee-from-the-origins-to-the-last-evolutions/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:19"
+        },
+        {
+            "url": "https://www.gaggia.com/gaggia-classic-30-charity-auction/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:22"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-vs-automatic-machines/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:24"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-in-the-world-munich/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:26"
+        },
+        {
+            "url": "https://www.gaggia.com/myespressomoments-federica-maiolo/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:29"
+        },
+        {
+            "url": "https://www.gaggia.com/espresso-series/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:32"
+        },
+        {
+            "url": "https://www.gaggia.com/it/promozione-gaggia-espresso/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:34"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-in-the-world-sydney/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:36"
+        },
+        {
+            "url": "https://www.gaggia.com/myespressomoments-alessandro-zaccaro/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:39"
+        },
+        {
+            "url": "https://www.gaggia.com/myespressomoments-frollemente/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:42"
+        },
+        {
+            "url": "https://www.gaggia.com/myespressomoments-francesco-pruneddu/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:44"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-in-the-world-hong-kong/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:47"
+        },
+        {
+            "url": "https://www.gaggia.com/myespressomoments-francesca-ilaria-luisa/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:50"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-in-the-world-londra/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:39:53"
+        },
+        {
+            "url": "https://www.gaggia.com/myespressomoments-gaia-borroni/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:02"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-in-the-world-new-york/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:05"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-in-the-world-oslo/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:08"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-in-the-world-copenaghen/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:11"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-in-the-world-san-paolo/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:13"
+        },
+        {
+            "url": "https://www.gaggia.com/time-mirror-25-years-of-gaggia-automatic-machines/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:17"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-in-the-world-tokyo/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:19"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-in-the-world-lima/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:21"
+        },
+        {
+            "url": "https://www.gaggia.com/cherry-red-red-on-show/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:24"
+        },
+        {
+            "url": "https://www.gaggia.com/deep-blue-underwater-emotions/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:27"
+        },
+        {
+            "url": "https://www.gaggia.com/the-international-coffee-day/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:30"
+        },
+        {
+            "url": "https://www.gaggia.com/landing-on-the-moon/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:32"
+        },
+        {
+            "url": "https://www.gaggia.com/gaggia-coffee-mocktails-moonlight-milk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:34"
+        },
+        {
+            "url": "https://www.gaggia.com/cupping-everything-you-must-know/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:37"
+        },
+        {
+            "url": "https://www.gaggia.com/gaggia-coffee-mocktails-chill-banana-shake/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:40"
+        },
+        {
+            "url": "https://www.gaggia.com/specialty-coffee/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:42"
+        },
+        {
+            "url": "https://www.gaggia.com/home-rituals/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:45"
+        },
+        {
+            "url": "https://www.gaggia.com/industrial-grey-the-old-and-the-new/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:47"
+        },
+        {
+            "url": "https://www.gaggia.com/polar-white-snow-alike/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:50"
+        },
+        {
+            "url": "https://www.gaggia.com/mdw-gaggia-open-house/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:40:53"
+        },
+        {
+            "url": "https://www.gaggia.com/gaggia-open-house-art-design-and-coffee-at-the-milano-design-week/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:00"
+        },
+        {
+            "url": "https://www.gaggia.com/gaggia-iced-coffee-club-signature-recipes-for-home-baristas-and-more/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:03"
+        },
+        {
+            "url": "https://www.gaggia.com/the-home-baristas-guide-to-single-origin-specialty-coffee-and-blends/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:05"
+        },
+        {
+            "url": "https://www.gaggia.com/gaggia-coffee-mocktails/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:08"
+        },
+        {
+            "url": "https://www.gaggia.com/thunder-black-the-sound-of-rituals/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:10"
+        },
+        {
+            "url": "https://www.gaggia.com/classic-gt-portraits-visual-autobiography/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:12"
+        },
+        {
+            "url": "https://www.gaggia.com/vegan-tiramisu-metra/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:15"
+        },
+        {
+            "url": "https://www.gaggia.com/marco-bianchi-recipes/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:17"
+        },
+        {
+            "url": "https://www.gaggia.com/gaggia-classic-up-step-up-your-coffee-game/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:20"
+        },
+        {
+            "url": "https://www.gaggia.com/coffee-origins-and-botany/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:22"
+        },
+        {
+            "url": "https://www.gaggia.com/classic-up-a-new-classic/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:25"
+        },
+        {
+            "url": "https://www.gaggia.com/how-to-describe-an-espresso-with-more-words-than-justnice/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:28"
+        },
+        {
+            "url": "https://www.gaggia.com/train-your-palate-like-a-barista-how-to/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:31"
+        },
+        {
+            "url": "https://www.gaggia.com/superdrinks-the-acai-milkshake-ft-taiao-and-damien-burgess/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:33"
+        },
+        {
+            "url": "https://www.gaggia.com/superdrinks-mango-sunshine-ft-taiao/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:37"
+        },
+        {
+            "url": "https://www.gaggia.com/superdrinks-pistachio-over-ice-cream-con-taiao-e-damien-burgess/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:39"
+        },
+        {
+            "url": "https://www.gaggia.com/the-natural-sweetness-of-coffee-how-it-is-born-and-how-to-extract-it/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:42"
+        },
+        {
+            "url": "https://www.gaggia.com/coffee-roasting-profiles-light-or-dark/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:44"
+        },
+        {
+            "url": "https://www.gaggia.com/superdrinks-pumpkin-bliss-ft-taiao-and-damien-burgess/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:47"
+        },
+        {
+            "url": "https://www.gaggia.com/gaggia-classic-gt-midnight-black/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:49"
+        },
+        {
+            "url": "https://www.gaggia.com/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:56"
+        },
+        {
+            "url": "https://www.gaggia.com/compare/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:41:59"
+        },
+        {
+            "url": "https://www.gaggia.com/it/centri-assistenza/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:02"
+        },
+        {
+            "url": "https://www.gaggia.com/our-history/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:05"
+        },
+        {
+            "url": "https://www.gaggia.com/truly-italian-roots/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:08"
+        },
+        {
+            "url": "https://www.gaggia.com/terms-and-conditions/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:10"
+        },
+        {
+            "url": "https://www.gaggia.com/contacts/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:12"
+        },
+        {
+            "url": "https://www.gaggia.com/privacy-policy/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:15"
+        },
+        {
+            "url": "https://www.gaggia.com/cookie-policy/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:18"
+        },
+        {
+            "url": "https://www.gaggia.com/faq/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:21"
+        },
+        {
+            "url": "https://www.gaggia.com/code-of-business-conduct/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:23"
+        },
+        {
+            "url": "https://www.gaggia.com/coffee-line/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:25"
+        },
+        {
+            "url": "https://www.gaggia.com/de/haendlersuche-mach-caffe-aus-kaffee/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:28"
+        },
+        {
+            "url": "https://www.gaggia.com/de/haendlersuche/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:30"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:33"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/classic-30/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:35"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/gran-gaggia-style/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:38"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/gran-gaggia-deluxe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:41"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/viva-style/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:43"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/gran-gaggia-prestige/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:46"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/viva-prestige/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:56"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/viva-chic/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:42:59"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/viva-deluxe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:01"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/classic-color-vibes/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:04"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/classic-energy-vibes/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:07"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/new-classic/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:10"
+        },
+        {
+            "url": "https://www.gaggia.com/de/manuelle-kaffeemaschinen/new-classic-evo-5/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:13"
+        },
+        {
+            "url": "https://www.gaggia.com/de/manuelle-kaffeemaschinen/carezza-style/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:16"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/carezza-deluxe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:19"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/classic-gt/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:23"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/espresso-deluxe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:25"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/espresso-style/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:27"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/espresso-evolution/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:30"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/classic-up/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:33"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/classic-e24-energy-vibes/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:36"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/classic-e24-color-vibes/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:38"
+        },
+        {
+            "url": "https://www.gaggia.com/manual-machines/new-classic-e24/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:41"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:43"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/naviglio-deluxe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:46"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/naviglio-milk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:49"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/naviglio/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:56"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/brera/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:43:58"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/accademia-glass/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:01"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/accademia-stainless-steel/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:04"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/besana/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:07"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/anima/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:10"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/cadorna-plus-barista/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:13"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/magenta-over-ice/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:16"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/magenta-prestige-2/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:20"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/magenta-prestige/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:23"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/magenta-milk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:26"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/magenta-plus/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:29"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/anima-class/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:33"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/anima-prestige/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:36"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/anima-deluxe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:39"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/anima-barista-plus/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:42"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/velasca/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:44"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/velasca-prestige/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:46"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/cadorna-milk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:50"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/cadorna-prestige/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:44:53"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/cadorna-overice/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:03"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/cadorna-style/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:06"
+        },
+        {
+            "url": "https://www.gaggia.com/automatic-machines/cadorna-plus/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:08"
+        },
+        {
+            "url": "https://www.gaggia.com/accessories/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:11"
+        },
+        {
+            "url": "https://www.gaggia.com/accessories/espresso-cups/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:14"
+        },
+        {
+            "url": "https://www.gaggia.com/accessories/tamping-mat/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:17"
+        },
+        {
+            "url": "https://www.gaggia.com/accessories/gaggia-crema-perfetta-filter-holder-kit/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:19"
+        },
+        {
+            "url": "https://www.gaggia.com/accessories/gaggia-water-filter-intenza-brita/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:22"
+        },
+        {
+            "url": "https://www.gaggia.com/accessories/strainer-with-wooden-handle/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:24"
+        },
+        {
+            "url": "https://www.gaggia.com/accessories/cappuccino-cups/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:27"
+        },
+        {
+            "url": "https://www.gaggia.com/accessories/glass-milk-carafe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:29"
+        },
+        {
+            "url": "https://www.gaggia.com/accessories/wooden-handle-filter-holder/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:32"
+        },
+        {
+            "url": "https://www.gaggia.com/accessories/gaggia-water-filter-intenza-mavea/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:34"
+        },
+        {
+            "url": "https://www.gaggia.com/accessories/gaggia-crema-perfetta-filter-holder-kit-2/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:37"
+        },
+        {
+            "url": "https://www.gaggia.com/accessories/bottomless-filter-holder-and-barista-pro-filter/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:39"
+        },
+        {
+            "url": "https://www.gaggia.com/accessories/gaggia-decalcifier/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:41"
+        },
+        {
+            "url": "https://www.gaggia.com/accessories/coffee-oil-remover-tablets/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:44"
+        },
+        {
+            "url": "https://www.gaggia.com/accessories/crema-xl-system/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:47"
+        },
+        {
+            "url": "https://www.gaggia.com/?post_type=accessory&p=208",
+            "status": "error",
+            "details": "HTTP 404",
+            "checked_at": "2026-11-10 01:45:50"
+        },
+        {
+            "url": "https://www.gaggia.com/coffees/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:45:52"
+        },
+        {
+            "url": "https://www.gaggia.com/coffees/espresso-100-arabica/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:02"
+        },
+        {
+            "url": "https://www.gaggia.com/coffees/espresso-intenso/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:05"
+        },
+        {
+            "url": "https://www.gaggia.com/coffees/espresso-decaffeinated/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:08"
+        },
+        {
+            "url": "https://www.gaggia.com/coffees/espresso-classic/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:10"
+        },
+        {
+            "url": "https://www.gaggia.com/grinders/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:13"
+        },
+        {
+            "url": "https://www.gaggia.com/grinders/grinder-mdf-55/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:15"
+        },
+        {
+            "url": "https://www.gaggia.com/grinders/grinder-md15/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:18"
+        },
+        {
+            "url": "https://www.gaggia.com/promo/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:21"
+        },
+        {
+            "url": "https://www.gaggia.com/de/promo/gaggia-vollautomaten/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:23"
+        },
+        {
+            "url": "https://www.gaggia.com/de/promo/gaggia-siebtraeger/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:25"
+        },
+        {
+            "url": "https://www.gaggia.com/de/promo/mach-caffe-aus-kaffee/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:28"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:31"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri8759-01-anima-class/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:34"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri8759-01-anima-black/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:36"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri8759-01-anima-deluxe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:39"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri8762-01-anima-prestige/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:42"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9781-01-anima-barista-plus/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:44"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9781-01-accademia-glass/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:47"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9782-01-accademia-inox/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:49"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9305-01-brera-inox/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:46:52"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9305-11-brera-black/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:02"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/hd8749-01-naviglio-black/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:04"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/hd8749-11-naviglio-deluxe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:07"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri8749-01-naviglio-milk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:09"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri8260-01-velasca-black/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:12"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri8263-01-velasca-prestige/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:15"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9481-12-classic-e24-red/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:18"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri8180-01-besana/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:20"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri8525-01-carezza-deluxe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:24"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/eg5603-40-cadorna-prestige-over-ice/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:27"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/eg6603-40-magenta-prestige-over-ice/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:29"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/eg2109-05-eg2109-orange/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:32"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/eg2115-03-espresso-evolution-red/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:35"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/eg2109-04-eg2109-grey/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:37"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/eg2109-01-eg2109-black/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:39"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/eg2111-01-espresso-style-black/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:42"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9481-11-classic-e24-inox/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:44"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9481-13-classic-e24-white/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:46"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9481-14-classic-e24-black/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:48"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9481-15-classic-e24-blue/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:47:51"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9481-16-classic-e24-grey/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:00"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9481-17-classic-e24-green/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:03"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9481-18-classic-e24-yellow/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:05"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9481-19-classic-e24-lobster/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:08"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/classic-gt/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:11"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9604-01-cadorna-prestige/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:13"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri8702-01-magenta-prestige/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:16"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri8701-01-magenta-milk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:20"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri8700-01-magenta-plus/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:22"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9602-01-cadorna-barista-plus/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:24"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9601-01-cadorna-plus/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:27"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9600-01-cadorna-style/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:29"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/ri9603-01-cadorna-milk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:31"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/eg2111-03-espresso-style-red/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:34"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/eg2111-64-espresso-deluxe-grey/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:37"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/eg2111-66-espresso-deluxe-green/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:40"
+        },
+        {
+            "url": "https://www.gaggia.com/product-search/eg2115-01-espresso-evolution-black/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:43"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/45-years-of-design/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:45"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/85-years-of-heritage/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:48"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/alessandro-gottardo-for-gaggia/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:48:50"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/barista-art/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:01"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/carlo-stanga-for-gaggia/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:03"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/coffee-station/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:06"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/coffee-mocktails-2/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:08"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/extra/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:10"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/gt-portraits-2/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:13"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/home-barista-glossary/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:16"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/gaggia-casamenu/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:18"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/il-glossario-dellhome-barista/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:21"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/my-espresso-moments/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:24"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/new-products/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:27"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/our-eco-friendly-side/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:30"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/the-home-barista/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:33"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/the-home-barista-cooks-recipes/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:36"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/truly-italian/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:40"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/truly-italian-in-the-world-2/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:43"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/uncategorized/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:46"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/various-2/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:49"
+        },
+        {
+            "url": "https://www.gaggia.com/casa-gaggia/various/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:51"
+        },
+        {
+            "url": "https://www.gaggia.com/author/admin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:49:55"
+        },
+        {
+            "url": "https://www.gaggia.com/author/vmeggiolaro/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:50:01"
+        },
+        {
+            "url": "https://www.gaggia.com/author/massimiliano/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:50:03"
+        },
+        {
+            "url": "https://www.gaggia.com/author/claudia-viola/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-11-10 01:50:12"
+        }
+    ],
+    "sitemap_used": true,
+    "sitemap_generated": false,
+    "completed_at": "2026-11-10 01:50:12"
+}

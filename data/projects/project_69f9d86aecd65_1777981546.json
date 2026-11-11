@@ -1,0 +1,174 @@
+{
+    "id": "project_69f9d86aecd65_1777981546",
+    "project_name": "Billoxy",
+    "website_url": "https://www.billoxy.in/",
+    "sitemap_url": null,
+    "use_sitemap": true,
+    "status": "completed",
+    "created_at": "2026-05-05 17:15:46",
+    "updated_at": "2026-05-05 17:16:52",
+    "progress": {
+        "total_urls": 25,
+        "processed": 25,
+        "clean": 16,
+        "lorem_found": 0,
+        "errors": 8,
+        "percentage": 100,
+        "cf_blocked": 0
+    },
+    "results": [
+        {
+            "url": "https://billoxy.in",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-05-05 17:15:49"
+        },
+        {
+            "url": "https://billoxy.in/pricing",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-05-05 17:15:52"
+        },
+        {
+            "url": "https://billoxy.in/company/aboutus",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-05-05 17:15:54"
+        },
+        {
+            "url": "https://billoxy.in/company/contactus",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-05-05 17:15:57"
+        },
+        {
+            "url": "https://billoxy.in/company/whybilloxy",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-05-05 17:15:59"
+        },
+        {
+            "url": "https://billoxy.in/chatbot",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-05-05 17:16:02"
+        },
+        {
+            "url": "https://billoxy.in/ai-chat",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-05-05 17:16:05"
+        },
+        {
+            "url": "https://billoxy.in/resource/casestudy-list",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-05-05 17:16:08"
+        },
+        {
+            "url": "https://billoxy.in/resource/whitepaper-list",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-05-05 17:16:10"
+        },
+        {
+            "url": "https://billoxy.in/resource/whitepaper",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-05-05 17:16:12"
+        },
+        {
+            "url": "https://billoxy.in/events",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-05-05 17:16:14"
+        },
+        {
+            "url": "https://billoxy.in/free-tools/gst-calculator",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-05-05 17:16:16"
+        },
+        {
+            "url": "https://billoxy.in/free-tools/quick-invoice",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-05-05 17:16:19"
+        },
+        {
+            "url": "https://billoxy.in/resource/casestudy-list/saas-startup-scales-finance-ops",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-05-05 17:16:21"
+        },
+        {
+            "url": "https://billoxy.in/resource/casestudy-list/marketing-studio-cuts-billing-time-80-percent",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-05-05 17:16:23"
+        },
+        {
+            "url": "https://billoxy.in/resource/casestudy-list/retail-brand-streamlines-multi-location-billing",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-05-05 17:16:26"
+        },
+        {
+            "url": "https://billoxy.in/events/14",
+            "status": "error",
+            "details": "HTTP 404",
+            "checked_at": "2026-05-05 17:16:28"
+        },
+        {
+            "url": "https://billoxy.in/events/15",
+            "status": "error",
+            "details": "HTTP 404",
+            "checked_at": "2026-05-05 17:16:31"
+        },
+        {
+            "url": "https://billoxy.in/events/16",
+            "status": "error",
+            "details": "HTTP 404",
+            "checked_at": "2026-05-05 17:16:34"
+        },
+        {
+            "url": "https://billoxy.in/events/17",
+            "status": "error",
+            "details": "HTTP 404",
+            "checked_at": "2026-05-05 17:16:36"
+        },
+        {
+            "url": "https://billoxy.in/events/18",
+            "status": "error",
+            "details": "HTTP 404",
+            "checked_at": "2026-05-05 17:16:43"
+        },
+        {
+            "url": "https://billoxy.in/events/19",
+            "status": "error",
+            "details": "HTTP 404",
+            "checked_at": "2026-05-05 17:16:45"
+        },
+        {
+            "url": "https://billoxy.in/events/21",
+            "status": "error",
+            "details": "HTTP 404",
+            "checked_at": "2026-05-05 17:16:46"
+        },
+        {
+            "url": "https://billoxy.in/events/23",
+            "status": "error",
+            "details": "HTTP 404",
+            "checked_at": "2026-05-05 17:16:49"
+        },
+        {
+            "url": "https://billoxy.in/events/25",
+            "status": "error",
+            "details": "HTTP 404",
+            "checked_at": "2026-05-05 17:16:51"
+        }
+    ],
+    "sitemap_used": true,
+    "sitemap_generated": false,
+    "completed_at": "2026-05-05 17:16:52"
+}

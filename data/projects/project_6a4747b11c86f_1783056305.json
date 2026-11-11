@@ -1,0 +1,2239 @@
+{
+    "id": "project_6a4747b11c86f_1783056305",
+    "project_name": "The Coffee Co",
+    "website_url": "https://thecoffeeco.in",
+    "sitemap_url": null,
+    "use_sitemap": true,
+    "status": "completed",
+    "created_at": "2026-07-03 10:55:05",
+    "updated_at": "2026-07-03 11:18:24",
+    "progress": {
+        "total_urls": 369,
+        "processed": 369,
+        "clean": 363,
+        "lorem_found": 1,
+        "errors": 3,
+        "percentage": 100,
+        "cf_blocked": 1
+    },
+    "results": [
+        {
+            "url": "https://thecoffeeco.in/blog/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:08"
+        },
+        {
+            "url": "https://thecoffeeco.in/distributor/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:10"
+        },
+        {
+            "url": "https://thecoffeeco.in/struggling-with-inconsistent-espresso-how-gaggia-solves-this-problem/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:13"
+        },
+        {
+            "url": "https://thecoffeeco.in/how-gaggia-maintains-espresso-quality-over-time-compared-to-cheaper-machines/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:15"
+        },
+        {
+            "url": "https://thecoffeeco.in/morning-coffee-problems-how-automatic-machines-can-improve-your-daily-routine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:18"
+        },
+        {
+            "url": "https://thecoffeeco.in/how-to-get-consistent-results-from-your-automatic-coffee-machine-every-day/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:20"
+        },
+        {
+            "url": "https://thecoffeeco.in/how-to-clean-and-maintain-an-automatic-coffee-machine-properly/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:22"
+        },
+        {
+            "url": "https://thecoffeeco.in/temperature-issues-in-automatic-coffee-machines-and-their-impact-on-taste/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:25"
+        },
+        {
+            "url": "https://thecoffeeco.in/what-happens-inside-a-gaggia-machine-during-brewing-explained-simply/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:27"
+        },
+        {
+            "url": "https://thecoffeeco.in/why-gaggia-machines-are-built-for-long-term-coffee-consistency/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:29"
+        },
+        {
+            "url": "https://thecoffeeco.in/why-your-automatic-coffee-machine-isnt-giving-cafe-quality-coffee/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:31"
+        },
+        {
+            "url": "https://thecoffeeco.in/are-gaggia-machines-easy-to-use-for-beginners/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:34"
+        },
+        {
+            "url": "https://thecoffeeco.in/why-your-coffee-tastes-flat-the-hidden-role-of-extraction/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:36"
+        },
+        {
+            "url": "https://thecoffeeco.in/from-office-pantry-to-premium-brew-upgrading-workplace-coffee/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:37"
+        },
+        {
+            "url": "https://thecoffeeco.in/top-7-mistakes-people-make-while-using-coffee-machines/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:39"
+        },
+        {
+            "url": "https://thecoffeeco.in/how-to-increase-the-life-of-your-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:41"
+        },
+        {
+            "url": "https://thecoffeeco.in/difference-between-home-and-commercial-coffee-machines/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:43"
+        },
+        {
+            "url": "https://thecoffeeco.in/beyond-instant-why-coffee-pods-are-the-future-of-home-brewing/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:46"
+        },
+        {
+            "url": "https://thecoffeeco.in/essential-espresso-accessories-separating-must-haves-from-marketing-hype/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:48"
+        },
+        {
+            "url": "https://thecoffeeco.in/the-essential-guide-to-coffee-machines-for-cafes/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:50"
+        },
+        {
+            "url": "https://thecoffeeco.in/the-ultimate-guide-to-semi-automatic-coffee-machines/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:57"
+        },
+        {
+            "url": "https://thecoffeeco.in/choosing-the-right-coffee-machine-for-your-cafe-a-comprehensive-guide/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:55:59"
+        },
+        {
+            "url": "https://thecoffeeco.in/how-to-make-cafe-style-hot-chocolate-at-home-using-an-automatic-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:01"
+        },
+        {
+            "url": "https://thecoffeeco.in/choosing-the-right-coffee-machine-based-on-your-daily-coffee-consumption/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:04"
+        },
+        {
+            "url": "https://thecoffeeco.in/the-art-of-brewing-espresso-and-cappuccino-understanding-their-unique-styles/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:06"
+        },
+        {
+            "url": "https://thecoffeeco.in/coffee-machine-repairs-a-complete-guide-to-fixing-common-issues/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:08"
+        },
+        {
+            "url": "https://thecoffeeco.in/what-are-coffee-pods-and-how-do-they-actually-work/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:10"
+        },
+        {
+            "url": "https://thecoffeeco.in/why-should-you-service-your-coffee-machine-regularly/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:13"
+        },
+        {
+            "url": "https://thecoffeeco.in/what-most-people-get-wrong-about-espresso-at-home/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:15"
+        },
+        {
+            "url": "https://thecoffeeco.in/what-is-a-coffee-blend-and-why-it-tastes-different-every-time/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:18"
+        },
+        {
+            "url": "https://thecoffeeco.in/what-does-a-coffee-grinder-actually-do-and-why-it-matters-so-much/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:20"
+        },
+        {
+            "url": "https://thecoffeeco.in/top-10-bean-to-cup-coffee-machines-for-home-office-and-commercial-use/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:22"
+        },
+        {
+            "url": "https://thecoffeeco.in/are-pod-coffee-machines-worth-it-pros-cons-and-best-use-cases/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:25"
+        },
+        {
+            "url": "https://thecoffeeco.in/how-to-choose-the-right-coffee-machine-for-your-home/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:28"
+        },
+        {
+            "url": "https://thecoffeeco.in/one-touch-excellence-the-automatic-coffee-machine-experience/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:30"
+        },
+        {
+            "url": "https://thecoffeeco.in/unlock-the-power-of-espresso-with-a-semi-automatic-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:32"
+        },
+        {
+            "url": "https://thecoffeeco.in/which-coffee-machine-is-right-for-you-lets-find-out/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:35"
+        },
+        {
+            "url": "https://thecoffeeco.in/best-coffee-machines-to-buy-in-2025-top-10-picks/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:38"
+        },
+        {
+            "url": "https://thecoffeeco.in/manual-coffee-grinder-vs-automatic-grinder-whats-worth-the-effort/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:40"
+        },
+        {
+            "url": "https://thecoffeeco.in/selecting-the-perfect-espresso-machine-for-cafe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:42"
+        },
+        {
+            "url": "https://thecoffeeco.in/the-best-coffee-machines-for-every-budget-affordable-to-premium-options/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:51"
+        },
+        {
+            "url": "https://thecoffeeco.in/choosing-the-right-espresso-machine-a-home-baristas-guide/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:54"
+        },
+        {
+            "url": "https://thecoffeeco.in/choosing-the-best-automatic-coffee-maker-for-your-home-or-cafe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:56"
+        },
+        {
+            "url": "https://thecoffeeco.in/mastering-your-brew-a-comprehensive-guide-to-automatic-coffee-makers/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:56:58"
+        },
+        {
+            "url": "https://thecoffeeco.in/the-definitive-guide-to-coffee-blends-in-depth-knowledge-for-coffee-lovers/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:01"
+        },
+        {
+            "url": "https://thecoffeeco.in/how-to-make-cafe-quality-cappuccino-with-an-automatic-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:04"
+        },
+        {
+            "url": "https://thecoffeeco.in/exploring-the-features-of-jura-coffee-machines-a-deep-dive-into-quality-brewing/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:06"
+        },
+        {
+            "url": "https://thecoffeeco.in/coffee-machines-for-offices-streamlining-your-workplace-coffee-routine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:09"
+        },
+        {
+            "url": "https://thecoffeeco.in/one-touch-perfection-the-rise-of-fully-automatic-coffee-machines/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:11"
+        },
+        {
+            "url": "https://thecoffeeco.in/power-pressure-perfection-the-rise-of-smart-espresso-machines/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:14"
+        },
+        {
+            "url": "https://thecoffeeco.in/compatible-nespresso-pods-in-india-best-brands-prices-how-to-choose/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:16"
+        },
+        {
+            "url": "https://thecoffeeco.in/discover-the-convenience-of-automatic-coffee-machines-for-home-and-office/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:19"
+        },
+        {
+            "url": "https://thecoffeeco.in/find-the-perfect-coffee-grinder-for-your-brewing-style/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:21"
+        },
+        {
+            "url": "https://thecoffeeco.in/your-ultimate-guide-to-choosing-a-top-coffee-machine-in-india/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:23"
+        },
+        {
+            "url": "https://thecoffeeco.in/top-commercial-coffee-machines-for-indian-businesses/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:25"
+        },
+        {
+            "url": "https://thecoffeeco.in/why-your-coffee-never-tastes-like-a-cafes-a-practical-brewing-guide/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:28"
+        },
+        {
+            "url": "https://thecoffeeco.in/top-coffee-pod-machines-in-india-quick-quality-brews/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:30"
+        },
+        {
+            "url": "https://thecoffeeco.in/crafting-the-perfect-cold-brew-a-step-by-step-guide/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:32"
+        },
+        {
+            "url": "https://thecoffeeco.in/selecting-the-ideal-grind-size-for-your-coffee-brewer/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:35"
+        },
+        {
+            "url": "https://thecoffeeco.in/exploring-the-distinctions-between-latte-cappuccino-and-espresso/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:37"
+        },
+        {
+            "url": "https://thecoffeeco.in/coffee-pods-capsule-vs-coffee-concentrates-which-one-wins-in-speed-and-strength/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:48"
+        },
+        {
+            "url": "https://thecoffeeco.in/top-coffee-machines-from-leading-brands-in-india/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:51"
+        },
+        {
+            "url": "https://thecoffeeco.in/semi-automatic-and-manual-coffee-makers-that-elevate-your-coffee-game/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:53"
+        },
+        {
+            "url": "https://thecoffeeco.in/is-a-pod-coffee-maker-right-for-you/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:55"
+        },
+        {
+            "url": "https://thecoffeeco.in/top-signs-your-coffee-machine-needs-immediate-repair/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:57:58"
+        },
+        {
+            "url": "https://thecoffeeco.in/hassle-free-nespresso-pod-replacement-and-supply-tips/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:00"
+        },
+        {
+            "url": "https://thecoffeeco.in/the-secret-to-longer-lasting-coffee-machines-expert-maintenance-tips/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:03"
+        },
+        {
+            "url": "https://thecoffeeco.in/the-ultimate-guide-to-office-coffee-machine-servicing/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:05"
+        },
+        {
+            "url": "https://thecoffeeco.in/quick-and-reliable-coffee-machine-repair-service/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:08"
+        },
+        {
+            "url": "https://thecoffeeco.in/why-regular-coffee-machine-maintenance-saves-you-money-and-time/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:10"
+        },
+        {
+            "url": "https://thecoffeeco.in/how-professional-coffee-machine-installation-can-transform-your-brewing-experience/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:13"
+        },
+        {
+            "url": "https://thecoffeeco.in/reusable-pods-vs-disposable-coffee-pods-which-ones-greener-and-cheaper/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:15"
+        },
+        {
+            "url": "https://thecoffeeco.in/budget-coffee-machines-vs-premium-models-what-are-you-really-paying-for/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:18"
+        },
+        {
+            "url": "https://thecoffeeco.in/cold-brew-coffee-vs-hot-coffee-pods-a-seasonal-brewing-debate/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:20"
+        },
+        {
+            "url": "https://thecoffeeco.in/espresso-machine-vs-nespresso-machine-key-differences-explained/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:23"
+        },
+        {
+            "url": "https://thecoffeeco.in/espresso-coffee-makers-vs-pod-machines-which-one-delivers-a-better-kick/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:25"
+        },
+        {
+            "url": "https://thecoffeeco.in/why-investing-in-a-high-quality-coffee-machine-is-crucial-for-your-cafe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:27"
+        },
+        {
+            "url": "https://thecoffeeco.in/the-ultimate-guide-to-choosing-the-best-espresso-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:30"
+        },
+        {
+            "url": "https://thecoffeeco.in/navigating-the-commercial-espresso-machine-landscape-for-business-success/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:33"
+        },
+        {
+            "url": "https://thecoffeeco.in/a-comprehensive-journey-through-coffee-machine-diversity/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:36"
+        },
+        {
+            "url": "https://thecoffeeco.in/the-definitive-roadmap-to-selecting-your-ideal-coffee-companion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:46"
+        },
+        {
+            "url": "https://thecoffeeco.in/transform-your-workplace-the-transformative-power-of-office-coffee-machines/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:48"
+        },
+        {
+            "url": "https://thecoffeeco.in/the-evolution-of-espresso-machines-from-manual-to-automatic/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:50"
+        },
+        {
+            "url": "https://thecoffeeco.in/understanding-automatic-and-semi-automatic-coffee-machines-features-differences-and-business-benefits/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:52"
+        },
+        {
+            "url": "https://thecoffeeco.in/how-jura-coffee-machines-make-cafe-quality-coffee-at-home/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:55"
+        },
+        {
+            "url": "https://thecoffeeco.in/commercial-coffee-machines-how-to-serve-high-quality-coffee-every-time/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:58:57"
+        },
+        {
+            "url": "https://thecoffeeco.in/understanding-coffee-machine-prices-what-youre-really-paying-for/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:00"
+        },
+        {
+            "url": "https://thecoffeeco.in/rediscovering-the-charm-of-classic-espresso-machine-craftsmanship/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:03"
+        },
+        {
+            "url": "https://thecoffeeco.in/decoding-the-true-value-coffee-machine-features-vs-price-point/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:06"
+        },
+        {
+            "url": "https://thecoffeeco.in/your-personalized-roadmap-to-finding-the-ultimate-home-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:09"
+        },
+        {
+            "url": "https://thecoffeeco.in/unexpected-and-innovative-home-uses-for-your-espresso-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:11"
+        },
+        {
+            "url": "https://thecoffeeco.in/finding-the-best-espresso-machine-for-every-coffee-lovers-needs/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:14"
+        },
+        {
+            "url": "https://thecoffeeco.in/discover-the-timeless-quality-of-gaggia-coffee-machines/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:16"
+        },
+        {
+            "url": "https://thecoffeeco.in/discover-the-excellence-of-jura-coffee-machines/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:19"
+        },
+        {
+            "url": "https://thecoffeeco.in/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:20"
+        },
+        {
+            "url": "https://thecoffeeco.in/contact-us/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:22"
+        },
+        {
+            "url": "https://thecoffeeco.in/cafe-collaboration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:25"
+        },
+        {
+            "url": "https://thecoffeeco.in/about-us/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:27"
+        },
+        {
+            "url": "https://thecoffeeco.in/locations/buy-coffee-beans-in-mumbai/",
+            "status": "lorem_found",
+            "details": "Lorem ipsum (43x), dolor sit amet (5x), consectetur adipiscing (5x)",
+            "checked_at": "2026-07-03 10:59:29",
+            "occurrences": 53
+        },
+        {
+            "url": "https://thecoffeeco.in/brands/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:34"
+        },
+        {
+            "url": "https://thecoffeeco.in/shop/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:40"
+        },
+        {
+            "url": "https://thecoffeeco.in/service-maintenance/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:41"
+        },
+        {
+            "url": "https://thecoffeeco.in/cart/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:44"
+        },
+        {
+            "url": "https://thecoffeeco.in/shipping-returns/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:45"
+        },
+        {
+            "url": "https://thecoffeeco.in/category/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:50"
+        },
+        {
+            "url": "https://thecoffeeco.in/compare/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:52"
+        },
+        {
+            "url": "https://thecoffeeco.in/terms-conditions/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:55"
+        },
+        {
+            "url": "https://thecoffeeco.in/checkout/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 10:59:57"
+        },
+        {
+            "url": "https://thecoffeeco.in/rays-hot-chocolate/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:00"
+        },
+        {
+            "url": "https://thecoffeeco.in/privacy-policy/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:03"
+        },
+        {
+            "url": "https://thecoffeeco.in/my-account/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:05"
+        },
+        {
+            "url": "https://thecoffeeco.in/gaggia-new-espresso-series/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:07"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:09"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-repair-my-gaggia-naviglio-deluxe-if-i-get-loose-pucks-and-weak-coffee/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:11"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/are-there-recommended-maintenance-tasks-for-the-jura-z10-outside-the-prompts/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:13"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/why-wont-my-jura-cup-warmer-power-button-illuminate-or-heat-up/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:16"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/why-is-my-saeco-royal-otc-hd8930-having-trouble-dispensing-water/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:17"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-can-i-remove-a-broken-screw-from-my-saeco-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:19"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-can-i-fix-a-broken-steam-wand-on-my-aroma-saeco-espresso-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:21"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-solve-rinse-issues-on-the-saeco/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:23"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-fix-the-steam-wand-needle-valve-that-wont-close-on-a-saeco-espresso-machine-2/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:33"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/what-should-i-do-if-my-eureka-mignon-specialita-grinder-breaks-after-two-months/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:35"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-replace-or-repair-the-switch-on-a-eureka-mignon-specialita/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:36"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-troubleshoot-o-mignon-single-dose-issues/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:38"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-can-i-repair-my-eureka-mignon-specialita/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:40"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/what-are-the-best-steps-for-troubleshooting-a-eureka-mignon-specialita/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:43"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/why-isnt-my-eureka-specialita-grinding-at-all/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:45"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-can-i-repair-a-broken-eureka-mignon-libra/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:47"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-repair-a-broken-switch-cable-on-a-eureka-mignon-mci-mt220/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:50"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/why-does-my-eureka-mignon-either-not-respond-or-turn-off-instantly/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:52"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-fix-a-non-working-dose-timer-on-a-eureka-mignon-specialita/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:54"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-can-i-stop-my-eureka-zenith-65-neo-from-getting-stuck-in-continuous-grind-mode/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:56"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-identify-and-fix-damaged-burrs-on-my-eureka-mignon-zero-65/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:00:59"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-can-i-fix-my-eureka-atom-grinder-working-correctly/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:01"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-maintain-my-jura-giga-x8c-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:03"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-repair-gaggia-la-brilaiante-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:05"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-repair-eureka-helios-65-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:07"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-you-fix-a-jura-giga-x8c-coffee-machine-thats-not-brewing-properly/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:09"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-repair-my-broken-gaggia-la-brilaiante-coffee-maker/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:12"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-repair-my-broken-saeco-magic-m2-coffee-maker/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:14"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-clean-gaggia-la-brilaiante-automatic-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:21"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-clean-eureka-helios-65-coffee-bean-grinder/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:23"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-repair-eureka-helios-65-espresso-machine-boiler/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:25"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-repair-magister-muira-2-espresso-machine-boiler/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:28"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-repair-gaggia-classic-gt-espresso-machine-boiler/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:30"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-clean-saeco-magic-m2-coffee-bean-grinder/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:33"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-clean-gaggia-la-brilaiante-coffee-bean-grinder/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:35"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-clean-eureka-helios-65-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:37"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-clean-magister-es60-stilo-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:38"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-clean-saeco-magic-m2-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:41"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-clean-jura-giga-x8c-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:42"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-repair-my-broken-eureka-helios-65-coffee-maker/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:45"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-repair-my-broken-magister-es60-stilo-coffee-maker/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:47"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-repair-my-broken-jura-giga-x8c-coffee-maker/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:49"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-you-fix-a-eureka-helios-65-coffee-machine-thats-not-brewing-properly/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:51"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-you-fix-a-magister-es60-stilo-coffee-machine-thats-not-brewing-properly/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:53"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-you-fix-a-saeco-magic-m2-coffee-machine-thats-not-brewing-properly/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:55"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-you-fix-a-gaggia-la-brilaiante-coffee-machine-thats-not-brewing-properly/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:01:58"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/is-it-worth-repairing-eureka-helios-65-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:00"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/is-it-worth-repairing-magister-es60-stilo-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:02"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/is-it-worth-repairing-saeco-magic-m2-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:12"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/is-it-worth-repairing-jura-giga-x8c-coffee-machine-2/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:14"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/is-it-worth-repairing-jura-giga-x8c-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:16"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/is-it-worth-repairing-gaggia-la-brilaiante-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:19"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-repair-magister-es60-stilo-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:21"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-repair-saeco-magic-m2-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:23"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-repair-jura-giga-x8c-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:25"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-maintain-my-eureka-helios-65-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:27"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-maintain-my-magister-es60-stilo-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:30"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-maintain-my-saeco-magic-m2-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:32"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-maintain-my-gaggia-la-brilaiante-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:35"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-can-i-fix-a-broken-dial-on-my-eureka-mignon-zero-65/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:37"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/what-should-i-do-if-my-eureka-mignon-specialita-stops-working-properly/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:39"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-repair-my-eureka-mignon-suddenly-behaving-erratically/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:41"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-can-i-fix-a-problem-with-my-eureka-mignon-specialita-grinder/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:43"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/why-does-my-eureka-mignon-grinder-intermittently-fail-to-start/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:45"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-often-should-i-perform-eureka-mignon-maintenance/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:47"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-repair-repairing-my-magister-stella-pro-where-should-i-start/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:49"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/can-someone-help-with-troubleshooting-or-repairing-my-saeco-automatic-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:50"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-repair-my-saeco-lirika-otc-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:02:53"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-can-i-fix-the-boiler-in-a-home-espresso-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:03"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/my-jura-e8-is-broken-how-can-i-diagnose-and-fix-the-problem/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:06"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-can-i-fix-the-boilergate-issue-in-the-gaggia-classic-evo-pro/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:07"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-repair-a-defective-espresso-machine-found-on-ebay/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:09"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-can-i-fix-heavy-channeling-or-spraying-in-my-gaggia-classic-evo-pro/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:11"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-solve-problems-with-the-gaggia-classic-evo-model/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:13"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-fix-a-gaggia-classic-flow-problem-solenoid-or-pump-issue/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:15"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-can-i-fix-low-water-flow-in-my-gaggia-naviglio/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:17"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-fix-my-gaggia-naviglio-espresso-machine-that-lost-power-after-a-pop-sound/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:20"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/why-doesnt-my-gaggia-cadorna-prestige-finish-making-milk-drinks/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:22"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-fix-gaggia-cadorna-prestige-carafe-dispensing-water-before-milk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:24"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-replace-the-drip-tray-magnet-on-a-gaggia-magenta-prestige/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:25"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-can-i-fix-a-grinding-problem-in-my-gaggia-magenta-prestige/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:27"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/whats-the-right-way-to-perform-gaggia-boiler-element-repair/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:29"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/is-my-gaggia-classic-thermostat-broken-and-how-can-i-confirm-it/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:31"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/whats-the-right-process-for-saeco-picobaristo-coffee-machine-repair/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:33"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/why-is-my-jura-e8-suddenly-making-weak-coffee/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:35"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/are-saeco-picobaristo-coffee-machines-easy-to-repair/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:37"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-often-should-i-maintain-my-jura-z10/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:39"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/what-should-i-do-if-my-jura-machine-malfunctions/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:41"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-repair-my-gaggia-classic-pro/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:49"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/what-should-i-know-before-repairing-a-used-gaggia-classic/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:51"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/gaggia-classic-pro-brewing-issues-how-should-i-fix-it-myself/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:03:53"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-fix-gaggia-magenta-bypass-not-working-properly/",
+            "status": "cloudflare_blocked",
+            "details": "BOT PROTECTION - Access blocked by security layer (BLOCKED BY)",
+            "checked_at": "2026-07-03 11:04:09"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/whats-included-in-gaggia-magenta-prestige-maintenance/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:12"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/why-does-my-gaggia-classic-seem-to-have-several-issues-at-once/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:15"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-fix-a-low-pressure-problem-in-a-1-year-old-gaggia-evolution-espresso-machine-2/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:16"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-difficult-is-it-to-repair-a-broken-gaggia-classic/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:18"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-maintain-a-gaggia-classic/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:21"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-often-does-a-gaggia-classic-need-maintenance/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:24"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/what-is-the-maintenance-cost-for-a-gaggia-classic/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:25"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-to-repair-a-retro-gaggia-espresso-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:28"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-do-i-clean-my-gaggia-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:30"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/how-can-i-enhance-my-gaggia-coffee-machine-experience/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:31"
+        },
+        {
+            "url": "https://thecoffeeco.in/knowledge-base/what-makes-gaggia-coffee-machines-special/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:33"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:35"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/rea-espresso-tonic-spritz-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:37"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/uravu-iced-filter-latte-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:39"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/southern-estate-buttercream-cold-latte-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:46"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/southern-estate-citrus-honey-iced-americano-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:48"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/morning-dew-cinnamon-bloom-pour-over-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:51"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/uravu-jaggery-coconut-iced-latte-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:53"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/southern-estate-honey-oat-latte-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:55"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/morning-dew-organic-honey-almond-pour-over-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:04:58"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/morning-dew-organic-vanilla-cold-brew-latte-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:01"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/southern-estate-spiced-brown-sugar-latte-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:03"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/uravu-filter-coffee-shakerato-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:05"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/rea-cocoa-spice-latte-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:08"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/morning-dew-citrus-cold-brew-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:10"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/morning-dew-medium-roast-french-press-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:11"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/southern-estate-medium-roast-americano-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:13"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/southern-estate-medium-dark-cappuccino-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:15"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/rea-classic-cold-coffee-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:17"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/rays-signature-hot-chocolate-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:20"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/morning-dew-organic-medium-roast-cold-brew-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:22"
+        },
+        {
+            "url": "https://thecoffeeco.in/recipe/morning-dew-monsooned-malabar-pour-over-recipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:24"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/morning-dew-medium-roast-coffee-capsules-pack-of-10/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:26"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/southern-estate-medium-roast-coffee-capsules-pack-of-10/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:29"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/rea-medium-dark-roast-coffee-capsules-pack-of-10/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:34"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-classic-e24-inox-stainless-steel/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:37"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-classic-e24-energy-vibes/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:40"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-classic-e24-color-vibes/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:42"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-anima-class/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:45"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-anima-prestige/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:48"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-naviglio-deluxe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:52"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-magenta-prestige/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:54"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-magenta-milk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:57"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-magenta-plus/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:05:59"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-cadorna-prestige-otc/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:01"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-cadorna-milk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:04"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-accademia-stainless-steel/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:07"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-accademia-glass/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:10"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-classic-gt/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:12"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-naviglio-milk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:15"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-cadorna-presitge-over-ice/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:17"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-magenta-prestige-over-ice/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:19"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/easy-pours-starter-pack-pack-of-6/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:22"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/uravu-premium-filter-coffee-powder-with-tin-can/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:25"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/uravu-premium-filter-coffee-powder-with-brass-filter-coffee-maker/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:32"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/uravu-premium-filter-coffee-powder-with-2-davaras-set/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:34"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-j10/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:36"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-claris-filter-pro-smart-maxi/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:39"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-descaling-liquid/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:41"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-milk-glass-container/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:43"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-giga-x8c/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:46"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-x10/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:48"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-z10-diamond-black/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:52"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-ena8/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:53"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-e8/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:56"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/uravu-premium-filter-coffee-powder/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:06:59"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-eg2109-01/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:02"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-espresso-style/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:04"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-espresso-deluxe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:06"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-espresso-evolution/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:09"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-classic-evo-30-special-edition/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:11"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-mdf-55/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:14"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-md15-grinder/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:16"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/eureka-helios-65/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:20"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/eureka-zenith-65-hs/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:25"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/eureka-mignon-bravo/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:28"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/eureka-mignon-classico/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:31"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/magister-es40-1-group-semi-automatic-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:34"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/magister-miura-2-group-semi-automatic-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:36"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/magister-es100-delta-luxury-version-2-group-semi-automatic-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:38"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/magister-stella-professional-inox-steel-with-thermo-pid-inbuilt-water-tank-semi-automatic-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:41"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/magister-es100-delta-black-2-group-semi-automatic-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:44"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/magister-es100-hrc-2-group-semi-automatic-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:46"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/magister-es70-stilo-2-group-compact-semi-automatic-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:49"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/magister-es60-stilo-1-group-semi-automatic-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:51"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/magister-es100-stilo-2-group-semi-automatic-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:54"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-la-brilaiante/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:07:57"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-besana/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:08:00"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/saeco-se-180-with-steam-wand/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:08:03"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/saeco-royal-otc/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:08:04"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/saeco-aurora-m1/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:08:06"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/saeco-magic-m2/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:08:08"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/saeco-magic-m1-with-steam-wand/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:08:12"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-cool-control-1-0l/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:08:16"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-cup-warmer-small/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:08:23"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-s8-chrome/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:08:25"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/rays-hot-chocolate-jar-125-gms/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:08:27"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/monsooned-malabar-medium-roast-coffee/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:08:31"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/morning-dew/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:08:48"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/rea/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:09:14"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/morning-dew-organic-medium-roast-coffee/",
+            "status": "error",
+            "details": "TIMEOUT - cURL error: Operation timed out after 30001 milliseconds with 0 bytes received",
+            "checked_at": "2026-07-03 11:10:54"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/southern-estate-medium-dark/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:10:56"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/southern-estate/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:10:57"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-espresso-cups/",
+            "status": "error",
+            "details": "TIMEOUT - cURL error: Operation timed out after 30001 milliseconds with 0 bytes received",
+            "checked_at": "2026-07-03 11:12:37"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-bottomless-porta-filter/",
+            "status": "error",
+            "details": "HTTP 500 - Server Error",
+            "checked_at": "2026-07-03 11:14:00"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/gaggia-cleaning-tablets/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:14:25"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-descaling-tablet/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:15:00"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-milk-system-cleaner/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:15:51"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-claris-filter-smart/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:04"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-claris-filter-pro-smart/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:11"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-claris-filter-white/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:13"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-claris-fitler-blue/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:15"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-stainless-steel-milk-pipe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:18"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-espresso-glass/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:23"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-latte-macchiato-glass-short/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:25"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-latte-macchiato-glass-tall/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:28"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-espresso-cups-saucer/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:30"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-coffee-cups-saucer/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:33"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-cappuccino-cup-saucer/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:36"
+        },
+        {
+            "url": "https://thecoffeeco.in/product/jura-cleaning-tablets-box-of-6/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:38"
+        },
+        {
+            "url": "https://thecoffeeco.in/category/uncategorized/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:40"
+        },
+        {
+            "url": "https://thecoffeeco.in/category/coffee-machines/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:43"
+        },
+        {
+            "url": "https://thecoffeeco.in/category/espresso-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:45"
+        },
+        {
+            "url": "https://thecoffeeco.in/category/distributor/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:47"
+        },
+        {
+            "url": "https://thecoffeeco.in/category/coffee-pods/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:50"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/uncategory/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:52"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/automatic-coffee-machines/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:16:57"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/automatic-coffee-maker/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:00"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/coffee-machine-for-cafe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:01"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/espresso-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:03"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/semi-automatic-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:05"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/accessories-and-consumables/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:07"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/bean-to-cup/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:08"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/brand/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:11"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/coffee-and-cuppachino-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:14"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/coffee-blend/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:16"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/coffee-brewer/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:18"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/coffee-beans-grinder-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:20"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/coffee-capsules/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:22"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/brand/eureka/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:25"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/brand/gaggia/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:27"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/brand/gaggia/gaggia-accessories/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:29"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/brand/gaggia/gaggia-espresso/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:31"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/home/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:35"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/home-espresso-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:36"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/brand/jura/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:39"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/brand/jura/jura-accessories/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:44"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/brand/magister/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:46"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/manual-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:48"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/offices/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:50"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/professional-coffee-machine/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:53"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/brand/saeco/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:56"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/usage/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:17:58"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/brand/gaggia/espresso/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:18:00"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/usage/gaggia-jura-accessories/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:18:02"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/usage/home-offices/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:18:04"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/usage/hotels-restaurants/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:18:07"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/usage/specialty-cafes/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:18:09"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/usage/accessories-usage/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:18:12"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/coffee-beans/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:18:13"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/coffee-powder/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:18:15"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/uravu/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:18:17"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/hot-chocolate/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:18:20"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/easy-pours/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:18:22"
+        },
+        {
+            "url": "https://thecoffeeco.in/product-category/merchandise/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-03 11:18:24"
+        }
+    ],
+    "sitemap_used": true,
+    "sitemap_generated": false,
+    "completed_at": "2026-07-03 11:18:24"
+}

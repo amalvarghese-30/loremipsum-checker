@@ -1,0 +1,30 @@
+{
+    "id": "project_69b6d9175d2ae_1773590807",
+    "project_name": "Cubit",
+    "website_url": "https://cubitfurniture.com",
+    "sitemap_url": null,
+    "use_sitemap": true,
+    "status": "completed",
+    "created_at": "2026-03-15 21:36:47",
+    "updated_at": "2026-03-15 21:36:48",
+    "progress": {
+        "total_urls": 1,
+        "processed": 1,
+        "clean": 0,
+        "lorem_found": 0,
+        "errors": 0,
+        "percentage": 100
+    },
+    "results": [
+        {
+            "url": "https://cubitfurniture.com",
+            "status": "error",
+            "details": "HTTP 403",
+            "checked_at": "2026-03-15 21:36:48"
+        }
+    ],
+    "sitemap_used": false,
+    "sitemap_generated": true,
+    "output_sitemap": "project_69b6d9175d2ae_1773590807_sitemap.xml",
+    "completed_at": "2026-03-15 21:36:48"
+}

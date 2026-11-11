@@ -1,0 +1,564 @@
+{
+    "id": "project_6a3923585c484_1782129496",
+    "project_name": "aasantax.com Audit",
+    "website_url": "http://aasantax.com/",
+    "sitemap_url": null,
+    "use_sitemap": true,
+    "status": "completed",
+    "created_at": "2026-06-22 17:28:16",
+    "updated_at": "2026-06-22 17:31:14",
+    "progress": {
+        "total_urls": 90,
+        "processed": 90,
+        "clean": 89,
+        "lorem_found": 0,
+        "errors": 0,
+        "percentage": 100,
+        "cf_blocked": 0
+    },
+    "results": [
+        {
+            "url": "https://aasantax.com/blogs/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:17"
+        },
+        {
+            "url": "https://aasantax.com/sole-proprietorship-vs-private-limited-company-which-is-right-for-your-business/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:19"
+        },
+        {
+            "url": "https://aasantax.com/itr-filing-2024-25-5-costly-mistakes-you-must-avoid/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:21"
+        },
+        {
+            "url": "https://aasantax.com/when-do-you-need-gst-registration-a-complete-guide-for-small-business-owners/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:23"
+        },
+        {
+            "url": "https://aasantax.com/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:24"
+        },
+        {
+            "url": "https://aasantax.com/service/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:26"
+        },
+        {
+            "url": "https://aasantax.com/contact-us/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:28"
+        },
+        {
+            "url": "https://aasantax.com/about-us/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:30"
+        },
+        {
+            "url": "https://aasantax.com/service-detail-page/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:32"
+        },
+        {
+            "url": "https://aasantax.com/home/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:34"
+        },
+        {
+            "url": "https://aasantax.com/sample-page/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:36"
+        },
+        {
+            "url": "https://aasantax.com/services/ledgers-accounting-software-saas/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:37"
+        },
+        {
+            "url": "https://aasantax.com/services/financial-statement-preparation/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:39"
+        },
+        {
+            "url": "https://aasantax.com/services/company-llp-name-availability-check/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:40"
+        },
+        {
+            "url": "https://aasantax.com/services/digital-signature-certificate/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:42"
+        },
+        {
+            "url": "https://aasantax.com/services/bookkeeping-services/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:43"
+        },
+        {
+            "url": "https://aasantax.com/services/winding-up-of-llp/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:46"
+        },
+        {
+            "url": "https://aasantax.com/services/winding-up-of-company/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:47"
+        },
+        {
+            "url": "https://aasantax.com/services/appointment-letter/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:49"
+        },
+        {
+            "url": "https://aasantax.com/services/moa-amendment/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:51"
+        },
+        {
+            "url": "https://aasantax.com/services/udyog-aadhaar-msme-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:56"
+        },
+        {
+            "url": "https://aasantax.com/services/share-transfer/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:28:58"
+        },
+        {
+            "url": "https://aasantax.com/services/import-export-code/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:00"
+        },
+        {
+            "url": "https://aasantax.com/services/increase-authorized-capital/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:01"
+        },
+        {
+            "url": "https://aasantax.com/services/registered-office-change/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:03"
+        },
+        {
+            "url": "https://aasantax.com/services/fssai-registration-license/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:05"
+        },
+        {
+            "url": "https://aasantax.com/services/remove-directors/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:07"
+        },
+        {
+            "url": "https://aasantax.com/services/trade-license/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:09"
+        },
+        {
+            "url": "https://aasantax.com/services/professional-tax-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:11"
+        },
+        {
+            "url": "https://aasantax.com/services/usa-company-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:13"
+        },
+        {
+            "url": "https://aasantax.com/services/esi-return-filing/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:15"
+        },
+        {
+            "url": "https://aasantax.com/services/section-8-company-ngo-non-profit-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:17"
+        },
+        {
+            "url": "https://aasantax.com/services/producer-company-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:19"
+        },
+        {
+            "url": "https://aasantax.com/services/nidhi-company-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:21"
+        },
+        {
+            "url": "https://aasantax.com/services/indian-subsidiary-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:22"
+        },
+        {
+            "url": "https://aasantax.com/services/add-directors/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:24"
+        },
+        {
+            "url": "https://aasantax.com/services/esi-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:26"
+        },
+        {
+            "url": "https://aasantax.com/services/gst-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:28"
+        },
+        {
+            "url": "https://aasantax.com/services/pf-return-filing/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:29"
+        },
+        {
+            "url": "https://aasantax.com/services/pf-provident-fund-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:32"
+        },
+        {
+            "url": "https://aasantax.com/services/partnership-firm-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:40"
+        },
+        {
+            "url": "https://aasantax.com/services/one-person-company-opc-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:42"
+        },
+        {
+            "url": "https://aasantax.com/services/limited-liability-partnership-llp-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:44"
+        },
+        {
+            "url": "https://aasantax.com/services/private-limited-company-it-filing/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:45"
+        },
+        {
+            "url": "https://aasantax.com/services/gst-return-filing/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:47"
+        },
+        {
+            "url": "https://aasantax.com/services/proprietorship-income-tax-filing/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:49"
+        },
+        {
+            "url": "https://aasantax.com/services/public-limited-company-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:50"
+        },
+        {
+            "url": "https://aasantax.com/services/expense-management/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:52"
+        },
+        {
+            "url": "https://aasantax.com/services/itr-7-form-filing-trusts-ngos/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:55"
+        },
+        {
+            "url": "https://aasantax.com/services/payroll-processing/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:56"
+        },
+        {
+            "url": "https://aasantax.com/services/itr-1-form-filing-salary-pension/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:57"
+        },
+        {
+            "url": "https://aasantax.com/services/itr-2-form-filing-capital-gains/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:29:59"
+        },
+        {
+            "url": "https://aasantax.com/services/itr-3-form-filing-business-income/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:01"
+        },
+        {
+            "url": "https://aasantax.com/services/itr-4-form-filing-presumptive-income/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:03"
+        },
+        {
+            "url": "https://aasantax.com/services/itr-5-form-filing-partnership-llp/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:05"
+        },
+        {
+            "url": "https://aasantax.com/services/itr-6-form-filing-companies/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:06"
+        },
+        {
+            "url": "https://aasantax.com/services/foreign-subsidiary-it-filing/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:08"
+        },
+        {
+            "url": "https://aasantax.com/services/gstin-verification-tool/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:10"
+        },
+        {
+            "url": "https://aasantax.com/services/partnership-income-tax-filing/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:12"
+        },
+        {
+            "url": "https://aasantax.com/services/llp-income-tax-filing/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:13"
+        },
+        {
+            "url": "https://aasantax.com/services/gst-registration-for-foreigners/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:20"
+        },
+        {
+            "url": "https://aasantax.com/services/temporary-gst-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:21"
+        },
+        {
+            "url": "https://aasantax.com/services/gst-registration-cancellation/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:23"
+        },
+        {
+            "url": "https://aasantax.com/services/gst-invoicing/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:25"
+        },
+        {
+            "url": "https://aasantax.com/services/eway-bill/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:26"
+        },
+        {
+            "url": "https://aasantax.com/services/input-tax-credit-itc-reconciliation/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:28"
+        },
+        {
+            "url": "https://aasantax.com/services/gst-software-for-accountants-ledgers/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:30"
+        },
+        {
+            "url": "https://aasantax.com/services/trademark-opposition/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:32"
+        },
+        {
+            "url": "https://aasantax.com/services/trademark-renewal/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:34"
+        },
+        {
+            "url": "https://aasantax.com/services/gst-annual-return-gstr-9/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:35"
+        },
+        {
+            "url": "https://aasantax.com/services/gst-lut-filing/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:37"
+        },
+        {
+            "url": "https://aasantax.com/services/trademark-objection-reply/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:39"
+        },
+        {
+            "url": "https://aasantax.com/services/trademark-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:41"
+        },
+        {
+            "url": "https://aasantax.com/services/private-limited-company-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:43"
+        },
+        {
+            "url": "https://aasantax.com/services/proprietorship-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:44"
+        },
+        {
+            "url": "https://aasantax.com/category/uncategorized/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:45"
+        },
+        {
+            "url": "https://aasantax.com/category/startup-business-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:47"
+        },
+        {
+            "url": "https://aasantax.com/category/intellectual-property/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:48"
+        },
+        {
+            "url": "https://aasantax.com/category/goods-services-tax-gst/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:50"
+        },
+        {
+            "url": "https://aasantax.com/category/income-tax/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:51"
+        },
+        {
+            "url": "https://aasantax.com/category/compliance/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:30:59"
+        },
+        {
+            "url": "https://aasantax.com/category/accounting-bookkeeping/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:31:00"
+        },
+        {
+            "url": "https://aasantax.com/category/business-documents/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:31:02"
+        },
+        {
+            "url": "https://aasantax.com/services-categories/startup-business-registration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:31:04"
+        },
+        {
+            "url": "https://aasantax.com/services-categories/intellectual-property/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:31:06"
+        },
+        {
+            "url": "https://aasantax.com/services-categories/goods-services-tax-gst/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:31:07"
+        },
+        {
+            "url": "https://aasantax.com/services-categories/income-tax/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:31:08"
+        },
+        {
+            "url": "https://aasantax.com/services-categories/compliance/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:31:10"
+        },
+        {
+            "url": "https://aasantax.com/services-categories/accounting-bookkeeping/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:31:12"
+        },
+        {
+            "url": "https://aasantax.com/services-categories/business-documents/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-06-22 17:31:13"
+        }
+    ],
+    "sitemap_used": true,
+    "sitemap_generated": false,
+    "completed_at": "2026-06-22 17:31:14"
+}

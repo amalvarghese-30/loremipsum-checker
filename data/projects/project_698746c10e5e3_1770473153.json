@@ -1,0 +1,1961 @@
+{
+    "id": "project_698746c10e5e3_1770473153",
+    "project_name": "Caramelly",
+    "website_url": "https://caramelly.in/",
+    "sitemap_url": null,
+    "use_sitemap": true,
+    "status": "completed",
+    "created_at": "2026-02-07 19:35:53",
+    "updated_at": "2026-02-07 19:41:57",
+    "progress": {
+        "total_urls": 323,
+        "processed": 323,
+        "clean": 322,
+        "lorem_found": 0,
+        "errors": 0,
+        "percentage": 100
+    },
+    "results": [
+        {
+            "url": "https://caramelly.in/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:35:55"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-starbucks-colombia",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:35:57"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-starbucks-house-of-blend",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:35:58"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-starbucks-espresso-roast",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:35:59"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-lattissima-one-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:00"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-delonghi-essenza-mini-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:01"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-master-origin-coffee-capsules-pods-1",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:02"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-master-origin-indonesia",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:03"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-master-origin-coffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:04"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-master-origin-nicaragua",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:06"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-master-origin-ethiopia",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:07"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-napoli-coffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:08"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-kazaar",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:09"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-ristretto-coffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:10"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-arpeggio",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:11"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-roma-coffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:12"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-livanto",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:13"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-starbucks-caffe-verona",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:14"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-starbucks-lungo-pike-place-roast",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:15"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-starbucks-blonde-espresso-roast",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:16"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-starbucks-sumatra",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:17"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-decaf-arpeggio",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:18"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-decaf-volluto",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:19"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-magpod-capsule-holder",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:20"
+        },
+        {
+            "url": "https://caramelly.in/products/caffenu-descaler-compatible-with-all-nespresso-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:21"
+        },
+        {
+            "url": "https://caramelly.in/products/vertuo-caramel-cookie",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:22"
+        },
+        {
+            "url": "https://caramelly.in/products/vertuo-fortado",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:23"
+        },
+        {
+            "url": "https://caramelly.in/products/vertuo-diavolitto",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:25"
+        },
+        {
+            "url": "https://caramelly.in/products/vertuo-stormio",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:26"
+        },
+        {
+            "url": "https://caramelly.in/products/vertuo-altissio",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:27"
+        },
+        {
+            "url": "https://caramelly.in/products/vertuo-intenso",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:28"
+        },
+        {
+            "url": "https://caramelly.in/products/torta-di-nocciole-flavour-exclusive-edition",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:29"
+        },
+        {
+            "url": "https://caramelly.in/products/vertuo-melozio",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:30"
+        },
+        {
+            "url": "https://caramelly.in/products/shanghai-lungo",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:31"
+        },
+        {
+            "url": "https://caramelly.in/products/tokyo-vivalto-lungo",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:32"
+        },
+        {
+            "url": "https://caramelly.in/products/stockholm-fortissio-lungo",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:34"
+        },
+        {
+            "url": "https://caramelly.in/products/vienna-linizio-lungo",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:35"
+        },
+        {
+            "url": "https://caramelly.in/products/classico-roast",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:36"
+        },
+        {
+            "url": "https://caramelly.in/products/intenso-roast",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:37"
+        },
+        {
+            "url": "https://caramelly.in/products/forte-roast",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:38"
+        },
+        {
+            "url": "https://caramelly.in/products/classico-roast-lungo",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:39"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-gift-card",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:40"
+        },
+        {
+            "url": "https://caramelly.in/products/coffee-hamper-18",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:41"
+        },
+        {
+            "url": "https://caramelly.in/products/lor-espresso-onyx-coffee-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:42"
+        },
+        {
+            "url": "https://caramelly.in/products/lor-espresso-colombia-coffee-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:43"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-delonghi-gran-lattissima",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:44"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-vertuo-double-espresso-scuro-coffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:45"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-variety-pack-coffee-capsules-50-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:46"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-strabucks-breakfast-blend-coffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:47"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-vertuo-orafio-coffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:48"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-by-starbucks-coffee-capsules-variety-pack-50-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:49"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-vertuo-il-cafe-coffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:50"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-vertuo-double-espesso-chiaro-coffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:51"
+        },
+        {
+            "url": "https://caramelly.in/products/sage-breville-the-barista-express-impress-espresso-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:53"
+        },
+        {
+            "url": "https://caramelly.in/products/nescafe-dolce-gusto-latte-macchiato-coffee-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:54"
+        },
+        {
+            "url": "https://caramelly.in/products/nescafe-dolce-gusto-cappuccino-coffee-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:55"
+        },
+        {
+            "url": "https://caramelly.in/products/nescafe-dolce-gusto-cafe-au-lait-coffee-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:56"
+        },
+        {
+            "url": "https://caramelly.in/products/bialetti-coffee-press-preziosa",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:57"
+        },
+        {
+            "url": "https://caramelly.in/products/bialetti-moka-express-tricolor",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:58"
+        },
+        {
+            "url": "https://caramelly.in/products/lavazza-blue-caffe-crema-lungo-pack-of-25-coffee-capsules-compatible-with-lavazza-blue-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:36:59"
+        },
+        {
+            "url": "https://caramelly.in/products/lavazza-nespresso-compatible-coffee-capsule-espresso-ristretto",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:00"
+        },
+        {
+            "url": "https://caramelly.in/products/lavazza-blue-espresso-intenso",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:01"
+        },
+        {
+            "url": "https://caramelly.in/products/lavazza-blue-espresso-top-class-pack-of-25-coffee-capsules-compatible-with-lavazza-blue-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:03"
+        },
+        {
+            "url": "https://caramelly.in/products/lavazza-blue-classy-mini-coffee-machine-lb-300",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:04"
+        },
+        {
+            "url": "https://caramelly.in/products/lavazza-blue-classy-compact-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:05"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-paris-espresso-coffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:06"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-istanbul-espressocoffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:07"
+        },
+        {
+            "url": "https://caramelly.in/products/gaggia-cadorna-prestige-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:08"
+        },
+        {
+            "url": "https://caramelly.in/products/gaggia-academmia-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:09"
+        },
+        {
+            "url": "https://caramelly.in/products/gaggia-classic-color-vibes-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:10"
+        },
+        {
+            "url": "https://caramelly.in/products/jura-e8-black-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:11"
+        },
+        {
+            "url": "https://caramelly.in/products/lavazza-r-g-espresso-italiano-ground-coffee-powder",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:13"
+        },
+        {
+            "url": "https://caramelly.in/products/lavazza-r-g-espresso-italiano-ground-coffee-beans",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:14"
+        },
+        {
+            "url": "https://caramelly.in/products/lavazza-r-g-gusto-crema-ground-coffee-beans",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:15"
+        },
+        {
+            "url": "https://caramelly.in/products/lavazza-r-g-rossa-ground-coffee-powder",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:16"
+        },
+        {
+            "url": "https://caramelly.in/products/lavazza-blue-espresso-dolce",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:17"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-starbucks-sunny-day-blend-coffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:18"
+        },
+        {
+            "url": "https://caramelly.in/products/jura-z10-diamond-black-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:19"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-starbucks-guatemala-coffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:20"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-trial-coffee-7-pods-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:21"
+        },
+        {
+            "url": "https://caramelly.in/products/sage-breville-the-barista-express-espresso-machine-ses875",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:22"
+        },
+        {
+            "url": "https://caramelly.in/products/tonino-lamborghini-nespresso-compatible-espresso-red-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:23"
+        },
+        {
+            "url": "https://caramelly.in/products/tonino-lamborghini-nespresso-compatible-espresso-black-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:24"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-vaniglia",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:25"
+        },
+        {
+            "url": "https://caramelly.in/products/caramello",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:26"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-double-walled-cappuccino-cups",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:27"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-double-wall-thermal-insulated-stackable-glass-mug-pack-of-2-250-ml-each",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:28"
+        },
+        {
+            "url": "https://caramelly.in/products/t-lamborghini-nespresso-compatible-200-km-h-variety-pack-50-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:29"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-starbucks-smooth-caramel-coffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:30"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-starbucks-creamy-vanilla-coffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:31"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-acrylic-pods-drawer",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:32"
+        },
+        {
+            "url": "https://caramelly.in/products/almond-beverage-plant-based-1-litre",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:33"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-qube-acrylic-with-40-assorted-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:34"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-qube-acrylic-without-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:35"
+        },
+        {
+            "url": "https://caramelly.in/products/mathieu-teisseire-chocolate-syrup",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:36"
+        },
+        {
+            "url": "https://caramelly.in/products/mathieu-teisseire-tiramisu-syrup",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:38"
+        },
+        {
+            "url": "https://caramelly.in/products/mathieu-teisseire-popcorn-syrup",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:39"
+        },
+        {
+            "url": "https://caramelly.in/products/mathieu-teisseire-caramel-syrup",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:40"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-vertuo-roasted-hazelnut-coffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:41"
+        },
+        {
+            "url": "https://caramelly.in/products/mathieu-teisseire-hazelnut-syrup-700ml",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:42"
+        },
+        {
+            "url": "https://caramelly.in/products/sage-breville-dual-boiler-espresso-coffee-machine-bes920xl",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:43"
+        },
+        {
+            "url": "https://caramelly.in/products/water-filter-for-sage",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:44"
+        },
+        {
+            "url": "https://caramelly.in/products/tip",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:45"
+        },
+        {
+            "url": "https://caramelly.in/products/bialetti-dolce-gabbana-moka-express-sicilian-cart",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:46"
+        },
+        {
+            "url": "https://caramelly.in/products/beanies-chai-latte-flavour-infused-instant-coffee-50g",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:47"
+        },
+        {
+            "url": "https://caramelly.in/products/beanies-creamy-caramel-flavour-infused-instant-coffee-50g",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:48"
+        },
+        {
+            "url": "https://caramelly.in/products/beanies-irish-creamflavour-infused-instant-coffee-50g",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:49"
+        },
+        {
+            "url": "https://caramelly.in/products/beanies-choco-orange-flavour-infused-instant-coffee-50g-1",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:50"
+        },
+        {
+            "url": "https://caramelly.in/products/sage-breville-the-barista-touch-impress-espresso-machine-ses881",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:51"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-hex-acrylic-pods-holder",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:52"
+        },
+        {
+            "url": "https://caramelly.in/products/ribbed-curvy-glass",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:53"
+        },
+        {
+            "url": "https://caramelly.in/products/saeco-magic-m1-fully-automatic-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:54"
+        },
+        {
+            "url": "https://caramelly.in/products/saeco-magic-m2-fully-automatic-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:55"
+        },
+        {
+            "url": "https://caramelly.in/products/saeco-se-180-fully-automatic-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:56"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-foamlatte-pro-milk-frother",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:57"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-vacuum-insulated-mug-300ml-3",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:58"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-vacuum-insulated-mug-300ml-5",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:37:59"
+        },
+        {
+            "url": "https://caramelly.in/products/gaggia-espresso-evolution-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:00"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-r51x-electric-coffee-grinder",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:01"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-nespresso-coffee-capsules-pods-french-vanilla",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:02"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-nespresso-coffee-capsules-pods-hazelnut-muffin",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:03"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-nespresso-coffee-capsules-pods-caramel-cookie",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:05"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-nespresso-barista-coffee-capsules-pack",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:06"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-espresso-pop-nespresso-coffee-capsule-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:07"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-espresso-pop-nespresso-coffee-capsule-machine-with-milk-frother-free-10-coffee-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:08"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-starbucks-decaf-blonde-espresso-roast-coffee-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:09"
+        },
+        {
+            "url": "https://caramelly.in/products/cafe-royal-cherry-chocolate-coffee-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:10"
+        },
+        {
+            "url": "https://caramelly.in/products/cafe-royal-tiramisu-coffee-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:11"
+        },
+        {
+            "url": "https://caramelly.in/products/mix-match-nespresso-coffee-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:12"
+        },
+        {
+            "url": "https://caramelly.in/products/delonghi-ecam-450-86-t-super-automatic-eletta-explore-espresso-coffee-maker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:13"
+        },
+        {
+            "url": "https://caramelly.in/products/clearyl-smart-filter-cartridge",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:14"
+        },
+        {
+            "url": "https://caramelly.in/products/caffenu-cleaning-capsules-for-originalline",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:15"
+        },
+        {
+            "url": "https://caramelly.in/products/caffenu-cleaning-capsules-for-vertuoline",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:16"
+        },
+        {
+            "url": "https://caramelly.in/products/caffenu-eco-descaler-for-beantocup-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:17"
+        },
+        {
+            "url": "https://caramelly.in/products/caffenu-cleaning-tablets-tub-100tablets",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:18"
+        },
+        {
+            "url": "https://caramelly.in/products/caffenu-cleaning-tablets-blister-10tablets",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:20"
+        },
+        {
+            "url": "https://caramelly.in/products/caffenu-milk-system-cleaner",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:21"
+        },
+        {
+            "url": "https://caramelly.in/products/caffenu-cleaning-capsules-for-originalline-10-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:22"
+        },
+        {
+            "url": "https://caramelly.in/products/caffenu-jura-double-action-cleaning-tablets",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:23"
+        },
+        {
+            "url": "https://caramelly.in/products/137-almond-milk-unsweetend-1-litre-copy",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:24"
+        },
+        {
+            "url": "https://caramelly.in/products/nescafe-dolce-gusto-flat-white-coffee-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:25"
+        },
+        {
+            "url": "https://caramelly.in/products/caffenu-descaling-cleaning-kit",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:26"
+        },
+        {
+            "url": "https://caramelly.in/products/caffenu-eco-power-cleaning-tablets-52-tabs",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:27"
+        },
+        {
+            "url": "https://caramelly.in/products/caffenu-eco-power-cleaning-tablets-descaler-kit-compatible-with-all-sage-breville-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:38"
+        },
+        {
+            "url": "https://caramelly.in/products/caffenu%C2%AE-jura%C2%AE-triple-action-cleaning-tablets-descaler-kit-compatible-with-all-jura%C2%AE-machines-copy",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:39"
+        },
+        {
+            "url": "https://caramelly.in/products/caffenu-cleaning-tablets-descaler-kit-for-philips-gaggia-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:40"
+        },
+        {
+            "url": "https://caramelly.in/products/6-pack-replacement-carbon-water-filters-compatible-with-breville-sage",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:41"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-ambassador",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:42"
+        },
+        {
+            "url": "https://caramelly.in/products/jura-x10-platinum-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:43"
+        },
+        {
+            "url": "https://caramelly.in/products/lor-espresso-fortissimo-coffee-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:44"
+        },
+        {
+            "url": "https://caramelly.in/products/caffenu%C2%AE-sage-breville-power-cleaning-tablets-10-tabs-x-1-4g-compatible-with-all-sage-breville-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:45"
+        },
+        {
+            "url": "https://caramelly.in/products/cafe-royal-espresso-decaf-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:46"
+        },
+        {
+            "url": "https://caramelly.in/products/cafe-royal-lungo-decaf-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:47"
+        },
+        {
+            "url": "https://caramelly.in/products/delonghi-rivelia-exam-440-55-w-super-automatic-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:48"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-fikapresso-pro-portable-electric-espresso-machine-with-self-heating",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:50"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-fikapresso-portable-nespress-pods-compatible-espresso-maker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:51"
+        },
+        {
+            "url": "https://caramelly.in/products/sage-breville-the-oracle-jet-espresso-machinesage-breville-the-oracle-jet-espresso-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:52"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-viennese-roast-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:53"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-espresso-dark-roast-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:53"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-roasted-almond-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:55"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-raspberry-chocolate-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:56"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-baileys-flavour-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:57"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-rocher-hazelnut-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:58"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-double-chocolate-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:38:59"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-flavourettes-pack-50-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:00"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-perfect-with-milk-pack-30-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:01"
+        },
+        {
+            "url": "https://caramelly.in/products/jura-j10-coffee-machine-piano-black",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:02"
+        },
+        {
+            "url": "https://caramelly.in/products/dolce-gabbana-bialetti-moka-express-mediterrean-blue",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:03"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-pumpkin-spice-coffee-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:04"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-decaf-brunch-coffee-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:05"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso-inissia-en80-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:06"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-barista-cocktail-glass-pack-of-2-200-ml-each",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:07"
+        },
+        {
+            "url": "https://caramelly.in/products/vittoria-decaf-nespresso-compatible-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:08"
+        },
+        {
+            "url": "https://caramelly.in/products/home-blend-original-drip-coffee-bags-light-to-medium-roast-pack-of-10",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:09"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-ristretto-intenso-coffee-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:11"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-iced-vanilla-lattte-coffee-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:12"
+        },
+        {
+            "url": "https://caramelly.in/products/gaggia-cadorna-over-ice-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:13"
+        },
+        {
+            "url": "https://caramelly.in/products/gaggia-magenta-over-ice-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:14"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-nespresso-compatible-dark-roast-selection-pack-30-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:15"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-discovery-pack-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:16"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-nespresso%C2%AE-compatible-gourmet-pack-30-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:17"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-houseblend-coffee",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:18"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-fikapresso-series-protective-portable-case",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:19"
+        },
+        {
+            "url": "https://caramelly.in/products/pedrini-moka-express-frida-kahlo-edition",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:20"
+        },
+        {
+            "url": "https://caramelly.in/products/pedrini-moka-pot-infinity-edition",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:22"
+        },
+        {
+            "url": "https://caramelly.in/products/pedrini-moka-pot-promo-edition",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:23"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-fikapresso-portable-nespresso%C2%AE-pods-compatible-espresso-maker-with-case-free-discovery-pack",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:24"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-fikapresso-pro-portable-nespresso%C2%AE-pods-compatible-espresso-maker-self-heating-with-case-free-discovery-pack",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:25"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-biscoffee-crunch-flavoured-nespresso%C2%AE-compatible-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:26"
+        },
+        {
+            "url": "https://caramelly.in/products/oatly-barista-blend-oat-m-lk",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:27"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-honeysundried-coffee",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:28"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-winecaskreserve-coffee",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:30"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-dolcecrema-coffee",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:31"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-dubai-chocolate-flavoured-nespresso%C2%AE-compatible-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:32"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-pink-bourbon-coffee",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:34"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-cappuccino-blend-coffee",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:35"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-french-vanilla-flavoured-nespresso%C2%AE-compatible-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:36"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-caramel-cookie-flavoured-nespresso%C2%AE-compatible-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:38"
+        },
+        {
+            "url": "https://caramelly.in/products/nura-sidamo-coffee-drip-bags",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:39"
+        },
+        {
+            "url": "https://caramelly.in/products/copy-delonghi-magnifica-start-ecam-222-60-bg-super-automatic-espresso-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:40"
+        },
+        {
+            "url": "https://caramelly.in/products/delonghi-maestosa-epam960-75-glm-super-automatic-espresso-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:41"
+        },
+        {
+            "url": "https://caramelly.in/products/delonghi-dinamica-plus-ecam380-95-tb-super-automatic-espresso-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:42"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-festive-signaturebrews-gift",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:43"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-festive-dailybrews-gift",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:44"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-festive-indulgence-gift",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:45"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-festive-curation-gift",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:46"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-brew-luxe-festive-gift-box",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:47"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-hexaqube-acrylic-pods-holder-free-70-nespresso-originalline-capsules-combo",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:48"
+        },
+        {
+            "url": "https://caramelly.in/products/nespresso%C2%AE-sweet-almond-hibiscus-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:49"
+        },
+        {
+            "url": "https://caramelly.in/products/pick-mix-steal-deal-3-coffee-tins",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:51"
+        },
+        {
+            "url": "https://caramelly.in/products/lavazza-tales-of-roma-nespresso%C2%AE-compatible-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:52"
+        },
+        {
+            "url": "https://caramelly.in/products/lor-lungo-mattinata-nespresso%C2%AE-compatible-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:53"
+        },
+        {
+            "url": "https://caramelly.in/products/starbucks-ristretto-shot-nespresso%C2%AE-compatible-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:54"
+        },
+        {
+            "url": "https://caramelly.in/products/cafe-royal-espresso-forte-nespresso%C2%AE-compatible-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:55"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-nespresso%C2%AE-compatible-super-saver-pack-80-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:56"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-nespresso%C2%AE-compatible-variety-pack-50-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:57"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-pink-bourbon-nespresso%C2%AE-compatible-coffee-capsules-10-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:58"
+        },
+        {
+            "url": "https://caramelly.in/products/de-longhi-dlsc002-water-filter-softener-for-coffee-machines-easy-install-filters-impurities-2-months-usage",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:39:59"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-grape-fermented-coffee",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:00"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-frozen-cherry-coffee",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:02"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-ethiopia-yirgacheffe-coffee",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:03"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-costa-rica-coffee",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:04"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-signature-fermentation-trio",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:05"
+        },
+        {
+            "url": "https://caramelly.in/products/caramelly-origin-select-bundle",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:06"
+        },
+        {
+            "url": "https://caramelly.in/pages/about",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:07"
+        },
+        {
+            "url": "https://caramelly.in/pages/gourmet",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:08"
+        },
+        {
+            "url": "https://caramelly.in/pages/faqs",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:09"
+        },
+        {
+            "url": "https://caramelly.in/pages/contact",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:10"
+        },
+        {
+            "url": "https://caramelly.in/pages/register-warranty",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:11"
+        },
+        {
+            "url": "https://caramelly.in/pages/recycling",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:12"
+        },
+        {
+            "url": "https://caramelly.in/pages/coffee-machine-repair-service",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:13"
+        },
+        {
+            "url": "https://caramelly.in/pages/machine-comparison",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:14"
+        },
+        {
+            "url": "https://caramelly.in/pages/caramelly-loyalty-program",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:15"
+        },
+        {
+            "url": "https://caramelly.in/pages/amazon-free-coffee",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:16"
+        },
+        {
+            "url": "https://caramelly.in/pages/test-repair-page",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:17"
+        },
+        {
+            "url": "https://caramelly.in/pages/test-used-marketplace",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:18"
+        },
+        {
+            "url": "https://caramelly.in/pages/test-warranty-page",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:19"
+        },
+        {
+            "url": "https://caramelly.in/pages/mumbai-coffee-festival-contest",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:19"
+        },
+        {
+            "url": "https://caramelly.in/collections/starbucks-nespresso",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:20"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-compatible-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:22"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-barista-creations",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:23"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-ispirazione-italiana",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:24"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-accessories",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:25"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-vertuo",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:27"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-world-explorations",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:28"
+        },
+        {
+            "url": "https://caramelly.in/collections/illy-nespresso",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:29"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-limited-editions",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:30"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-master-origin",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:31"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-decaffeinated",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:32"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-compatible-coffee-capsules-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:35"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-compatible-coffee-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:36"
+        },
+        {
+            "url": "https://caramelly.in/collections/roaster-market",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:38"
+        },
+        {
+            "url": "https://caramelly.in/collections/coffee-accessories",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:40"
+        },
+        {
+            "url": "https://caramelly.in/collections/nescafe-dolce-gusto",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:41"
+        },
+        {
+            "url": "https://caramelly.in/collections/bean-to-cup-coffee-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:43"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-ristretto-espresso",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:44"
+        },
+        {
+            "url": "https://caramelly.in/collections/all",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:45"
+        },
+        {
+            "url": "https://caramelly.in/collections/manual-brewers",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:46"
+        },
+        {
+            "url": "https://caramelly.in/collections/melitta",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:47"
+        },
+        {
+            "url": "https://caramelly.in/collections/12-gst",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:48"
+        },
+        {
+            "url": "https://caramelly.in/collections/lavazza-blue-coffee-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:50"
+        },
+        {
+            "url": "https://caramelly.in/collections/whats-new",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:51"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-pods-bundles",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:53"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-best-selling-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:54"
+        },
+        {
+            "url": "https://caramelly.in/collections/best-selling-products",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:55"
+        },
+        {
+            "url": "https://caramelly.in/collections/newest-products",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:56"
+        },
+        {
+            "url": "https://caramelly.in/collections/gaggia-coffee-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:58"
+        },
+        {
+            "url": "https://caramelly.in/collections/jura-coffee-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:40:59"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-espresso-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:00"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-milk-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:01"
+        },
+        {
+            "url": "https://caramelly.in/collections/milk-frothers",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:02"
+        },
+        {
+            "url": "https://caramelly.in/collections/nespresso-cold-coffee-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:03"
+        },
+        {
+            "url": "https://caramelly.in/collections/machine-maintenance-spares",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:05"
+        },
+        {
+            "url": "https://caramelly.in/collections/new-arrivals-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:06"
+        },
+        {
+            "url": "https://caramelly.in/collections/instant-coffee",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:07"
+        },
+        {
+            "url": "https://caramelly.in/collections/sage-breville-coffee-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:08"
+        },
+        {
+            "url": "https://caramelly.in/collections/coffee-beans",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:09"
+        },
+        {
+            "url": "https://caramelly.in/collections/ground-coffee",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:10"
+        },
+        {
+            "url": "https://caramelly.in/collections/delonghi-coffee-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:11"
+        },
+        {
+            "url": "https://caramelly.in/collections/international-coffee-roasters",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:12"
+        },
+        {
+            "url": "https://caramelly.in/collections/saeco-coffee-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:13"
+        },
+        {
+            "url": "https://caramelly.in/collections/philips-coffee-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:14"
+        },
+        {
+            "url": "https://caramelly.in/collections/oat-almond-coconut-milk",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:15"
+        },
+        {
+            "url": "https://caramelly.in/collections/perfect-for-milk-coffee-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:16"
+        },
+        {
+            "url": "https://caramelly.in/collections/milklab",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:17"
+        },
+        {
+            "url": "https://caramelly.in/collections/capsules-pods-holder",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:18"
+        },
+        {
+            "url": "https://caramelly.in/collections/coffee-cups-mugs",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:19"
+        },
+        {
+            "url": "https://caramelly.in/collections/lavazza-blue-coffee-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:20"
+        },
+        {
+            "url": "https://caramelly.in/collections/coffee-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:21"
+        },
+        {
+            "url": "https://caramelly.in/collections/la-marzocco-coffee-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:22"
+        },
+        {
+            "url": "https://caramelly.in/collections/coffee-machine-cleaning-spares",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:23"
+        },
+        {
+            "url": "https://caramelly.in/collections/ariete-coffee-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:24"
+        },
+        {
+            "url": "https://caramelly.in/collections/gifting",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:25"
+        },
+        {
+            "url": "https://caramelly.in/collections/coffee-beans-grinders",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:26"
+        },
+        {
+            "url": "https://caramelly.in/collections/light-roast-coffees",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:27"
+        },
+        {
+            "url": "https://caramelly.in/collections/medium-roast-coffees",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:28"
+        },
+        {
+            "url": "https://caramelly.in/collections/dark-roast-coffees",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:29"
+        },
+        {
+            "url": "https://caramelly.in/collections/international-coffees",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:30"
+        },
+        {
+            "url": "https://caramelly.in/collections/special-edition-coffees",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:31"
+        },
+        {
+            "url": "https://caramelly.in/collections/portable-espresso-makers",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:32"
+        },
+        {
+            "url": "https://caramelly.in/collections/easy-brews",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:33"
+        },
+        {
+            "url": "https://caramelly.in/collections/caramelly-coffee-pods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:34"
+        },
+        {
+            "url": "https://caramelly.in/collections/new-arrival-roaster-market",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:35"
+        },
+        {
+            "url": "https://caramelly.in/collections/best-coffee-machines-home-office",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:37"
+        },
+        {
+            "url": "https://caramelly.in/collections/best-selling-coffee-beans",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:38"
+        },
+        {
+            "url": "https://caramelly.in/collections/best-with-milk-coffee-beans",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:39"
+        },
+        {
+            "url": "https://caramelly.in/collections/ready-to-drink",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:40"
+        },
+        {
+            "url": "https://caramelly.in/collections/semi-automatic-espresso-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:41"
+        },
+        {
+            "url": "https://caramelly.in/collections/cold-brew-enabled-espresso-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:42"
+        },
+        {
+            "url": "https://caramelly.in/collections/fully-automatic-coffee-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:43"
+        },
+        {
+            "url": "https://caramelly.in/collections/professional-automatic-coffee-machines",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:44"
+        },
+        {
+            "url": "https://caramelly.in/collections/t-lamborghini-coffee-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:45"
+        },
+        {
+            "url": "https://caramelly.in/collections/caramelly-coffee-beans",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:46"
+        },
+        {
+            "url": "https://caramelly.in/collections/caramelly-coffee",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:47"
+        },
+        {
+            "url": "https://caramelly.in/collections/6-months-collection",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:48"
+        },
+        {
+            "url": "https://caramelly.in/blogs/news",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:49"
+        },
+        {
+            "url": "https://caramelly.in/blogs/news/nespresso-capsules",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:50"
+        },
+        {
+            "url": "https://caramelly.in/blogs/news/top-5-favorite-coffee-machine",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:52"
+        },
+        {
+            "url": "https://caramelly.in/blogs/news/our-top-5-favorite-coffee-recipes-of-all-times",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:53"
+        },
+        {
+            "url": "https://caramelly.in/blogs/news/how-to-judge-an-original-nespresso-coffee-capsule",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:54"
+        },
+        {
+            "url": "https://caramelly.in/blogs/news/a-brief-history-of-the-coffee-capsule",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:55"
+        },
+        {
+            "url": "https://caramelly.in/blogs/news/hold-that-button-down-a-guide-to-consistent-capsule-brewing",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:56"
+        },
+        {
+            "url": "https://caramelly.in/blogs/news/5-steps-to-brew-better-capsule-coffee-at-home",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-07 19:41:57"
+        }
+    ],
+    "sitemap_used": true,
+    "sitemap_generated": false,
+    "completed_at": "2026-02-07 19:41:57"
+}

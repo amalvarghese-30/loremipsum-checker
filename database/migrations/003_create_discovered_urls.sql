@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS `discovered_urls` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `scan_id` BIGINT UNSIGNED NOT NULL,
+  `original_url` TEXT NOT NULL,
+  `normalized_url` VARCHAR(2048) NOT NULL,
+  `canonical_url` TEXT NULL,
+  `final_url` TEXT NULL,
+  `url_hash` CHAR(64) NOT NULL COMMENT 'SHA-256 of normalized_url',
+  `discovery_source` VARCHAR(100) NOT NULL DEFAULT 'unknown',
+  `crawl_depth` TINYINT UNSIGNED NOT NULL DEFAULT 0,
+  `status` ENUM('pending','queued','processing','retry_wait','completed','failed','needs_review') NOT NULL DEFAULT 'pending',
+  `retry_count` TINYINT UNSIGNED NOT NULL DEFAULT 0,
+  `discovered_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `processed_at` DATETIME NULL,
+  `last_error` TEXT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_scan_url_hash` (`scan_id`, `url_hash`),
+  INDEX `idx_scan_status` (`scan_id`, `status`),
+  INDEX `idx_scan_id` (`scan_id`),
+  CONSTRAINT `fk_durls_scan` FOREIGN KEY (`scan_id`) REFERENCES `scans`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

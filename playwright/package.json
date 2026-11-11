@@ -1,0 +1,12 @@
+{
+  "name": "lorem-checker-playwright",
+  "version": "1.0.0",
+  "description": "Playwright JS Rendering Fallback for Lorem Ipsum Checker",
+  "main": "render-page.js",
+  "scripts": {
+    "test": "node render-page.js '{\"url\":\"http://localhost\"}'"
+  },
+  "dependencies": {
+    "playwright": "^1.42.0"
+  }
+}

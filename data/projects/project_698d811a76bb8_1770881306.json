@@ -1,0 +1,1781 @@
+{
+    "id": "project_698d811a76bb8_1770881306",
+    "project_name": "Agarwal",
+    "website_url": "https://agarwalherbalproducts.com/",
+    "sitemap_url": null,
+    "use_sitemap": true,
+    "status": "completed",
+    "created_at": "2026-02-12 12:58:26",
+    "updated_at": "2026-02-12 13:09:08",
+    "progress": {
+        "total_urls": 293,
+        "processed": 293,
+        "clean": 292,
+        "lorem_found": 0,
+        "errors": 0,
+        "percentage": 100
+    },
+    "results": [
+        {
+            "url": "https://agarwalherbalproducts.com/blog/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:58:34"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/say-goodbye-to-chemicals-discover-the-magic-of-herbal-henna-hair-color/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:58:36"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/restore-and-revive-your-skin-with-super-heel-repair-anti-crack-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:58:38"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/beauty-life-style-classic/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:58:40"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:58:42"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/privacy-policy/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:58:44"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/about-us/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:58:46"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/contact-us/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:58:48"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/directors/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:58:51"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/terms-condition/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:58:53"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/shop/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:58:56"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/my-account/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:58:58"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/olive-oil-no-lye-hair-relaxer-kit-regular/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:00"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/coconut-oil-hair-food/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:02"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/rich-cream-hair-color-with-moroccan-argan-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:04"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/pure-aloevera-gel/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:06"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/herbal-hair-pomade-smooth-hold-natural-shine-without-damage/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:09"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/soyabean-oil-pressing-formula-strengthen-roots-restore-scalp-balance-naturally/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:11"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/bergamot-oil-formula-herbal-scalp-therapy-for-stronger-healthier-hair/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:13"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/agarwals-soft-color-olive-oil-hair-food/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:15"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/hair-styling-gel/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:16"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aira-sensual-desire-deodorant-body-spray/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:18"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/almond-skin-beauty-cream-deep-nourishment-for-radiant-youthful-skin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:21"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/henna-cone-red-black/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:23"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/nail-decoration-paste/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:25"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/black-henna-natural-black-hair-color-without-harsh-chemicals/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:27"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/hair-color-shampoo-with-keratin-hair-darkening/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:29"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/keratin-hair-color-shampoo/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:31"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/agarwals-soft-color-herbal-henna-hair-colours-with-keratin-rich-conditioning/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:33"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/herbal-henna-black-hair-color/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:35"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/black-berry-petroleum-jelly-skin-softening-care-with-a-berry-boost/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:38"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/pure-olive-petroleum-jelly-natural-moisture-shield-for-soft-healthy-skin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:40"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/cocoa-butter-petroleum-jelly-deep-moisture-skin-repair-with-a-nourishing-touch/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:43"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/petroleum-jelly-multipurpose-skin-protector-moisturizer/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:45"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/agarwals-soft-color-indian-hemp-petroleum-jelly/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:48"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/soft-color-professional-hot-oil-treatment-hair-conditioner/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:51"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/texturizer-hair-softener-with-moroccan-argan-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:53"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/papaya-skin-beauty-cream-natural-radiance-even-toned-glow/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:55"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/henna-mehendi-100-natural-henna-powder/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 12:59:58"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-powder-gentle-skin-care-for-infants/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:01"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/black-henna-powder-hair-dye-3gm-sachet/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:06"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/natural-hair-color-with-extra-conditioning/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:10"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/strawberry-face-wash/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:12"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/7-in-one-natural-oil-for-hair-skin-2/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:15"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/cactus-hair-oil-intense-protection-hydration-for-resilient-healthy-hair/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:17"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/instant-heena-colour-mehndi-cone/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:19"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/olive-keratin-styling-cream-smooth-styling-with-strength-shine-deep-repair/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:22"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/almond-keratin-styling-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:24"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/blackseed-keratin-styling-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:27"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/argan-seed-keratin-styling-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:30"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/cucumber-aloe-vera-face-body-scrub-gentle-exfoliation-soothing-hydration/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:32"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/strawberry-face-body-scrub-polishing-glow-with-berry-brightness/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:34"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/apricot-face-body-scrub-deep-cleansing-radiant-skin-with-natural-exfoliation/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:36"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/honey-almond-face-body-scrub-gentle-nourishment-smooth-radiance/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:38"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/charcoal-face-body-scrub-deep-detox-for-clear-refreshed-skin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:41"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/majma-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:43"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/mahalya-henna-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:46"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/sarahyi-henna-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:49"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/7-star-sandaliya-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:51"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/cavador-paris-rique-men-perfume/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:53"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/cavador-paris-evony-women-perfume/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:55"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/cavador-paris-celestia-women-perfume/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:00:58"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/cavador-paris-montague-men-perfume/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:01"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/shower-gel-orange-lemon/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:03"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-cream-regular-gentle-care/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:05"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/blackberry-body-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:08"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/almond-body-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:10"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/curcum-body-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:12"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/milk-body-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:15"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/papaya-body-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:17"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/vitamin-c-body-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:20"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/cocoa-butter-body-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:22"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/pure-olive-body-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:25"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/argan-moroccan-body-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:27"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/glycerine-daisy-body-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:30"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/lemon-glycerine-skin-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:32"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/black-seed-petroleum-jelly-herbal-protection-deep-nourishment-for-healthy-skin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:34"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/coconut-petroleum-jelly/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:37"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/chocolate-lip-balm/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:39"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/mix-fruit-lip-balm/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:41"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/peach-lip-balm/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:43"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/strawberry-lip-balm/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:46"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/vanilla-lip-balm/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:48"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/lip-balm/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:51"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/coconut-keratin-hair-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:53"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/rosemary-keratin-hair-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:55"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/henna-amla-keratin-hair-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:01:57"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aloe-vera-keratin-hair-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:00"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/agarwal-coconut-hair-oil-pure-nourishment-for-stronger-shinier-hair/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:03"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/amla-hair-oil-ayurvedic-strength-for-long-lustrous-hair/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:05"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/garlic-hair-oil-revitalize-your-scalp-boost-hair-growth-naturally/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:07"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/olive-hair-oil-deep-nourishment-for-smooth-shiny-strong-hair/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:10"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/almond-hair-oil-vitamin-rich-care-for-strong-silky-and-healthy-hair/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:13"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/argan-moroccan-hair-oil-luxurious-care-for-smooth-shiny-frizz-free-hair/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:15"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/agarwal-aloe-vera-hair-oil-cooling-nourishment-scalp-care/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:17"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/agarwal-dandruff-control-hair-oil-flake-free-healthy-nourished-scalp/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:19"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/dandruff-control-keratin-hair-spa/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:22"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/agarwals-soft-color-keratin-henna-amla-hot-oil-treatment/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:23"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aloe-vera-hot-oil-treatment-with-keratin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:25"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/moroccan-argan-hot-oil-treatment-with-keratin-deep-nourishment-repair/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:27"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/cactus-garlic-hot-oil-treatment-with-keratin-strength-repair-for-weak-thinning-hair/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:30"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/soft-color-coconut-oil-hair-food/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:33"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/hair-food-intensive-nourishment-for-strong-healthy-hair/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:36"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/agarwals-soft-color-bees-wax-hair-food/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:38"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/argan-skin-beauty-cream-luxurious-hydration-for-radiant-youthful-skin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:41"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/cocoa-butter-skin-beauty-cream-deep-moisture-for-smooth-supple-glowing-skin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:44"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/blackberry-skin-cream-radiant-glow-with-antioxidant-rich-blackberry-extract/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:47"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/pure-olive-skin-cream-deep-moisture-natural-glow-with-virgin-olive-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:49"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/blackseed-skin-cream-herbal-nourishment-for-healthy-radiant-skin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:53"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/strawberry-clay-face-pack-detox-glow-pore-care/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:56"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/fresh-mint-clay-pack-cooling-oil-control-formula/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:02:58"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/cucumber-clay-pack-soothing-hydration-pore-care/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:00"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/honey-saffron-clay-pack-glow-enhancing-nourishing-care/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:02"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-oil-regular-gentle-care-for-delicate-skin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:04"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-almond-oil-pure-care-for-delicate-skin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:07"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-argan-oil-gentle-nourishment-for-soft-healthy-skin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:09"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-coconut-oil-pure-gentle-care-for-delicate-skin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:11"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-olive-oil-gentle-nourishment-protection-for-babys-skin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:13"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-shampoo-regular-gentle-care/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:15"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-almond-oil-shampoo/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:17"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-coconut-oil-shampoo/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:19"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-argan-oil-shampoo/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:21"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-olive-oil-shampoo/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:23"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aloe-vera-skin-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:25"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/shea-butter-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:27"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/anti-stretch-mark-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:29"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/bio-care-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:31"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/super-heel-repair-anti-crack-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:33"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/anti-septic-turmeric-skin-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:35"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/clear-marks-skin-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:37"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aira-sensual-turab-tyba-deodorant-body-spray/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:39"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aira-sensual-my-feel-deodorant-body-spray/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:41"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aira-sensual-good-friend-deodorant-body-spray/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:43"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aira-sensual-long-time-deodorant-body-spray/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:45"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aira-sensual-fantasy-deodorant-body-spray/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:47"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aira-sensual-my-sense-deodorant-body-spray/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:49"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aira-sensual-bakhour-deodorant-body-spray/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:50"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aira-sensual-spark-deodorant-body-spray/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:52"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aira-sensual-passion-deodorant-body-spray/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:54"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aira-sensual-midnight-deodorant-body-spray/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:56"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aira-sensual-chocolate-deodorant-body-spray/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:03:58"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/sheikh-al-sudan-roll-on/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:00"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/shams-aleeza-roll-on/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:02"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/roll-on-818/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:04"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/roll-on-oud-mawadda/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:06"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/roll-on-tebr-alddahb/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:08"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/roll-on-pink-lady/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:10"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/roll-on-oudi/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:12"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/roll-on-al-fares/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:14"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/attar-full-roll-on/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:16"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/shower-gel-cool-burst/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:18"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/shower-gel-lavender/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:20"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/shower-gel-green-tea-neem/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:22"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/green-tea-hand-wash/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:24"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/orange-hand-wash/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:26"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/pomegranate-hand-wash/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:27"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-soap-milk-protein/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:29"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-soap-almond/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:31"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-soap-hibiscus-gentle-care/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:33"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-soap-green-tea-fresh-care/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:35"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-olive-cream-gentle-nourishment-protection/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:37"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-aloe-vera-cream-cooling-hydration-gentle-care/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:39"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-coconut-cream-gentle-moisture-protection/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:41"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-almond-cream-nourishment-softness/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:44"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-petroleum-jelly-without-perfume/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:46"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-petroleum-jelly-sandalwood/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:49"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-petroleum-jelly-regular/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:51"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-olive-oil-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:53"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-argan-oil-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:55"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-coconut-oil-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:04:58"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-almond-oil-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:00"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/baby-lotion-regular-gentle-care/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:03"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/laundry-soap-bio-wonder-clean/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:07"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/laundry-soap-shine-brite/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:10"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/bitter-almond-hair-skin-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:13"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/turmeric-bath-soap/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:15"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/bath-soap-sweet-almond/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:17"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/bath-soap-black-seed/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:19"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/bath-soap-bitter-almond-curcum/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:22"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/bath-soap-green-tea/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:24"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/bath-soap-castor/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:26"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/bath-soap-charcoal/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:28"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/invigorating-body-massage-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:30"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/nourishing-body-massage-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:32"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/massage-oil-body-relaxing/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:34"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/hair-removal-cream-calming-aloe-vera/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:35"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/hair-removal-cream-exotic-sandal/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:37"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/hair-removal-cream-gentle-lavender/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:40"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/hair-removal-cream-velvety-rose/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:41"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/hair-removal-cream-citrusy-lemon/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:43"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/super-fairness-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:45"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/honey-almond-body-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:47"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/avocado-body-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:49"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aloe-vera-body-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:52"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/coconut-body-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:53"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/glycerin-skin-cream-red-tin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:56"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/moisturizing-skin-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:05:58"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/glycerine-skin-cream-aloe-vera/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:00"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/glycerine-skin-cream-strawberry/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:02"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/glycerine-skin-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:04"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/neem-basil-face-mask/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:05"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/green-tea-oil-natural-oil-for-hair-skin-2/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:07"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/argan-oil-moroccan-natural-oil-for-hair-skin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:09"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/cocoa-butter-oil-natural-oil-for-hair-skin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:11"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/jojoba-oil-natural-oil-for-hair-skin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:13"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/turmeric-hair-skin-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:15"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/black-seed-oil-natural-oil-for-hair-skin-2/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:17"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/castor-oil-natural-oil-for-hair-skin-3/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:19"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/shea-butter-oil-natural-oil-for-hair-skin/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:21"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/sweet-almond-oil-natural-oil-for-hair-skin-2/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:23"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/henna-amla-hair-oil-treatment/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:24"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/rosemary-hair-oil-treatment/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:26"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/onion-hair-oil-treatment/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:28"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/rosemary-shampoo-with-keratin-treatment/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:31"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/coconut-shampoo-with-keratin-treatment/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:33"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aloe-vera-shampoo-with-keratin-treatment/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:35"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/egg-protein-hair-shampoo-with-keratin-treatment/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:37"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/henna-amla-shampoo-keratin-treatment/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:39"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/anti-dandruff-shampoo-keratin-treatment/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:41"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/professional-hot-oil-treatment-strong-hair-from-the-root/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:43"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/professional-hot-oil-treatment-damage-weak-dull-hair/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:46"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/coconut-keratin-hair-spa/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:48"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/rosemary-keratin-hair-spa/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:50"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/henna-amla-keratin-hair-spa/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:52"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/olive-keratin-hair-spa/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:54"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aloe-vera-keratin-hair-spa/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:56"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/black-seed-keratin-hair-spa/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:06:58"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/almond-keratin-hair-spa/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:00"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/cucumber-face-wash/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:02"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/aloe-vera-vitamin-c-face-wash/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:04"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/neem-mint-face-wash/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:06"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/vitamin-c-face-mask/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:08"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/coffee-face-mask/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:10"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/bamboo-charcoal-face-mask/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:13"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/pomegranate-face-mask/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:15"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/advance-sun-protection-cream-spf-40/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:17"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/charcoal-face-wash/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:19"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/neem-face-wash/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:21"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/lemon-face-wash/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:23"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/hair-relaxer-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:25"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product/hair-relaxer-cream-super/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:27"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/category/skin-care/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:29"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/hair-care/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:31"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/skin-care/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:33"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/roll-ons-attar/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:35"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/henna-cone/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:37"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/nail-henna/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:39"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/hair-care/hair-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:41"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/hair-care/hair-relaxer/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:42"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/dandruff-control-keratin-hair-spa/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:44"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/hair-food-intensive-nourishment-for-strong/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:46"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/baby-care/baby-shampoo/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:48"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/baby-care/baby-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:49"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/baby-care/baby-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:51"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/hair-care/hair-shampoo/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:53"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/skin-care/petroleum-jelly/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:55"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/skin-care/clay-pack/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:57"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/skin-care/face-and-body-scrub/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:07:58"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/skin-care/skin-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:00"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/skin-care/skin-beauty-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:02"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/anti-stretch-mark/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:04"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/bio-care-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:06"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/skin-care/face-mask/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:08"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/skin-care/skin-cream/sun-screen/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:10"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/skin-care/face-wash/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:11"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/glycerin-skin-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:13"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/skin-care/body-lotion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:15"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/hair-removal-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:17"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/skin-care/body-massage-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:19"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/bath-soap/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:21"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/baby-care/baby-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:23"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/baby-care/baby-petroleum-jelly/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:25"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/baby-care/baby-soap/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:27"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/skin-care/hand-wash/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:30"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/shower-gel/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:32"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/perfumes/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:33"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/deodorant/deodorant-body-spray/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:35"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/perfumes/cavador-paris-perfumes/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:37"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/laundry-soap/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:39"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/hair-care/hair-colors/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:42"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/hair-relaxer-creme/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:44"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/hair-care/hair-gel/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:46"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/hair-care/keratin-styling-hair-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:48"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/hair-care/keratin-hair-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:50"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/hair-care/keratin-hair-spa/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:51"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/hot-oil-treatment/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:53"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/hair-care/hair-care-products/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:55"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/keratin-treatment-shampoo/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:08:58"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/lip-care/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:09:00"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/hair-skin-oil/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:09:02"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/baby-care/baby-powder/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:09:04"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/pure-aloevera-gel/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:09:05"
+        },
+        {
+            "url": "https://agarwalherbalproducts.com/product-category/moisturizing-skin-cream/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-12 13:09:07"
+        }
+    ],
+    "sitemap_used": true,
+    "sitemap_generated": false,
+    "completed_at": "2026-02-12 13:09:08"
+}

@@ -1,0 +1,385 @@
+{
+    "id": "project_6a44e1b4b52f8_1782899124",
+    "project_name": "rajaprabhu.konkandigital.com Audit",
+    "website_url": "https://rajaprabhu.konkandigital.com/",
+    "sitemap_url": null,
+    "use_sitemap": true,
+    "status": "completed",
+    "created_at": "2026-07-01 15:15:24",
+    "updated_at": "2026-07-01 15:17:25",
+    "progress": {
+        "total_urls": 60,
+        "processed": 60,
+        "clean": 58,
+        "lorem_found": 1,
+        "errors": 0,
+        "percentage": 100,
+        "cf_blocked": 0
+    },
+    "results": [
+        {
+            "url": "https://rajaprabhu.konkandigital.com/2025/03/27/digital-auditing-technology-icai-standards/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:27"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/2025/03/27/startup-india-tax-exemptions-section-80-iac/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:29"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/2025/03/28/tds-tcs-withholding-taxes-indian-corporates/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:30"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/2025/03/28/fema-compliance-inward-foreign-investment-india/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:32"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/2025/03/29/section-44ab-tax-audits-india-businesses/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:34"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/2025/03/29/corporate-tax-rates-planning-india/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:36"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/2025/03/29/roc-filing-checklist-companies-act-2013/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:38"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/2025/03/29/gst-compliance-india-sme-guide/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:40"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/",
+            "status": "lorem_found",
+            "details": "Lorem ipsum (8x), dolor sit amet (8x), consectetur adipiscing (8x)",
+            "checked_at": "2026-07-01 15:15:42",
+            "occurrences": 24
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/services/business-setup-corporate-structuring/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:44"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/services/fema-rbi-cross-border-advisory/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:46"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/services/corporate-roc-compliance/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:47"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/services/audit-assurance-services/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:48"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/services/payroll-hr-outsourcing/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:50"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/services/taxation-compliance-services/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:52"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/services/accounting-bookkeeping-services/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:53"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/testimonials/rebbeca-parker/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:56"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/testimonials/jack-wolf/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:57"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/testimonials/maria-sanchez/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:15:58"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/testimonials/amit-sharma/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:01"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/services/business-advisory-growth-consulting/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:05"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/services/global-mobility-regulatory-support/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:06"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/services/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:09"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/contact/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:11"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:12"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/team/johnatan-moralle/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:13"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/team/rebeca-johnson/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:15"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/team/daniel-brila/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:17"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/landing-page/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:19"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/careers/associate-consultant/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:20"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/careers/consultant-remuneration-total-rewards/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:22"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/careers/consulting-team-organizational-strategy/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:24"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/careers/intern-kfi-outcomes-data-analytics/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:26"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/careers/intern-consulting-operations/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:27"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/worksheets/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:29"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/accounting-tax-audit-cpa/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:32"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/team/elizabeth-jhant/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:34"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/team/frank-bonvie/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:35"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/team/lilya-haring/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:37"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/team/jacob-trivella/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:39"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/team/ryan-harper-2/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:49"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/terms-conditions/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:51"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/testimonials/daniel-foster/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:53"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/testimonials/john-wolfar/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:55"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/testimonials/anna-johnsan/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:57"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/free-consultation/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:16:58"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/testimonials/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:17:00"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/press-release/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:17:02"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/careers/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:17:05"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/team/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:17:07"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/blog/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:17:08"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/case-studies/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:17:10"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/testimonials/ros-eckelberry/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:17:12"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/about/testimonials/jennie-southern/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:17:14"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/privacy-policy/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:17:15"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/category/expert-advice/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:17:16"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/category/industry-insights/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:17:19"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/category/property/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:17:21"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/category/success-story/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:17:22"
+        },
+        {
+            "url": "https://rajaprabhu.konkandigital.com/category/tax/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-07-01 15:17:24"
+        }
+    ],
+    "sitemap_used": true,
+    "sitemap_generated": false,
+    "completed_at": "2026-07-01 15:17:25"
+}

@@ -1,0 +1,625 @@
+{
+    "id": "project_69ba3b2ecfa45_1773812526",
+    "project_name": " cubit",
+    "website_url": "https://cubitfurniture.com/",
+    "sitemap_url": null,
+    "use_sitemap": true,
+    "status": "completed",
+    "created_at": "2026-03-18 11:12:06",
+    "updated_at": "2026-03-18 11:18:43",
+    "progress": {
+        "total_urls": 100,
+        "processed": 100,
+        "clean": 97,
+        "lorem_found": 1,
+        "errors": 1,
+        "percentage": 100,
+        "cf_blocked": 0
+    },
+    "results": [
+        {
+            "url": "https://cubitfurniture.com/blog/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:12:15"
+        },
+        {
+            "url": "https://cubitfurniture.com/hydraulic-murphy-beds-the-future-of-smart-furniture-in-india/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:12:20"
+        },
+        {
+            "url": "https://cubitfurniture.com/from-sofa-to-bed-in-seconds-a-day-in-the-life-with-convertible-furniture/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:12:23"
+        },
+        {
+            "url": "https://cubitfurniture.com/10-smart-ways-to-save-space-with-murphy-beds/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:12:26"
+        },
+        {
+            "url": "https://cubitfurniture.com/blending-comfort-with-style-how-to-choose-the-perfect-sofa-cum-bed/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:12:30"
+        },
+        {
+            "url": "https://cubitfurniture.com/smart-furniture-solutions-for-growing-families-in-small-homes/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:12:33"
+        },
+        {
+            "url": "https://cubitfurniture.com/from-kitchen-to-living-room-clever-ways-to-use-foldable-tables-daily/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:12:37"
+        },
+        {
+            "url": "https://cubitfurniture.com/top-8-space-saving-furniture-ideas-every-small-indian-home-needs/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:12:41"
+        },
+        {
+            "url": "https://cubitfurniture.com/best-murphy-beds-with-study-desks-for-modern-homes/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:12:44"
+        },
+        {
+            "url": "https://cubitfurniture.com/smart-folding-tables-for-small-spaces/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:12:48"
+        },
+        {
+            "url": "https://cubitfurniture.com/best-space-saving-folding-study-table-design-ideas/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:12:52"
+        },
+        {
+            "url": "https://cubitfurniture.com/slide-out-dining-table-with-cutlery-storage-a-space-saving-solution-for-modern-homes/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:12:55"
+        },
+        {
+            "url": "https://cubitfurniture.com/home-decor-trends-in-2025-creating-style-and-space-with-murphy-beds/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:12:58"
+        },
+        {
+            "url": "https://cubitfurniture.com/why-wall-attached-beds-are-the-future-of-space-saving-furniture/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:13:01"
+        },
+        {
+            "url": "https://cubitfurniture.com/how-a-murphy-wall-bed-can-transform-your-bedroom-into-a-multi-functional-space/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:13:04"
+        },
+        {
+            "url": "https://cubitfurniture.com/no-nail-furniture-a-smarter-sustainable-way-to-furnish-your-home/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:13:07"
+        },
+        {
+            "url": "https://cubitfurniture.com/space-saving-innovation-how-smart-furniture-beds-are-transforming-urban-living/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:13:10"
+        },
+        {
+            "url": "https://cubitfurniture.com/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:13:14"
+        },
+        {
+            "url": "https://cubitfurniture.com/shop/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:13:20"
+        },
+        {
+            "url": "https://cubitfurniture.com/about-us/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:13:23"
+        },
+        {
+            "url": "https://cubitfurniture.com/consultation/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:13:32"
+        },
+        {
+            "url": "https://cubitfurniture.com/contact-us/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:13:34"
+        },
+        {
+            "url": "https://cubitfurniture.com/refund_returns/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:13:38"
+        },
+        {
+            "url": "https://cubitfurniture.com/terms-and-conditions/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:13:41"
+        },
+        {
+            "url": "https://cubitfurniture.com/shipping/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:13:44"
+        },
+        {
+            "url": "https://cubitfurniture.com/privacy-policy/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:13:47"
+        },
+        {
+            "url": "https://cubitfurniture.com/demo-webstories/",
+            "status": "error",
+            "details": "HTTP 404",
+            "checked_at": "2026-03-18 11:13:50"
+        },
+        {
+            "url": "https://cubitfurniture.com/my-account/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:13:54"
+        },
+        {
+            "url": "https://cubitfurniture.com/faq/",
+            "status": "lorem_found",
+            "details": "Lorem Ipsum (24x)",
+            "checked_at": "2026-03-18 11:13:57",
+            "occurrences": 24
+        },
+        {
+            "url": "https://cubitfurniture.com/compare/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:14:00"
+        },
+        {
+            "url": "https://cubitfurniture.com/cart/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:14:05"
+        },
+        {
+            "url": "https://cubitfurniture.com/checkout/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:14:09"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/xl-modern-sofa-cum-bed-with-lounger/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:14:13"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/single-wall-bed-with-study-desk-and-storage/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:14:16"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/hardy-centre-table/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:14:20"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/laurel-hardy-table-set/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:14:23"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/laurel-side-table/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:14:27"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/modern-sofa-cum-bed/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:14:30"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/modern-sofa-cum-bed-with-lounger/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:14:33"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/contemporary-sofa-cum-bed/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:14:37"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/classic-sofa-cum-bed/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:14:47"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/chic-sofa-cum-bed/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:14:50"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/kitchen-appliance-table-with-pull-up-table/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:14:53"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/closed-book-storage-with-folding-pull-up-table/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:14:57"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/pull-up-table/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:15:01"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/slide-out-study-desk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:15:04"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/winged-folding-dining-table/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:15:08"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/slide-out-study-desk-with-tall-storage/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:15:12"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/slide-out-study-desk-with-book-storage/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:15:16"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/slide-out-dining-folding-table-with-snack-bar/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:15:19"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/slide-out-dining-folding-table-with-cutlery-storage/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:15:23"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/double-murphy-bed/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:15:27"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/single-murphy-bed-with-study-desk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:15:31"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/single-murphy-bed/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:15:36"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/single-murphy-bed-with-folding-desk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:15:40"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/double-murphy-bed-with-storage/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:15:44"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/horizontal-single-murphy-bed/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:15:48"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/single-murphy-bed-with-storage/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:15:51"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/double-murphy-bed-with-study-desk-and-storage/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:15:55"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/double-murphy-bed-with-study-desk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:15:58"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/single-murphy-bed-with-sliding-dining-table/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:16:10"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/single-murphy-bed-with-study-desk-and-storage/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:16:14"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/horizontal-single-wall-bed/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:16:18"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/single-wall-bed-with-sliding-dining-table/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:16:21"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/double-wall-bed-with-study-desk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:16:25"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/double-wall-bed-with-study-desk-and-storage/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:16:28"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/single-wall-bed-with-storage/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:16:32"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/double-wall-bed-with-storage/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:16:36"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/single-wall-bed-with-folding-desk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:16:41"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/single-wall-bed/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:16:45"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/double-wall-bed-with-wardrobe-on-both-sides/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:16:48"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/single-wall-bed-with-study-desk/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:16:51"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/double-wall-bed/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:16:55"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/double-murphy-bed-with-wardrobe-on-both-sides/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:17:00"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/cushion/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:17:03"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/memory-foam-pillow/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:17:07"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/latex-feel-pillow/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:17:11"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/best-fiber-pillow/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:17:14"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/alm-premia/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:17:18"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/alm-aura/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:17:21"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/alm-hybrid/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:17:31"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/alm-luxe/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:17:35"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/mattress-toppers/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:17:39"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/duvet/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:17:42"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/mattress-protector/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:17:46"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/latex-pillow/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:17:50"
+        },
+        {
+            "url": "https://cubitfurniture.com/product/consultation/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:17:53"
+        },
+        {
+            "url": "https://cubitfurniture.com/category/blog/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:17:56"
+        },
+        {
+            "url": "https://cubitfurniture.com/product-category/wall-beds/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:18:00"
+        },
+        {
+            "url": "https://cubitfurniture.com/product-category/folding-tables/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:18:05"
+        },
+        {
+            "url": "https://cubitfurniture.com/product-category/sofa-cum-bed/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:18:11"
+        },
+        {
+            "url": "https://cubitfurniture.com/product-category/no-nail-concept/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:18:15"
+        },
+        {
+            "url": "https://cubitfurniture.com/product-category/murphy-beds/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:18:19"
+        },
+        {
+            "url": "https://cubitfurniture.com/product-category/accessories/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:18:23"
+        },
+        {
+            "url": "https://cubitfurniture.com/product-category/accessories/mattress/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:18:27"
+        },
+        {
+            "url": "https://cubitfurniture.com/product-category/accessories/pillow/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:18:30"
+        },
+        {
+            "url": "https://cubitfurniture.com/product-category/accessories/mattress-protector/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:18:34"
+        },
+        {
+            "url": "https://cubitfurniture.com/product-category/consultation/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:18:38"
+        },
+        {
+            "url": "https://cubitfurniture.com/product-category/custom-furniture/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:18:41"
+        },
+        {
+            "url": "https://cubitfurniture.com/locations.kml",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-03-18 11:18:42"
+        }
+    ],
+    "sitemap_used": true,
+    "sitemap_generated": false,
+    "completed_at": "2026-03-18 11:18:43"
+}

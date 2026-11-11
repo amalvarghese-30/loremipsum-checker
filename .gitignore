@@ -1,0 +1,28 @@
+# Environment & Credentials
+.env
+.env.local
+.env.*.local
+
+# Data storage & logs (runtime data generated on VPS)
+data/locks/*
+!data/locks/.gitkeep
+data/logs/*
+!data/logs/.gitkeep
+data/sitemaps/*
+!data/sitemaps/.gitkeep
+data/backup_*
+
+# Node & dependencies
+node_modules/
+playwright/.cache/
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# Large Archives
+*.zip
+loremispum.zip

@@ -1,0 +1,1493 @@
+{
+    "id": "project_699c66cab6770_1771857610",
+    "project_name": "Ubon",
+    "website_url": "https://ubonindia.com/",
+    "sitemap_url": null,
+    "use_sitemap": true,
+    "status": "completed",
+    "created_at": "2026-02-23 20:10:10",
+    "updated_at": "2026-02-23 20:14:35",
+    "progress": {
+        "total_urls": 245,
+        "processed": 245,
+        "clean": 244,
+        "lorem_found": 0,
+        "errors": 0,
+        "percentage": 100
+    },
+    "results": [
+        {
+            "url": "https://ubonindia.com/",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:12"
+        },
+        {
+            "url": "https://ubonindia.com/products/buy-online-ubon-bass-factory-2-0-bt-5200-wireless-neckband",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:13"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-quick-charge-cl-50-wireless-neckband",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:14"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-fusion-wr-496-iphone-otg-connector-with-480mbps-data-transfer-rate-and-supports-usb-input-tf-card-and-sd-card",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:16"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-power-master-wr-401-micro-usb-cable",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:17"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-power-master-wr-402-type-c-cable",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:18"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-power-master-wr-403-iph-cable",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:19"
+        },
+        {
+            "url": "https://ubonindia.com/products/ch-888",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:20"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-ch-300-og-series-25-watt-mobile-charger",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:21"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-cool-bass-sp-70-portable-speaker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:22"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-bullet-series-cl-35-wireless-neckband",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:23"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-super-star-cm-617-collar-mic",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:24"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-mr-mike-gt-440-collar-mic",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:25"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-pb-x106-10000mah-power-bank",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:27"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-type-c-tc-486-wired-earphones",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:28"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-maharaja-series-ch-008-65w-pd-charger-with-type-c-cable",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:29"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-og-series-100w-wr-329-usb-to-type-c-cable",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:30"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-magnet-series-wr-444-3-in-1-cable",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:31"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-sultaan-sp-47-wireless-speaker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:32"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-8-in-1-cleaningkit-kt-10-gadget-cleaning-kit",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:33"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-ninja-j5-4-0-wireless-earbuds",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:34"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-maharaja-sp-46-wireless-speaker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:35"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-music-blaster-ht-1550-multimedia-speaker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:36"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-enjoy-unparalleled-audio-quality-with-ub-784-romeo-beat-earphones",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:37"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-20w-wr-550-deluxe-micro-usb-cable",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:38"
+        },
+        {
+            "url": "https://ubonindia.com/products/wr-501-1-metre-65w-high-speed-charging-cable-with-type-c-port-supports-multiple-charging-protocols-and-multiple-devices",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:39"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-speedup-3-0-ch-910-100w-fast-charger-for-ios-and-android-devices",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:41"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-boost-series-ch-58-mobile-fast-safe-charger",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:42"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-pb-x105-powerbank",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:43"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-sp-65-shahenshah-to-rule-hearts-with-music",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:44"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-ch-27-charge-pro-80w-fast-and-safe-charger",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:45"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-rl-2030-lighting-ring-perfect-illumination-for-professional-video-shoots",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:47"
+        },
+        {
+            "url": "https://ubonindia.com/products/rl-2033-lighting-ring-advanced-illumination-for-superior-video-shoots",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:48"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-rl-2032-lighting-ring-your-perfect-companion-for-professional-video-shoots",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:49"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-rl-2031-lighting-ring-enhance-your-video-and-selfie-shoots",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:50"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-sp-28-light-house-series-portable-speaker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:51"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-hp-735-light-up-series-headphones",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:52"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-hp-720-beast-series-designer-headphones",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:54"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-ch-920-65w-warrior-series-charger-superfast-safe-and-compact",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:55"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-ch-940-warrior-2-0-65w-dual-port-fast-charger",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:56"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-hp-740-beast-wireless-headphone-experience-40-hours-of-real-stereo-sound-and-comfort",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:57"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-ch-945-boss-series-dual-port-fast-wall-charger-superfast-charging-powerful-performance",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:58"
+        },
+        {
+            "url": "https://ubonindia.com/products/the-ubon-gt-465-stereo-smartphone-pro-video-making-kit",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:10:59"
+        },
+        {
+            "url": "https://ubonindia.com/products/boost-your-drive-with-ubon-ch-291-65w-fast-car-charger",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:00"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-gt-430-pod-star-the-ultimate-wireless-audio-solution-for-content-creators-and-professionals",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:01"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-rl-2034-the-ultimate-2-in-1-fan-and-led-light-with-remote-control",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:03"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-sf-170-magnetic-mobile-holder-with-camera-control-and-remote-enhance-your-hands-free-mobile-experience",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:04"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-gt-425-influencer-series-wireless-collar-mic",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:05"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-cl-120-enc-magnetic-wireless-neckband-enjoy-powerful-features-with-80-hours-playtime-for-ultimate-audio-enjoyment",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:06"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-j23-topper-series-premium-truly-wireless-earbuds-with-36-hours-playtime-active-noise-reduction",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:07"
+        },
+        {
+            "url": "https://ubonindia.com/products/cl-60-karma-wireless-neckband",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:08"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-wr-408-the-ultimate-type-c-braided-cable-for-speed-durability-and-convenience",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:09"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-j26-air-tiger-wireless-earbuds-real-music-anytime-anywhere",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:10"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-crh-521-magnetic-phone-holder-ultimate-convenience-for-your-car",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:12"
+        },
+        {
+            "url": "https://ubonindia.com/products/wr-470-iph-cable-2024-edition-fast-durable-and-tangle-free-charging-solution-for-all-devices",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:13"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-ht-1570-party-speaker-120w-power-12-inch-woofer-rgb-lights-dual-mics-and-hi-fi-sound-with-rechargeable-battery",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:14"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-s-15-mini-bomb-series-portable-wireless-speakers-with-20w-sound-rgb-lights-10-hour-playtime",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:15"
+        },
+        {
+            "url": "https://ubonindia.com/products/cl-66-workout-series",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:16"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-wr-470-deluxe-cable-the-best-quality-data-cable-with-iph-charging",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:17"
+        },
+        {
+            "url": "https://ubonindia.com/products/best-smart-watch-ubons-sw-191-active-series-smart-watch-for-ultimate-performance",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:19"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-gold-edition-sp-70-deluxe-portable-speaker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:20"
+        },
+        {
+            "url": "https://ubonindia.com/products/hp-700-hip-hop-v5-3-wireless-headphones",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:21"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-j19-freedom-series",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:22"
+        },
+        {
+            "url": "https://ubonindia.com/products/best-quality-induction-cooktop-ubon-black-ic-101-infrared-cooktop",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:23"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-mini-soundbar-truly-wireless-speaker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:24"
+        },
+        {
+            "url": "https://ubonindia.com/products/s-71-cool-bass-wireless-speaker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:25"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-sp-180-party-boy-speaker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:27"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-pb-sx202-power-brick",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:28"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-sp-80-thunder-series-wireless-speaker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:29"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-sw-201-active-plus-smart-watch",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:30"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-j30-wireless-earbuds",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:31"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-sp-6600-wireless-speaker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:32"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-pb-x88-pro-power-bank",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:33"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-pb-sx2001-power-bank",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:34"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-hp-755-beast-wireless-headphone",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:35"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-sp-85-30w-party-speaker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:36"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-pb-x120-30w-10000mah-power-brick-built-in-cables-led-display-dual-output-fast-charging-power-bank",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:37"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-ub-780-champ-earphones",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:39"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-j31-tws",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:40"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-hp-705-beast-series-headphones",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:41"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-presents-hp-65-truly-wireless-headphones",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:42"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-sp-95-king-series-20w-party-speaker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:43"
+        },
+        {
+            "url": "https://ubonindia.com/products/pb-x31-pro-power-punch-powerbank-10000mah-fast-charging-powerhouse-with-dual-usb-output-and-intelligent-protection",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:44"
+        },
+        {
+            "url": "https://ubonindia.com/products/pb-sx2002-4-in-1-champion-power-bank-with-20000mah-capacity-15w-fast-charging-dual-inputs-outputs-intelligent-power-ic-made-in-india",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:45"
+        },
+        {
+            "url": "https://ubonindia.com/products/wr-71-og-series-c-to-c-cable",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:46"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-cl-65-vibration-series-neckband-40h-playtime-type-c-fast-charging",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:47"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-sw-201-active-plus-smart-watch-copy",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:48"
+        },
+        {
+            "url": "https://ubonindia.com/products/sw-171-boss-pro-smartwatch-copy",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:49"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-hp-740-beast-wireless-headphone-copy",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:50"
+        },
+        {
+            "url": "https://ubonindia.com/products/gt-460-podcast-2-0-wireless-collar-microphone-ultra-clear-long-lasting-noise-cancelling-mic-for-creators",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:51"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-j31-freedom-series-tws-earbuds-40hrs-battery-bluetooth-v5-3-enc-mic-voice-assistant-copy",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:52"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-s-72-winner-series-wireless-soundbar",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:53"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-j37-air-tiger-pro",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:54"
+        },
+        {
+            "url": "https://ubonindia.com/products/cm-1115-3-in-1-breakfast-maker-mini-oven-coffee-maker-grill-toaster",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:55"
+        },
+        {
+            "url": "https://ubonindia.com/products/af-8000-air-fryer-4-2l-capacity-touch-control-1400w-power",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:57"
+        },
+        {
+            "url": "https://ubonindia.com/products/rh-1505-room-heater-800w-carbon-heater-with-180-swing",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:58"
+        },
+        {
+            "url": "https://ubonindia.com/products/mg-6000-mix-pro-mixer-blender-600w-motor-3-jars-3-speed-control",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:11:59"
+        },
+        {
+            "url": "https://ubonindia.com/products/nm-7000-nutri-blender-mixer-450w-motor-2-carry-away-jars",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:00"
+        },
+        {
+            "url": "https://ubonindia.com/products/sm-4005-grill-sandwich-maker-800w-power-non-stick-plates",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:01"
+        },
+        {
+            "url": "https://ubonindia.com/products/ir-5020-handheld-garment-steamer-1500w-power-continuous-steam",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:02"
+        },
+        {
+            "url": "https://ubonindia.com/products/ek-1000-premium-electric-kettle-1-5l-1350w-stainless-steel-body",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:03"
+        },
+        {
+            "url": "https://ubonindia.com/products/ek-1000-premium-electric-kettle-1-5l-1350w-stainless-steel-body-copy",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:04"
+        },
+        {
+            "url": "https://ubonindia.com/products/wc-915-3-in-1-charging-station-pro-22w-magnetic-wireless-fast-charger",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:05"
+        },
+        {
+            "url": "https://ubonindia.com/products/sf-180-360-selfie-stick-tripod-gimbal-style-rotation-wireless-remote",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:06"
+        },
+        {
+            "url": "https://ubonindia.com/products/sp-230-party-monster-wireless-speaker-80w-sound-karaoke-rgb-lights",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:07"
+        },
+        {
+            "url": "https://ubonindia.com/products/ec-3005-chop-it-electric-multi-chopper-400w-motor-500ml-jar",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:08"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-ec-3000-mini-chopper",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:09"
+        },
+        {
+            "url": "https://ubonindia.com/products/j39-air-clip-wireless-earbuds",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:10"
+        },
+        {
+            "url": "https://ubonindia.com/products/ubon-bt-30-og-series-wireless-earbuds",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:11"
+        },
+        {
+            "url": "https://ubonindia.com/products/sf-175-skyshot-selfie-stick-tripod-2-2m-extendable-wireless-remote",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:13"
+        },
+        {
+            "url": "https://ubonindia.com/products/j35-boss-series-wireless-earbuds-36h-playtime-gaming-mode-hd-sound",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:14"
+        },
+        {
+            "url": "https://ubonindia.com/products/cl-115-eargun-series-wireless-neckband-45h-playtime-quick-charge",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:15"
+        },
+        {
+            "url": "https://ubonindia.com/products/sw-151-smart-watch-wireless-calling-health-tracking-sports-modes",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:16"
+        },
+        {
+            "url": "https://ubonindia.com/products/sp-1-professional-party-speaker-80w-sound-dual-woofers-wireless-mics",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:17"
+        },
+        {
+            "url": "https://ubonindia.com/pages/contact",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:18"
+        },
+        {
+            "url": "https://ubonindia.com/pages/about-ubon",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:19"
+        },
+        {
+            "url": "https://ubonindia.com/pages/privacy-policy",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:20"
+        },
+        {
+            "url": "https://ubonindia.com/pages/terms-and-conditions",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:21"
+        },
+        {
+            "url": "https://ubonindia.com/pages/search-results-page",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:22"
+        },
+        {
+            "url": "https://ubonindia.com/pages/e-waste-management",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:23"
+        },
+        {
+            "url": "https://ubonindia.com/pages/warranty-registration",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:24"
+        },
+        {
+            "url": "https://ubonindia.com/pages/special-offers",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:25"
+        },
+        {
+            "url": "https://ubonindia.com/pages/rate-your-experience",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:26"
+        },
+        {
+            "url": "https://ubonindia.com/pages/repairs-replacement-policy",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:27"
+        },
+        {
+            "url": "https://ubonindia.com/pages/ubon-in-news",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:28"
+        },
+        {
+            "url": "https://ubonindia.com/pages/corporate-bulk-orders",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:29"
+        },
+        {
+            "url": "https://ubonindia.com/pages/home-appliances",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:31"
+        },
+        {
+            "url": "https://ubonindia.com/collections/homepage",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:32"
+        },
+        {
+            "url": "https://ubonindia.com/collections/wireless-neckbands",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:33"
+        },
+        {
+            "url": "https://ubonindia.com/collections/buy-headphones",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:34"
+        },
+        {
+            "url": "https://ubonindia.com/collections/wireless-speakers",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:34"
+        },
+        {
+            "url": "https://ubonindia.com/collections/buy-earphone",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:36"
+        },
+        {
+            "url": "https://ubonindia.com/collections/buy-data-cables",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:37"
+        },
+        {
+            "url": "https://ubonindia.com/collections/buy-power-bank",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:38"
+        },
+        {
+            "url": "https://ubonindia.com/collections/mobile-charger",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:39"
+        },
+        {
+            "url": "https://ubonindia.com/collections/buy-most-loved-products",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:40"
+        },
+        {
+            "url": "https://ubonindia.com/collections/buy-new-arrivals",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:41"
+        },
+        {
+            "url": "https://ubonindia.com/collections/wireless-earbuds",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:41"
+        },
+        {
+            "url": "https://ubonindia.com/collections/buy-extensions-board",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:42"
+        },
+        {
+            "url": "https://ubonindia.com/collections/buy-smart-watch",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:44"
+        },
+        {
+            "url": "https://ubonindia.com/collections/all",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:45"
+        },
+        {
+            "url": "https://ubonindia.com/collections/best-neckband-under-2000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:46"
+        },
+        {
+            "url": "https://ubonindia.com/collections/best-neckbands-under-1000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:46"
+        },
+        {
+            "url": "https://ubonindia.com/collections/selfie-stick",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:48"
+        },
+        {
+            "url": "https://ubonindia.com/collections/ubon-new-arrivals",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:49"
+        },
+        {
+            "url": "https://ubonindia.com/collections/ubon-top-selling-products",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:50"
+        },
+        {
+            "url": "https://ubonindia.com/collections/ubon-best-selling-products",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:51"
+        },
+        {
+            "url": "https://ubonindia.com/collections/globofilter-best-selling-products-index",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:52"
+        },
+        {
+            "url": "https://ubonindia.com/collections/best-seller-of-this-week",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:53"
+        },
+        {
+            "url": "https://ubonindia.com/collections/new-launch-nl-ca",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:54"
+        },
+        {
+            "url": "https://ubonindia.com/collections/earbuds-under-1800-ebds-ca",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:55"
+        },
+        {
+            "url": "https://ubonindia.com/collections/speakers-under-1000-spkr-ca",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:56"
+        },
+        {
+            "url": "https://ubonindia.com/collections/most-buy-products-mbp-ca",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:57"
+        },
+        {
+            "url": "https://ubonindia.com/collections/daily-deals-dd-ca",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:12:58"
+        },
+        {
+            "url": "https://ubonindia.com/collections/wireless-speaker-wlsk-ca",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:00"
+        },
+        {
+            "url": "https://ubonindia.com/collections/trending-products-tp-ca",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:01"
+        },
+        {
+            "url": "https://ubonindia.com/collections/customer-bought-today-cbt-cos-a",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:02"
+        },
+        {
+            "url": "https://ubonindia.com/collections/ipl-special-sale",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:03"
+        },
+        {
+            "url": "https://ubonindia.com/collections/gadgets-accessories-combos",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:04"
+        },
+        {
+            "url": "https://ubonindia.com/collections/accessories",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:05"
+        },
+        {
+            "url": "https://ubonindia.com/collections/workouts",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:05"
+        },
+        {
+            "url": "https://ubonindia.com/collections/outings",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:07"
+        },
+        {
+            "url": "https://ubonindia.com/collections/music",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:08"
+        },
+        {
+            "url": "https://ubonindia.com/collections/work-calls",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:09"
+        },
+        {
+            "url": "https://ubonindia.com/collections/incredible-deals",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:10"
+        },
+        {
+            "url": "https://ubonindia.com/collections/monsoon-sale",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:11"
+        },
+        {
+            "url": "https://ubonindia.com/collections/zomato-coupon",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:13"
+        },
+        {
+            "url": "https://ubonindia.com/collections/charger-offers",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:14"
+        },
+        {
+            "url": "https://ubonindia.com/collections/earphone-offers",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:15"
+        },
+        {
+            "url": "https://ubonindia.com/collections/speaker-offer",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:16"
+        },
+        {
+            "url": "https://ubonindia.com/collections/bluetooth-offer",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:17"
+        },
+        {
+            "url": "https://ubonindia.com/collections/cable-offer",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:18"
+        },
+        {
+            "url": "https://ubonindia.com/collections/otg",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:19"
+        },
+        {
+            "url": "https://ubonindia.com/collections/best-car-accessories",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:21"
+        },
+        {
+            "url": "https://ubonindia.com/collections/sound-bar",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:22"
+        },
+        {
+            "url": "https://ubonindia.com/collections/home-theater",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:23"
+        },
+        {
+            "url": "https://ubonindia.com/collections/hot-deals",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:24"
+        },
+        {
+            "url": "https://ubonindia.com/collections/tripods",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:25"
+        },
+        {
+            "url": "https://ubonindia.com/collections/collar-mic",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:26"
+        },
+        {
+            "url": "https://ubonindia.com/collections/products",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:27"
+        },
+        {
+            "url": "https://ubonindia.com/collections/binge-watch",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:28"
+        },
+        {
+            "url": "https://ubonindia.com/collections/party-speaker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:29"
+        },
+        {
+            "url": "https://ubonindia.com/collections/travel",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:30"
+        },
+        {
+            "url": "https://ubonindia.com/collections/gaming",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:31"
+        },
+        {
+            "url": "https://ubonindia.com/collections/nackband-under-1000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:32"
+        },
+        {
+            "url": "https://ubonindia.com/collections/nackband-under-2000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:33"
+        },
+        {
+            "url": "https://ubonindia.com/collections/best-wireless-tws-earbuds-under-1200",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:34"
+        },
+        {
+            "url": "https://ubonindia.com/collections/wireless-tws-earbuds-under-1500",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:35"
+        },
+        {
+            "url": "https://ubonindia.com/collections/headphones-under-1500",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:36"
+        },
+        {
+            "url": "https://ubonindia.com/collections/headphones-under-2000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:37"
+        },
+        {
+            "url": "https://ubonindia.com/collections/wireless-speakers-under-700",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:38"
+        },
+        {
+            "url": "https://ubonindia.com/collections/wireless-speakers-under-800",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:39"
+        },
+        {
+            "url": "https://ubonindia.com/collections/best-wireless-speakers-under-1000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:40"
+        },
+        {
+            "url": "https://ubonindia.com/collections/mobile-charger-under-500",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:41"
+        },
+        {
+            "url": "https://ubonindia.com/collections/mobile-charger-under-800",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:42"
+        },
+        {
+            "url": "https://ubonindia.com/collections/power-banks-under-2000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:44"
+        },
+        {
+            "url": "https://ubonindia.com/collections/power-banks-under-3000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:45"
+        },
+        {
+            "url": "https://ubonindia.com/collections/power-banks-under-3001",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:46"
+        },
+        {
+            "url": "https://ubonindia.com/collections/soundbar-under-2000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:47"
+        },
+        {
+            "url": "https://ubonindia.com/collections/car-charger-under-1000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:48"
+        },
+        {
+            "url": "https://ubonindia.com/collections/earphones-under-300",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:49"
+        },
+        {
+            "url": "https://ubonindia.com/collections/home-theater-under-10000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:50"
+        },
+        {
+            "url": "https://ubonindia.com/collections/home-theater-under-20000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:51"
+        },
+        {
+            "url": "https://ubonindia.com/collections/home-theater-under-30000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:52"
+        },
+        {
+            "url": "https://ubonindia.com/collections/smartwatch-under-2000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:53"
+        },
+        {
+            "url": "https://ubonindia.com/collections/smartwatch-under-3000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:54"
+        },
+        {
+            "url": "https://ubonindia.com/collections/data-cable-under-300",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:55"
+        },
+        {
+            "url": "https://ubonindia.com/collections/data-cable-under-500",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:56"
+        },
+        {
+            "url": "https://ubonindia.com/collections/data-cable-under-1000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:57"
+        },
+        {
+            "url": "https://ubonindia.com/collections/sell-pricing",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:58"
+        },
+        {
+            "url": "https://ubonindia.com/collections/earphones-under-200",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:13:59"
+        },
+        {
+            "url": "https://ubonindia.com/collections/data-cable-under-200",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:00"
+        },
+        {
+            "url": "https://ubonindia.com/collections/mobile-charger-under-1000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:01"
+        },
+        {
+            "url": "https://ubonindia.com/collections/best-under-1200",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:02"
+        },
+        {
+            "url": "https://ubonindia.com/collections/pay-day-sale",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:03"
+        },
+        {
+            "url": "https://ubonindia.com/collections/best-speakers-under-2000",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:05"
+        },
+        {
+            "url": "https://ubonindia.com/collections/air-fryer",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:06"
+        },
+        {
+            "url": "https://ubonindia.com/collections/breakfast-maker",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:07"
+        },
+        {
+            "url": "https://ubonindia.com/collections/room-heater",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:08"
+        },
+        {
+            "url": "https://ubonindia.com/collections/mixure-grinder",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:09"
+        },
+        {
+            "url": "https://ubonindia.com/collections/home-all-collection",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:10"
+        },
+        {
+            "url": "https://ubonindia.com/collections/nutri-blender-mixer",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:11"
+        },
+        {
+            "url": "https://ubonindia.com/collections/sandwich-makers",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:12"
+        },
+        {
+            "url": "https://ubonindia.com/collections/garment-care",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:13"
+        },
+        {
+            "url": "https://ubonindia.com/collections/electric-kettle",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:14"
+        },
+        {
+            "url": "https://ubonindia.com/collections/egg-boiler",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:15"
+        },
+        {
+            "url": "https://ubonindia.com/collections/choppers",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:16"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:17"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/ubon-smart-watches",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:18"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/alien-bt-305-earbuds",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:20"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/fulfil-your-wanderlust-with-ubon-selfie-stick",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:21"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/best-raksha-bandhan-gifts",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:22"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/feel-special-with-ubon",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:23"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/monsoon-maintenance-tips-for-keeping-your-ubon-wireless-speakers-in-prime-condition",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:24"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/cl-35-bullet-your-soundtrack-to-immersive-audio-adventures",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:25"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/enhance-your-janmashtami-celebrations-with-ubons-premium-sound-accessories",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:26"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/%F0%9F%92%A5harmonizing-festivities-with-ubons-latest-audio-and-electronic-accessories%F0%9F%92%A5%F0%9F%8E%87",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:27"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/tech-essentials-for-every-journey-ubons-must-have-vacation-gear",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:28"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/moms-can-be-supermoms-with-ubon",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:29"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/live-your-born-to-be-free-moments-with-ubon-wireless-earbuds",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:30"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/ubon-india-the-best-electronic-store-in-india-trusted-online-store-for-electronic-gadgets",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:31"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/stay-charged-stay-protected-gift-ubon-pb-x106-magno-safe-power-bank-this-raksha-bandhan",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:32"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/the-significance-of-party-speakers-in-ganesh-mahotsav",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:33"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/https-ubonindia-com-collections-pay-day-sale",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:34"
+        },
+        {
+            "url": "https://ubonindia.com/blogs/ubon-blogs/power-meets-freedom-ubon-s-next-gen-power-banks-1",
+            "status": "clean",
+            "details": "Clean - No placeholder text found",
+            "checked_at": "2026-02-23 20:14:35"
+        }
+    ],
+    "sitemap_used": true,
+    "sitemap_generated": false,
+    "completed_at": "2026-02-23 20:14:35"
+}
