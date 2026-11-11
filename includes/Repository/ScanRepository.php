@@ -53,14 +53,34 @@ class ScanRepository
     public function getById(int $id): ?array
     {
         $stmt = $this->db->prepare('
-            SELECT s.*, p.project_name, p.website_url, p.normalized_website_url
+            SELECT s.*, p.project_name, p.website_url, p.normalized_website_url,
+                   ss.settings_json
             FROM scans s
             JOIN projects p ON s.project_id = p.id
+            LEFT JOIN scan_settings ss ON s.id = ss.scan_id
             WHERE s.id = ?
         ');
         $stmt->execute([$id]);
         $row = $stmt->fetch();
+        if ($row && !empty($row['settings_json'])) {
+            $decoded = json_decode($row['settings_json'], true);
+            $row['settings'] = is_array($decoded) ? $decoded : [];
+        } else if ($row) {
+            $row['settings'] = [];
+        }
         return $row ?: null;
+    }
+
+    public function getSettings(int $scanId): array
+    {
+        $stmt = $this->db->prepare('SELECT settings_json FROM scan_settings WHERE scan_id = ? LIMIT 1');
+        $stmt->execute([$scanId]);
+        $json = $stmt->fetchColumn();
+        if ($json) {
+            $decoded = json_decode($json, true);
+            return is_array($decoded) ? $decoded : [];
+        }
+        return [];
     }
 
     public function getLatestByProjectId(int $projectId): ?array
@@ -94,17 +114,30 @@ class ScanRepository
         return $stmt->execute([$scanId]);
     }
 
-    public function setDiscoveredCount(int $scanId, int $count): bool
+    public function setDiscoveredCount(int $scanId, int $count, bool $limitReached = false, int $excludedCount = 0): bool
     {
-        $stmt = $this->db->prepare('UPDATE scans SET discovered_count = ?, updated_at = NOW() WHERE id = ?');
-        return $stmt->execute([$count, $scanId]);
+        $stmt = $this->db->prepare('
+            UPDATE scans
+            SET discovered_count = ?,
+                url_limit_reached = ?,
+                excluded_by_limit_count = ?,
+                updated_at = NOW()
+            WHERE id = ?
+        ');
+        return $stmt->execute([$count, $limitReached ? 1 : 0, $excludedCount, $scanId]);
     }
 
-    public function recordPageResult(int $scanId, string $status, int $findingCount = 0): bool
-    {
-        $isClean    = $status === 'clean' ? 1 : 0;
-        $isAffected = $status === 'findings_detected' ? 1 : 0;
-        $isFailed   = in_array($status, ['failed', 'cloudflare_blocked', 'bot_blocked']) ? 1 : 0;
+    public function recordPageResult(
+        int $scanId,
+        string $status,
+        int $findingCount = 0,
+        int $loremCount = 0,
+        int $auditCount = 0,
+        int $resourceCount = 0
+    ): bool {
+        $isClean    = ($status === 'clean') ? 1 : 0;
+        $isAffected = ($status === 'findings_detected') ? 1 : 0;
+        $isFailed   = in_array($status, ['failed', 'cloudflare_blocked', 'bot_blocked'], true) ? 1 : 0;
 
         $stmt = $this->db->prepare('
             UPDATE scans
@@ -113,11 +146,23 @@ class ScanRepository
                 affected_page_count = affected_page_count + ?,
                 failed_count = failed_count + ?,
                 total_findings = total_findings + ?,
+                lorem_finding_count = lorem_finding_count + ?,
+                audit_finding_count = audit_finding_count + ?,
+                resource_finding_count = resource_finding_count + ?,
                 last_heartbeat_at = NOW(),
                 updated_at = NOW()
             WHERE id = ?
         ');
-        return $stmt->execute([$isClean, $isAffected, $isFailed, $findingCount, $scanId]);
+        return $stmt->execute([
+            $isClean,
+            $isAffected,
+            $isFailed,
+            $findingCount,
+            $loremCount,
+            $auditCount,
+            $resourceCount,
+            $scanId
+        ]);
     }
 
     public function completeScan(int $scanId, ?int $elapsedSeconds = null): bool

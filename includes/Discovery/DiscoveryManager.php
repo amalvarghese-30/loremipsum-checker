@@ -36,15 +36,16 @@ class DiscoveryManager
      *
      * @param string $websiteUrl  The website's homepage URL
      * @param array  $settings    Per-scan settings (may override config)
-     * @return array              Merged, deduplicated URL records
+     * @return array              Merged, deduplicated URL records with global limit applied
      */
     public function discover(string $websiteUrl, array $settings = []): array
     {
         $cfg      = array_merge($this->config, $settings);
         $discCfg  = $cfg['discovery'] ?? [];
+        $maxUrls  = (int)($cfg['crawler']['default_max_urls'] ?? $cfg['crawler']['max_urls'] ?? 500);
         $allUrls  = [];  // normalized_url_hash => record
 
-        $this->log('INFO', "Starting URL discovery for: {$websiteUrl}", 'discovery');
+        $this->log('INFO', "Starting URL discovery for: {$websiteUrl} (Global URL limit: {$maxUrls})", 'discovery');
 
         // 1. robots.txt — discover additional sitemap declarations
         $robotsSitemaps = [];
@@ -73,7 +74,7 @@ class DiscoveryManager
             $sitemapUrls   = $sitemapDisc->discover($websiteUrl, $extraSitemaps);
 
             $this->log('INFO', count($sitemapUrls) . ' URL(s) from XML sitemaps', 'discovery');
-            $this->mergeUrls($allUrls, $sitemapUrls, $websiteUrl);
+            $this->mergeUrls($allUrls, $sitemapUrls, $websiteUrl, $maxUrls);
         }
 
         // 4. HTML metadata / link tag sitemap hints
@@ -86,7 +87,7 @@ class DiscoveryManager
             $feedUrlsFromMeta = $feedUrls;
 
             $this->log('INFO', count($feedUrls) . ' URL(s) from feeds', 'discovery');
-            $this->mergeUrls($allUrls, $feedUrls, $websiteUrl);
+            $this->mergeUrls($allUrls, $feedUrls, $websiteUrl, $maxUrls);
         }
 
         // 5. HTML sitemap pages
@@ -96,32 +97,31 @@ class DiscoveryManager
             $htmlSitemapUrls = $htmlSitemapDisc->discover($websiteUrl);
 
             $this->log('INFO', count($htmlSitemapUrls) . ' URL(s) from HTML sitemaps', 'discovery');
-            $this->mergeUrls($allUrls, $htmlSitemapUrls, $websiteUrl);
+            $this->mergeUrls($allUrls, $htmlSitemapUrls, $websiteUrl, $maxUrls);
         }
 
         // 6. WordPress REST API
         if ($discCfg['wordpress_api'] ?? true) {
             $this->log('INFO', 'Running WordPress API discovery', 'discovery');
-            $wpDisc  = new WordPressDiscovery($this->http, $this->normalizer, $this->logFn);
+            $wpDisc  = new WordPressDiscovery($this->http, $this->normalizer, $cfg, $this->logFn);
             $wpUrls  = $wpDisc->discover($websiteUrl);
 
             if (!empty($wpUrls)) {
                 $this->log('INFO', count($wpUrls) . ' URL(s) from WordPress API', 'discovery');
-                $this->mergeUrls($allUrls, $wpUrls, $websiteUrl);
+                $this->mergeUrls($allUrls, $wpUrls, $websiteUrl, $maxUrls);
             }
         }
 
         // 7. Internal link crawling
         if ($discCfg['internal_crawler'] ?? true) {
-            $maxUrls  = (int)($cfg['crawler']['default_max_urls'] ?? 500);
-            $maxDepth = (int)($cfg['crawler']['default_max_depth'] ?? 3);
+            $maxDepth = (int)($cfg['crawler']['default_max_depth'] ?? $cfg['crawler']['max_depth'] ?? 3);
 
             $this->log('INFO', "Running internal crawler (max={$maxUrls}, depth={$maxDepth})", 'discovery');
             $crawler    = new InternalCrawler($this->http, $this->normalizer, $cfg, $this->logFn);
             $crawlUrls  = $crawler->crawl($websiteUrl, $maxUrls, $maxDepth);
 
             $this->log('INFO', count($crawlUrls) . ' URL(s) from internal crawler', 'discovery');
-            $this->mergeUrls($allUrls, $crawlUrls, $websiteUrl);
+            $this->mergeUrls($allUrls, $crawlUrls, $websiteUrl, $maxUrls);
         }
 
         $total = count($allUrls);
@@ -137,7 +137,7 @@ class DiscoveryManager
      * If a URL was already found by another method, its first discovery source wins
      * but additional sources are tracked in metadata.
      */
-    private function mergeUrls(array &$master, array $newUrls, string $websiteUrl): void
+    private function mergeUrls(array &$master, array $newUrls, string $websiteUrl, int $maxUrls = 500): void
     {
         foreach ($newUrls as $record) {
             if (empty($record['url'])) {
@@ -154,6 +154,9 @@ class DiscoveryManager
             $hash = $this->normalizer->getUrlHash($normalized);
 
             if (!isset($master[$hash])) {
+                if (count($master) >= $maxUrls) {
+                    continue; // Skip adding new unique URL if global limit reached
+                }
                 $master[$hash] = [
                     'url'            => $url,
                     'normalized_url' => $normalized,

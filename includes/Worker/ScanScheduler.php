@@ -150,13 +150,17 @@ class ScanScheduler
         // 1. Evaluate technical failures
         if ($errorType !== null || ($httpStatus !== null && $httpStatus >= 400)) {
             // Check if retryable
-            $retryableCodes = $this->config['fetching']['retryable_http_codes'] ?? [408, 429, 500, 502, 503, 504];
+            $retryableCodes = $this->config['fetching']['retryable_http_codes'] ?? [408, 425, 429, 500, 502, 503, 504];
             $maxRetries     = (int)($this->config['fetching']['max_retries'] ?? 3);
             $currentRetries = (int)($urlRecord['retry_count'] ?? 0);
 
             if (($errorType === 'timeout' || in_array($httpStatus, $retryableCodes, true)) && $currentRetries < $maxRetries) {
-                $this->urlRepo->incrementRetry($urlId, $errorMsg ?: "HTTP {$httpStatus}");
-                $this->logRepo->log($scanId, $projectId, 'WARNING', "Retrying ({$currentRetries}/{$maxRetries}) on {$url}: {$errorMsg}", 'fetch', $url);
+                // Exponential backoff with jitter: 2^(retries) * base_delay + jitter
+                $baseDelay = (int)($this->config['fetching']['retry_base_delay'] ?? 2);
+                $delaySec  = min(60, pow(2, $currentRetries) * $baseDelay + rand(0, 2));
+
+                $this->urlRepo->scheduleRetry($urlId, $errorMsg ?: "HTTP {$httpStatus}", $delaySec);
+                $this->logRepo->log($scanId, $projectId, 'WARNING', "Scheduled retry ({$currentRetries}/{$maxRetries}) in {$delaySec}s on {$url}: {$errorMsg}", 'fetch', $url);
                 return;
             }
 
@@ -195,16 +199,42 @@ class ScanScheduler
         }
 
         // 2. Successful fetch: extract content nodes and external assets
+        // Check if JS rendering is requested via Playwright
+        $renderedWithJs = false;
+        if (!empty($this->config['playwright']['enabled'])) {
+            $rendered = $this->renderWithPlaywright($finalUrl);
+            if ($rendered !== null && !empty($rendered['html'])) {
+                $content = $rendered['html'];
+                $renderedWithJs = true;
+                $this->logRepo->log($scanId, $projectId, 'INFO', "Rendered with Playwright: {$finalUrl}", 'render', $finalUrl);
+            }
+        }
+
         $extracted = $this->extractor->extract($content, $finalUrl);
         $findings  = $this->detector->scanHtmlNodes($extracted['nodes'], $finalUrl);
 
-        // Run optional audit modules (missing title, empty page, heading structure, alt text)
+        // Run optional audit modules (missing title, empty page, heading structure, alt text, broken links)
         $auditFindings = $this->auditModules->auditPage($content, $finalUrl, $extracted);
+        if (!empty($extracted['links'])) {
+            $linkFindings = $this->auditModules->auditLinks($extracted['links'], $finalUrl, $this->http);
+            $auditFindings = array_merge($auditFindings, $linkFindings);
+        }
+
         $allFindings   = array_merge($findings, $auditFindings);
 
         $hasLorem     = !empty($findings);
+        $hasAudit     = !empty($auditFindings);
         $findingCount = count($allFindings);
+
+        $loremCount   = count($findings);
+        $auditCount   = count($auditFindings);
+
+        // Status separation
         $pageStatus   = $hasLorem ? 'findings_detected' : 'clean';
+        $auditStatus  = $hasAudit ? ($hasLorem ? 'findings_detected' : 'audit_issues') : 'clean';
+
+        // Compute content hash for duplicate page detection
+        $contentHash  = $this->auditModules->computeContentHash($extracted['full_text'] ?? '');
 
         // 3. Persist page result and findings incrementally
         $pageResultId = null;
@@ -219,6 +249,7 @@ class ScanScheduler
                 'http_status'       => $httpStatus,
                 'content_type'      => $contentType,
                 'processing_status' => $pageStatus,
+                'audit_status'      => $auditStatus,
                 'finding_count'     => $findingCount,
                 'duration_ms'       => $durationMs,
                 'retry_count'       => (int)($urlRecord['retry_count'] ?? 0),
@@ -227,13 +258,22 @@ class ScanScheduler
                 'page_title'        => $extracted['page_title'],
                 'word_count'        => $extracted['word_count'],
                 'has_lorem_ipsum'   => $hasLorem ? 1 : 0,
+                'content_hash'      => $contentHash,
+                'rendered_with_js'  => $renderedWithJs ? 1 : 0,
             ]);
 
             if (!empty($allFindings) && $pageResultId) {
                 $this->findingRepo->insertBatch($scanId, $pageResultId, null, $allFindings);
             }
 
-            $this->scanRepo->recordPageResult($scanId, $pageStatus, $findingCount);
+            $this->scanRepo->recordPageResult(
+                $scanId,
+                $pageStatus,
+                $findingCount,
+                $loremCount,
+                $auditCount,
+                0 // Resource findings recorded separately in inspectDiscoveredResources
+            );
             $this->db->commit();
         } catch (\Exception $e) {
             $this->db->rollBack();
@@ -248,8 +288,12 @@ class ScanScheduler
             $this->logRepo->log($scanId, $projectId, 'INFO', "Clean: {$url}", 'scan', $url);
         }
 
-        // 5. Inspect discovered external assets (JS, CSS) if enabled
-        if (!empty($extracted['resources']) && ($this->config['detection']['scan_javascript'] || $this->config['detection']['scan_css'])) {
+        // 5. Inspect discovered external assets (JS, CSS, JSON) if enabled
+        if (!empty($extracted['resources']) && (
+            !empty($this->config['detection']['scan_javascript']) ||
+            !empty($this->config['detection']['scan_css']) ||
+            !empty($this->config['detection']['scan_json'])
+        )) {
             $this->inspectDiscoveredResources($scanId, $projectId, $pageResultId, $finalUrl, $websiteUrl, $extracted['resources']);
         }
     }
@@ -303,10 +347,12 @@ class ScanScheduler
             $resBody = $resFetch['content'];
             $resFindings = [];
 
-            if ($type === 'javascript') {
+            if ($type === 'javascript' && !empty($this->config['detection']['scan_javascript'])) {
                 $resFindings = $this->detector->scanJavaScript($resBody, $resolved, $pageUrl);
-            } elseif ($type === 'css') {
+            } elseif ($type === 'css' && !empty($this->config['detection']['scan_css'])) {
                 $resFindings = $this->detector->scanCss($resBody, $resolved, $pageUrl);
+            } elseif ($type === 'json' && !empty($this->config['detection']['scan_json'])) {
+                $resFindings = $this->detector->scanJson($resBody, $resolved, $pageUrl);
             }
 
             $this->resourceRepo->markCompleted($resourceId, [
@@ -319,8 +365,42 @@ class ScanScheduler
 
             if (!empty($resFindings)) {
                 $this->findingRepo->insertBatch($scanId, $pageResultId, $resourceId, $resFindings);
+                $this->scanRepo->recordPageResult($scanId, 'clean', count($resFindings), 0, 0, count($resFindings));
                 $this->logRepo->log($scanId, $projectId, 'WARNING', "Placeholder found in external {$type}: {$resolved}", 'detection', $resolved);
             }
         }
+    }
+
+    private function renderWithPlaywright(string $url): ?array
+    {
+        $script = $this->config['playwright']['script'] ?? (dirname(__DIR__, 2) . '/playwright/render-page.js');
+        if (!file_exists($script)) {
+            return null;
+        }
+
+        $nodeBinary = getenv('NODE_BINARY') ?: 'node';
+        $timeout = (int)($this->config['playwright']['timeout'] ?? 30000);
+
+        $inputJson = json_encode([
+            'url'     => $url,
+            'timeout' => $timeout,
+        ]);
+
+        $cmd = sprintf('%s %s %s', escapeshellcmd($nodeBinary), escapeshellarg($script), escapeshellarg($inputJson));
+
+        $output = [];
+        $returnCode = 0;
+        @exec($cmd, $output, $returnCode);
+
+        if ($returnCode !== 0 || empty($output)) {
+            return null;
+        }
+
+        $result = @json_decode(implode("\n", $output), true);
+        if (is_array($result) && !empty($result['success'])) {
+            return $result;
+        }
+
+        return null;
     }
 }

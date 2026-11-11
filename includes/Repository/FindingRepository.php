@@ -46,6 +46,16 @@ class FindingRepository
 
         $inserted = 0;
         foreach ($findings as $f) {
+            // Generate distinct stable fingerprint with offset and category if not already set
+            $fingerprint = $f['finding_fingerprint'] ?? hash(
+                'sha256',
+                ($f['page_url'] ?? '') . '|' .
+                ($f['resource_type'] ?? 'html') . '|' .
+                ($f['detection_category'] ?? 'lorem_ipsum') . '|' .
+                ($f['matched_text'] ?? '') . '|' .
+                ($f['character_position'] ?? 0)
+            );
+
             $stmt->execute([
                 $scanId,
                 $pageResultId,
@@ -65,7 +75,7 @@ class FindingRepository
                 $f['detection_category'] ?? 'lorem_ipsum',
                 $f['severity'] ?? 'high',
                 $f['confidence'] ?? 'high',
-                $f['finding_fingerprint']
+                $fingerprint
             ]);
             $inserted++;
         }

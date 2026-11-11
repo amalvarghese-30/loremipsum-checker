@@ -16,17 +16,19 @@ class WordPressDiscovery
 {
     private HttpClient    $http;
     private UrlNormalizer $normalizer;
+    private array         $config;
     /** @var callable|null */
     private $logFn;
 
-    // Cap maximum API pages to prevent endless pagination on huge blogs
-    private const MAX_PAGES_PER_TYPE = 5;
+    // Configurable pagination defaults
+    private const DEFAULT_MAX_PAGES = 10;
     private const PER_PAGE = 100;
 
-    public function __construct(HttpClient $http, UrlNormalizer $normalizer, ?callable $logFn = null)
+    public function __construct(HttpClient $http, UrlNormalizer $normalizer, array $config = [], ?callable $logFn = null)
     {
         $this->http       = $http;
         $this->normalizer = $normalizer;
+        $this->config     = $config;
         $this->logFn      = $logFn;
     }
 
@@ -77,8 +79,9 @@ class WordPressDiscovery
     {
         $records = [];
         $page = 1;
+        $maxPages = (int)($this->config['discovery']['wp_max_pages'] ?? self::DEFAULT_MAX_PAGES);
 
-        while ($page <= self::MAX_PAGES_PER_TYPE) {
+        while ($page <= $maxPages) {
             $apiUrl = sprintf(
                 '%s/wp-json/wp/v2/%s?per_page=%d&page=%d&_fields=link,modified',
                 $origin,

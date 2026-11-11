@@ -31,7 +31,7 @@ class Database
 
         self::loadEnv();
 
-        $driver = strtolower(getenv('DB_DRIVER') ?: 'sqlite');
+        $driver = strtolower(getenv('DB_DRIVER') ?: 'mysql');
 
         if ($driver === 'sqlite') {
             $sqlitePath = getenv('DB_SQLITE_PATH') ?: (dirname(__DIR__) . '/database/lorem_ipsum_checker.sqlite');
@@ -53,7 +53,7 @@ class Database
             }
         }
 
-        // MySQL Fallback
+        // MySQL (Primary production database)
         $host     = getenv('DB_HOST')     ?: '127.0.0.1';
         $port     = (int)(getenv('DB_PORT') ?: 3306);
         $dbName   = getenv('DB_NAME')     ?: 'lorem_ipsum_checker';
@@ -71,6 +71,25 @@ class Database
         try {
             self::$instance = new \PDO($dsn, $user, $password, $options);
         } catch (\PDOException $e) {
+            // If MySQL fails and DB_DRIVER was not explicitly specified, try SQLite fallback gracefully
+            if (getenv('DB_DRIVER') === false) {
+                $sqlitePath = dirname(__DIR__) . '/database/lorem_ipsum_checker.sqlite';
+                $dir = dirname($sqlitePath);
+                if (!is_dir($dir)) {
+                    @mkdir($dir, 0755, true);
+                }
+                try {
+                    self::$instance = new \PDO("sqlite:{$sqlitePath}", null, null, [
+                        \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
+                        \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
+                    ]);
+                    self::$instance->exec('PRAGMA foreign_keys = ON;');
+                    self::$instance->exec('PRAGMA journal_mode = WAL;');
+                    return self::$instance;
+                } catch (\PDOException $sqle) {
+                    // Fall through to throw original MySQL error
+                }
+            }
             throw new \RuntimeException('Database connection failed: ' . self::sanitizeErrorMessage($e->getMessage()));
         }
 

@@ -23,14 +23,16 @@ class PageResultRepository
         $stmt = $this->db->prepare('
             INSERT INTO page_results (
                 scan_id, discovered_url_id, requested_url, final_url,
-                http_status, content_type, processing_status, finding_count,
-                duration_ms, retry_count, error_type, error_message,
-                page_title, word_count, has_lorem_ipsum, started_at, completed_at
+                http_status, content_type, processing_status, audit_status,
+                finding_count, duration_ms, retry_count, error_type, error_message,
+                page_title, word_count, has_lorem_ipsum, content_hash,
+                rendered_with_js, started_at, completed_at
             ) VALUES (
                 ?, ?, ?, ?,
                 ?, ?, ?, ?,
+                ?, ?, ?, ?, ?,
                 ?, ?, ?, ?,
-                ?, ?, ?, NOW(), NOW()
+                ?, NOW(), NOW()
             )
         ');
 
@@ -42,6 +44,7 @@ class PageResultRepository
             $data['http_status'] ?? null,
             $data['content_type'] ?? null,
             $data['processing_status'] ?? 'clean',
+            $data['audit_status'] ?? 'clean',
             (int)($data['finding_count'] ?? 0),
             $data['duration_ms'] ?? null,
             (int)($data['retry_count'] ?? 0),
@@ -49,7 +52,9 @@ class PageResultRepository
             $data['error_message'] ?? null,
             $data['page_title'] ?? null,
             $data['word_count'] ?? null,
-            !empty($data['has_lorem_ipsum']) ? 1 : 0
+            !empty($data['has_lorem_ipsum']) ? 1 : 0,
+            $data['content_hash'] ?? null,
+            !empty($data['rendered_with_js']) ? 1 : 0
         ]);
 
         return (int)$this->db->lastInsertId();

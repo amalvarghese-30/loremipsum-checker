@@ -37,6 +37,7 @@ require_once BASE_DIR . '/includes/Api/RequestValidator.php';
 require_once BASE_DIR . '/includes/Api/ProjectController.php';
 require_once BASE_DIR . '/includes/Api/ScanController.php';
 require_once BASE_DIR . '/includes/Api/ResultsController.php';
+require_once BASE_DIR . '/includes/Api/RulesController.php';
 require_once BASE_DIR . '/includes/Api/ExportController.php';
 require_once BASE_DIR . '/includes/Api/Router.php';
 

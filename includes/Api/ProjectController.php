@@ -83,11 +83,19 @@ class ProjectController
             Response::error('Project not found.', 'NOT_FOUND', 404);
         }
 
-        // Cancel any active scans for this project
+        // Cancel any active scans for this project and terminate their workers
         $activeScans = $this->scanRepo->listByProjectId($id);
         foreach ($activeScans as $s) {
-            if (in_array($s['status'], ['initializing', 'discovering', 'scanning'])) {
+            if (in_array($s['status'], ['initializing', 'discovering', 'scanning', 'pause_requested'])) {
                 $this->scanRepo->updateStatus((int)$s['id'], 'cancelled');
+                if (!empty($s['worker_pid'])) {
+                    $pid = (int)$s['worker_pid'];
+                    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                        @exec("taskkill /F /PID {$pid} 2>nul");
+                    } else {
+                        @exec("kill -TERM {$pid} 2>/dev/null");
+                    }
+                }
             }
         }
 

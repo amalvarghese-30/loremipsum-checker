@@ -21,8 +21,9 @@ class ResourceRepository
 
     /**
      * Find existing resource or register a new one for this scan.
+     * Also links the resource to the pageResultId via page_resource_relations.
      *
-     * @return array [id => int, is_new => bool]
+     * @return array [id => int, is_new => bool, status => string]
      */
     public function findOrCreate(
         int $scanId,
@@ -37,27 +38,46 @@ class ResourceRepository
         $checkStmt->execute([$scanId, $hash]);
         $row = $checkStmt->fetch();
 
+        $resourceId = null;
+        $isNew = false;
+        $status = 'pending';
+
         if ($row) {
-            return ['id' => (int)$row['id'], 'is_new' => false, 'status' => $row['processing_status']];
+            $resourceId = (int)$row['id'];
+            $isNew = false;
+            $status = $row['processing_status'];
+        } else {
+            $insertStmt = $this->db->prepare('
+                INSERT INTO scan_resources (
+                    scan_id, page_result_id, resource_url, normalized_resource_url,
+                    resource_hash, resource_type, processing_status
+                ) VALUES (?, ?, ?, ?, ?, ?, "pending")
+            ');
+
+            $insertStmt->execute([
+                $scanId,
+                $pageResultId,
+                $resourceUrl,
+                $normalizedUrl,
+                $hash,
+                $resourceType
+            ]);
+
+            $resourceId = (int)$this->db->lastInsertId();
+            $isNew = true;
+            $status = 'pending';
         }
 
-        $insertStmt = $this->db->prepare('
-            INSERT INTO scan_resources (
-                scan_id, page_result_id, resource_url, normalized_resource_url,
-                resource_hash, resource_type, processing_status
-            ) VALUES (?, ?, ?, ?, ?, ?, "pending")
-        ');
+        // Maintain many-to-many relationship with referencing page
+        if ($pageResultId && $resourceId) {
+            $linkStmt = $this->db->prepare('
+                INSERT IGNORE INTO page_resource_relations (scan_id, page_result_id, resource_id, created_at)
+                VALUES (?, ?, ?, NOW())
+            ');
+            $linkStmt->execute([$scanId, $pageResultId, $resourceId]);
+        }
 
-        $insertStmt->execute([
-            $scanId,
-            $pageResultId,
-            $resourceUrl,
-            $normalizedUrl,
-            $hash,
-            $resourceType
-        ]);
-
-        return ['id' => (int)$this->db->lastInsertId(), 'is_new' => true, 'status' => 'pending'];
+        return ['id' => $resourceId, 'is_new' => $isNew, 'status' => $status];
     }
 
     public function markCompleted(int $resourceId, array $data): bool

@@ -189,6 +189,9 @@ function convertMysqlToSqlite(string $sql): string
     // Convert ENUMs to TEXT
     $sql = preg_replace('/ENUM\s*\([^)]+\)/i', 'TEXT', $sql);
 
+    // Convert ALTER TABLE ... ADD COLUMN ... AFTER ... to SQLite format (strip AFTER)
+    $sql = preg_replace('/\s+AFTER\s+`?\w+`?/i', '', $sql);
+
     // Convert INT types
     $sql = preg_replace('/\b(TINYINT|SMALLINT|MEDIUMINT|BIGINT|INT)\s+UNSIGNED\b/i', 'INTEGER', $sql);
     $sql = preg_replace('/\b(TINYINT|SMALLINT|MEDIUMINT|BIGINT|INT)\b/i', 'INTEGER', $sql);

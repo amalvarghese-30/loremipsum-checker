@@ -27,6 +27,7 @@ class Router
         $projectCtrl = new ProjectController($this->db);
         $scanCtrl    = new ScanController($this->db, $this->config);
         $resultsCtrl = new ResultsController($this->db);
+        $rulesCtrl   = new RulesController($this->db);
         $exportCtrl  = new ExportController($this->db);
 
         switch ($action) {
@@ -68,6 +69,21 @@ class Router
                 break;
             case 'export':
                 $exportCtrl->export();
+                break;
+            case 'rules_list':
+                $rulesCtrl->list();
+                break;
+            case 'rules_create':
+                $rulesCtrl->create();
+                break;
+            case 'rules_update':
+                $rulesCtrl->update();
+                break;
+            case 'rules_toggle':
+                $rulesCtrl->toggle();
+                break;
+            case 'rules_delete':
+                $rulesCtrl->delete();
                 break;
             default:
                 Response::error("Unknown action: '{$action}'", 'INVALID_ACTION', 400);

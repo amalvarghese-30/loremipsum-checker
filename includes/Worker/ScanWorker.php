@@ -64,6 +64,7 @@ class ScanWorker
             exit(1);
         }
 
+        $scanId = (int)$scan['id'];
         $projectId  = (int)$scan['project_id'];
         $websiteUrl = $scan['website_url'];
         $pid        = getmypid();
@@ -86,12 +87,27 @@ class ScanWorker
             echo "[" . date('Y-m-d H:i:s') . "] [{$level}] {$message}\n";
         };
 
+        // Automatic Recovery of Stale Scans across the system
+        try {
+            $recovery = new ScanRecovery($this->scanRepo, $this->urlRepo, $this->logRepo);
+            $recovered = $recovery->recoverStaleScans((int)($this->config['worker']['stale_threshold'] ?? 120));
+            if (!empty($recovered)) {
+                $logFn('INFO', 'ScanRecovery successfully recovered orphaned scan(s): ' . implode(', ', $recovered), 'recovery');
+            }
+        } catch (\Throwable $re) {
+            // Non-fatal
+        }
+
         $this->scanRepo->updateHeartbeat($scanId, $pid);
         $logFn('INFO', "Worker started under PID {$pid} for scan {$scanId} ({$websiteUrl})", 'worker');
 
+        // Merge scan settings snapshot with application config
+        $scanSettings = $this->scanRepo->getSettings($scanId);
+        $effectiveConfig = $this->mergeEffectiveConfig($this->config, $scanSettings);
+
         try {
             $normalizer = new UrlNormalizer();
-            $http       = new HttpClient($this->config['fetching'] ?? []);
+            $http       = new HttpClient($effectiveConfig['fetching'] ?? []);
 
             // ── PHASE 1: URL DISCOVERY ──────────────────────────────────────────
             // If the scan was paused and resumed, discovery may already be done
@@ -102,15 +118,20 @@ class ScanWorker
                 $this->scanRepo->updateStatus($scanId, 'discovering');
                 $logFn('INFO', 'Starting URL discovery...', 'discovery');
 
-                $discManager = new DiscoveryManager($http, $normalizer, $this->config, $logFn);
-                $discovered  = $discManager->discover($websiteUrl);
+                $discManager = new DiscoveryManager($http, $normalizer, $effectiveConfig, $logFn);
+                $discovered  = $discManager->discover($websiteUrl, $scanSettings);
 
                 if (empty($discovered)) {
                     throw new Exception("Discovery engine could not find any accessible URLs for {$websiteUrl}");
                 }
 
+                $maxGlobalUrls = (int)($effectiveConfig['crawler']['default_max_urls'] ?? 500);
+                $totalDiscoveredCount = count($discovered);
+                $limitReached = $totalDiscoveredCount >= $maxGlobalUrls;
+                $excludedCount = max(0, $totalDiscoveredCount - $maxGlobalUrls);
+
                 $insertedCount = $this->urlRepo->insertBatch($scanId, $discovered);
-                $this->scanRepo->setDiscoveredCount($scanId, $insertedCount);
+                $this->scanRepo->setDiscoveredCount($scanId, $insertedCount, $limitReached, $excludedCount);
                 $logFn('SUCCESS', "Saved {$insertedCount} unique discovered URL(s) to database queue", 'discovery');
             } else {
                 $logFn('INFO', "Resuming scan with {$totalUrls} existing URL(s) in queue", 'resume');
@@ -122,11 +143,11 @@ class ScanWorker
 
             // Load detection rules (DB + config defaults)
             $dbRules = $this->ruleRepo->getActiveRules();
-            $rules   = !empty($dbRules) ? $dbRules : ($this->config['detection']['default_rules'] ?? []);
+            $rules   = !empty($dbRules) ? $dbRules : ($effectiveConfig['detection']['default_rules'] ?? []);
 
             $extractor    = new HtmlContentExtractor();
-            $detector     = new DetectionEngine($rules, (int)($this->config['detection']['context_chars'] ?? 150));
-            $auditModules = new AuditModules();
+            $detector     = new DetectionEngine($rules, (int)($effectiveConfig['detection']['context_chars'] ?? 150));
+            $auditModules = new AuditModules($effectiveConfig['audit_modules'] ?? []);
 
             $scheduler = new ScanScheduler(
                 $this->db,
@@ -141,7 +162,7 @@ class ScanWorker
                 $this->resourceRepo,
                 $this->findingRepo,
                 $this->logRepo,
-                $this->config
+                $effectiveConfig
             );
 
             $finalState = $scheduler->run($scanId, $projectId, $websiteUrl);
@@ -170,5 +191,59 @@ class ScanWorker
             $this->scanRepo->failScan($scanId, $e->getMessage());
             exit(1);
         }
+    }
+
+    private function mergeEffectiveConfig(array $appConfig, array $scanSettings): array
+    {
+        $merged = $appConfig;
+
+        if (isset($scanSettings['max_urls'])) {
+            $merged['crawler']['default_max_urls'] = (int)$scanSettings['max_urls'];
+            $merged['crawler']['max_urls'] = (int)$scanSettings['max_urls'];
+        }
+        if (isset($scanSettings['max_depth'])) {
+            $merged['crawler']['default_max_depth'] = (int)$scanSettings['max_depth'];
+            $merged['crawler']['max_depth'] = (int)$scanSettings['max_depth'];
+        }
+        if (isset($scanSettings['concurrency'])) {
+            $merged['fetching']['concurrency'] = (int)$scanSettings['concurrency'];
+        }
+        if (isset($scanSettings['per_domain_concurrency'])) {
+            $merged['fetching']['per_domain_concurrency'] = (int)$scanSettings['per_domain_concurrency'];
+        }
+        if (isset($scanSettings['request_delay'])) {
+            $merged['fetching']['request_delay'] = (int)$scanSettings['request_delay'];
+        }
+        if (isset($scanSettings['verify_ssl'])) {
+            $merged['fetching']['verify_ssl'] = (bool)$scanSettings['verify_ssl'];
+        }
+        if (isset($scanSettings['request_timeout'])) {
+            $merged['crawler']['request_timeout'] = (int)$scanSettings['request_timeout'];
+            $merged['fetching']['request_timeout'] = (int)$scanSettings['request_timeout'];
+        }
+        if (isset($scanSettings['connection_timeout'])) {
+            $merged['crawler']['connection_timeout'] = (int)$scanSettings['connection_timeout'];
+            $merged['fetching']['connection_timeout'] = (int)$scanSettings['connection_timeout'];
+        }
+        if (isset($scanSettings['max_retries'])) {
+            $merged['fetching']['max_retries'] = (int)$scanSettings['max_retries'];
+        }
+        if (isset($scanSettings['js_rendering'])) {
+            $merged['playwright']['enabled'] = (bool)$scanSettings['js_rendering'];
+        }
+        if (isset($scanSettings['scan_javascript'])) {
+            $merged['detection']['scan_javascript'] = (bool)$scanSettings['scan_javascript'];
+        }
+        if (isset($scanSettings['scan_css'])) {
+            $merged['detection']['scan_css'] = (bool)$scanSettings['scan_css'];
+        }
+        if (isset($scanSettings['scan_json'])) {
+            $merged['detection']['scan_json'] = (bool)$scanSettings['scan_json'];
+        }
+        if (isset($scanSettings['audit_modules']) && is_array($scanSettings['audit_modules'])) {
+            $merged['audit_modules'] = array_merge($merged['audit_modules'] ?? [], $scanSettings['audit_modules']);
+        }
+
+        return $merged;
     }
 }

@@ -55,10 +55,20 @@ class ScanController
 
         // 2. Prepare scan settings snapshot from POST overrides
         $scanSettings = [
-            'use_sitemap'  => ($_POST['use_sitemap'] ?? 'auto') === 'auto',
-            'max_urls'     => isset($_POST['max_urls']) ? (int)$_POST['max_urls'] : null,
-            'max_depth'    => isset($_POST['max_depth']) ? (int)$_POST['max_depth'] : null,
-            'concurrency'  => isset($_POST['concurrency']) ? (int)$_POST['concurrency'] : null,
+            'use_sitemap'            => isset($_POST['use_sitemap']) ? (($_POST['use_sitemap'] === '1' || $_POST['use_sitemap'] === 'true' || $_POST['use_sitemap'] === 'auto')) : true,
+            'max_urls'               => isset($_POST['max_urls']) && is_numeric($_POST['max_urls']) ? (int)$_POST['max_urls'] : null,
+            'max_depth'              => isset($_POST['max_depth']) && is_numeric($_POST['max_depth']) ? (int)$_POST['max_depth'] : null,
+            'concurrency'            => isset($_POST['concurrency']) && is_numeric($_POST['concurrency']) ? (int)$_POST['concurrency'] : null,
+            'per_domain_concurrency' => isset($_POST['per_domain_concurrency']) && is_numeric($_POST['per_domain_concurrency']) ? (int)$_POST['per_domain_concurrency'] : null,
+            'request_delay'          => isset($_POST['request_delay']) && is_numeric($_POST['request_delay']) ? (int)$_POST['request_delay'] : null,
+            'request_timeout'        => isset($_POST['request_timeout']) && is_numeric($_POST['request_timeout']) ? (int)$_POST['request_timeout'] : null,
+            'connection_timeout'     => isset($_POST['connection_timeout']) && is_numeric($_POST['connection_timeout']) ? (int)$_POST['connection_timeout'] : null,
+            'verify_ssl'             => isset($_POST['verify_ssl']) ? ($_POST['verify_ssl'] === '1' || $_POST['verify_ssl'] === 'true') : false,
+            'js_rendering'           => isset($_POST['js_rendering']) ? ($_POST['js_rendering'] === '1' || $_POST['js_rendering'] === 'true') : false,
+            'scan_javascript'        => isset($_POST['scan_javascript']) ? ($_POST['scan_javascript'] === '1' || $_POST['scan_javascript'] === 'true') : false,
+            'scan_css'               => isset($_POST['scan_css']) ? ($_POST['scan_css'] === '1' || $_POST['scan_css'] === 'true') : false,
+            'scan_json'              => isset($_POST['scan_json']) ? ($_POST['scan_json'] === '1' || $_POST['scan_json'] === 'true') : false,
+            'audit_modules'          => isset($_POST['audit_modules']) && is_array($_POST['audit_modules']) ? $_POST['audit_modules'] : null,
         ];
 
         // 3. Create scan record
@@ -184,10 +194,12 @@ class ScanController
         }
 
         $scanId = (int)$scan['id'];
-        if ($scan['status'] !== 'paused' && $scan['status'] !== 'interrupted') {
+        if ($scan['status'] !== 'paused' && $scan['status'] !== 'interrupted' && $scan['status'] !== 'pause_requested') {
             Response::error('Scan is not currently paused or interrupted.');
         }
 
+        // Release stale PID lock before dispatching
+        $this->scanRepo->updateHeartbeat($scanId, null);
         $this->scanRepo->updateStatus($scanId, 'scanning');
         $this->logRepo->log($scanId, $projectId, 'SUCCESS', 'Scan resumed by user', 'api');
 
@@ -209,6 +221,16 @@ class ScanController
         $scanId = (int)$scan['id'];
         $this->scanRepo->updateStatus($scanId, 'cancel_requested');
         $this->logRepo->log($scanId, $projectId, 'WARNING', 'Cancellation requested by user', 'api');
+
+        // Cleanly terminate worker PID if running locally and known
+        if (!empty($scan['worker_pid'])) {
+            $pid = (int)$scan['worker_pid'];
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                @exec("taskkill /F /PID {$pid} 2>nul");
+            } else {
+                @exec("kill -TERM {$pid} 2>/dev/null");
+            }
+        }
 
         Response::success(['message' => 'Cancellation signal issued to worker']);
     }

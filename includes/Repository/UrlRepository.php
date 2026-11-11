@@ -35,9 +35,9 @@ class UrlRepository
         $insertedCount = 0;
         $urlInsertStmt = $this->db->prepare('
             INSERT IGNORE INTO discovered_urls (
-                scan_id, original_url, normalized_url, url_hash,
+                scan_id, original_url, normalized_url, url_hash, domain,
                 discovery_source, crawl_depth, status, discovered_at
-            ) VALUES (?, ?, ?, ?, ?, ?, "pending", NOW())
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, "pending", NOW())
         ');
 
         $sourceInsertStmt = $this->db->prepare('
@@ -49,11 +49,13 @@ class UrlRepository
         $findIdStmt = $this->db->prepare('SELECT id FROM discovered_urls WHERE scan_id = ? AND url_hash = ?');
 
         foreach ($records as $r) {
+            $domain = parse_url($r['url'], PHP_URL_HOST) ?: '';
             $urlInsertStmt->execute([
                 $scanId,
                 $r['url'],
                 $r['normalized_url'],
                 $r['url_hash'],
+                $domain,
                 $r['source'] ?? 'unknown',
                 (int)($r['depth'] ?? 0)
             ]);
@@ -100,13 +102,18 @@ class UrlRepository
 
     /**
      * Fetch a batch of pending/retry URLs for processing.
+     * Selects only records whose next_attempt_at is NULL or in the past.
      */
     public function fetchPendingBatch(int $scanId, int $limit = 50): array
     {
         $stmt = $this->db->prepare('
-            SELECT id, original_url, normalized_url, crawl_depth, retry_count
+            SELECT id, original_url, normalized_url, domain, crawl_depth, retry_count, attempt_count
             FROM discovered_urls
-            WHERE scan_id = ? AND status IN ("pending", "queued", "retry_wait")
+            WHERE scan_id = ?
+              AND (
+                status IN ("pending", "queued")
+                OR (status = "retry_wait" AND (next_attempt_at IS NULL OR next_attempt_at <= NOW()))
+              )
             ORDER BY crawl_depth ASC, id ASC
             LIMIT ?
         ');
@@ -129,16 +136,23 @@ class UrlRepository
         return $stmt->execute([$status, $finalUrl, $lastError, $status, $urlId]);
     }
 
-    public function incrementRetry(int $urlId, string $lastError): bool
+    public function scheduleRetry(int $urlId, string $lastError, int $delaySeconds = 5): bool
     {
         $stmt = $this->db->prepare('
             UPDATE discovered_urls
             SET retry_count = retry_count + 1,
+                attempt_count = attempt_count + 1,
                 status = "retry_wait",
-                last_error = ?
+                last_error = ?,
+                next_attempt_at = DATE_ADD(NOW(), INTERVAL ? SECOND)
             WHERE id = ?
         ');
-        return $stmt->execute([$lastError, $urlId]);
+        return $stmt->execute([$lastError, $delaySeconds, $urlId]);
+    }
+
+    public function incrementRetry(int $urlId, string $lastError): bool
+    {
+        return $this->scheduleRetry($urlId, $lastError, 5);
     }
 
     public function resetProcessingToPending(int $scanId): int

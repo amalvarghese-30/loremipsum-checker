@@ -11,15 +11,19 @@ declare(strict_types=1);
 require_once __DIR__ . '/UrlNormalizerTest.php';
 require_once __DIR__ . '/DetectionEngineTest.php';
 require_once __DIR__ . '/HtmlContentExtractorTest.php';
+require_once __DIR__ . '/AuditModulesTest.php';
+require_once __DIR__ . '/RepositoryIntegrationTest.php';
 
 echo "========================================================\n";
 echo "       LOREM IPSUM CHECKER - AUTOMATED TEST SUITE        \n";
 echo "========================================================\n\n";
 
 $tests = [
-    'UrlNormalizerTest'       => new UrlNormalizerTest(),
-    'DetectionEngineTest'     => new DetectionEngineTest(),
-    'HtmlContentExtractorTest'=> new HtmlContentExtractorTest(),
+    'UrlNormalizerTest'        => new UrlNormalizerTest(),
+    'DetectionEngineTest'      => new DetectionEngineTest(),
+    'HtmlContentExtractorTest' => new HtmlContentExtractorTest(),
+    'AuditModulesTest'         => new AuditModulesTest(),
+    'RepositoryIntegrationTest'=> new RepositoryIntegrationTest(),
 ];
 
 $passedSuites = 0;

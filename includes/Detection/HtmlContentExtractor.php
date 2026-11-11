@@ -67,6 +67,18 @@ class HtmlContentExtractor
             }
         }
 
+        // 1b. Links for broken-link audit
+        $extractedLinks = [];
+        $aNodes = $dom->getElementsByTagName('a');
+        foreach ($aNodes as $a) {
+            if ($a->hasAttribute('href')) {
+                $href = trim($a->getAttribute('href'));
+                if ($href !== '' && !str_starts_with($href, '#') && !str_starts_with($href, 'javascript:') && !str_starts_with($href, 'mailto:')) {
+                    $extractedLinks[] = $href;
+                }
+            }
+        }
+
         // 2. Meta description
         $metaNodes = $xpath->query('//meta[translate(@name, "DESCRIPTION", "description")="description"]');
         if ($metaNodes && $metaNodes->length > 0) {
@@ -171,6 +183,7 @@ class HtmlContentExtractor
             'meta_desc'   => $metaDesc,
             'word_count'  => $wordCount,
             'full_text'   => $allText,
+            'links'       => $extractedLinks,
         ];
     }
 

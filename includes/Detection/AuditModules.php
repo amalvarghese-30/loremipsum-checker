@@ -33,6 +33,9 @@ class AuditModules
             'missing_meta_desc'    => true,
             'image_alt'            => true,
             'heading_structure'    => true,
+            'incomplete_sections'  => true,
+            'missing_canonical'    => true,
+            'missing_lang'         => true,
         ], $moduleSettings);
     }
 
@@ -200,6 +203,141 @@ class AuditModules
                         'finding_fingerprint' => hash('sha256', $pageUrl . '|audit|multiple_h1'),
                     ];
                 }
+            }
+
+            // 5. Incomplete / Empty Sections
+            if (!empty($this->moduleSettings['incomplete_sections'])) {
+                $xpath = new DOMXPath($dom);
+                $emptySections = $xpath->query('//section[not(normalize-space())] | //article[not(normalize-space())] | //div[contains(@class, "content") and not(normalize-space())]');
+                if ($emptySections && $emptySections->length > 0) {
+                    $findings[] = [
+                        'page_url'            => $pageUrl,
+                        'resource_url'        => null,
+                        'resource_type'       => 'audit',
+                        'matched_text'        => "{$emptySections->length} empty content section(s) detected",
+                        'surrounding_context' => 'Incomplete layout: Found <section> or content containers with no text content.',
+                        'html_element'        => 'section',
+                        'css_selector'        => 'section:empty, article:empty',
+                        'section_name'        => 'Layout Quality',
+                        'line_number'         => null,
+                        'character_position'  => null,
+                        'is_visible'          => true,
+                        'detection_rule_id'   => null,
+                        'detection_category'  => 'incomplete_sections',
+                        'severity'            => 'medium',
+                        'confidence'          => 'medium',
+                        'finding_fingerprint' => hash('sha256', $pageUrl . '|audit|incomplete_sections'),
+                    ];
+                }
+            }
+
+            // 6. Missing Canonical Link
+            if (!empty($this->moduleSettings['missing_canonical'])) {
+                $canonical = null;
+                $linkNodes = $dom->getElementsByTagName('link');
+                foreach ($linkNodes as $link) {
+                    if (strtolower($link->getAttribute('rel')) === 'canonical') {
+                        $canonical = trim($link->getAttribute('href'));
+                        break;
+                    }
+                }
+                if (empty($canonical)) {
+                    $findings[] = [
+                        'page_url'            => $pageUrl,
+                        'resource_url'        => null,
+                        'resource_type'       => 'audit',
+                        'matched_text'        => 'Missing canonical tag',
+                        'surrounding_context' => 'SEO recommendation: Page does not specify a <link rel="canonical"> tag.',
+                        'html_element'        => 'link',
+                        'css_selector'        => 'link[rel="canonical"]',
+                        'section_name'        => 'SEO / Meta',
+                        'line_number'         => null,
+                        'character_position'  => null,
+                        'is_visible'          => false,
+                        'detection_rule_id'   => null,
+                        'detection_category'  => 'missing_canonical',
+                        'severity'            => 'low',
+                        'confidence'          => 'high',
+                        'finding_fingerprint' => hash('sha256', $pageUrl . '|audit|missing_canonical'),
+                    ];
+                }
+            }
+
+            // 7. Missing Language Attribute (<html lang="...">)
+            if (!empty($this->moduleSettings['missing_lang'])) {
+                $htmlNodes = $dom->getElementsByTagName('html');
+                if ($htmlNodes->length > 0 && !$htmlNodes->item(0)->hasAttribute('lang')) {
+                    $findings[] = [
+                        'page_url'            => $pageUrl,
+                        'resource_url'        => null,
+                        'resource_type'       => 'audit',
+                        'matched_text'        => 'Missing lang attribute on <html> element',
+                        'surrounding_context' => 'Accessibility recommendation: Define language on <html> (e.g. <html lang="en">).',
+                        'html_element'        => 'html',
+                        'css_selector'        => 'html',
+                        'section_name'        => 'Accessibility',
+                        'line_number'         => null,
+                        'character_position'  => null,
+                        'is_visible'          => false,
+                        'detection_rule_id'   => null,
+                        'detection_category'  => 'missing_lang',
+                        'severity'            => 'low',
+                        'confidence'          => 'high',
+                        'finding_fingerprint' => hash('sha256', $pageUrl . '|audit|missing_lang'),
+                    ];
+                }
+            }
+        }
+
+        return $findings;
+    }
+
+    /**
+     * Audit extracted links to find broken ones (HTTP 4xx/5xx).
+     *
+     * @param array $links Array of URLs extracted from the page
+     * @param string $pageUrl
+     * @param \LoremChecker\HttpClient $http
+     * @return array Finding records for broken links
+     */
+    public function auditLinks(array $links, string $pageUrl, \LoremChecker\HttpClient $http): array
+    {
+        if (empty($this->moduleSettings['broken_links']) || empty($links)) {
+            return [];
+        }
+
+        $findings = [];
+        $uniqueLinks = array_unique($links);
+        $checkLimit = min(20, count($uniqueLinks)); // Bound checks per page to maintain performance
+        $sampled = array_slice($uniqueLinks, 0, $checkLimit);
+
+        foreach ($sampled as $linkUrl) {
+            $resp = $http->fetch($linkUrl, [
+                'timeout'     => 10,
+                'max_retries' => 1,
+                'apply_delay' => false,
+            ]);
+
+            $status = $resp['http_status'];
+            if ($status !== null && $status >= 400) {
+                $findings[] = [
+                    'page_url'            => $pageUrl,
+                    'resource_url'        => $linkUrl,
+                    'resource_type'       => 'audit',
+                    'matched_text'        => "Broken link: {$linkUrl} responded with HTTP {$status}",
+                    'surrounding_context' => "Found broken link pointing to {$linkUrl}",
+                    'html_element'        => 'a',
+                    'css_selector'        => "a[href=\"{$linkUrl}\"]",
+                    'section_name'        => 'Broken Links',
+                    'line_number'         => null,
+                    'character_position'  => null,
+                    'is_visible'          => true,
+                    'detection_rule_id'   => null,
+                    'detection_category'  => 'broken_link',
+                    'severity'            => ($status >= 500) ? 'high' : 'medium',
+                    'confidence'          => 'high',
+                    'finding_fingerprint' => hash('sha256', $pageUrl . '|audit|broken_link|' . $linkUrl),
+                ];
             }
         }
 

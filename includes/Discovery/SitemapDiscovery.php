@@ -52,6 +52,9 @@ class SitemapDiscovery
             '/wp-sitemap.xml', '/sitemap1.xml',
         ];
 
+        // Configurable max sitemaps to explore per scan (default 100)
+        $maxSitemaps = (int)($this->config['discovery']['max_sitemaps'] ?? self::MAX_SITEMAPS);
+
         $locations = [];
         foreach ($commonPaths as $path) {
             $locations[] = $origin . $path;
@@ -66,8 +69,8 @@ class SitemapDiscovery
         $allUrls         = [];
 
         foreach ($locations as $sitemapUrl) {
-            if (count($visitedSitemaps) >= self::MAX_SITEMAPS) {
-                $this->log('WARNING', 'Reached max sitemap limit (' . self::MAX_SITEMAPS . ')', 'sitemap');
+            if (count($visitedSitemaps) >= $maxSitemaps) {
+                $this->log('WARNING', "Reached max sitemap limit ({$maxSitemaps})", 'sitemap');
                 break;
             }
 
