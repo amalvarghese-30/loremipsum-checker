@@ -153,11 +153,15 @@ class UrlNormalizer
 
         // Document-relative
         $basePath = $baseParts['path'] ?? '/';
-        $dir      = dirname($basePath);
-        if ($dir === '.') {
-            $dir = '/';
+        if (str_ends_with($basePath, '/')) {
+            $dir = $basePath;
+        } else {
+            $dir = dirname($basePath);
+            if ($dir === '.' || $dir === '\\') {
+                $dir = '/';
+            }
+            $dir = rtrim(str_replace('\\', '/', $dir), '/') . '/';
         }
-        $dir = rtrim($dir, '/') . '/';
 
         return "{$scheme}://{$host}{$port}{$dir}{$url}";
     }
