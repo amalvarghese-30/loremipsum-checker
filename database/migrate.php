@@ -162,6 +162,9 @@ exit(0);
  */
 function convertMysqlToSqlite(string $sql): string
 {
+    // Remove comments
+    $sql = preg_replace('/--.*$/m', '', $sql);
+
     // Remove ENGINE=..., DEFAULT CHARSET=..., COLLATE=...
     $sql = preg_replace('/ENGINE=\w+/i', '', $sql);
     $sql = preg_replace('/DEFAULT CHARSET=\w+/i', '', $sql);
@@ -172,11 +175,16 @@ function convertMysqlToSqlite(string $sql): string
     $sql = preg_replace('/`id`\s+INT\s+UNSIGNED\s+NOT\s+NULL\s+AUTO_INCREMENT/i', '`id` INTEGER PRIMARY KEY AUTOINCREMENT', $sql);
     $sql = preg_replace('/,\s*PRIMARY\s+KEY\s*\(`id`\)/i', '', $sql);
 
+    // Remove UNIQUE KEY `name` -> UNIQUE
+    $sql = preg_replace('/UNIQUE\s+KEY\s+`[^`]+`\s*\(/i', 'UNIQUE (', $sql);
+    $sql = preg_replace('/UNIQUE\s+KEY\s+\w+\s*\(/i', 'UNIQUE (', $sql);
+
     // Remove index prefix lengths like (`normalized_website_url`(255)) -> (`normalized_website_url`)
     $sql = preg_replace('/\(`([^`]+)`\(\d+\)\)/', '(`$1`)', $sql);
 
-    // Remove standalone table INDEX definitions (SQLite prefers CREATE INDEX outside, but ignores if removed or converted)
+    // Remove standalone MySQL table INDEX definitions (SQLite creates indexes via CREATE INDEX)
     $sql = preg_replace('/,\s*INDEX\s+`[^`]+`\s*\([^)]+\)/i', '', $sql);
+    $sql = preg_replace('/,\s*INDEX\s+\w+\s*\([^)]+\)/i', '', $sql);
 
     // Convert ENUMs to TEXT
     $sql = preg_replace('/ENUM\s*\([^)]+\)/i', 'TEXT', $sql);
