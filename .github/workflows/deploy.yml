@@ -20,7 +20,7 @@ jobs:
             echo "🚀 Deploying updates to Lorem Ipsum Checker..."
             
             # Navigate to project directory on VPS
-            cd /opt/loremipsum-checker
+            cd /root/loremipsum-checker
             
             # Pull latest changes from GitHub
             git fetch origin main
