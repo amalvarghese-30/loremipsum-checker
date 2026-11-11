@@ -1,6 +1,6 @@
 <?php
 /**
- * Database singleton — PDO connection with manual .env loading.
+ * Database singleton — PDO connection supporting SQLite and MySQL.
  *
  * Usage:
  *   $pdo = \LoremChecker\Database::getInstance();
@@ -21,7 +21,7 @@ class Database
     /**
      * Get (or create) the PDO singleton.
      *
-     * @throws \RuntimeException on connection failure (message hides credentials)
+     * @throws \RuntimeException on connection failure
      */
     public static function getInstance(): \PDO
     {
@@ -31,19 +31,36 @@ class Database
 
         self::loadEnv();
 
+        $driver = strtolower(getenv('DB_DRIVER') ?: 'sqlite');
+
+        if ($driver === 'sqlite') {
+            $sqlitePath = getenv('DB_SQLITE_PATH') ?: (dirname(__DIR__) . '/database/lorem_ipsum_checker.sqlite');
+            $dir = dirname($sqlitePath);
+            if (!is_dir($dir)) {
+                @mkdir($dir, 0755, true);
+            }
+
+            try {
+                self::$instance = new \PDO("sqlite:{$sqlitePath}", null, null, [
+                    \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
+                    \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
+                ]);
+                self::$instance->exec('PRAGMA foreign_keys = ON;');
+                self::$instance->exec('PRAGMA journal_mode = WAL;');
+                return self::$instance;
+            } catch (\PDOException $e) {
+                throw new \RuntimeException('SQLite database connection failed: ' . $e->getMessage());
+            }
+        }
+
+        // MySQL Fallback
         $host     = getenv('DB_HOST')     ?: '127.0.0.1';
         $port     = (int)(getenv('DB_PORT') ?: 3306);
         $dbName   = getenv('DB_NAME')     ?: 'lorem_ipsum_checker';
         $user     = getenv('DB_USER')     ?: 'root';
         $password = getenv('DB_PASSWORD') ?: '';
 
-        $dsn = sprintf(
-            'mysql:host=%s;port=%d;dbname=%s;charset=utf8mb4',
-            $host,
-            $port,
-            $dbName
-        );
-
+        $dsn = sprintf('mysql:host=%s;port=%d;dbname=%s;charset=utf8mb4', $host, $port, $dbName);
         $options = [
             \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
@@ -54,10 +71,7 @@ class Database
         try {
             self::$instance = new \PDO($dsn, $user, $password, $options);
         } catch (\PDOException $e) {
-            // Never expose credentials or the full DSN in the error message.
-            throw new \RuntimeException(
-                'Database connection failed: ' . self::sanitizeErrorMessage($e->getMessage())
-            );
+            throw new \RuntimeException('Database connection failed: ' . self::sanitizeErrorMessage($e->getMessage()));
         }
 
         return self::$instance;
@@ -71,87 +85,57 @@ class Database
         self::$instance = null;
     }
 
-    /**
-     * Load the .env file from the project root into the process environment.
-     * Skips lines that are blank or start with #.
-     * Does NOT overwrite already-set environment variables so that system-level
-     * env vars take precedence over the file.
-     */
     private static function loadEnv(): void
     {
         if (self::$envLoaded) {
             return;
         }
 
-        // Look for .env next to this file, then in the project root (one dir up).
         $candidates = [
             dirname(__DIR__) . '/.env',
             __DIR__ . '/.env',
         ];
 
-        $envFile = null;
-        foreach ($candidates as $candidate) {
-            if (is_readable($candidate)) {
-                $envFile = $candidate;
+        foreach ($candidates as $envFile) {
+            if (file_exists($envFile) && is_readable($envFile)) {
+                $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+                if ($lines !== false) {
+                    foreach ($lines as $line) {
+                        $line = trim($line);
+                        if ($line === '' || $line[0] === '#') {
+                            continue;
+                        }
+                        if (str_contains($line, '=')) {
+                            [$key, $value] = explode('=', $line, 2);
+                            $key   = trim($key);
+                            $value = trim($value);
+                            if (strlen($value) >= 2 && (
+                                ($value[0] === '"' && $value[-1] === '"') ||
+                                ($value[0] === "'" && $value[-1] === "'")
+                            )) {
+                                $value = substr($value, 1, -1);
+                            }
+                            if (getenv($key) === false && !array_key_exists($key, $_ENV)) {
+                                putenv("{$key}={$value}");
+                                $_ENV[$key] = $value;
+                            }
+                        }
+                    }
+                }
+                self::$envLoaded = true;
                 break;
             }
         }
-
-        if ($envFile !== null) {
-            $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-            foreach ($lines as $line) {
-                $line = trim($line);
-
-                // Skip comments and empty lines.
-                if ($line === '' || $line[0] === '#') {
-                    continue;
-                }
-
-                // Split on the first '=' only.
-                $eqPos = strpos($line, '=');
-                if ($eqPos === false) {
-                    continue;
-                }
-
-                $key   = trim(substr($line, 0, $eqPos));
-                $value = trim(substr($line, $eqPos + 1));
-
-                // Strip optional surrounding quotes (single or double).
-                if (strlen($value) >= 2) {
-                    $first = $value[0];
-                    $last  = $value[strlen($value) - 1];
-                    if (($first === '"' && $last === '"') || ($first === "'" && $last === "'")) {
-                        $value = substr($value, 1, -1);
-                    }
-                }
-
-                // Only set if not already defined in the real environment.
-                if ($key !== '' && getenv($key) === false) {
-                    putenv("$key=$value");
-                    $_ENV[$key]    = $value;
-                    $_SERVER[$key] = $value;
-                }
-            }
-        }
-
-        self::$envLoaded = true;
     }
 
-    /**
-     * Remove host/port/credential details from PDO error messages before
-     * surfacing them to callers.
-     */
-    private static function sanitizeErrorMessage(string $message): string
+    private static function sanitizeErrorMessage(string $msg): string
     {
-        // Strip common patterns that might expose credentials or hostnames.
-        $message = preg_replace('/password[=:][^\s]*/i', 'password=[REDACTED]', $message);
-        $message = preg_replace('/user[=:][^\s]*/i', 'user=[REDACTED]', $message);
-        // Keep the MySQL error code but remove the host from SQLSTATE messages.
-        $message = preg_replace('/\b(?:\d{1,3}\.){3}\d{1,3}\b/', '[host]', $message);
-        return $message;
+        $patterns = [
+            '/user=\S+/i'     => 'user=***',
+            '/password=\S+/i' => 'password=***',
+            '/pwd=\S+/i'      => 'pwd=***',
+            '/host=\S+/i'     => 'host=***',
+        ];
+        return preg_replace(array_keys($patterns), array_values($patterns), $msg) ?? 'Connection error';
     }
-
-    /** Prevent instantiation. */
-    private function __construct() {}
-    private function __clone() {}
 }
