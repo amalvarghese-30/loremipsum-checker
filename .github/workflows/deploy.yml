@@ -20,7 +20,7 @@ jobs:
             echo "🚀 Deploying updates to Lorem Ipsum Checker..."
             
             # Navigate to project directory on VPS
-            cd /var/www/html/loremipsum-checker
+            cd /opt/loremipsum-checker
             
             # Pull latest changes from GitHub
             git fetch origin main
@@ -29,8 +29,8 @@ jobs:
             # Run any pending database migrations
             php database/migrate.php
             
-            # Fix file permissions
-            chown -R www-data:www-data /var/www/html/loremipsum-checker
+            # Fix file permissions for data folder and scripts
+            chown -R www-data:www-data data
             chmod -R 775 data
             chmod 755 worker.php database/migrate.php
             
