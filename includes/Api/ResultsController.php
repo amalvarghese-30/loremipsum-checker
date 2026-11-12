@@ -58,6 +58,11 @@ class ResultsController
         ]);
     }
 
+    public function listPages(): void
+    {
+        $this->pageResults();
+    }
+
     public function findings(): void
     {
         $scanId = RequestValidator::validateId($_GET['scan_id'] ?? null, 'scan_id');
@@ -85,6 +90,11 @@ class ResultsController
                 'total_pages' => ceil($total / $pagination['limit']),
             ],
         ]);
+    }
+
+    public function listFindings(): void
+    {
+        $this->findings();
     }
 
     public function compare(): void
