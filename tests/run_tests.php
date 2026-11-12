@@ -18,6 +18,7 @@ require_once __DIR__ . '/HttpClientRetryTest.php';
 require_once __DIR__ . '/DetectionPipelineTest.php';
 require_once __DIR__ . '/ResponseSizeLimitTest.php';
 require_once __DIR__ . '/ParagraphLevelDetectionTest.php';
+require_once __DIR__ . '/ReportingIntegrityTest.php';
 
 echo "========================================================\n";
 echo "       LOREM IPSUM CHECKER - AUTOMATED TEST SUITE        \n";
@@ -34,6 +35,7 @@ $tests = [
     'DetectionPipelineTest'        => new DetectionPipelineTest(),
     'ResponseSizeLimitTest'        => new ResponseSizeLimitTest(),
     'ParagraphLevelDetectionTest'  => new ParagraphLevelDetectionTest(),
+    'ReportingIntegrityTest'       => new ReportingIntegrityTest(),
 ];
 
 $passedSuites = 0;

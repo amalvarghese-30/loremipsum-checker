@@ -128,17 +128,89 @@ class ScanRepository
         return $stmt->execute([$count, $limitReached ? 1 : 0, $excludedCount, $scanId]);
     }
 
+    private ?bool $hasLoremPageCountColumn = null;
+
+    private function checkLoremPageCountColumn(): bool
+    {
+        if ($this->hasLoremPageCountColumn !== null) {
+            return $this->hasLoremPageCountColumn;
+        }
+
+        try {
+            $isSqlite = QueryHelper::isSqlite($this->db);
+            if ($isSqlite) {
+                $cols = $this->db->query("PRAGMA table_info(scans)")->fetchAll();
+                $found = false;
+                foreach ($cols as $col) {
+                    if (($col['name'] ?? '') === 'lorem_page_count') {
+                        $found = true;
+                        break;
+                    }
+                }
+                $this->hasLoremPageCountColumn = $found;
+            } else {
+                $stmt = $this->db->query("SHOW COLUMNS FROM scans LIKE 'lorem_page_count'");
+                $this->hasLoremPageCountColumn = ($stmt && $stmt->rowCount() > 0);
+            }
+        } catch (\Throwable $e) {
+            $this->hasLoremPageCountColumn = false;
+        }
+
+        return $this->hasLoremPageCountColumn;
+    }
+
     public function recordPageResult(
         int $scanId,
         string $status,
         int $findingCount = 0,
         int $loremCount = 0,
         int $auditCount = 0,
-        int $resourceCount = 0
+        int $resourceCount = 0,
+        int $loremPageCount = 0,
+        int $loremOccurrenceCount = 0
     ): bool {
         $isClean    = ($status === 'clean') ? 1 : 0;
         $isAffected = ($status === 'findings_detected') ? 1 : 0;
-        $isFailed   = in_array($status, ['failed', 'cloudflare_blocked', 'bot_blocked'], true) ? 1 : 0;
+        $isFailed   = in_array($status, ['failed', 'cloudflare_blocked', 'bot_blocked', 'rate_limited', 'timeout', 'ssl_error', 'not_found', 'error'], true) ? 1 : 0;
+
+        // Auto-derive lorem page & occurrence counts if omitted
+        if ($loremPageCount === 0 && $loremCount > 0) {
+            $loremPageCount = 1;
+        }
+        if ($loremOccurrenceCount === 0 && $loremCount > 0) {
+            $loremOccurrenceCount = $loremCount;
+        }
+
+        if ($this->checkLoremPageCountColumn()) {
+            $stmt = QueryHelper::prepare($this->db, '
+                UPDATE scans
+                SET processed_count = processed_count + 1,
+                    clean_count = clean_count + ?,
+                    affected_page_count = affected_page_count + ?,
+                    failed_count = failed_count + ?,
+                    total_findings = total_findings + ?,
+                    lorem_finding_count = lorem_finding_count + ?,
+                    audit_finding_count = audit_finding_count + ?,
+                    resource_finding_count = resource_finding_count + ?,
+                    lorem_page_count = lorem_page_count + ?,
+                    lorem_occurrence_count = lorem_occurrence_count + ?,
+                    last_heartbeat_at = NOW(),
+                    updated_at = NOW()
+                WHERE id = ?
+            ');
+            return $stmt->execute([
+                $isClean,
+                $isAffected,
+                $isFailed,
+                $findingCount,
+                $loremCount,
+                $auditCount,
+                $resourceCount,
+                $loremPageCount,
+                $loremOccurrenceCount,
+                $scanId
+            ]);
+        }
 
         $stmt = QueryHelper::prepare($this->db, '
             UPDATE scans
@@ -164,6 +236,144 @@ class ScanRepository
             $resourceCount,
             $scanId
         ]);
+    }
+
+    public function recordResourceFindings(int $scanId, int $findingCount): bool
+    {
+        if ($findingCount <= 0) {
+            return true;
+        }
+        $stmt = QueryHelper::prepare($this->db, '
+            UPDATE scans
+            SET total_findings = total_findings + ?,
+                resource_finding_count = resource_finding_count + ?,
+                last_heartbeat_at = NOW(),
+                updated_at = NOW()
+            WHERE id = ?
+        ');
+        return $stmt->execute([$findingCount, $findingCount, $scanId]);
+    }
+
+    /**
+     * Reconcile aggregate scan counters directly from page_results and findings tables.
+     * Guarantees 100% data integrity between source-of-truth rows and scans summary table.
+     */
+    public function reconcileCounters(int $scanId): array
+    {
+        $hasLoremCol = $this->checkLoremPageCountColumn();
+
+        // 1. Calculate page-level counts from page_results
+        $pageStmt = $this->db->prepare('
+            SELECT 
+                COUNT(*) as total_pages,
+                COUNT(CASE WHEN processing_status = "clean" THEN 1 END) as clean_pages,
+                COUNT(CASE WHEN processing_status = "findings_detected" THEN 1 END) as affected_pages,
+                COUNT(CASE WHEN processing_status IN ("failed", "cloudflare_blocked", "bot_blocked", "rate_limited", "timeout", "ssl_error", "not_found", "error") OR http_status >= 400 THEN 1 END) as failed_pages,
+                COUNT(CASE WHEN has_lorem_ipsum = 1 THEN 1 END) as lorem_pages
+            FROM page_results
+            WHERE scan_id = ?
+        ');
+        $pageStmt->execute([$scanId]);
+        $pageStats = $pageStmt->fetch() ?: [
+            'total_pages' => 0, 'clean_pages' => 0, 'affected_pages' => 0, 'failed_pages' => 0, 'lorem_pages' => 0
+        ];
+
+        // 2. Calculate finding-level counts from findings
+        $findStmt = $this->db->prepare('
+            SELECT 
+                COUNT(*) as total_findings,
+                COUNT(CASE WHEN detection_category = "lorem_ipsum" THEN 1 END) as lorem_findings,
+                COALESCE(SUM(CASE WHEN detection_category = "lorem_ipsum" THEN COALESCE(occurrences, 1) ELSE 0 END), 0) as lorem_occurrences,
+                COUNT(CASE WHEN detection_category != "lorem_ipsum" AND (resource_type = "html" OR resource_type IS NULL) THEN 1 END) as audit_findings,
+                COUNT(CASE WHEN resource_type IN ("css", "javascript", "json", "asset", "external_script") THEN 1 END) as resource_findings
+            FROM findings
+            WHERE scan_id = ?
+        ');
+        $findStmt->execute([$scanId]);
+        $findStats = $findStmt->fetch() ?: [
+            'total_findings' => 0, 'lorem_findings' => 0, 'lorem_occurrences' => 0, 'audit_findings' => 0, 'resource_findings' => 0
+        ];
+
+        $cleanCount    = (int)($pageStats['clean_pages'] ?? 0);
+        $affectedCount = (int)($pageStats['affected_pages'] ?? 0);
+        $failedCount   = (int)($pageStats['failed_pages'] ?? 0);
+        $processedCount = (int)($pageStats['total_pages'] ?? 0);
+        $loremPages    = (int)($pageStats['lorem_pages'] ?? 0);
+
+        $totalFindings     = (int)($findStats['total_findings'] ?? 0);
+        $loremFindings     = (int)($findStats['lorem_findings'] ?? 0);
+        $loremOccurrences  = (int)($findStats['lorem_occurrences'] ?? 0);
+        $auditFindings     = (int)($findStats['audit_findings'] ?? 0);
+        $resourceFindings  = (int)($findStats['resource_findings'] ?? 0);
+
+        if ($hasLoremCol) {
+            $upd = QueryHelper::prepare($this->db, '
+                UPDATE scans
+                SET processed_count = ?,
+                    clean_count = ?,
+                    affected_page_count = ?,
+                    failed_count = ?,
+                    total_findings = ?,
+                    lorem_finding_count = ?,
+                    audit_finding_count = ?,
+                    resource_finding_count = ?,
+                    lorem_page_count = ?,
+                    lorem_occurrence_count = ?,
+                    updated_at = NOW()
+                WHERE id = ?
+            ');
+            $upd->execute([
+                $processedCount,
+                $cleanCount,
+                $affectedCount,
+                $failedCount,
+                $totalFindings,
+                $loremFindings,
+                $auditFindings,
+                $resourceFindings,
+                $loremPages,
+                $loremOccurrences,
+                $scanId
+            ]);
+        } else {
+            $upd = QueryHelper::prepare($this->db, '
+                UPDATE scans
+                SET processed_count = ?,
+                    clean_count = ?,
+                    affected_page_count = ?,
+                    failed_count = ?,
+                    total_findings = ?,
+                    lorem_finding_count = ?,
+                    audit_finding_count = ?,
+                    resource_finding_count = ?,
+                    updated_at = NOW()
+                WHERE id = ?
+            ');
+            $upd->execute([
+                $processedCount,
+                $cleanCount,
+                $affectedCount,
+                $failedCount,
+                $totalFindings,
+                $loremFindings,
+                $auditFindings,
+                $resourceFindings,
+                $scanId
+            ]);
+        }
+
+        return [
+            'processed_count'        => $processedCount,
+            'clean_count'            => $cleanCount,
+            'affected_page_count'    => $affectedCount,
+            'failed_count'           => $failedCount,
+            'lorem_page_count'       => $loremPages,
+            'total_findings'         => $totalFindings,
+            'lorem_finding_count'    => $loremFindings,
+            'lorem_occurrence_count' => $loremOccurrences,
+            'audit_finding_count'    => $auditFindings,
+            'resource_finding_count' => $resourceFindings,
+        ];
     }
 
     public function completeScan(int $scanId, ?int $elapsedSeconds = null): bool

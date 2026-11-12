@@ -168,8 +168,18 @@ class FindingRepository
         $params = [$scanId];
 
         if (!empty($filters['category'])) {
-            $sql .= ' AND detection_category = ?';
-            $params[] = $filters['category'];
+            $cat = trim($filters['category']);
+            if (strtolower($cat) === 'seo') {
+                $sql .= ' AND detection_category IN ("missing_title", "missing_meta_desc", "missing_h1", "missing_canonical", "heading_structure")';
+            } elseif (str_contains($cat, ',')) {
+                $parts = array_filter(array_map('trim', explode(',', $cat)));
+                $ph = implode(',', array_fill(0, count($parts), '?'));
+                $sql .= " AND detection_category IN ({$ph})";
+                foreach ($parts as $p) { $params[] = $p; }
+            } else {
+                $sql .= ' AND detection_category = ?';
+                $params[] = $cat;
+            }
         }
         if (!empty($filters['severity'])) {
             $sql .= ' AND severity = ?';
@@ -215,8 +225,18 @@ class FindingRepository
         $params = [$scanId];
 
         if (!empty($filters['category'])) {
-            $sql .= ' AND detection_category = ?';
-            $params[] = $filters['category'];
+            $cat = trim($filters['category']);
+            if (strtolower($cat) === 'seo') {
+                $sql .= ' AND detection_category IN ("missing_title", "missing_meta_desc", "missing_h1", "missing_canonical", "heading_structure")';
+            } elseif (str_contains($cat, ',')) {
+                $parts = array_filter(array_map('trim', explode(',', $cat)));
+                $ph = implode(',', array_fill(0, count($parts), '?'));
+                $sql .= " AND detection_category IN ({$ph})";
+                foreach ($parts as $p) { $params[] = $p; }
+            } else {
+                $sql .= ' AND detection_category = ?';
+                $params[] = $cat;
+            }
         }
         if (!empty($filters['severity'])) {
             $sql .= ' AND severity = ?';

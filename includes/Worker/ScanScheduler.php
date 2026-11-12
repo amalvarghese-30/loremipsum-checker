@@ -385,13 +385,22 @@ class ScanScheduler
                 $this->findingRepo->insertBatch($scanId, $pageResultId, null, $allFindings);
             }
 
+            $loremOccurrences = 0;
+            if ($hasLorem) {
+                foreach ($findings as $f) {
+                    $loremOccurrences += max(1, (int)($f['occurrences'] ?? 1));
+                }
+            }
+
             $this->scanRepo->recordPageResult(
                 $scanId,
                 $pageStatus,
                 $findingCount,
                 $loremCount,
                 $auditCount,
-                0 // Resource findings recorded separately in inspectDiscoveredResources
+                0, // Resource findings recorded separately in inspectDiscoveredResources
+                $hasLorem ? 1 : 0,
+                $loremOccurrences
             );
             $this->db->commit();
         } catch (\Throwable $e) {
@@ -512,7 +521,7 @@ class ScanScheduler
 
             if (!empty($resFindings)) {
                 $this->findingRepo->insertBatch($scanId, $pageResultId, $resourceId, $resFindings);
-                $this->scanRepo->recordPageResult($scanId, 'clean', count($resFindings), 0, 0, count($resFindings));
+                $this->scanRepo->recordResourceFindings($scanId, count($resFindings));
                 $this->logRepo->log($scanId, $projectId, 'WARNING', "Placeholder found in external {$type}: {$resolved}", 'detection', $resolved);
             }
         }

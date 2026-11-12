@@ -72,6 +72,8 @@ class RepositoryIntegrationTest
                 lorem_finding_count INTEGER NOT NULL DEFAULT 0,
                 audit_finding_count INTEGER NOT NULL DEFAULT 0,
                 resource_finding_count INTEGER NOT NULL DEFAULT 0,
+                lorem_page_count INTEGER NOT NULL DEFAULT 0,
+                lorem_occurrence_count INTEGER NOT NULL DEFAULT 0,
                 url_limit_reached INTEGER NOT NULL DEFAULT 0,
                 excluded_by_limit_count INTEGER NOT NULL DEFAULT 0,
                 elapsed_time INTEGER NULL,

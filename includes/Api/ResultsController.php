@@ -162,7 +162,7 @@ class ResultsController
                 COUNT(CASE WHEN processing_status = "clean" THEN 1 END) as clean_pages,
                 COUNT(CASE WHEN processing_status = "findings_detected" THEN 1 END) as affected_pages,
                 COUNT(CASE WHEN has_lorem_ipsum = 1 THEN 1 END) as lorem_pages,
-                COUNT(CASE WHEN processing_status IN ("failed", "cloudflare_blocked", "error") OR http_status >= 400 THEN 1 END) as error_pages,
+                COUNT(CASE WHEN processing_status IN ("failed", "cloudflare_blocked", "bot_blocked", "rate_limited", "timeout", "ssl_error", "not_found", "error") OR http_status >= 400 THEN 1 END) as error_pages,
                 COUNT(CASE WHEN audit_status = "audit_issues" THEN 1 END) as audit_issue_pages,
                 COUNT(*) as total_pages
             FROM page_results
@@ -200,8 +200,24 @@ class ResultsController
         $sevStmt->execute([$scanId]);
         $severities = $sevStmt->fetchAll();
 
+        // Fetch associated project
+        $projectStmt = $this->db->prepare('SELECT id, project_name, website_url FROM projects WHERE id = ?');
+        $projectStmt->execute([(int)$scan['project_id']]);
+        $project = $projectStmt->fetch() ?: [];
+
+        // Ensure scan counters accurately reflect source-of-truth rows
+        $loremCat = $catMap['lorem_ipsum'] ?? null;
+        $loremFindings = $loremCat ? (int)$loremCat['count'] : (int)($scan['lorem_finding_count'] ?? 0);
+        $loremOccurrences = $loremCat ? (int)$loremCat['occurrences'] : (int)($scan['lorem_occurrence_count'] ?? $loremFindings);
+        $loremPages = isset($health['lorem_pages']) ? (int)$health['lorem_pages'] : (int)($scan['lorem_page_count'] ?? 0);
+
+        $scan['lorem_finding_count']    = $loremFindings;
+        $scan['lorem_occurrence_count'] = $loremOccurrences;
+        $scan['lorem_page_count']       = $loremPages;
+
         Response::success([
             'scan'           => $scan,
+            'project'        => $project,
             'health'         => $health,
             'categories'     => $categories,
             'category_stats' => $catMap,

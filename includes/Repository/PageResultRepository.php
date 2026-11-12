@@ -159,9 +159,21 @@ class PageResultRepository
         }
 
         if (!empty($filters['category'])) {
-            $sql .= ' AND id IN (SELECT page_result_id FROM findings WHERE scan_id = ? AND detection_category = ?)';
-            $params[] = $scanId;
-            $params[] = $filters['category'];
+            $cat = trim($filters['category']);
+            if (strtolower($cat) === 'seo') {
+                $sql .= ' AND id IN (SELECT page_result_id FROM findings WHERE scan_id = ? AND detection_category IN ("missing_title", "missing_meta_desc", "missing_h1", "missing_canonical", "heading_structure"))';
+                $params[] = $scanId;
+            } elseif (str_contains($cat, ',')) {
+                $parts = array_filter(array_map('trim', explode(',', $cat)));
+                $ph = implode(',', array_fill(0, count($parts), '?'));
+                $sql .= " AND id IN (SELECT page_result_id FROM findings WHERE scan_id = ? AND detection_category IN ({$ph}))";
+                $params[] = $scanId;
+                foreach ($parts as $p) { $params[] = $p; }
+            } else {
+                $sql .= ' AND id IN (SELECT page_result_id FROM findings WHERE scan_id = ? AND detection_category = ?)';
+                $params[] = $scanId;
+                $params[] = $cat;
+            }
         }
 
         if (!empty($filters['search'])) {
@@ -219,9 +231,21 @@ class PageResultRepository
         }
 
         if (!empty($filters['category'])) {
-            $sql .= ' AND id IN (SELECT page_result_id FROM findings WHERE scan_id = ? AND detection_category = ?)';
-            $params[] = $scanId;
-            $params[] = $filters['category'];
+            $cat = trim($filters['category']);
+            if (strtolower($cat) === 'seo') {
+                $sql .= ' AND id IN (SELECT page_result_id FROM findings WHERE scan_id = ? AND detection_category IN ("missing_title", "missing_meta_desc", "missing_h1", "missing_canonical", "heading_structure"))';
+                $params[] = $scanId;
+            } elseif (str_contains($cat, ',')) {
+                $parts = array_filter(array_map('trim', explode(',', $cat)));
+                $ph = implode(',', array_fill(0, count($parts), '?'));
+                $sql .= " AND id IN (SELECT page_result_id FROM findings WHERE scan_id = ? AND detection_category IN ({$ph}))";
+                $params[] = $scanId;
+                foreach ($parts as $p) { $params[] = $p; }
+            } else {
+                $sql .= ' AND id IN (SELECT page_result_id FROM findings WHERE scan_id = ? AND detection_category = ?)';
+                $params[] = $scanId;
+                $params[] = $cat;
+            }
         }
 
         if (!empty($filters['search'])) {

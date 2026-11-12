@@ -36,6 +36,12 @@ class ProjectController
             $processed = (int)($r['processed_count'] ?? 0);
             $percentage = $totalUrls > 0 ? round(($processed / $totalUrls) * 100, 2) : 0;
 
+            $loremFindings    = (int)($r['lorem_finding_count'] ?? 0);
+            $loremPages       = (int)($r['lorem_page_count'] ?? 0);
+            $loremOccurrences = (int)($r['lorem_occurrence_count'] ?? $loremFindings);
+            $affectedPages    = (int)($r['affected_page_count'] ?? 0);
+            $totalFindings    = (int)($r['total_findings'] ?? 0);
+
             // Maintain exact structure expected by index.html loadProjects()
             $projects[] = [
                 'id'           => (string)$r['id'],
@@ -45,12 +51,16 @@ class ProjectController
                 'created_at'   => $r['created_at'],
                 'updated_at'   => $r['updated_at'],
                 'progress'     => [
-                    'total_urls'  => $totalUrls,
-                    'processed'   => $processed,
-                    'clean'       => (int)($r['clean_count'] ?? 0),
-                    'lorem_found' => (int)($r['affected_page_count'] ?? 0),
-                    'errors'      => (int)($r['failed_count'] ?? 0),
-                    'percentage'  => $percentage,
+                    'total_urls'        => $totalUrls,
+                    'processed'         => $processed,
+                    'clean'             => (int)($r['clean_count'] ?? 0),
+                    'lorem_found'       => $loremFindings,
+                    'lorem_pages'       => $loremPages,
+                    'lorem_occurrences' => $loremOccurrences,
+                    'affected_pages'    => $affectedPages,
+                    'total_findings'    => $totalFindings,
+                    'errors'            => (int)($r['failed_count'] ?? 0),
+                    'percentage'        => $percentage,
                 ],
                 'latest_scan_id' => $r['latest_scan_id'] ? (int)$r['latest_scan_id'] : null,
             ];

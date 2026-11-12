@@ -137,7 +137,15 @@ foreach ($files as $file) {
             if ($stmt === '' || $stmt === ';') {
                 continue;
             }
-            $pdo->exec($stmt);
+            try {
+                $pdo->exec($stmt);
+            } catch (\PDOException $e) {
+                if (stripos($e->getMessage(), 'duplicate column') !== false || stripos($e->getMessage(), 'already exists') !== false) {
+                    warn("Column or index already exists: " . $e->getMessage());
+                    continue;
+                }
+                throw $e;
+            }
         }
 
         $ins = $pdo->prepare("INSERT INTO `schema_migrations` (`migration`) VALUES (?)");
