@@ -105,19 +105,6 @@ class QueryHelper
             $sql
         );
 
-        // 6. IF(? IN ("completed", "failed"), datetime('now'), processed_at) ->
-        //    CASE WHEN ? IN ('completed', 'failed') THEN datetime('now') ELSE processed_at END
-        $sql = preg_replace_callback(
-            '/\bIF\s*\((.*?)\s*,\s*(.*?)\s*,\s*(.*?)\)/is',
-            function ($matches) {
-                $cond = trim($matches[1]);
-                $t    = trim($matches[2]);
-                $f    = trim($matches[3]);
-                return "CASE WHEN {$cond} THEN {$t} ELSE {$f} END";
-            },
-            $sql
-        );
-
         return $sql;
     }
 

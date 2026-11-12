@@ -321,9 +321,37 @@ class RepositoryIntegrationTest
         $compOk = $scanRepo->completeScan($scanId);
         $this->assertTrue($compOk, 'Scan completed and elapsed time calculated');
 
-        // 11. Test URL status transition with IF() / CASE expression
-        $markOk = $urlRepo->markStatus(1, 'completed', 'https://example.com/page1');
-        $this->assertTrue($markOk, 'URL marked completed using compatible IF/CASE expression');
+        // 11. Test URL status transitions (pending -> processing -> completed/failed)
+        // 11a. Transition to 'processing' -> processed_at must remain NULL
+        $urlRepo->markStatus(2, 'processing');
+        $checkStmt = $this->pdo->prepare('SELECT status, processed_at FROM discovered_urls WHERE id = 2');
+        $checkStmt->execute();
+        $u2 = $checkStmt->fetch();
+        $this->assertEquals('processing', $u2['status'], 'Status transitioned to processing');
+        $this->assertTrue($u2['processed_at'] === null, 'processed_at remains NULL during processing');
+
+        // 11b. Transition to 'completed' -> processed_at must receive a valid timestamp
+        $urlRepo->markStatus(2, 'completed', 'https://example.com/page2');
+        $checkStmt->execute();
+        $u2Completed = $checkStmt->fetch();
+        $this->assertEquals('completed', $u2Completed['status'], 'Status transitioned to completed');
+        $this->assertTrue(!empty($u2Completed['processed_at']), 'processed_at populated on completed');
+
+        // 11c. Transition to 'failed' -> processed_at must receive a valid timestamp
+        $urlRepo->markStatus(1, 'failed', null, 'Fatal 500 error');
+        $checkStmt1 = $this->pdo->prepare('SELECT status, processed_at FROM discovered_urls WHERE id = 1');
+        $checkStmt1->execute();
+        $u1Failed = $checkStmt1->fetch();
+        $this->assertEquals('failed', $u1Failed['status'], 'Status transitioned to failed');
+        $this->assertTrue(!empty($u1Failed['processed_at']), 'processed_at populated on failed');
+
+        // 11d. Updating existing completed URL to another status -> processed_at remains unchanged
+        $prevTime = $u2Completed['processed_at'];
+        $urlRepo->markStatus(2, 'needs_review');
+        $checkStmt->execute();
+        $u2Review = $checkStmt->fetch();
+        $this->assertEquals('needs_review', $u2Review['status'], 'Status transitioned to needs_review');
+        $this->assertEquals($prevTime, $u2Review['processed_at'], 'processed_at preserved when status is non-terminal');
 
         // 12. Test Logging with NOW(3)
         $logRepo->log($scanId, $projId, 'INFO', 'Test log message', 'test');

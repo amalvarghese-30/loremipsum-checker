@@ -131,7 +131,10 @@ class UrlRepository
             SET status = ?,
                 final_url = COALESCE(?, final_url),
                 last_error = ?,
-                processed_at = IF(? IN ("completed", "failed"), NOW(), processed_at)
+                processed_at = CASE
+                    WHEN ? IN ("completed", "failed") THEN NOW()
+                    ELSE processed_at
+                END
             WHERE id = ?
         ');
         return $stmt->execute([$status, $finalUrl, $lastError, $status, $urlId]);
