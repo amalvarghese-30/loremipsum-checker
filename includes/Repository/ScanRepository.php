@@ -168,15 +168,27 @@ class ScanRepository
 
     public function completeScan(int $scanId, ?int $elapsedSeconds = null): bool
     {
-        $stmt = QueryHelper::prepare($this->db, '
-            UPDATE scans
-            SET status = "completed",
-                completed_at = NOW(),
-                elapsed_time = COALESCE(?, TIMESTAMPDIFF(SECOND, started_at, NOW())),
-                last_heartbeat_at = NOW(),
-                updated_at = NOW()
-            WHERE id = ?
-        ');
+        if (QueryHelper::isSqlite($this->db)) {
+            $stmt = $this->db->prepare('
+                UPDATE scans
+                SET status = "completed",
+                    completed_at = datetime("now"),
+                    elapsed_time = COALESCE(?, CAST((strftime("%s", "now") - strftime("%s", started_at)) AS INTEGER)),
+                    last_heartbeat_at = datetime("now"),
+                    updated_at = datetime("now")
+                WHERE id = ?
+            ');
+        } else {
+            $stmt = $this->db->prepare('
+                UPDATE scans
+                SET status = "completed",
+                    completed_at = NOW(),
+                    elapsed_time = COALESCE(?, TIMESTAMPDIFF(SECOND, started_at, NOW())),
+                    last_heartbeat_at = NOW(),
+                    updated_at = NOW()
+                WHERE id = ?
+            ');
+        }
         return $stmt->execute([$elapsedSeconds, $scanId]);
     }
 
@@ -195,11 +207,19 @@ class ScanRepository
 
     public function getStaleScans(int $thresholdSeconds = 120): array
     {
-        $stmt = QueryHelper::prepare($this->db, '
-            SELECT * FROM scans
-            WHERE status IN ("initializing", "discovering", "scanning")
-              AND last_heartbeat_at < DATE_SUB(NOW(), INTERVAL ? SECOND)
-        ');
+        if (QueryHelper::isSqlite($this->db)) {
+            $stmt = $this->db->prepare('
+                SELECT * FROM scans
+                WHERE status IN ("initializing", "discovering", "scanning")
+                  AND last_heartbeat_at < datetime("now", "-" || ? || " seconds")
+            ');
+        } else {
+            $stmt = $this->db->prepare('
+                SELECT * FROM scans
+                WHERE status IN ("initializing", "discovering", "scanning")
+                  AND last_heartbeat_at < DATE_SUB(NOW(), INTERVAL ? SECOND)
+            ');
+        }
         $stmt->execute([$thresholdSeconds]);
         return $stmt->fetchAll();
     }

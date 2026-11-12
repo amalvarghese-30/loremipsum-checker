@@ -107,17 +107,18 @@ class UrlRepository
      */
     public function fetchPendingBatch(int $scanId, int $limit = 50): array
     {
-        $stmt = QueryHelper::prepare($this->db, '
+        $nowExpr = QueryHelper::isSqlite($this->db) ? "datetime('now')" : "NOW()";
+        $stmt = $this->db->prepare("
             SELECT id, original_url, normalized_url, domain, crawl_depth, retry_count, attempt_count
             FROM discovered_urls
             WHERE scan_id = ?
               AND (
-                status IN ("pending", "queued")
-                OR (status = "retry_wait" AND (next_attempt_at IS NULL OR next_attempt_at <= NOW()))
+                status IN ('pending', 'queued')
+                OR (status = 'retry_wait' AND (next_attempt_at IS NULL OR next_attempt_at <= {$nowExpr}))
               )
             ORDER BY crawl_depth ASC, id ASC
             LIMIT ?
-        ');
+        ");
         $stmt->bindValue(1, $scanId, PDO::PARAM_INT);
         $stmt->bindValue(2, $limit, PDO::PARAM_INT);
         $stmt->execute();
@@ -132,7 +133,7 @@ class UrlRepository
                 final_url = COALESCE(?, final_url),
                 last_error = ?,
                 processed_at = CASE
-                    WHEN ? IN ("completed", "failed") THEN NOW()
+                    WHEN ? IN (\'completed\', \'failed\') THEN NOW()
                     ELSE processed_at
                 END
             WHERE id = ?
@@ -142,15 +143,27 @@ class UrlRepository
 
     public function scheduleRetry(int $urlId, string $lastError, int $delaySeconds = 5): bool
     {
-        $stmt = QueryHelper::prepare($this->db, '
-            UPDATE discovered_urls
-            SET retry_count = retry_count + 1,
-                attempt_count = attempt_count + 1,
-                status = "retry_wait",
-                last_error = ?,
-                next_attempt_at = DATE_ADD(NOW(), INTERVAL ? SECOND)
-            WHERE id = ?
-        ');
+        if (QueryHelper::isSqlite($this->db)) {
+            $stmt = $this->db->prepare('
+                UPDATE discovered_urls
+                SET retry_count = retry_count + 1,
+                    attempt_count = attempt_count + 1,
+                    status = "retry_wait",
+                    last_error = ?,
+                    next_attempt_at = datetime("now", "+" || ? || " seconds")
+                WHERE id = ?
+            ');
+        } else {
+            $stmt = $this->db->prepare('
+                UPDATE discovered_urls
+                SET retry_count = retry_count + 1,
+                    attempt_count = attempt_count + 1,
+                    status = "retry_wait",
+                    last_error = ?,
+                    next_attempt_at = DATE_ADD(NOW(), INTERVAL ? SECOND)
+                WHERE id = ?
+            ');
+        }
         return $stmt->execute([$lastError, $delaySeconds, $urlId]);
     }
 

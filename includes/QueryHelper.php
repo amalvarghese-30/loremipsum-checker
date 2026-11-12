@@ -70,37 +70,15 @@ class QueryHelper
         $sql = preg_replace('/\bNOW\s*\(\s*3\s*\)/i', "strftime('%Y-%m-%d %H:%M:%f', 'now')", $sql);
         $sql = preg_replace('/\bNOW\s*\(\s*\)/i', "datetime('now')", $sql);
 
-        // 3. DATE_ADD(datetime('now'), INTERVAL ? SECOND) -> datetime('now', '+' || ? || ' seconds')
-        $sql = preg_replace(
-            '/DATE_ADD\s*\(\s*datetime\(\'now\'\)\s*,\s*INTERVAL\s+(\?|\d+)\s+SECOND\s*\)/i',
-            "datetime('now', '+' || $1 || ' seconds')",
-            $sql
-        );
-        $sql = preg_replace(
-            '/DATE_ADD\s*\(\s*NOW\(\)\s*,\s*INTERVAL\s+(\?|\d+)\s+SECOND\s*\)/i',
-            "datetime('now', '+' || $1 || ' seconds')",
-            $sql
-        );
-
-        // 4. DATE_SUB(datetime('now'), INTERVAL ? SECOND) -> datetime('now', '-' || ? || ' seconds')
-        $sql = preg_replace(
-            '/DATE_SUB\s*\(\s*datetime\(\'now\'\)\s*,\s*INTERVAL\s+(\?|\d+)\s+SECOND\s*\)/i',
-            "datetime('now', '-' || $1 || ' seconds')",
-            $sql
-        );
-        $sql = preg_replace(
-            '/DATE_SUB\s*\(\s*NOW\(\)\s*,\s*INTERVAL\s+(\?|\d+)\s+SECOND\s*\)/i',
-            "datetime('now', '-' || $1 || ' seconds')",
-            $sql
-        );
-
-        // 5. TIMESTAMPDIFF(SECOND, col1, col2) -> (CAST(strftime('%s', col2) AS INTEGER) - CAST(strftime('%s', col1) AS INTEGER))
+        // 3. Fallback for TIMESTAMPDIFF(SECOND, a, b) if present in raw queries
         $sql = preg_replace_callback(
-            '/TIMESTAMPDIFF\s*\(\s*SECOND\s*,\s*([^,]+)\s*,\s*([^)]+)\s*\)/i',
+            '/TIMESTAMPDIFF\s*\(\s*SECOND\s*,\s*([a-zA-Z0-9_]+)\s*,\s*(?:NOW\(\)|datetime\(\'now\'\)|([a-zA-Z0-9_]+))\s*\)/i',
             function ($matches) {
                 $start = trim($matches[1]);
-                $end   = trim($matches[2]);
-                return "(CAST(strftime('%s', {$end}) AS INTEGER) - CAST(strftime('%s', {$start}) AS INTEGER))";
+                $end = isset($matches[2]) && $matches[2] !== '' ? trim($matches[2]) : "'now'";
+                $startExpr = (stripos($start, 'now') !== false) ? "'now'" : $start;
+                $endExpr = (stripos($end, 'now') !== false) ? "'now'" : $end;
+                return "CAST((strftime('%s', {$endExpr}) - strftime('%s', {$startExpr})) AS INTEGER)";
             },
             $sql
         );
