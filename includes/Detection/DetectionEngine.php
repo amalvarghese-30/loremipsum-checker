@@ -42,7 +42,8 @@ class DetectionEngine
                 continue;
             }
 
-            $matches = $this->matchText($text, 'html');
+            $sourceType = $node['source_type'] ?? 'html';
+            $matches = $this->matchText($text, $sourceType);
             if (empty($matches)) {
                 continue;
             }
@@ -91,10 +92,17 @@ class DetectionEngine
                     ? implode(', ', array_slice($uniquePhrases, 0, 3)) . ' (' . $groupData['occurrences'] . ' occurrences)'
                     : $uniquePhrases[0] . ' (' . $groupData['occurrences'] . ' occurrence' . ($groupData['occurrences'] > 1 ? 's' : '') . ')';
 
+                $resType = 'html';
+                if (($node['source_type'] ?? '') === 'inline_javascript') {
+                    $resType = 'javascript';
+                } elseif (($node['source_type'] ?? '') === 'embedded_json') {
+                    $resType = 'json';
+                }
+
                 $findings[] = [
                     'page_url'            => $pageUrl,
                     'resource_url'        => null,
-                    'resource_type'       => 'html',
+                    'resource_type'       => $resType,
                     'matched_text'        => $normalizedParagraph, // Store complete paragraph text
                     'occurrences'         => $groupData['occurrences'], // Total phrase matches in paragraph
                     'matched_phrases'     => $groupData['phrases'],
@@ -246,7 +254,23 @@ class DetectionEngine
             // Check if rule applies to this source type
             $sources = explode(',', $rule['source_types'] ?? 'html,javascript,css,json,text');
             $sources = array_map('trim', $sources);
-            if (!in_array($sourceType, $sources, true) && !in_array('text', $sources, true)) {
+
+            $allowed = false;
+            if (in_array($sourceType, $sources, true)) {
+                $allowed = true;
+            } elseif ($sourceType === 'text') {
+                $allowed = in_array('text', $sources, true);
+            } elseif (str_starts_with($sourceType, 'html')) {
+                $allowed = in_array('html', $sources, true);
+            } elseif (str_contains($sourceType, 'javascript')) {
+                $allowed = in_array('javascript', $sources, true);
+            } elseif (str_contains($sourceType, 'json')) {
+                $allowed = in_array('json', $sources, true);
+            } elseif (str_contains($sourceType, 'css')) {
+                $allowed = in_array('css', $sources, true);
+            }
+
+            if (!$allowed) {
                 continue;
             }
 

@@ -120,6 +120,23 @@ class ReportingIntegrityTest
                 updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
 
+            CREATE TABLE scan_settings (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                scan_id INTEGER NOT NULL,
+                settings_json TEXT NOT NULL,
+                created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+
+            CREATE TABLE url_discovery_sources (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                discovered_url_id INTEGER NOT NULL,
+                scan_id INTEGER NOT NULL,
+                source_type VARCHAR(100) NOT NULL,
+                source_url TEXT NULL,
+                crawl_depth INTEGER NOT NULL DEFAULT 0,
+                discovered_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+
             CREATE TABLE discovered_urls (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 scan_id INTEGER NOT NULL,
