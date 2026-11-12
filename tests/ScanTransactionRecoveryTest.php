@@ -204,6 +204,7 @@ class ScanTransactionRecoveryTest
                 resource_url TEXT NULL,
                 resource_type VARCHAR(50) NOT NULL DEFAULT "html",
                 matched_text TEXT NOT NULL,
+                occurrences INTEGER NOT NULL DEFAULT 1,
                 surrounding_context TEXT NULL,
                 html_element VARCHAR(100) NULL,
                 css_selector VARCHAR(500) NULL,
