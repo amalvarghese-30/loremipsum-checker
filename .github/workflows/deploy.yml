@@ -28,7 +28,11 @@ jobs:
 
       - name: Run Complete Test Suite
         run: |
-          php tests/run_tests.php
+          php tests/run_tests.php 2>&1 | tee test_output.log || {
+            ERR=$(cat test_output.log)
+            echo "::error title=Automated Test Suite Failures::$ERR"
+            exit 1
+          }
 
   deploy:
     name: Deploy to Live VPS
