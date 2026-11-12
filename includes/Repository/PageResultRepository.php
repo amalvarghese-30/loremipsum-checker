@@ -49,8 +49,21 @@ class PageResultRepository
             $findStmt->execute([$pageResId]);
             $fRow = $findStmt->fetch(PDO::FETCH_ASSOC) ?: [];
 
+            $hasDbFindings = ($fRow['total_page_findings'] ?? 0) > 0;
+            $pageFindingCount = $hasDbFindings 
+                ? (int)$fRow['total_page_findings'] 
+                : (int)($existing['finding_count'] ?? 0);
+            $loremFindings = $hasDbFindings
+                ? (int)($fRow['lorem_findings'] ?? 0)
+                : (!empty($existing['has_lorem_ipsum']) ? $pageFindingCount : 0);
+            $loremOccurrences = $hasDbFindings
+                ? (int)($fRow['lorem_occurrences'] ?? 0)
+                : (!empty($existing['has_lorem_ipsum']) ? $pageFindingCount : 0);
+            $auditFindings = $hasDbFindings
+                ? (int)($fRow['audit_findings'] ?? 0)
+                : (empty($existing['has_lorem_ipsum']) ? $pageFindingCount : 0);
+
             $isFailed = in_array($existing['processing_status'], ['failed', 'cloudflare_blocked', 'bot_blocked', 'rate_limited', 'timeout', 'ssl_error', 'not_found', 'error'], true) || ((int)($existing['http_status'] ?? 0) >= 400);
-            $pageFindingCount = (int)($fRow['total_page_findings'] ?? 0);
             $isAffected = ($existing['processing_status'] === 'findings_detected' || $pageFindingCount > 0) && !$isFailed;
             $isClean = ($existing['processing_status'] === 'clean') && !$isFailed && ($pageFindingCount === 0);
 
@@ -59,9 +72,9 @@ class PageResultRepository
                 'is_affected'       => $isAffected ? 1 : 0,
                 'is_failed'         => $isFailed ? 1 : 0,
                 'has_lorem'         => !empty($existing['has_lorem_ipsum']) ? 1 : 0,
-                'lorem_findings'    => (int)($fRow['lorem_findings'] ?? 0),
-                'lorem_occurrences' => (int)($fRow['lorem_occurrences'] ?? 0),
-                'audit_findings'    => (int)($fRow['audit_findings'] ?? 0),
+                'lorem_findings'    => $loremFindings,
+                'lorem_occurrences' => $loremOccurrences,
+                'audit_findings'    => $auditFindings,
                 'total_findings'    => $pageFindingCount,
             ];
 
