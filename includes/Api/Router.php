@@ -64,6 +64,18 @@ class Router
             case 'findings':
                 $resultsCtrl->findings();
                 break;
+            case 'dashboard_stats':
+                $resultsCtrl->dashboardStats();
+                break;
+            case 'scan_summary':
+                $resultsCtrl->scanSummary();
+                break;
+            case 'page_detail':
+                $resultsCtrl->pageDetail();
+                break;
+            case 'scans_list':
+                $scanCtrl->scansList();
+                break;
             case 'compare':
                 $resultsCtrl->compare();
                 break;

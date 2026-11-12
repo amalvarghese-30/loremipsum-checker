@@ -243,6 +243,24 @@ class ScanWorker
         if (isset($scanSettings['max_retries'])) {
             $merged['fetching']['max_retries'] = (int)$scanSettings['max_retries'];
         }
+        if (isset($scanSettings['retry_base_delay'])) {
+            $merged['fetching']['retry_base_delay'] = (int)$scanSettings['retry_base_delay'];
+        }
+        if (isset($scanSettings['max_retry_delay'])) {
+            $merged['fetching']['max_retry_delay'] = (int)$scanSettings['max_retry_delay'];
+        }
+        if (isset($scanSettings['follow_redirects'])) {
+            $merged['fetching']['follow_redirects'] = (bool)$scanSettings['follow_redirects'];
+        }
+        if (isset($scanSettings['max_redirects'])) {
+            $merged['fetching']['max_redirects'] = (int)$scanSettings['max_redirects'];
+        }
+        if (isset($scanSettings['max_response_size'])) {
+            $merged['fetching']['max_response_size'] = (int)$scanSettings['max_response_size'];
+        }
+        if (isset($scanSettings['discovery_methods']) && is_array($scanSettings['discovery_methods'])) {
+            $merged['discovery'] = array_merge($merged['discovery'] ?? [], $scanSettings['discovery_methods']);
+        }
         if (isset($scanSettings['js_rendering'])) {
             $merged['playwright']['enabled'] = (bool)$scanSettings['js_rendering'];
         }
