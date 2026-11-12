@@ -8,6 +8,7 @@
 
 namespace LoremChecker\Repository;
 
+use LoremChecker\QueryHelper;
 use PDO;
 
 class ProjectRepository
@@ -31,13 +32,13 @@ class ProjectRepository
         if ($row) {
             // Update name if changed
             if (!empty($projectName) && $projectName !== $row['project_name']) {
-                $upd = $this->db->prepare('UPDATE projects SET project_name = ?, updated_at = NOW() WHERE id = ?');
+                $upd = QueryHelper::prepare($this->db, 'UPDATE projects SET project_name = ?, updated_at = NOW() WHERE id = ?');
                 $upd->execute([$projectName, $row['id']]);
             }
             return (int)$row['id'];
         }
 
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             INSERT INTO projects (project_name, website_url, normalized_website_url, created_at, updated_at)
             VALUES (?, ?, ?, NOW(), NOW())
         ');
@@ -90,7 +91,7 @@ class ProjectRepository
 
     public function softDelete(int $id): bool
     {
-        $stmt = $this->db->prepare('UPDATE projects SET deleted_at = NOW(), updated_at = NOW() WHERE id = ?');
+        $stmt = QueryHelper::prepare($this->db, 'UPDATE projects SET deleted_at = NOW(), updated_at = NOW() WHERE id = ?');
         return $stmt->execute([$id]);
     }
 }

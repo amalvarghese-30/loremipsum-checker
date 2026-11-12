@@ -7,6 +7,7 @@
 
 namespace LoremChecker\Repository;
 
+use LoremChecker\QueryHelper;
 use PDO;
 
 class ScanRepository
@@ -25,7 +26,7 @@ class ScanRepository
         $numStmt->execute([$projectId]);
         $scanNumber = (int)$numStmt->fetchColumn();
 
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             INSERT INTO scans (
                 project_id, scan_number, status, started_at, last_heartbeat_at,
                 discovered_count, processed_count, clean_count, affected_page_count,
@@ -40,7 +41,7 @@ class ScanRepository
 
         // Save scan settings snapshot
         if (!empty($settings)) {
-            $setStmt = $this->db->prepare('
+            $setStmt = QueryHelper::prepare($this->db, '
                 INSERT INTO scan_settings (scan_id, settings_json, created_at)
                 VALUES (?, ?, NOW())
             ');
@@ -100,23 +101,23 @@ class ScanRepository
 
     public function updateStatus(int $scanId, string $status): bool
     {
-        $stmt = $this->db->prepare('UPDATE scans SET status = ?, updated_at = NOW() WHERE id = ?');
+        $stmt = QueryHelper::prepare($this->db, 'UPDATE scans SET status = ?, updated_at = NOW() WHERE id = ?');
         return $stmt->execute([$status, $scanId]);
     }
 
     public function updateHeartbeat(int $scanId, ?int $pid = null): bool
     {
         if ($pid !== null) {
-            $stmt = $this->db->prepare('UPDATE scans SET last_heartbeat_at = NOW(), worker_pid = ?, updated_at = NOW() WHERE id = ?');
+            $stmt = QueryHelper::prepare($this->db, 'UPDATE scans SET last_heartbeat_at = NOW(), worker_pid = ?, updated_at = NOW() WHERE id = ?');
             return $stmt->execute([$pid, $scanId]);
         }
-        $stmt = $this->db->prepare('UPDATE scans SET last_heartbeat_at = NOW(), updated_at = NOW() WHERE id = ?');
+        $stmt = QueryHelper::prepare($this->db, 'UPDATE scans SET last_heartbeat_at = NOW(), updated_at = NOW() WHERE id = ?');
         return $stmt->execute([$scanId]);
     }
 
     public function setDiscoveredCount(int $scanId, int $count, bool $limitReached = false, int $excludedCount = 0): bool
     {
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             UPDATE scans
             SET discovered_count = ?,
                 url_limit_reached = ?,
@@ -139,7 +140,7 @@ class ScanRepository
         $isAffected = ($status === 'findings_detected') ? 1 : 0;
         $isFailed   = in_array($status, ['failed', 'cloudflare_blocked', 'bot_blocked'], true) ? 1 : 0;
 
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             UPDATE scans
             SET processed_count = processed_count + 1,
                 clean_count = clean_count + ?,
@@ -167,7 +168,7 @@ class ScanRepository
 
     public function completeScan(int $scanId, ?int $elapsedSeconds = null): bool
     {
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             UPDATE scans
             SET status = "completed",
                 completed_at = NOW(),
@@ -181,7 +182,7 @@ class ScanRepository
 
     public function failScan(int $scanId, string $errorMessage): bool
     {
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             UPDATE scans
             SET status = "failed",
                 error_message = ?,
@@ -194,7 +195,7 @@ class ScanRepository
 
     public function getStaleScans(int $thresholdSeconds = 120): array
     {
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             SELECT * FROM scans
             WHERE status IN ("initializing", "discovering", "scanning")
               AND last_heartbeat_at < DATE_SUB(NOW(), INTERVAL ? SECOND)

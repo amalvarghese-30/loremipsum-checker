@@ -8,6 +8,7 @@
 
 namespace LoremChecker\Repository;
 
+use LoremChecker\QueryHelper;
 use PDO;
 
 class ResourceRepository
@@ -70,7 +71,7 @@ class ResourceRepository
 
         // Maintain many-to-many relationship with referencing page
         if ($pageResultId && $resourceId) {
-            $linkStmt = $this->db->prepare('
+            $linkStmt = QueryHelper::prepare($this->db, '
                 INSERT IGNORE INTO page_resource_relations (scan_id, page_result_id, resource_id, created_at)
                 VALUES (?, ?, ?, NOW())
             ');
@@ -82,7 +83,7 @@ class ResourceRepository
 
     public function markCompleted(int $resourceId, array $data): bool
     {
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             UPDATE scan_resources
             SET content_type = ?,
                 http_status = ?,
@@ -106,7 +107,7 @@ class ResourceRepository
 
     public function markFailed(int $resourceId, string $error): bool
     {
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             UPDATE scan_resources
             SET processing_status = "failed",
                 error_message = ?,

@@ -19,6 +19,7 @@ $config = require_once BASE_DIR . '/config.php';
 
 // Include core modules
 require_once BASE_DIR . '/includes/database.php';
+require_once BASE_DIR . '/includes/QueryHelper.php';
 require_once BASE_DIR . '/includes/HttpClient.php';
 require_once BASE_DIR . '/includes/Discovery/UrlNormalizer.php';
 require_once BASE_DIR . '/includes/Discovery/DiscoveryManager.php';

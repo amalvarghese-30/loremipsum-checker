@@ -7,6 +7,7 @@
 
 namespace LoremChecker\Repository;
 
+use LoremChecker\QueryHelper;
 use PDO;
 
 class RuleRepository
@@ -47,7 +48,7 @@ class RuleRepository
 
     public function updateRule(int $id, array $rule): bool
     {
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             UPDATE detection_rules
             SET rule_name = ?,
                 pattern = ?,
@@ -76,7 +77,7 @@ class RuleRepository
 
     public function toggleRule(int $id, bool $enabled): bool
     {
-        $stmt = $this->db->prepare('UPDATE detection_rules SET enabled = ?, updated_at = NOW() WHERE id = ?');
+        $stmt = QueryHelper::prepare($this->db, 'UPDATE detection_rules SET enabled = ?, updated_at = NOW() WHERE id = ?');
         return $stmt->execute([$enabled ? 1 : 0, $id]);
     }
 
@@ -88,7 +89,7 @@ class RuleRepository
 
     public function addRule(array $rule): int
     {
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             INSERT INTO detection_rules (
                 rule_name, pattern, detection_category, enabled,
                 case_sensitive, severity, confidence, source_types,

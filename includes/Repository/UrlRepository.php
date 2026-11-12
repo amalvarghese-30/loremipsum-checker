@@ -8,6 +8,7 @@
 
 namespace LoremChecker\Repository;
 
+use LoremChecker\QueryHelper;
 use PDO;
 
 class UrlRepository
@@ -33,14 +34,14 @@ class UrlRepository
         }
 
         $insertedCount = 0;
-        $urlInsertStmt = $this->db->prepare('
+        $urlInsertStmt = QueryHelper::prepare($this->db, '
             INSERT IGNORE INTO discovered_urls (
                 scan_id, original_url, normalized_url, url_hash, domain,
                 discovery_source, crawl_depth, status, discovered_at
             ) VALUES (?, ?, ?, ?, ?, ?, ?, "pending", NOW())
         ');
 
-        $sourceInsertStmt = $this->db->prepare('
+        $sourceInsertStmt = QueryHelper::prepare($this->db, '
             INSERT INTO url_discovery_sources (
                 discovered_url_id, scan_id, source_type, source_url, crawl_depth, discovered_at
             ) VALUES (?, ?, ?, ?, ?, NOW())
@@ -106,7 +107,7 @@ class UrlRepository
      */
     public function fetchPendingBatch(int $scanId, int $limit = 50): array
     {
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             SELECT id, original_url, normalized_url, domain, crawl_depth, retry_count, attempt_count
             FROM discovered_urls
             WHERE scan_id = ?
@@ -125,7 +126,7 @@ class UrlRepository
 
     public function markStatus(int $urlId, string $status, ?string $finalUrl = null, ?string $lastError = null): bool
     {
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             UPDATE discovered_urls
             SET status = ?,
                 final_url = COALESCE(?, final_url),
@@ -138,7 +139,7 @@ class UrlRepository
 
     public function scheduleRetry(int $urlId, string $lastError, int $delaySeconds = 5): bool
     {
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             UPDATE discovered_urls
             SET retry_count = retry_count + 1,
                 attempt_count = attempt_count + 1,

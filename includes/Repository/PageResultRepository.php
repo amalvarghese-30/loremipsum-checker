@@ -7,6 +7,7 @@
 
 namespace LoremChecker\Repository;
 
+use LoremChecker\QueryHelper;
 use PDO;
 
 class PageResultRepository
@@ -20,7 +21,7 @@ class PageResultRepository
 
     public function saveResult(array $data): int
     {
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             INSERT INTO page_results (
                 scan_id, discovered_url_id, requested_url, final_url,
                 http_status, content_type, processing_status, audit_status,

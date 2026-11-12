@@ -31,10 +31,16 @@ class Database
 
         self::loadEnv();
 
-        $driver = strtolower(getenv('DB_DRIVER') ?: 'mysql');
+        $driver = strtolower(getenv('DB_DRIVER') ?: 'sqlite');
 
         if ($driver === 'sqlite') {
-            $sqlitePath = getenv('DB_SQLITE_PATH') ?: (dirname(__DIR__) . '/database/lorem_ipsum_checker.sqlite');
+            $rawPath = getenv('DB_SQLITE_PATH') ?: 'database/lorem_ipsum_checker.sqlite';
+            // Resolve relative paths reliably against project root
+            if (!preg_match('/^([a-zA-Z]:[\\\\\/]|\/)/', $rawPath)) {
+                $sqlitePath = dirname(__DIR__) . '/' . ltrim($rawPath, '/\\');
+            } else {
+                $sqlitePath = $rawPath;
+            }
             $dir = dirname($sqlitePath);
             if (!is_dir($dir)) {
                 @mkdir($dir, 0755, true);

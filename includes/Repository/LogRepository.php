@@ -7,6 +7,7 @@
 
 namespace LoremChecker\Repository;
 
+use LoremChecker\QueryHelper;
 use PDO;
 
 class LogRepository
@@ -27,7 +28,7 @@ class LogRepository
         ?string $url = null,
         ?array $metadata = null
     ): void {
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             INSERT INTO scan_logs (
                 scan_id, project_id, event_type, log_level, message,
                 url, metadata_json, created_at

@@ -8,6 +8,7 @@
 
 namespace LoremChecker\Repository;
 
+use LoremChecker\QueryHelper;
 use PDO;
 
 class FindingRepository
@@ -28,7 +29,7 @@ class FindingRepository
             return 0;
         }
 
-        $stmt = $this->db->prepare('
+        $stmt = QueryHelper::prepare($this->db, '
             INSERT INTO findings (
                 scan_id, page_result_id, resource_id, page_url, resource_url,
                 resource_type, matched_text, surrounding_context, html_element,

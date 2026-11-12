@@ -6,6 +6,7 @@
 declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/includes/database.php';
+require_once dirname(__DIR__) . '/includes/QueryHelper.php';
 require_once dirname(__DIR__) . '/includes/Repository/ProjectRepository.php';
 require_once dirname(__DIR__) . '/includes/Repository/ScanRepository.php';
 require_once dirname(__DIR__) . '/includes/Repository/UrlRepository.php';
@@ -300,6 +301,34 @@ class RepositoryIntegrationTest
 
         $rules = $ruleRepo->getActiveRules();
         $this->assertTrue(count($rules) >= 1, 'Active rules queried successfully');
+
+        // 7. Test Heartbeat & Status update (NOW() compatibility)
+        $hbOk = $scanRepo->updateHeartbeat($scanId, 1234);
+        $this->assertTrue($hbOk, 'Heartbeat updated using QueryHelper NOW()');
+
+        $stOk = $scanRepo->updateStatus($scanId, 'scanning');
+        $this->assertTrue($stOk, 'Scan status updated');
+
+        // 8. Test Retry Scheduling (DATE_ADD compatibility)
+        $retryOk = $urlRepo->scheduleRetry(1, 'Temporary Timeout', 10);
+        $this->assertTrue($retryOk, 'URL retry scheduled with future timestamp');
+
+        // 9. Test Stale Scans Detection (DATE_SUB compatibility)
+        $staleScans = $scanRepo->getStaleScans(300);
+        $this->assertTrue(is_array($staleScans), 'Stale scans queried successfully');
+
+        // 10. Test Scan Completion & Elapsed Time (TIMESTAMPDIFF compatibility)
+        $compOk = $scanRepo->completeScan($scanId);
+        $this->assertTrue($compOk, 'Scan completed and elapsed time calculated');
+
+        // 11. Test URL status transition with IF() / CASE expression
+        $markOk = $urlRepo->markStatus(1, 'completed', 'https://example.com/page1');
+        $this->assertTrue($markOk, 'URL marked completed using compatible IF/CASE expression');
+
+        // 12. Test Logging with NOW(3)
+        $logRepo->log($scanId, $projId, 'INFO', 'Test log message', 'test');
+        $logs = $logRepo->getLogs($scanId);
+        $this->assertTrue(count($logs) >= 1, 'Log entry persisted with NOW(3) compatibility');
     }
 
     private function assertTrue(bool $condition, string $message): void
