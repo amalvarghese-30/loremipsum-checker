@@ -106,8 +106,49 @@ class ScanScheduler
             // 2. Fetch next batch of pending URLs
             $batch = $this->urlRepo->fetchPendingBatch($scanId, $batchSize);
             if (empty($batch)) {
-                // All pending URLs are done!
-                break;
+                // Safeguard against premature completion (e.g. Scan 5 issue):
+                // Verify whether any unfinished URLs remain in pending, queued, processing, or retry_wait.
+                $counts     = $this->urlRepo->getCountsByStatus($scanId);
+                $pending    = ($counts['pending'] ?? 0) + ($counts['queued'] ?? 0);
+                $processing = $counts['processing'] ?? 0;
+                $retryWait  = $counts['retry_wait'] ?? 0;
+                $unfinished = $pending + $processing + $retryWait;
+
+                if ($unfinished === 0) {
+                    // All discovered URLs have reached terminal states (completed, failed, etc.)
+                    break;
+                }
+
+                // If only retry_wait URLs remain, wait for them to mature rather than completing
+                if ($retryWait > 0 && $pending === 0 && $processing === 0) {
+                    $this->logRepo->log(
+                        $scanId,
+                        $projectId,
+                        'INFO',
+                        "Waiting for {$retryWait} retry_wait URL(s) to become eligible for next attempt...",
+                        'scheduler'
+                    );
+                    sleep(2);
+                    continue;
+                }
+
+                // If dangling processing URLs exist with no active work, reset them to pending
+                if ($processing > 0 && $pending === 0 && $retryWait === 0) {
+                    $reset = $this->urlRepo->resetProcessingToPending($scanId);
+                    if ($reset > 0) {
+                        $this->logRepo->log(
+                            $scanId,
+                            $projectId,
+                            'WARNING',
+                            "Recovered {$reset} dangling processing URL(s) back to pending",
+                            'recovery'
+                        );
+                        continue;
+                    }
+                }
+
+                sleep(1);
+                continue;
             }
 
             // Mark batch as 'processing'
@@ -149,18 +190,32 @@ class ScanScheduler
 
         // 1. Evaluate technical failures
         if ($errorType !== null || ($httpStatus !== null && $httpStatus >= 400)) {
-            // Check if retryable
-            $retryableCodes = $this->config['fetching']['retryable_http_codes'] ?? [408, 425, 429, 500, 502, 503, 504];
+            // Check if retryable using improved HttpClient classification & response metadata
+            $curlErrno      = (int)($response['curl_errno'] ?? 0);
+            $isRetryable    = !empty($response['is_retryable']) || HttpClient::isRetryable($errorType, $httpStatus, $curlErrno);
             $maxRetries     = (int)($this->config['fetching']['max_retries'] ?? 3);
             $currentRetries = (int)($urlRecord['retry_count'] ?? 0);
 
-            if (($errorType === 'timeout' || in_array($httpStatus, $retryableCodes, true)) && $currentRetries < $maxRetries) {
-                // Exponential backoff with jitter: 2^(retries) * base_delay + jitter
-                $baseDelay = (int)($this->config['fetching']['retry_base_delay'] ?? 2);
-                $delaySec  = min(60, pow(2, $currentRetries) * $baseDelay + rand(0, 2));
+            if ($isRetryable && $currentRetries < $maxRetries) {
+                $maxDelay = (int)($this->config['fetching']['max_retry_delay'] ?? 60);
+                $raDelay  = HttpClient::parseRetryAfter($response['headers']['retry-after'] ?? null, $maxDelay);
+
+                if ($raDelay > 0) {
+                    $delaySec = $raDelay;
+                } else {
+                    $baseDelay = (int)($this->config['fetching']['retry_base_delay'] ?? 2);
+                    $delaySec  = min($maxDelay, (int)(pow(2, $currentRetries) * $baseDelay + rand(0, 2)));
+                }
 
                 $this->urlRepo->scheduleRetry($urlId, $errorMsg ?: "HTTP {$httpStatus}", $delaySec);
-                $this->logRepo->log($scanId, $projectId, 'WARNING', "Scheduled retry ({$currentRetries}/{$maxRetries}) in {$delaySec}s on {$url}: {$errorMsg}", 'fetch', $url);
+                $this->logRepo->log(
+                    $scanId,
+                    $projectId,
+                    'WARNING',
+                    "Scheduled retry (" . ($currentRetries + 1) . "/{$maxRetries}) in {$delaySec}s on {$url}: {$errorMsg}",
+                    'fetch',
+                    $url
+                );
                 return;
             }
 
@@ -190,8 +245,29 @@ class ScanScheduler
                 ]);
                 $this->scanRepo->recordPageResult($scanId, $pStatus, 0);
                 $this->db->commit();
-            } catch (\Exception $e) {
-                $this->db->rollBack();
+            } catch (\Throwable $e) {
+                if ($this->db->inTransaction()) {
+                    $this->db->rollBack();
+                }
+                $this->logRepo->log(
+                    $scanId,
+                    $projectId,
+                    'ERROR',
+                    "Database write error on failed page [ID: {$urlId}, URL: {$url}]: " . $e->getMessage(),
+                    'db',
+                    $url
+                );
+
+                // RECOVERY: URL must not remain in 'processing' state!
+                try {
+                    $this->urlRepo->markStatus($urlId, 'failed', $finalUrl, "DB write error: " . $e->getMessage());
+                } catch (\Throwable $recoveryEx) {
+                    throw new \RuntimeException(
+                        "Critical DB failure: could not mark URL {$urlId} failed after transaction rollback: " . $e->getMessage(),
+                        0,
+                        $e
+                    );
+                }
             }
 
             $this->logRepo->log($scanId, $projectId, 'ERROR', "Failed [{$httpStatus}]: {$url} - {$errorMsg}", 'fetch', $url);
@@ -255,8 +331,8 @@ class ScanScheduler
                 'retry_count'       => (int)($urlRecord['retry_count'] ?? 0),
                 'error_type'        => null,
                 'error_message'     => null,
-                'page_title'        => $extracted['page_title'],
-                'word_count'        => $extracted['word_count'],
+                'page_title'        => $extracted['page_title'] ?? null,
+                'word_count'        => $extracted['word_count'] ?? null,
                 'has_lorem_ipsum'   => $hasLorem ? 1 : 0,
                 'content_hash'      => $contentHash,
                 'rendered_with_js'  => $renderedWithJs ? 1 : 0,
@@ -275,9 +351,37 @@ class ScanScheduler
                 0 // Resource findings recorded separately in inspectDiscoveredResources
             );
             $this->db->commit();
-        } catch (\Exception $e) {
-            $this->db->rollBack();
-            $this->logRepo->log($scanId, $projectId, 'ERROR', "Database write error on {$url}: " . $e->getMessage(), 'db');
+        } catch (\Throwable $e) {
+            if ($this->db->inTransaction()) {
+                $this->db->rollBack();
+            }
+            $this->logRepo->log(
+                $scanId,
+                $projectId,
+                'ERROR',
+                "Database write error on page [ID: {$urlId}, URL: {$url}]: " . $e->getMessage(),
+                'db',
+                $url
+            );
+
+            // RECOVERY: URL must not remain trapped in 'processing' status!
+            // If retry attempts remain, schedule retry; otherwise mark failed.
+            $maxRetries     = (int)($this->config['fetching']['max_retries'] ?? 3);
+            $currentRetries = (int)($urlRecord['retry_count'] ?? 0);
+
+            try {
+                if ($currentRetries < $maxRetries) {
+                    $this->urlRepo->scheduleRetry($urlId, "DB write error: " . $e->getMessage(), 5);
+                } else {
+                    $this->urlRepo->markStatus($urlId, 'failed', $finalUrl, "DB write error: " . $e->getMessage());
+                }
+            } catch (\Throwable $recoveryEx) {
+                throw new \RuntimeException(
+                    "Critical DB failure: could not transition URL {$urlId} out of processing after transaction rollback: " . $e->getMessage(),
+                    0,
+                    $e
+                );
+            }
             return;
         }
 

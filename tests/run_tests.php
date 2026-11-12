@@ -13,17 +13,21 @@ require_once __DIR__ . '/DetectionEngineTest.php';
 require_once __DIR__ . '/HtmlContentExtractorTest.php';
 require_once __DIR__ . '/AuditModulesTest.php';
 require_once __DIR__ . '/RepositoryIntegrationTest.php';
+require_once __DIR__ . '/ScanTransactionRecoveryTest.php';
+require_once __DIR__ . '/HttpClientRetryTest.php';
 
 echo "========================================================\n";
 echo "       LOREM IPSUM CHECKER - AUTOMATED TEST SUITE        \n";
 echo "========================================================\n\n";
 
 $tests = [
-    'UrlNormalizerTest'        => new UrlNormalizerTest(),
-    'DetectionEngineTest'      => new DetectionEngineTest(),
-    'HtmlContentExtractorTest' => new HtmlContentExtractorTest(),
-    'AuditModulesTest'         => new AuditModulesTest(),
-    'RepositoryIntegrationTest'=> new RepositoryIntegrationTest(),
+    'UrlNormalizerTest'            => new UrlNormalizerTest(),
+    'DetectionEngineTest'          => new DetectionEngineTest(),
+    'HtmlContentExtractorTest'     => new HtmlContentExtractorTest(),
+    'AuditModulesTest'             => new AuditModulesTest(),
+    'RepositoryIntegrationTest'    => new RepositoryIntegrationTest(),
+    'ScanTransactionRecoveryTest'  => new ScanTransactionRecoveryTest(),
+    'HttpClientRetryTest'          => new HttpClientRetryTest(),
 ];
 
 $passedSuites = 0;

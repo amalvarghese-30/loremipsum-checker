@@ -23,21 +23,22 @@ class HttpClient
     private const DEFAULT_UA = 'LoremIpsumChecker/2.0 (Internal Content Audit Tool)';
 
     // HTTP codes that are temporary failures worth retrying
-    private const RETRYABLE_CODES = [408, 425, 429, 500, 502, 503, 504];
+    public const RETRYABLE_CODES = [408, 425, 429, 500, 502, 503, 504];
 
     public function __construct(array $config = [])
     {
         $this->config = array_merge([
-            'connection_timeout'  => 10,
-            'request_timeout'     => 30,
-            'max_redirects'       => 10,
-            'verify_ssl'          => false,
-            'max_response_size'   => 10485760, // 10 MB
-            'max_retries'         => 3,
-            'retry_base_delay'    => 2,
-            'max_retry_delay'     => 60,
-            'request_delay'       => 1,        // seconds between same-domain requests
-            'user_agent'          => self::DEFAULT_UA,
+            'connection_timeout'     => 10,
+            'request_timeout'        => 30,
+            'max_redirects'          => 10,
+            'verify_ssl'             => false,
+            'max_response_size'      => 10485760, // 10 MB
+            'max_retries'            => 3,
+            'retry_base_delay'       => 2,
+            'max_retry_delay'        => 60,
+            'request_delay'          => 1,        // seconds between same-domain requests
+            'per_domain_concurrency' => 2,        // max parallel connections per domain in fetchMulti
+            'user_agent'             => self::DEFAULT_UA,
         ], $config);
     }
 
@@ -57,7 +58,9 @@ class HttpClient
      *   duration_ms: int,
      *   response_size: int,
      *   error_type: string|null,
-     *   error_message: string|null
+     *   error_message: string|null,
+     *   curl_errno: int,
+     *   is_retryable: bool
      * }
      */
     public function fetch(string $url, array $options = []): array
@@ -78,36 +81,30 @@ class HttpClient
             $result = $this->doRequest($url, $opts);
             $this->recordDomainRequest($url);
 
-            // Classify and decide whether to retry
-            $status = $result['http_status'];
-
-            if ($result['error_type'] === 'curl_error' || $result['error_type'] === 'timeout') {
-                if ($attempt < $maxRetries) {
-                    $delay = $this->calcRetryDelay($attempt, null);
-                    sleep($delay);
-                    continue;
-                }
-            }
-
-            if ($status !== null && in_array($status, self::RETRYABLE_CODES, true)) {
-                if ($attempt < $maxRetries) {
-                    $retryAfter = $result['headers']['retry-after'] ?? null;
-                    $delay = $this->calcRetryDelay($attempt, $retryAfter);
-                    sleep($delay);
-                    continue;
-                }
-            }
-
-            // Classify the response error_type properly
+            // Classify response
             $result = $this->classifyResponse($result);
+
+            // Check if retry eligible
+            if (!empty($result['is_retryable']) && $attempt < $maxRetries) {
+                $retryAfter = $result['headers']['retry-after'] ?? null;
+                $delay = $this->calcRetryDelay($attempt, $retryAfter);
+                if ($delay > 0) {
+                    sleep($delay);
+                }
+                continue;
+            }
+
             return $result;
         }
 
-        return $this->errorResponse($url, 'max_retries_exceeded', 'Maximum retry attempts exceeded');
+        return $this->errorResponse($url, 'max_retries_exceeded', 'Maximum retry attempts exceeded', 0, null, [], false);
     }
 
     /**
      * Fetch multiple URLs concurrently using cURL Multi.
+     *
+     * Hardened against multi execution failures, select -1 busy-loops,
+     * and leaks by enforcing per-domain concurrency limits and guaranteed cleanup.
      *
      * @param array<string>  $urls
      * @param callable       $onComplete  Called with (url, response) for each completed request
@@ -115,118 +112,252 @@ class HttpClient
      */
     public function fetchMulti(array $urls, callable $onComplete, array $options = []): void
     {
-        $concurrency = (int)($options['concurrency'] ?? 5);
-        $queue       = $urls;
-        $running     = [];   // handle_id => ['url' => ..., 'started_at' => ...]
-        $headerBufs  = [];   // handle_id => header string buffer
-        $bodyBufs    = [];   // handle_id => body string
+        $concurrency           = (int)($options['concurrency'] ?? $this->config['concurrency'] ?? 5);
+        $perDomainLimit        = (int)($options['per_domain_concurrency'] ?? $this->config['per_domain_concurrency'] ?? 2);
+        $queue                 = array_values($urls);
+        $running               = [];   // handle_id => ['url' => ..., 'host' => ..., 'started_at' => ..., 'ch' => ...]
+        $headerBufs            = [];   // handle_id => header string buffer
+        $bodyBufs              = [];   // handle_id => body string
+        $isOversized           = [];   // handle_id => bool
+        $activePerDomain       = [];   // host => count of active handles
 
         $mh = curl_multi_init();
+        if (!$mh) {
+            throw new \RuntimeException('Failed to initialize cURL Multi handle');
+        }
 
-        $addNext = function () use (&$queue, &$running, &$headerBufs, &$bodyBufs, $mh, $options) {
+        // Helper to launch next eligible URL from queue respecting per-domain concurrency
+        $addNext = function () use (
+            &$queue,
+            &$running,
+            &$headerBufs,
+            &$bodyBufs,
+            &$isOversized,
+            &$activePerDomain,
+            $mh,
+            $options,
+            $perDomainLimit,
+            $onComplete
+        ): bool {
             if (empty($queue)) {
-                return;
+                return false;
             }
-            $url = array_shift($queue);
-            $ch  = $this->buildHandle($url, $options);
-            $id  = (int)$ch;
 
-            $headerBufs[$id] = '';
-            $bodyBufs[$id]   = '';
+            // Find first URL whose domain is under the per-domain concurrency limit
+            $selectedIdx = null;
+            $selectedHost = null;
 
-            // Capture headers via callback
+            foreach ($queue as $idx => $candUrl) {
+                $host = strtolower(parse_url($candUrl, PHP_URL_HOST) ?? '');
+                $currentActive = $activePerDomain[$host] ?? 0;
+                if ($currentActive < $perDomainLimit) {
+                    $selectedIdx  = $idx;
+                    $selectedHost = $host;
+                    break;
+                }
+            }
+
+            if ($selectedIdx === null) {
+                // All candidate URLs in queue currently at max domain concurrency; wait for an active one to finish
+                return false;
+            }
+
+            $url = $queue[$selectedIdx];
+            array_splice($queue, $selectedIdx, 1);
+
+            $ch = $this->buildHandle($url, $options);
+            $id = (int)$ch;
+
+            $headerBufs[$id]  = '';
+            $bodyBufs[$id]    = '';
+            $isOversized[$id] = false;
+
+            // Capture headers
             curl_setopt($ch, CURLOPT_HEADERFUNCTION, function ($ch, $header) use ($id, &$headerBufs) {
                 $headerBufs[$id] .= $header;
                 return strlen($header);
             });
 
-            curl_setopt($ch, CURLOPT_WRITEFUNCTION, function ($ch, $data) use ($id, &$bodyBufs, $options) {
-                $maxSize = (int)($options['max_response_size'] ?? $this->config['max_response_size']);
-                if (strlen($bodyBufs[$id]) >= $maxSize) {
-                    return -1; // Signal cURL to abort
+            // Enforce response size limit
+            $maxSize = (int)($options['max_response_size'] ?? $this->config['max_response_size']);
+            curl_setopt($ch, CURLOPT_WRITEFUNCTION, function ($ch, $data) use ($id, &$bodyBufs, &$isOversized, $maxSize) {
+                if (strlen($bodyBufs[$id]) + strlen($data) > $maxSize) {
+                    $isOversized[$id] = true;
+                    return -1; // Abort
                 }
                 $bodyBufs[$id] .= $data;
                 return strlen($data);
             });
 
-            curl_multi_add_handle($mh, $ch);
-            $running[$id] = ['url' => $url, 'ch' => $ch, 'started_at' => microtime(true)];
-        };
+            // Increment per-domain count
+            $activePerDomain[$selectedHost] = ($activePerDomain[$selectedHost] ?? 0) + 1;
 
-        // Prime the queue
-        for ($i = 0; $i < $concurrency && !empty($queue); $i++) {
-            $addNext();
-        }
-
-        do {
-            $status = curl_multi_exec($mh, $active);
-            curl_multi_select($mh, 0.1);
-
-            while ($info = curl_multi_info_read($mh)) {
-                $ch = $info['handle'];
-                $id = (int)$ch;
-
-                if (!isset($running[$id])) {
-                    curl_multi_remove_handle($mh, $ch);
-                    curl_close($ch);
-                    continue;
-                }
-
-                $meta       = $running[$id];
-                $url        = $meta['url'];
-                $durationMs = (int)((microtime(true) - $meta['started_at']) * 1000);
-
-                $curlErr  = curl_error($ch);
-                $httpCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
-                $finalUrl = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) ?: $url;
-
-                $rawHeaders   = $headerBufs[$id] ?? '';
-                $parsedHeaders = $this->parseResponseHeaders($rawHeaders);
-                $body          = $bodyBufs[$id] ?? '';
-                $contentType   = $parsedHeaders['content-type'] ?? '';
-                $detectedType  = $this->detectContentType($contentType, $url, $body);
-
-                if ($curlErr) {
-                    $errType = str_contains($curlErr, 'timed out') ? 'timeout' : 'curl_error';
-                    $response = $this->errorResponse($url, $errType, "cURL: {$curlErr}");
-                } else {
-                    $response = [
-                        'requested_url' => $url,
-                        'final_url'     => $finalUrl,
-                        'http_status'   => $httpCode,
-                        'content_type'  => $detectedType,
-                        'content'       => $body,
-                        'headers'       => $parsedHeaders,
-                        'redirect_chain'=> [],
-                        'duration_ms'   => $durationMs,
-                        'response_size' => strlen($body),
-                        'error_type'    => null,
-                        'error_message' => null,
-                    ];
-                    $response = $this->classifyResponse($response);
-                }
-
-                $onComplete($url, $response);
-
-                // Clean up
-                curl_multi_remove_handle($mh, $ch);
+            $addResult = curl_multi_add_handle($mh, $ch);
+            if ($addResult !== CURLM_OK) {
+                // Registration failed: clean up immediately and do not add to running
                 curl_close($ch);
-                unset($running[$id], $headerBufs[$id], $bodyBufs[$id]);
-
-                // Add next from queue
-                $addNext();
+                unset($headerBufs[$id], $bodyBufs[$id], $isOversized[$id]);
+                $activePerDomain[$selectedHost]--;
+                if ($activePerDomain[$selectedHost] <= 0) {
+                    unset($activePerDomain[$selectedHost]);
+                }
+                $errStr = curl_multi_strerror($addResult) ?: "Code {$addResult}";
+                $onComplete($url, $this->errorResponse(
+                    $url,
+                    'curl_error',
+                    "curl_multi_add_handle failed: {$errStr}",
+                    $addResult,
+                    null,
+                    [],
+                    false
+                ));
+                return false;
             }
 
-        } while ($active > 0 && $status === CURLM_OK);
+            $running[$id] = [
+                'url'        => $url,
+                'host'       => $selectedHost,
+                'ch'         => $ch,
+                'started_at' => microtime(true),
+            ];
+            return true;
+        };
 
-        curl_multi_close($mh);
+        try {
+            // Prime the multi queue
+            while (count($running) < $concurrency && !empty($queue)) {
+                if (!$addNext()) {
+                    break;
+                }
+            }
+
+            $active = 0;
+            do {
+                do {
+                    $mrc = curl_multi_exec($mh, $active);
+                } while ($mrc === CURLM_CALL_MULTI_PERFORM);
+
+                if ($mrc !== CURLM_OK && $mrc !== CURLM_CALL_MULTI_PERFORM) {
+                    $errStr = curl_multi_strerror($mrc);
+                    throw new \RuntimeException("curl_multi_exec failed: {$errStr} (code {$mrc})");
+                }
+
+                while ($info = curl_multi_info_read($mh)) {
+                    $ch = $info['handle'];
+                    $id = (int)$ch;
+
+                    if (!isset($running[$id])) {
+                        curl_multi_remove_handle($mh, $ch);
+                        curl_close($ch);
+                        continue;
+                    }
+
+                    $meta       = $running[$id];
+                    $url        = $meta['url'];
+                    $host       = $meta['host'];
+                    $durationMs = (int)((microtime(true) - $meta['started_at']) * 1000);
+
+                    $curlErr   = curl_error($ch);
+                    $curlErrno = curl_errno($ch);
+                    $httpCode  = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                    $finalUrl  = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) ?: $url;
+
+                    $rawHeaders    = $headerBufs[$id] ?? '';
+                    $parsedHeaders = $this->parseResponseHeaders($rawHeaders);
+                    $body          = $bodyBufs[$id] ?? '';
+                    $contentType   = $parsedHeaders['content-type'] ?? '';
+                    $detectedType  = $this->detectContentType($contentType, $url, $body);
+
+                    if (!empty($isOversized[$id])) {
+                        $maxSize = (int)($options['max_response_size'] ?? $this->config['max_response_size']);
+                        $response = $this->errorResponse(
+                            $url,
+                            'response_too_large',
+                            "Response size exceeded limit ({$maxSize} bytes)",
+                            $curlErrno,
+                            $httpCode ?: null,
+                            $parsedHeaders,
+                            false
+                        );
+                    } elseif ($curlErr) {
+                        $errType  = self::classifyCurlError($curlErrno, $curlErr);
+                        $response = $this->errorResponse(
+                            $url,
+                            $errType,
+                            "cURL: {$curlErr}",
+                            $curlErrno,
+                            $httpCode ?: null,
+                            $parsedHeaders
+                        );
+                    } else {
+                        $response = [
+                            'requested_url' => $url,
+                            'final_url'     => $finalUrl,
+                            'http_status'   => $httpCode,
+                            'content_type'  => $detectedType,
+                            'content'       => $body,
+                            'headers'       => $parsedHeaders,
+                            'redirect_chain'=> [],
+                            'duration_ms'   => $durationMs,
+                            'response_size' => strlen($body),
+                            'error_type'    => null,
+                            'error_message' => null,
+                            'curl_errno'    => 0,
+                            'is_retryable'  => false,
+                        ];
+                        $response = $this->classifyResponse($response);
+                    }
+
+                    $onComplete($url, $response);
+
+                    // Clean up handle
+                    curl_multi_remove_handle($mh, $ch);
+                    curl_close($ch);
+
+                    if (isset($activePerDomain[$host])) {
+                        $activePerDomain[$host]--;
+                        if ($activePerDomain[$host] <= 0) {
+                            unset($activePerDomain[$host]);
+                        }
+                    }
+
+                    unset($running[$id], $headerBufs[$id], $bodyBufs[$id], $isOversized[$id]);
+
+                    // Refill slots up to concurrency limit
+                    while (count($running) < $concurrency && !empty($queue)) {
+                        if (!$addNext()) {
+                            break;
+                        }
+                    }
+                }
+
+                if ($active > 0) {
+                    $sel = curl_multi_select($mh, 0.1);
+                    if ($sel === -1) {
+                        // Avoid busy-loop if select returns -1
+                        usleep(15000);
+                    }
+                }
+
+            } while ($active > 0 || !empty($queue));
+
+        } finally {
+            // Guaranteed cleanup of any remaining handles
+            foreach ($running as $id => $meta) {
+                if (isset($meta['ch']) && (is_resource($meta['ch']) || $meta['ch'] instanceof \CurlHandle)) {
+                    @curl_multi_remove_handle($mh, $meta['ch']);
+                    @curl_close($meta['ch']);
+                }
+            }
+            @curl_multi_close($mh);
+        }
     }
 
     // ── Private implementation ────────────────────────────────────────────────
 
     private function doRequest(string $url, array $opts): array
     {
-        $startTime    = microtime(true);
+        $startTime     = microtime(true);
         $redirectChain = [];
 
         $ch = $this->buildHandle($url, $opts);
@@ -239,20 +370,23 @@ class HttpClient
         });
 
         // Enforce response size limit
-        $maxSize = (int)($opts['max_response_size'] ?? $this->config['max_response_size']);
-        $body    = '';
-        curl_setopt($ch, CURLOPT_WRITEFUNCTION, function ($ch, $data) use (&$body, $maxSize) {
-            if (strlen($body) >= $maxSize) {
+        $maxSize     = (int)($opts['max_response_size'] ?? $this->config['max_response_size']);
+        $body        = '';
+        $isOversized = false;
+        curl_setopt($ch, CURLOPT_WRITEFUNCTION, function ($ch, $data) use (&$body, &$isOversized, $maxSize) {
+            if (strlen($body) + strlen($data) > $maxSize) {
+                $isOversized = true;
                 return -1; // Abort
             }
             $body .= $data;
             return strlen($data);
         });
 
-        $rawBody  = curl_exec($ch);
-        $curlErr  = curl_error($ch);
-        $httpCode = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $finalUrl = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) ?: $url;
+        $rawBody   = curl_exec($ch);
+        $curlErr   = curl_error($ch);
+        $curlErrno = curl_errno($ch);
+        $httpCode  = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $finalUrl  = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) ?: $url;
         curl_close($ch);
 
         $durationMs    = (int)((microtime(true) - $startTime) * 1000);
@@ -260,9 +394,28 @@ class HttpClient
         $contentType   = $parsedHeaders['content-type'] ?? '';
         $detectedType  = $this->detectContentType($contentType, $url, $body);
 
+        if ($isOversized) {
+            return $this->errorResponse(
+                $url,
+                'response_too_large',
+                "Response size exceeded limit ({$maxSize} bytes)",
+                $curlErrno,
+                $httpCode ?: null,
+                $parsedHeaders,
+                false
+            );
+        }
+
         if ($curlErr) {
-            $errType = str_contains($curlErr, 'timed out') ? 'timeout' : 'curl_error';
-            return $this->errorResponse($url, $errType, "cURL: {$curlErr}");
+            $errType = self::classifyCurlError($curlErrno, $curlErr);
+            return $this->errorResponse(
+                $url,
+                $errType,
+                "cURL: {$curlErr}",
+                $curlErrno,
+                $httpCode ?: null,
+                $parsedHeaders
+            );
         }
 
         return [
@@ -277,6 +430,8 @@ class HttpClient
             'response_size' => strlen($body),
             'error_type'    => null,
             'error_message' => null,
+            'curl_errno'    => 0,
+            'is_retryable'  => false,
         ];
     }
 
@@ -302,6 +457,7 @@ class HttpClient
             CURLOPT_USERAGENT      => $ua,
             CURLOPT_ENCODING       => 'gzip, deflate',
             CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
+            CURLOPT_IPRESOLVE      => CURL_IPRESOLVE_V4, // Force IPv4 resolution per production stability fix
             CURLOPT_HEADER         => false, // We use HEADERFUNCTION instead
             CURLOPT_HTTPHEADER     => [
                 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -313,12 +469,131 @@ class HttpClient
         return $ch;
     }
 
+    /**
+     * Classify raw cURL error numbers and messages into structured failure types.
+     */
+    public static function classifyCurlError(int $errno, string $errorMsg): string
+    {
+        switch ($errno) {
+            case CURLE_OPERATION_TIMEDOUT:
+                return 'timeout';
+            case CURLE_COULDNT_RESOLVE_HOST:
+            case CURLE_COULDNT_RESOLVE_PROXY:
+                return 'dns_error';
+            case CURLE_COULDNT_CONNECT:
+                return 'connection_error';
+            case CURLE_RECV_ERROR:
+            case CURLE_SEND_ERROR:
+            case CURLE_GOT_NOTHING:
+                return 'connection_reset';
+            case CURLE_SSL_CONNECT_ERROR:
+            case CURLE_PEER_FAILED_VERIFICATION:
+            case CURLE_SSL_CERTPROBLEM:
+            case CURLE_SSL_CIPHER:
+            case CURLE_SSL_CACERT:
+                return 'ssl_error';
+            case CURLE_URL_MALFORMAT:
+                return 'invalid_url';
+            case CURLE_UNSUPPORTED_PROTOCOL:
+                return 'unsupported_protocol';
+            case CURLE_WRITE_ERROR:
+            case CURLE_ABORTED_BY_CALLBACK:
+                return 'response_too_large';
+            default:
+                $msgLower = strtolower($errorMsg);
+                if (str_contains($msgLower, 'timed out') || str_contains($msgLower, 'timeout')) {
+                    return 'timeout';
+                }
+                if (str_contains($msgLower, 'could not resolve host') || str_contains($msgLower, 'name or service not known')) {
+                    return 'dns_error';
+                }
+                if (str_contains($msgLower, 'connection reset') || str_contains($msgLower, 'empty reply') || str_contains($msgLower, 'recv error')) {
+                    return 'connection_reset';
+                }
+                if (str_contains($msgLower, 'failed to connect') || str_contains($msgLower, 'connection refused')) {
+                    return 'connection_error';
+                }
+                if (str_contains($msgLower, 'ssl') || str_contains($msgLower, 'certificate')) {
+                    return 'ssl_error';
+                }
+                return 'curl_error';
+        }
+    }
+
+    /**
+     * Determines whether an error is transient and eligible for retry.
+     */
+    public static function isRetryable(?string $errorType, ?int $httpStatus, int $curlErrno = 0): bool
+    {
+        // 1. Explicitly NON-retryable categories
+        if ($errorType === 'response_too_large' || $errorType === 'invalid_url' || $errorType === 'unsupported_protocol' || $errorType === 'ssl_error') {
+            return false;
+        }
+
+        if (in_array($curlErrno, [
+            CURLE_URL_MALFORMAT,
+            CURLE_UNSUPPORTED_PROTOCOL,
+            CURLE_PEER_FAILED_VERIFICATION,
+            CURLE_SSL_CACERT,
+            CURLE_SSL_CERTPROBLEM,
+            CURLE_SSL_CIPHER,
+        ], true)) {
+            return false;
+        }
+
+        // 2. Retryable network/cURL errors
+        if (in_array($errorType, ['timeout', 'dns_error', 'connection_error', 'connection_reset'], true)) {
+            return true;
+        }
+
+        if (in_array($curlErrno, [
+            CURLE_OPERATION_TIMEDOUT,
+            CURLE_COULDNT_RESOLVE_HOST,
+            CURLE_COULDNT_RESOLVE_PROXY,
+            CURLE_COULDNT_CONNECT,
+            CURLE_RECV_ERROR,
+            CURLE_SEND_ERROR,
+            CURLE_GOT_NOTHING,
+        ], true)) {
+            return true;
+        }
+
+        // 3. Retryable HTTP response codes
+        if ($httpStatus !== null && in_array($httpStatus, self::RETRYABLE_CODES, true)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Parse Retry-After header supporting both integer seconds and HTTP-date format,
+     * bounded by maxDelay.
+     */
+    public static function parseRetryAfter(?string $header, int $maxDelay = 60): int
+    {
+        if ($header === null || trim($header) === '') {
+            return 0;
+        }
+        $ra = trim($header);
+        if (ctype_digit($ra)) {
+            return min((int)$ra, $maxDelay);
+        }
+        $ts = strtotime($ra);
+        if ($ts !== false) {
+            return min(max(0, $ts - time()), $maxDelay);
+        }
+        return 0;
+    }
+
     private function classifyResponse(array $response): array
     {
-        $status  = $response['http_status'];
-        $content = $response['content'] ?? '';
+        $status    = $response['http_status'];
+        $content   = $response['content'] ?? '';
+        $curlErrno = (int)($response['curl_errno'] ?? 0);
 
         if ($response['error_type'] !== null) {
+            $response['is_retryable'] = self::isRetryable($response['error_type'], $status, $curlErrno);
             return $response;
         }
 
@@ -327,26 +602,39 @@ class HttpClient
         if ($protection) {
             $response['error_type']    = 'cloudflare_blocked';
             $response['error_message'] = $protection;
+            $response['is_retryable']  = false;
             return $response;
         }
 
         if ($status === null) {
+            $response['is_retryable'] = self::isRetryable($response['error_type'], $status, $curlErrno);
             return $response;
         }
 
         if ($status === 429) {
             $response['error_type']    = 'rate_limited';
             $response['error_message'] = 'HTTP 429 - Rate Limited (Too Many Requests)';
+            $response['is_retryable']  = true;
             return $response;
         }
 
         if ($status >= 500) {
             $response['error_type']    = 'server_error';
             $response['error_message'] = "HTTP {$status} - Server Error";
+            $response['is_retryable']  = in_array($status, self::RETRYABLE_CODES, true);
             return $response;
         }
 
         if ($status >= 400) {
+            $response['error_type']    = 'http_error';
+            $response['error_message'] = "HTTP {$status}";
+            $response['is_retryable']  = in_array($status, self::RETRYABLE_CODES, true);
+            return $response;
+        }
+
+        $response['is_retryable'] = false;
+        return $response;
+    }
             $response['error_type']    = 'http_error';
             $response['error_message'] = "HTTP {$status}";
             return $response;
@@ -472,25 +760,21 @@ class HttpClient
         return $parsed;
     }
 
-    private function calcRetryDelay(int $attempt, ?string $retryAfterHeader): int
+    public function calcRetryDelay(int $attempt, ?string $retryAfterHeader): int
     {
+        $maxDelay = (int)($this->config['max_retry_delay'] ?? 60);
+
         // Respect Retry-After header if present
-        if ($retryAfterHeader !== null) {
-            $ra = trim($retryAfterHeader);
-            if (ctype_digit($ra)) {
-                return min((int)$ra, $this->config['max_retry_delay']);
-            }
-            // Could be HTTP date — parse it
-            $ts = strtotime($ra);
-            if ($ts !== false) {
-                return min(max(0, $ts - time()), $this->config['max_retry_delay']);
-            }
+        $raDelay = self::parseRetryAfter($retryAfterHeader, $maxDelay);
+        if ($raDelay > 0) {
+            return $raDelay;
         }
 
         // Exponential backoff with jitter
-        $base  = $this->config['retry_base_delay'] * (2 ** ($attempt - 1));
-        $jitter = random_int(0, (int)($base * 0.3));
-        return min($base + $jitter, $this->config['max_retry_delay']);
+        $baseDelay = (int)($this->config['retry_base_delay'] ?? 2);
+        $base      = $baseDelay * (2 ** max(0, $attempt - 1));
+        $jitter    = random_int(0, max(1, (int)($base * 0.3)));
+        return min($base + $jitter, $maxDelay);
     }
 
     private function applyDomainDelay(string $url): void
@@ -520,20 +804,33 @@ class HttpClient
         }
     }
 
-    private function errorResponse(string $url, string $errorType, string $errorMessage): array
-    {
+    public function errorResponse(
+        string $url,
+        string $errorType,
+        string $errorMessage,
+        int $curlErrno = 0,
+        ?int $httpStatus = null,
+        array $headers = [],
+        ?bool $isRetryable = null
+    ): array {
+        if ($isRetryable === null) {
+            $isRetryable = self::isRetryable($errorType, $httpStatus, $curlErrno);
+        }
+
         return [
             'requested_url'  => $url,
             'final_url'      => $url,
-            'http_status'    => null,
+            'http_status'    => $httpStatus,
             'content_type'   => 'unknown',
             'content'        => '',
-            'headers'        => [],
+            'headers'        => $headers,
             'redirect_chain' => [],
             'duration_ms'    => 0,
             'response_size'  => 0,
             'error_type'     => $errorType,
             'error_message'  => $errorMessage,
+            'curl_errno'     => $curlErrno,
+            'is_retryable'   => $isRetryable,
         ];
     }
 }

@@ -317,9 +317,10 @@ class RepositoryIntegrationTest
         $staleScans = $scanRepo->getStaleScans(300);
         $this->assertTrue(is_array($staleScans), 'Stale scans queried successfully');
 
-        // 10. Test Scan Completion & Elapsed Time (TIMESTAMPDIFF compatibility)
-        $compOk = $scanRepo->completeScan($scanId);
-        $this->assertTrue($compOk, 'Scan completed and elapsed time calculated');
+        // 10. Test Scan Completion Guard (Phase 6 requirement)
+        // With URL 1 in retry_wait and URL 2 in pending, completion MUST be rejected by DB guard!
+        $compRejected = $scanRepo->completeScan($scanId);
+        $this->assertTrue(!$compRejected, 'Scan completion correctly rejected when unfinished URLs remain in queue');
 
         // 11. Test URL status transitions (pending -> processing -> completed/failed)
         // 11a. Transition to 'processing' -> processed_at must remain NULL
@@ -352,6 +353,13 @@ class RepositoryIntegrationTest
         $u2Review = $checkStmt->fetch();
         $this->assertEquals('needs_review', $u2Review['status'], 'Status transitioned to needs_review');
         $this->assertEquals($prevTime, $u2Review['processed_at'], 'processed_at preserved when status is non-terminal');
+
+        // Set URL 2 back to terminal 'completed'
+        $urlRepo->markStatus(2, 'completed');
+
+        // 11e. Now that all URLs are in terminal states (completed & failed), completeScan MUST succeed!
+        $compOk = $scanRepo->completeScan($scanId);
+        $this->assertTrue($compOk, 'Scan completed and elapsed time calculated after all URLs reached terminal state');
 
         // 12. Test Logging with NOW(3)
         $logRepo->log($scanId, $projId, 'INFO', 'Test log message', 'test');

@@ -109,6 +109,12 @@ class ScanWorker
             $normalizer = new UrlNormalizer();
             $http       = new HttpClient($effectiveConfig['fetching'] ?? []);
 
+            // Reset any orphaned in-flight 'processing' URLs back to 'pending'
+            $resetCount = $this->urlRepo->resetProcessingToPending($scanId);
+            if ($resetCount > 0) {
+                $logFn('INFO', "Recovered {$resetCount} orphaned in-flight URL(s) back to pending", 'recovery');
+            }
+
             // ── PHASE 1: URL DISCOVERY ──────────────────────────────────────────
             // If the scan was paused and resumed, discovery may already be done
             $urlCounts = $this->urlRepo->getCountsByStatus($scanId);
@@ -169,7 +175,16 @@ class ScanWorker
 
             // ── PHASE 3: FINALIZE ────────────────────────────────────────────────
             if ($finalState === 'completed') {
-                $this->scanRepo->completeScan($scanId);
+                $compOk = $this->scanRepo->completeScan($scanId);
+                if (!$compOk) {
+                    $counts = $this->urlRepo->getCountsByStatus($scanId);
+                    $unfinished = ($counts['pending'] ?? 0) + ($counts['queued'] ?? 0) + ($counts['processing'] ?? 0) + ($counts['retry_wait'] ?? 0);
+                    $errMsg = "Database guard rejected scan completion: {$unfinished} unfinished URL(s) remain in queue (" . json_encode($counts) . ")";
+                    $logFn('ERROR', $errMsg, 'completion');
+                    $this->scanRepo->failScan($scanId, $errMsg);
+                    exit(1);
+                }
+
                 $summary = $this->scanRepo->getById($scanId);
                 $logFn('SUCCESS', sprintf(
                     'Scan completed. Discovered: %d, Processed: %d, Clean: %d, Affected: %d, Failed: %d, Total Findings: %d',
@@ -186,7 +201,7 @@ class ScanWorker
                 $logFn('WARNING', 'Worker stopped cleanly on cancellation request.', 'worker');
             }
 
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             $logFn('ERROR', 'Worker fatal exception: ' . $e->getMessage(), 'error');
             $this->scanRepo->failScan($scanId, $e->getMessage());
             exit(1);

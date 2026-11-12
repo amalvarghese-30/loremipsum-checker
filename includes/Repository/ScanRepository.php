@@ -168,6 +168,8 @@ class ScanRepository
 
     public function completeScan(int $scanId, ?int $elapsedSeconds = null): bool
     {
+        // Enforce database-level completion guard: cannot complete if any URL remains
+        // in pending, queued, processing, or retry_wait states.
         if (QueryHelper::isSqlite($this->db)) {
             $stmt = $this->db->prepare('
                 UPDATE scans
@@ -177,7 +179,13 @@ class ScanRepository
                     last_heartbeat_at = datetime("now"),
                     updated_at = datetime("now")
                 WHERE id = ?
+                  AND NOT EXISTS (
+                      SELECT 1 FROM discovered_urls
+                      WHERE scan_id = ?
+                        AND status IN (\'pending\', \'queued\', \'processing\', \'retry_wait\')
+                  )
             ');
+            $stmt->execute([$elapsedSeconds, $scanId, $scanId]);
         } else {
             $stmt = $this->db->prepare('
                 UPDATE scans
@@ -187,9 +195,15 @@ class ScanRepository
                     last_heartbeat_at = NOW(),
                     updated_at = NOW()
                 WHERE id = ?
+                  AND NOT EXISTS (
+                      SELECT 1 FROM discovered_urls
+                      WHERE scan_id = ?
+                        AND status IN (\'pending\', \'queued\', \'processing\', \'retry_wait\')
+                  )
             ');
+            $stmt->execute([$elapsedSeconds, $scanId, $scanId]);
         }
-        return $stmt->execute([$elapsedSeconds, $scanId]);
+        return $stmt->rowCount() > 0;
     }
 
     public function failScan(int $scanId, string $errorMessage): bool
