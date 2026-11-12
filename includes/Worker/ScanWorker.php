@@ -177,9 +177,41 @@ class ScanWorker
             if ($finalState === 'completed') {
                 // Perform final authoritative counter reconciliation to guarantee 100% data integrity
                 try {
-                    $this->scanRepo->reconcileCounters($scanId, true);
+                    $recResult = $this->scanRepo->reconcileCounters($scanId, true);
                 } catch (\Throwable $recEx) {
-                    $logFn('WARNING', 'Post-scan counter reconciliation note: ' . $recEx->getMessage(), 'completion');
+                    $errMsg = 'Critical post-scan counter reconciliation failure: ' . $recEx->getMessage();
+                    $logFn('ERROR', $errMsg, 'completion');
+                    $this->scanRepo->failScan($scanId, $errMsg);
+                    exit(1);
+                }
+
+                $diag = $recResult['diagnostics'] ?? [];
+                $invariantPassed   = !empty($diag['invariant_passed']) || !empty($recResult['invariant_passed']);
+                $unclassifiedCount = (int)($diag['unclassified_pages_count'] ?? 0);
+
+                if (!$invariantPassed || $unclassifiedCount > 0) {
+                    $errMsg = sprintf(
+                        'Reconciliation validation rejected completion: invariant %s, %d unclassified page(s) remain.',
+                        $invariantPassed ? 'passed' : 'FAILED',
+                        $unclassifiedCount
+                    );
+                    $logFn('ERROR', $errMsg, 'completion');
+                    $this->scanRepo->failScan($scanId, $errMsg);
+                    exit(1);
+                }
+
+                // Verify stored counters by reading back from database
+                $storedSummary = $this->scanRepo->getById($scanId);
+                $pCount = (int)($storedSummary['processed_count'] ?? 0);
+                $cCount = (int)($storedSummary['clean_count'] ?? 0);
+                $aCount = (int)($storedSummary['affected_page_count'] ?? 0);
+                $fCount = (int)($storedSummary['failed_count'] ?? 0);
+
+                if ($pCount !== ($cCount + $aCount + $fCount)) {
+                    $errMsg = "Stored counter invariant mismatch after reconciliation: processed({$pCount}) != clean({$cCount}) + affected({$aCount}) + failed({$fCount})";
+                    $logFn('ERROR', $errMsg, 'completion');
+                    $this->scanRepo->failScan($scanId, $errMsg);
+                    exit(1);
                 }
 
                 $compOk = $this->scanRepo->completeScan($scanId);
@@ -192,15 +224,16 @@ class ScanWorker
                     exit(1);
                 }
 
-                $summary = $this->scanRepo->getById($scanId);
                 $logFn('SUCCESS', sprintf(
-                    'Scan completed. Discovered: %d, Processed: %d, Clean: %d, Affected: %d, Failed: %d, Total Findings: %d',
-                    $summary['discovered_count'],
-                    $summary['processed_count'],
-                    $summary['clean_count'],
-                    $summary['affected_page_count'],
-                    $summary['failed_count'],
-                    $summary['total_findings']
+                    'Scan completed successfully. Discovered: %d, Processed: %d, Clean: %d, Affected: %d, Failed: %d, Total Findings: %d, Lorem: %d (in %d pages)',
+                    $storedSummary['discovered_count'],
+                    $pCount,
+                    $cCount,
+                    $aCount,
+                    $fCount,
+                    $storedSummary['total_findings'],
+                    $storedSummary['lorem_finding_count'] ?? 0,
+                    $storedSummary['lorem_page_count'] ?? 0
                 ), 'completion');
             } elseif ($finalState === 'paused') {
                 $logFn('WARNING', 'Worker stopped cleanly on pause request.', 'worker');

@@ -1,11 +1,45 @@
-name: Deploy to Live VPS
+name: Test and Deploy to Live VPS
 
 on:
   push:
+    branches: [ main, 'corrective/*' ]
+  pull_request:
     branches: [ main ]
 
 jobs:
+  test:
+    name: Run Automated Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo, pdo_sqlite, curl, dom, json, mbstring
+          coverage: none
+
+      - name: Validate PHP Syntax (Lint)
+        run: |
+          echo "Linting all PHP files..."
+          find . -type f -name "*.php" -not -path "*/vendor/*" -exec php -l {} +
+
+      - name: Run Complete Test Suite
+        run: |
+          set -o pipefail
+          php tests/run_tests.php > test_output.log 2>&1 || {
+            ESCAPED=$(cat test_output.log | sed ':a;N;$!ba;s/\n/%0A/g')
+            echo "::error title=Automated Test Suite Failures::$ESCAPED"
+            exit 1
+          }
+          cat test_output.log >> $GITHUB_STEP_SUMMARY
+
   deploy:
+    name: Deploy to Live VPS
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to VPS via SSH

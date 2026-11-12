@@ -102,6 +102,32 @@ class UrlRepository
     }
 
     /**
+     * Insert a single discovered URL and record its primary source.
+     *
+     * @return int The discovered_urls.id
+     */
+    public function insertDiscovered(int $scanId, string $originalUrl, string $normalizedUrl, int $depth = 0, string $source = 'unknown', ?string $sourceUrl = null): int
+    {
+        $hash = hash('sha256', $normalizedUrl);
+        $records = [
+            [
+                'url'            => $originalUrl,
+                'normalized_url' => $normalizedUrl,
+                'url_hash'       => $hash,
+                'source'         => $source,
+                'depth'          => $depth,
+                'metadata'       => ['found_on' => $sourceUrl],
+            ]
+        ];
+
+        $this->insertBatch($scanId, $records);
+
+        $findStmt = $this->db->prepare('SELECT id FROM discovered_urls WHERE scan_id = ? AND url_hash = ? ORDER BY id DESC LIMIT 1');
+        $findStmt->execute([$scanId, $hash]);
+        return (int)$findStmt->fetchColumn();
+    }
+
+    /**
      * Fetch a batch of pending/retry URLs for processing.
      * Selects only records whose next_attempt_at is NULL or in the past.
      */

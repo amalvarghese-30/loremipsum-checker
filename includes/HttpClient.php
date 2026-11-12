@@ -225,122 +225,140 @@ class HttpClient
 
         try {
             // Prime the multi queue
-            while (count($running) < $concurrency && !empty($queue)) {
+            while (!empty($queue)) {
+                if (self::isDataUri($queue[0])) {
+                    $u = array_shift($queue);
+                    $onComplete($u, $this->handleDataUri($u, $options));
+                    continue;
+                }
+                if (count($running) >= $concurrency) {
+                    break;
+                }
                 if (!$addNext()) {
                     break;
                 }
             }
 
-            $active = 0;
-            do {
+            if (!empty($running) || !empty($queue)) {
+                $active = 0;
                 do {
-                    $mrc = curl_multi_exec($mh, $active);
-                } while ($mrc === CURLM_CALL_MULTI_PERFORM);
+                    do {
+                        $mrc = curl_multi_exec($mh, $active);
+                    } while ($mrc === CURLM_CALL_MULTI_PERFORM);
 
-                if ($mrc !== CURLM_OK && $mrc !== CURLM_CALL_MULTI_PERFORM) {
-                    $errStr = curl_multi_strerror($mrc);
-                    throw new \RuntimeException("curl_multi_exec failed: {$errStr} (code {$mrc})");
-                }
+                    if ($mrc !== CURLM_OK && $mrc !== CURLM_CALL_MULTI_PERFORM) {
+                        $errStr = curl_multi_strerror($mrc);
+                        throw new \RuntimeException("curl_multi_exec failed: {$errStr} (code {$mrc})");
+                    }
 
-                while ($info = curl_multi_info_read($mh)) {
-                    $ch = $info['handle'];
-                    $id = (int)$ch;
+                    while ($info = curl_multi_info_read($mh)) {
+                        $ch = $info['handle'];
+                        $id = (int)$ch;
 
-                    if (!isset($running[$id])) {
+                        if (!isset($running[$id])) {
+                            curl_multi_remove_handle($mh, $ch);
+                            curl_close($ch);
+                            continue;
+                        }
+
+                        $meta       = $running[$id];
+                        $url        = $meta['url'];
+                        $host       = $meta['host'];
+                        $durationMs = (int)((microtime(true) - $meta['started_at']) * 1000);
+
+                        $curlErr   = curl_error($ch);
+                        $curlErrno = curl_errno($ch);
+                        $httpCode  = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                        $finalUrl  = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) ?: $url;
+
+                        $rawHeaders    = $headerBufs[$id] ?? '';
+                        $parsedHeaders = $this->parseResponseHeaders($rawHeaders);
+                        $body          = $bodyBufs[$id] ?? '';
+                        $contentType   = $parsedHeaders['content-type'] ?? '';
+                        $detectedType  = $this->detectContentType($contentType, $url, $body);
+
+                        if (!empty($isOversized[$id])) {
+                            $maxSize = (int)($options['max_response_size'] ?? $this->config['max_response_size']);
+                            $limitMb = round($maxSize / 1048576, 2);
+                            $response = $this->errorResponse(
+                                $url,
+                                'response_too_large',
+                                "Response size exceeded configured maximum limit of {$limitMb} MB ({$maxSize} bytes)",
+                                $curlErrno,
+                                $httpCode ?: 200,
+                                $parsedHeaders,
+                                false
+                            );
+                        } elseif ($curlErr) {
+                            $errType  = self::classifyCurlError($curlErrno, $curlErr);
+                            $response = $this->errorResponse(
+                                $url,
+                                $errType,
+                                "cURL: {$curlErr}",
+                                $curlErrno,
+                                $httpCode ?: null,
+                                $parsedHeaders
+                            );
+                        } else {
+                            $response = [
+                                'requested_url' => $url,
+                                'final_url'     => $finalUrl,
+                                'http_status'   => $httpCode,
+                                'content_type'  => $detectedType,
+                                'content'       => $body,
+                                'headers'       => $parsedHeaders,
+                                'redirect_chain'=> [],
+                                'duration_ms'   => $durationMs,
+                                'response_size' => strlen($body),
+                                'error_type'    => null,
+                                'error_message' => null,
+                                'curl_errno'    => 0,
+                                'is_retryable'  => false,
+                            ];
+                            $response = $this->classifyResponse($response);
+                        }
+
+                        $onComplete($url, $response);
+
+                        // Clean up handle
                         curl_multi_remove_handle($mh, $ch);
                         curl_close($ch);
-                        continue;
-                    }
 
-                    $meta       = $running[$id];
-                    $url        = $meta['url'];
-                    $host       = $meta['host'];
-                    $durationMs = (int)((microtime(true) - $meta['started_at']) * 1000);
+                        if (isset($activePerDomain[$host])) {
+                            $activePerDomain[$host]--;
+                            if ($activePerDomain[$host] <= 0) {
+                                unset($activePerDomain[$host]);
+                            }
+                        }
 
-                    $curlErr   = curl_error($ch);
-                    $curlErrno = curl_errno($ch);
-                    $httpCode  = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
-                    $finalUrl  = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) ?: $url;
+                        unset($running[$id], $headerBufs[$id], $bodyBufs[$id], $isOversized[$id]);
 
-                    $rawHeaders    = $headerBufs[$id] ?? '';
-                    $parsedHeaders = $this->parseResponseHeaders($rawHeaders);
-                    $body          = $bodyBufs[$id] ?? '';
-                    $contentType   = $parsedHeaders['content-type'] ?? '';
-                    $detectedType  = $this->detectContentType($contentType, $url, $body);
-
-                    if (!empty($isOversized[$id])) {
-                        $maxSize = (int)($options['max_response_size'] ?? $this->config['max_response_size']);
-                        $limitMb = round($maxSize / 1048576, 2);
-                        $response = $this->errorResponse(
-                            $url,
-                            'response_too_large',
-                            "Response size exceeded configured maximum limit of {$limitMb} MB ({$maxSize} bytes)",
-                            $curlErrno,
-                            $httpCode ?: 200,
-                            $parsedHeaders,
-                            false
-                        );
-                    } elseif ($curlErr) {
-                        $errType  = self::classifyCurlError($curlErrno, $curlErr);
-                        $response = $this->errorResponse(
-                            $url,
-                            $errType,
-                            "cURL: {$curlErr}",
-                            $curlErrno,
-                            $httpCode ?: null,
-                            $parsedHeaders
-                        );
-                    } else {
-                        $response = [
-                            'requested_url' => $url,
-                            'final_url'     => $finalUrl,
-                            'http_status'   => $httpCode,
-                            'content_type'  => $detectedType,
-                            'content'       => $body,
-                            'headers'       => $parsedHeaders,
-                            'redirect_chain'=> [],
-                            'duration_ms'   => $durationMs,
-                            'response_size' => strlen($body),
-                            'error_type'    => null,
-                            'error_message' => null,
-                            'curl_errno'    => 0,
-                            'is_retryable'  => false,
-                        ];
-                        $response = $this->classifyResponse($response);
-                    }
-
-                    $onComplete($url, $response);
-
-                    // Clean up handle
-                    curl_multi_remove_handle($mh, $ch);
-                    curl_close($ch);
-
-                    if (isset($activePerDomain[$host])) {
-                        $activePerDomain[$host]--;
-                        if ($activePerDomain[$host] <= 0) {
-                            unset($activePerDomain[$host]);
+                        // Refill slots up to concurrency limit
+                        while (!empty($queue)) {
+                            if (self::isDataUri($queue[0])) {
+                                $u = array_shift($queue);
+                                $onComplete($u, $this->handleDataUri($u, $options));
+                                continue;
+                            }
+                            if (count($running) >= $concurrency) {
+                                break;
+                            }
+                            if (!$addNext()) {
+                                break;
+                            }
                         }
                     }
 
-                    unset($running[$id], $headerBufs[$id], $bodyBufs[$id], $isOversized[$id]);
-
-                    // Refill slots up to concurrency limit
-                    while (count($running) < $concurrency && !empty($queue)) {
-                        if (!$addNext()) {
-                            break;
+                    if ($active > 0) {
+                        $sel = curl_multi_select($mh, 0.1);
+                        if ($sel === -1) {
+                            // Avoid busy-loop if select returns -1
+                            usleep(15000);
                         }
                     }
-                }
 
-                if ($active > 0) {
-                    $sel = curl_multi_select($mh, 0.1);
-                    if ($sel === -1) {
-                        // Avoid busy-loop if select returns -1
-                        usleep(15000);
-                    }
-                }
-
-            } while ($active > 0 || !empty($queue));
+                } while ($active > 0 || !empty($queue));
+            }
 
         } finally {
             // Guaranteed cleanup of any remaining handles
@@ -354,10 +372,89 @@ class HttpClient
         }
     }
 
+    public static function isDataUri(string $url): bool
+    {
+        return str_starts_with(strtolower($url), 'data:');
+    }
+
+    public function handleDataUri(string $url, array $opts = []): array
+    {
+        $startTime = microtime(true);
+        $maxSize   = (int)($opts['max_response_size'] ?? $this->config['max_response_size']);
+
+        // Format: data:[<mediatype>][;base64],<data>
+        $commaPos = strpos($url, ',');
+        if ($commaPos === false) {
+            return $this->errorResponse($url, 'invalid_url', 'Malformed data URI: missing comma separator', 0, 400, [], false);
+        }
+
+        $meta = substr($url, 5, $commaPos - 5);
+        $rawPayload = substr($url, $commaPos + 1);
+
+        $isBase64 = false;
+        $mediaType = 'text/plain';
+
+        if ($meta !== '') {
+            $parts = explode(';', $meta);
+            if (isset($parts[0]) && $parts[0] !== '' && !str_starts_with(strtolower($parts[0]), 'base64')) {
+                $mediaType = trim($parts[0]);
+            }
+            foreach ($parts as $p) {
+                if (trim(strtolower($p)) === 'base64') {
+                    $isBase64 = true;
+                    break;
+                }
+            }
+        }
+
+        $payload = $isBase64 ? (base64_decode($rawPayload) ?: '') : urldecode($rawPayload);
+        $payloadSize = strlen($payload);
+
+        $parsedHeaders = [
+            'content-type'   => $mediaType,
+            'content-length' => (string)$payloadSize,
+        ];
+        $detectedType = $this->detectContentType($mediaType, $url, $payload);
+        $durationMs = (int)((microtime(true) - $startTime) * 1000);
+
+        if ($payloadSize > $maxSize) {
+            $limitMb = round($maxSize / 1048576, 2);
+            return $this->errorResponse(
+                $url,
+                'response_too_large',
+                "Response size exceeded configured maximum limit of {$limitMb} MB ({$maxSize} bytes)",
+                0,
+                200,
+                $parsedHeaders,
+                false
+            );
+        }
+
+        return [
+            'requested_url'  => $url,
+            'final_url'      => $url,
+            'http_status'    => 200,
+            'content_type'   => $detectedType,
+            'content'        => $payload,
+            'headers'        => $parsedHeaders,
+            'redirect_chain' => [],
+            'duration_ms'    => $durationMs,
+            'response_size'  => $payloadSize,
+            'error_type'     => null,
+            'error_message'  => null,
+            'curl_errno'     => 0,
+            'is_retryable'   => false,
+        ];
+    }
+
     // ── Private implementation ────────────────────────────────────────────────
 
     private function doRequest(string $url, array $opts): array
     {
+        if (self::isDataUri($url)) {
+            return $this->handleDataUri($url, $opts);
+        }
+
         $startTime     = microtime(true);
         $redirectChain = [];
 

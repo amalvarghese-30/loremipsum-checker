@@ -1,19 +1,22 @@
 <?php
 /**
- * Automated Regression Test Suite: Full Reporting Integrity and Cross-Layer Consistency
+ * Automated Regression & Integration Test Suite: Full Reporting Integrity and Cross-Layer Consistency
  *
  * Verifies that:
  * 1. 0 Lorem + 116 SEO issues produces 0 Lorem findings in registry, scan status, and summary,
  *    while accurately reporting 116 affected pages and 116 total findings.
  * 2. Multiple Lorem phrase occurrences in a single paragraph produce 1 finding, N occurrences, and 1 affected page.
- * 3. processed_count equals clean_count + affected_page_count + failed_count.
+ * 3. Counter sum integrity: processed_count equals clean_count + affected_page_count + failed_count.
  * 4. External resource findings increment total_findings and resource_finding_count WITHOUT incrementing processed_count.
- * 5. ExportService generates compliant CSV and JSON exports, isolates projects/scans, and distinguishes page vs resource findings.
- * 6. Runtime counter idempotency: page retries compute signed deltas without double-counting.
- * 7. Counter reconciliation: supports dry-run (no DB writes) and apply modes, fixing drift and enforcing P = C + A + F.
- * 8. Stale counter override: scan summary and API endpoints unconditionally report 0 if findings table has 0 rows.
- * 9. Category filtering supports 'seo' across all SEO categories.
- * 10. Mutually exclusive terminal page classification guarantees no double-counting.
+ * 5. Resource retry preservation: page retries NEVER delete external resource findings (resource_id IS NOT NULL).
+ * 6. Resource reprocessing: changes from N to 0 findings deletes old findings and decrements resource counters.
+ * 7. Canonical page result deduplication: latest result per discovered URL is canonical; superseded results never inflate current metrics.
+ * 8. Mutually exclusive page classification: unknown statuses are unclassified; clean with findings is flagged as discrepancy.
+ * 9. ExportService & ExportController: exact 18-column CSV schema, source_type by relationship identity, authoritative JSON metrics.
+ * 10. Runtime counter idempotency: retries use signed deltas without double-counting.
+ * 11. Reconcile counters: dry-run performs 0 database writes; apply mode executes transactionally and enforces invariants.
+ * 12. Authoritative reporting in both directions: 116->0 and 0->N are both corrected.
+ * 13. Actual API Controller integration: invokes actual controller methods without interface errors.
  */
 
 declare(strict_types=1);
@@ -35,10 +38,16 @@ require_once dirname(__DIR__) . '/includes/Api/ScanController.php';
 require_once dirname(__DIR__) . '/includes/Api/ResultsController.php';
 require_once dirname(__DIR__) . '/includes/Api/ExportController.php';
 
+use LoremChecker\Api\ExportController;
+use LoremChecker\Api\ProjectController;
+use LoremChecker\Api\Response;
+use LoremChecker\Api\ResultsController;
+use LoremChecker\Api\ScanController;
 use LoremChecker\Export\ExportService;
 use LoremChecker\Repository\FindingRepository;
 use LoremChecker\Repository\PageResultRepository;
 use LoremChecker\Repository\ProjectRepository;
+use LoremChecker\Repository\ResourceRepository;
 use LoremChecker\Repository\ScanRepository;
 use LoremChecker\Repository\UrlRepository;
 
@@ -49,6 +58,7 @@ class ReportingIntegrityTest
     private ProjectRepository $projectRepo;
     private ScanRepository $scanRepo;
     private PageResultRepository $pageResRepo;
+    private ResourceRepository $resourceRepo;
     private FindingRepository $findingRepo;
     private UrlRepository $urlRepo;
 
@@ -60,11 +70,12 @@ class ReportingIntegrityTest
         ]);
         $this->setupSchema();
 
-        $this->projectRepo = new ProjectRepository($this->pdo);
-        $this->scanRepo    = new ScanRepository($this->pdo);
-        $this->pageResRepo = new PageResultRepository($this->pdo);
-        $this->findingRepo = new FindingRepository($this->pdo);
-        $this->urlRepo     = new UrlRepository($this->pdo);
+        $this->projectRepo  = new ProjectRepository($this->pdo);
+        $this->scanRepo     = new ScanRepository($this->pdo);
+        $this->pageResRepo  = new PageResultRepository($this->pdo);
+        $this->resourceRepo = new ResourceRepository($this->pdo);
+        $this->findingRepo  = new FindingRepository($this->pdo);
+        $this->urlRepo      = new UrlRepository($this->pdo);
     }
 
     private function setupSchema(): void
@@ -109,20 +120,42 @@ class ReportingIntegrityTest
                 updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
 
+            CREATE TABLE scan_settings (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                scan_id INTEGER NOT NULL,
+                settings_json TEXT NOT NULL,
+                created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+
+            CREATE TABLE url_discovery_sources (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                discovered_url_id INTEGER NOT NULL,
+                scan_id INTEGER NOT NULL,
+                source_type VARCHAR(100) NOT NULL,
+                source_url TEXT NULL,
+                crawl_depth INTEGER NOT NULL DEFAULT 0,
+                discovered_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+
             CREATE TABLE discovered_urls (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 scan_id INTEGER NOT NULL,
-                url TEXT NOT NULL,
+                original_url TEXT NOT NULL,
+                url TEXT NULL,
                 normalized_url TEXT NOT NULL,
                 url_hash VARCHAR(64) NOT NULL,
                 domain VARCHAR(255) NULL,
+                crawl_depth INTEGER NOT NULL DEFAULT 0,
                 depth INTEGER NOT NULL DEFAULT 0,
-                discovery_source VARCHAR(100) NULL,
+                discovery_source VARCHAR(100) NOT NULL DEFAULT "unknown",
                 status TEXT NOT NULL DEFAULT "pending",
                 retry_count INTEGER NOT NULL DEFAULT 0,
                 next_attempt_at DATETIME NULL,
                 attempt_count INTEGER NOT NULL DEFAULT 0,
                 error_message TEXT NULL,
+                last_error TEXT NULL,
+                discovered_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                processed_at DATETIME NULL,
                 created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
@@ -156,16 +189,25 @@ class ReportingIntegrityTest
                 scan_id INTEGER NOT NULL,
                 page_result_id INTEGER NULL,
                 resource_url TEXT NOT NULL,
-                resource_type TEXT NOT NULL DEFAULT "css",
+                normalized_resource_url VARCHAR(2048) NOT NULL,
+                resource_hash CHAR(64) NOT NULL,
+                resource_type TEXT NOT NULL DEFAULT "other",
+                content_type VARCHAR(255) NULL,
                 http_status INTEGER NULL,
-                content_type VARCHAR(100) NULL,
+                processing_status TEXT NOT NULL DEFAULT "pending",
                 response_size INTEGER NULL,
                 duration_ms INTEGER NULL,
-                status TEXT NOT NULL DEFAULT "pending",
                 finding_count INTEGER NOT NULL DEFAULT 0,
                 error_message TEXT NULL,
-                created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                completed_at DATETIME NULL
+                fetched_at DATETIME NULL
+            );
+
+            CREATE TABLE page_resource_relations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                scan_id INTEGER NOT NULL,
+                page_result_id INTEGER NOT NULL,
+                resource_id INTEGER NOT NULL,
+                created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
 
             CREATE TABLE findings (
@@ -173,20 +215,35 @@ class ReportingIntegrityTest
                 scan_id INTEGER NOT NULL,
                 page_result_id INTEGER NOT NULL,
                 resource_id INTEGER NULL,
-                detection_rule_id INTEGER NULL,
-                detection_category TEXT NOT NULL DEFAULT "lorem_ipsum",
-                severity TEXT NOT NULL DEFAULT "high",
-                confidence TEXT NOT NULL DEFAULT "high",
-                resource_type TEXT NOT NULL DEFAULT "html",
+                page_url TEXT NOT NULL,
+                resource_url TEXT NULL,
+                resource_type VARCHAR(50) NOT NULL DEFAULT "html",
                 matched_text TEXT NOT NULL,
                 occurrences INTEGER NOT NULL DEFAULT 1,
                 surrounding_context TEXT NULL,
-                html_element VARCHAR(50) NULL,
-                css_selector TEXT NULL,
+                html_element VARCHAR(100) NULL,
+                css_selector VARCHAR(500) NULL,
+                section_name VARCHAR(500) NULL,
                 line_number INTEGER NULL,
-                xpath TEXT NULL,
-                character_offset INTEGER NULL,
+                character_position INTEGER NULL,
                 is_visible INTEGER NOT NULL DEFAULT 1,
+                detection_rule_id INTEGER NULL,
+                detection_category VARCHAR(100) NOT NULL DEFAULT "lorem_ipsum",
+                severity TEXT NOT NULL DEFAULT "high",
+                confidence TEXT NOT NULL DEFAULT "high",
+                finding_fingerprint CHAR(64) NOT NULL DEFAULT "",
+                created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+
+            CREATE TABLE scan_logs (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                scan_id INTEGER NOT NULL,
+                project_id INTEGER NOT NULL,
+                event_type VARCHAR(100) NOT NULL DEFAULT "general",
+                log_level VARCHAR(20) NOT NULL DEFAULT "INFO",
+                message TEXT NOT NULL,
+                url TEXT NULL,
+                metadata_json TEXT NULL,
                 created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
         ');
@@ -198,18 +255,21 @@ class ReportingIntegrityTest
         $this->testMultipleOccurrencesInParagraph();
         $this->testCounterSumIntegrity();
         $this->testResourceFindingsDoNotIncrementProcessedCount();
+        $this->testResourceRetryPreservesFindingsAndReprocessesCleanly();
+        $this->testCanonicalPageResultSupersedingHistoricalDuplicates();
+        $this->testMutuallyExclusivePageClassification();
         $this->testCategoryFilteringWithSeoGroup();
-        $this->testExportServiceCsvAndJson();
+        $this->testExportServiceAndControllerContract();
         $this->testRuntimeCounterIdempotencyOnPageRetry();
         $this->testReconcileCountersDryRunAndApply();
-        $this->testStaleCounterOverrideInScanSummary();
-        $this->testMutuallyExclusiveTerminalPageClassification();
+        $this->testStaleCounterOverrideInBothDirections();
+        $this->testActualApiControllersWithTestMode();
     }
 
     private function testZeroLoremWithSeoIssues(): void
     {
         $projId = $this->projectRepo->findOrCreate('SEO Test Site', 'https://seo.example.com', 'https://seo.example.com');
-        $scanId = $this->scanRepo->create($projId, 1, ['max_urls' => 200]);
+        $scanId = $this->scanRepo->createScan($projId, ['max_urls' => 200]);
 
         for ($i = 1; $i <= 116; $i++) {
             $url = "https://seo.example.com/page-{$i}";
@@ -229,6 +289,7 @@ class ReportingIntegrityTest
 
             $this->findingRepo->insertBatch($scanId, $pageResId, null, [
                 [
+                    'page_url'            => $url,
                     'detection_category'  => 'missing_title',
                     'severity'            => 'medium',
                     'confidence'          => 'high',
@@ -271,7 +332,7 @@ class ReportingIntegrityTest
     private function testMultipleOccurrencesInParagraph(): void
     {
         $projId = $this->projectRepo->findOrCreate('Multi Occurrence Site', 'https://multi.example.com', 'https://multi.example.com');
-        $scanId = $this->scanRepo->create($projId, 1);
+        $scanId = $this->scanRepo->createScan($projId);
 
         $url = 'https://multi.example.com/lorem-page';
         $urlId = $this->urlRepo->insertDiscovered($scanId, $url, $url, 1, 'crawler');
@@ -289,6 +350,7 @@ class ReportingIntegrityTest
 
         $this->findingRepo->insertBatch($scanId, $pageResId, null, [
             [
+                'page_url'            => $url,
                 'detection_category'  => 'lorem_ipsum',
                 'severity'            => 'high',
                 'confidence'          => 'high',
@@ -317,7 +379,7 @@ class ReportingIntegrityTest
     private function testCounterSumIntegrity(): void
     {
         $projId = $this->projectRepo->findOrCreate('Sum Integrity Site', 'https://sum.example.com', 'https://sum.example.com');
-        $scanId = $this->scanRepo->create($projId, 1);
+        $scanId = $this->scanRepo->createScan($projId);
 
         for ($i = 1; $i <= 10; $i++) {
             $this->scanRepo->recordPageResult($scanId, 'clean', 0, 0, 0, 0, 0, 0);
@@ -345,7 +407,7 @@ class ReportingIntegrityTest
     private function testResourceFindingsDoNotIncrementProcessedCount(): void
     {
         $projId = $this->projectRepo->findOrCreate('Resource Site', 'https://res.example.com', 'https://res.example.com');
-        $scanId = $this->scanRepo->create($projId, 1);
+        $scanId = $this->scanRepo->createScan($projId);
 
         $this->scanRepo->recordPageResult($scanId, 'clean', 0, 0, 0, 0, 0, 0);
 
@@ -363,10 +425,259 @@ class ReportingIntegrityTest
         $this->assertEquals(3, (int)$scanAfter['total_findings'], 'Total findings must be 3');
     }
 
+    /**
+     * Phase 1 & Phase 10 Item B:
+     * Retrying a page must NEVER delete external resource findings (resource_id IS NOT NULL).
+     * Reprocessing a resource to 0 findings must remove old findings and decrement counters.
+     */
+    private function testResourceRetryPreservesFindingsAndReprocessesCleanly(): void
+    {
+        $projId = $this->projectRepo->findOrCreate('Resource Retry Site', 'https://resretry.example.com', 'https://resretry.example.com');
+        $scanId = $this->scanRepo->createScan($projId);
+
+        $pageUrl = 'https://resretry.example.com/page1';
+        $cssUrl  = 'https://resretry.example.com/assets/styles.css';
+        $urlId   = $this->urlRepo->insertDiscovered($scanId, $pageUrl, $pageUrl, 1, 'crawler');
+
+        // 1. Initial page audit: 2 HTML Lorem findings
+        $save1 = $this->pageResRepo->saveResultWithMetrics([
+            'scan_id'           => $scanId,
+            'discovered_url_id' => $urlId,
+            'requested_url'     => $pageUrl,
+            'http_status'       => 200,
+            'processing_status' => 'findings_detected',
+            'finding_count'     => 2,
+            'has_lorem_ipsum'   => 1,
+        ]);
+        $pageResultId = $save1['id'];
+
+        $this->findingRepo->insertBatch($scanId, $pageResultId, null, [
+            ['page_url' => $pageUrl, 'detection_category' => 'lorem_ipsum', 'matched_text' => 'Lorem 1', 'occurrences' => 1],
+            ['page_url' => $pageUrl, 'detection_category' => 'lorem_ipsum', 'matched_text' => 'Lorem 2', 'occurrences' => 1],
+        ]);
+        $this->scanRepo->recordPageResult($scanId, 'findings_detected', 2, 2, 0, 0, 1, 2, $save1['old_metrics']);
+
+        // 2. Discover CSS resource and detect 3 findings in it
+        $reg = $this->resourceRepo->findOrCreate($scanId, $pageResultId, $cssUrl, $cssUrl, 'css');
+        $resourceId = $reg['id'];
+
+        $this->resourceRepo->markCompleted($resourceId, [
+            'content_type'  => 'text/css',
+            'http_status'   => 200,
+            'response_size' => 1024,
+            'duration_ms'   => 50,
+            'finding_count' => 3,
+        ]);
+        $this->findingRepo->insertBatch($scanId, $pageResultId, $resourceId, [
+            ['page_url' => $pageUrl, 'resource_url' => $cssUrl, 'resource_type' => 'css', 'detection_category' => 'placeholder', 'matched_text' => 'CSS Match 1', 'occurrences' => 1],
+            ['page_url' => $pageUrl, 'resource_url' => $cssUrl, 'resource_type' => 'css', 'detection_category' => 'placeholder', 'matched_text' => 'CSS Match 2', 'occurrences' => 1],
+            ['page_url' => $pageUrl, 'resource_url' => $cssUrl, 'resource_type' => 'css', 'detection_category' => 'placeholder', 'matched_text' => 'CSS Match 3', 'occurrences' => 1],
+        ]);
+        $this->scanRepo->recordResourceFindings($scanId, 3, 0);
+
+        $scan = $this->scanRepo->getById($scanId);
+        $this->assertEquals(1, (int)$scan['processed_count'], 'Processed pages must be 1');
+        $this->assertEquals(2, (int)$scan['lorem_finding_count'], 'Page lorem findings must be 2');
+        $this->assertEquals(3, (int)$scan['resource_finding_count'], 'Resource findings must be 3');
+        $this->assertEquals(5, (int)$scan['total_findings'], 'Total findings must be 5 (2 page + 3 resource)');
+
+        // 3. RETRY THE PAGE: Re-save page results (e.g. now page has 1 lorem finding)
+        $saveRetry = $this->pageResRepo->saveResultWithMetrics([
+            'scan_id'           => $scanId,
+            'discovered_url_id' => $urlId,
+            'requested_url'     => $pageUrl,
+            'http_status'       => 200,
+            'processing_status' => 'findings_detected',
+            'finding_count'     => 1,
+            'has_lorem_ipsum'   => 1,
+        ]);
+        $this->assertTrue(!$saveRetry['is_new'], 'Page retry must recognize existing record');
+
+        $this->findingRepo->insertBatch($scanId, $pageResultId, null, [
+            ['page_url' => $pageUrl, 'detection_category' => 'lorem_ipsum', 'matched_text' => 'Updated Lorem 1', 'occurrences' => 1],
+        ]);
+        $this->scanRepo->recordPageResult($scanId, 'findings_detected', 1, 1, 0, 0, 1, 1, $saveRetry['old_metrics']);
+
+        // CRITICAL CHECK: Did the 3 CSS resource findings survive the page retry?
+        $stmtCssCheck = $this->pdo->prepare('SELECT COUNT(*) FROM findings WHERE scan_id = ? AND resource_id = ?');
+        $stmtCssCheck->execute([$scanId, $resourceId]);
+        $survivingResourceFindings = (int)$stmtCssCheck->fetchColumn();
+        $this->assertEquals(3, $survivingResourceFindings, 'Page retry must NEVER delete external resource findings!');
+
+        // 4. REPROCESS RESOURCE WITH ZERO FINDINGS:
+        // Resource was re-fetched and now has 0 findings
+        $oldDeleted = $this->findingRepo->deleteByResourceId($scanId, $resourceId);
+        $this->assertEquals(3, $oldDeleted, 'deleteByResourceId must report 3 findings deleted');
+        $this->resourceRepo->markCompleted($resourceId, [
+            'content_type'  => 'text/css',
+            'http_status'   => 200,
+            'finding_count' => 0,
+        ]);
+        $this->scanRepo->recordResourceFindings($scanId, 0, $oldDeleted);
+
+        $scanAfterResClean = $this->scanRepo->getById($scanId);
+        $this->assertEquals(0, (int)$scanAfterResClean['resource_finding_count'], 'Resource finding count must decrement to 0');
+        $this->assertEquals(1, (int)$scanAfterResClean['total_findings'], 'Total findings must be 1 (page finding only)');
+
+        // 5. REPROCESS RESOURCE WITH 2 NEW FINDINGS:
+        $this->findingRepo->insertBatch($scanId, $pageResultId, $resourceId, [
+            ['page_url' => $pageUrl, 'resource_url' => $cssUrl, 'resource_type' => 'css', 'detection_category' => 'placeholder', 'matched_text' => 'New CSS Match A', 'occurrences' => 1],
+            ['page_url' => $pageUrl, 'resource_url' => $cssUrl, 'resource_type' => 'css', 'detection_category' => 'placeholder', 'matched_text' => 'New CSS Match B', 'occurrences' => 1],
+        ]);
+        $this->scanRepo->recordResourceFindings($scanId, 2, 0);
+
+        $scanFinal = $this->scanRepo->getById($scanId);
+        $this->assertEquals(2, (int)$scanFinal['resource_finding_count'], 'Resource finding count must become 2');
+        $this->assertEquals(3, (int)$scanFinal['total_findings'], 'Total findings must be 3');
+    }
+
+    /**
+     * Phase 4 & Phase 10 Item D:
+     * Canonical page result selection must supersede historical duplicate records without deleting them.
+     */
+    private function testCanonicalPageResultSupersedingHistoricalDuplicates(): void
+    {
+        $projId = $this->projectRepo->findOrCreate('Canonical Site', 'https://canonical.example.com', 'https://canonical.example.com');
+        $scanId = $this->scanRepo->createScan($projId);
+
+        $url = 'https://canonical.example.com/duplicate-test';
+        $urlId = $this->urlRepo->insertDiscovered($scanId, $url, $url, 1, 'crawler');
+
+        // Historical record 1: Superseded attempt with 3 Lorem findings
+        $p1 = $this->pageResRepo->saveResult([
+            'scan_id'           => $scanId,
+            'discovered_url_id' => $urlId,
+            'requested_url'     => $url,
+            'http_status'       => 200,
+            'processing_status' => 'findings_detected',
+            'finding_count'     => 3,
+            'has_lorem_ipsum'   => 1,
+        ]);
+        $this->findingRepo->insertBatch($scanId, $p1, null, [
+            ['page_url' => $url, 'detection_category' => 'lorem_ipsum', 'matched_text' => 'Old Lorem 1', 'occurrences' => 1],
+            ['page_url' => $url, 'detection_category' => 'lorem_ipsum', 'matched_text' => 'Old Lorem 2', 'occurrences' => 1],
+            ['page_url' => $url, 'detection_category' => 'lorem_ipsum', 'matched_text' => 'Old Lorem 3', 'occurrences' => 1],
+        ]);
+
+        // Historical record 2: Canonical latest attempt which resolved to CLEAN (0 findings)
+        $p2 = $this->pageResRepo->saveResult([
+            'scan_id'           => $scanId,
+            'discovered_url_id' => $urlId,
+            'requested_url'     => $url,
+            'http_status'       => 200,
+            'processing_status' => 'clean',
+            'finding_count'     => 0,
+            'has_lorem_ipsum'   => 0,
+            'force_insert'      => true,
+        ]);
+
+        $this->assertTrue($p2 > $p1, 'Latest page result must have higher ID');
+
+        // Reconcile scan
+        $rec = $this->scanRepo->reconcileCounters($scanId, true);
+
+        // Canonical result is p2 (clean), so processed=1, clean=1, affected=0, lorem_findings=0
+        $this->assertEquals(1, $rec['processed_count'], 'Canonical processed count must be 1 (not 2)');
+        $this->assertEquals(1, $rec['clean_count'], 'Canonical clean count must be 1');
+        $this->assertEquals(0, $rec['affected_page_count'], 'Affected count must be 0 (superseded record ignored)');
+        $this->assertEquals(0, $rec['lorem_finding_count'], 'Canonical lorem findings must be 0');
+        $this->assertEquals(1, $rec['diagnostics']['duplicate_pages_count'], 'Diagnostic must report 1 duplicate page set');
+
+        // Historical record p1 must still exist in page_results and findings (never deleted automatically!)
+        $stmtChkP1 = $this->pdo->prepare('SELECT COUNT(*) FROM page_results WHERE id = ?');
+        $stmtChkP1->execute([$p1]);
+        $this->assertEquals(1, (int)$stmtChkP1->fetchColumn(), 'Historical superseded page result must be preserved');
+
+        $stmtChkF1 = $this->pdo->prepare('SELECT COUNT(*) FROM findings WHERE page_result_id = ?');
+        $stmtChkF1->execute([$p1]);
+        $this->assertEquals(3, (int)$stmtChkF1->fetchColumn(), 'Historical superseded findings must be preserved');
+    }
+
+    /**
+     * Phase 3 & Phase 10 Item C:
+     * Classification must be strictly mutually exclusive and truthful.
+     */
+    private function testMutuallyExclusivePageClassification(): void
+    {
+        $projId = $this->projectRepo->findOrCreate('Class Site', 'https://class.example.com', 'https://class.example.com');
+        $scanId = $this->scanRepo->createScan($projId);
+
+        $urlIdx = 600;
+
+        // 1. Clean page: 200, clean, 0 findings
+        $urlIdx++;
+        $this->pageResRepo->saveResult([
+            'scan_id'           => $scanId,
+            'discovered_url_id' => $urlIdx,
+            'requested_url'     => "https://class.example.com/p-{$urlIdx}",
+            'http_status'       => 200,
+            'processing_status' => 'clean',
+            'finding_count'     => 0,
+        ]);
+
+        // 2. Affected page: 200, findings_detected, 2 findings
+        $urlIdx++;
+        $pAff = $this->pageResRepo->saveResult([
+            'scan_id'           => $scanId,
+            'discovered_url_id' => $urlIdx,
+            'requested_url'     => "https://class.example.com/p-{$urlIdx}",
+            'http_status'       => 200,
+            'processing_status' => 'findings_detected',
+            'finding_count'     => 2,
+        ]);
+        $this->findingRepo->insertBatch($scanId, $pAff, null, [
+            ['page_url' => "https://class.example.com/p-{$urlIdx}", 'detection_category' => 'missing_title', 'matched_text' => 'Title missing', 'occurrences' => 1],
+            ['page_url' => "https://class.example.com/p-{$urlIdx}", 'detection_category' => 'missing_h1', 'matched_text' => 'H1 missing', 'occurrences' => 1],
+        ]);
+
+        // 3. Failed pages: 500, 404, 429, timeout, ssl_error
+        $failureCases = [
+            ['status' => 'failed', 'http' => 500],
+            ['status' => 'not_found', 'http' => 404],
+            ['status' => 'rate_limited', 'http' => 429],
+            ['status' => 'timeout', 'http' => 0],
+            ['status' => 'ssl_error', 'http' => 0],
+        ];
+        foreach ($failureCases as $fc) {
+            $urlIdx++;
+            $this->pageResRepo->saveResult([
+                'scan_id'           => $scanId,
+                'discovered_url_id' => $urlIdx,
+                'requested_url'     => "https://class.example.com/p-{$urlIdx}",
+                'http_status'       => $fc['http'],
+                'processing_status' => $fc['status'],
+            ]);
+        }
+
+        // 4. Inconsistent page: marked 'clean' but actually has 1 persisted finding
+        $urlIdx++;
+        $pIncon = $this->pageResRepo->saveResult([
+            'scan_id'           => $scanId,
+            'discovered_url_id' => $urlIdx,
+            'requested_url'     => "https://class.example.com/p-{$urlIdx}",
+            'http_status'       => 200,
+            'processing_status' => 'clean',
+            'finding_count'     => 0,
+        ]);
+        $this->findingRepo->insertBatch($scanId, $pIncon, null, [
+            ['page_url' => "https://class.example.com/p-{$urlIdx}", 'detection_category' => 'lorem_ipsum', 'matched_text' => 'Surprise lorem', 'occurrences' => 1],
+        ]);
+
+        // Run reconciliation
+        $rec = $this->scanRepo->reconcileCounters($scanId, true);
+
+        $this->assertEquals(1, $rec['clean_count'], 'Clean count must be strictly 1');
+        $this->assertEquals(2, $rec['affected_page_count'], 'Affected count must be 2 (affected page + repaired inconsistent clean)');
+        $this->assertEquals(5, $rec['failed_count'], 'Failed count must be strictly 5');
+        $this->assertEquals(8, $rec['processed_count'], 'Processed count must be 8 (1 + 2 + 5)');
+        $this->assertEquals(1, $rec['diagnostics']['inconsistent_clean_count'], 'Must detect 1 inconsistent clean discrepancy');
+        $this->assertTrue($rec['diagnostics']['invariant_passed'], 'Invariant check must pass');
+    }
+
     private function testCategoryFilteringWithSeoGroup(): void
     {
         $projId = $this->projectRepo->findOrCreate('SEO Group Site', 'https://seogroup.example.com', 'https://seogroup.example.com');
-        $scanId = $this->scanRepo->create($projId, 1);
+        $scanId = $this->scanRepo->createScan($projId);
 
         $pageResId = $this->pageResRepo->saveResult([
             'scan_id'           => $scanId,
@@ -375,17 +686,17 @@ class ReportingIntegrityTest
             'http_status'       => 200,
             'processing_status' => 'findings_detected',
             'audit_status'      => 'audit_issues',
-            'finding_count'     => 5,
+            'finding_count'     => 7,
         ]);
 
         $findings = [
-            ['detection_category' => 'missing_title', 'severity' => 'high', 'matched_text' => 'Title missing', 'occurrences' => 1],
-            ['detection_category' => 'missing_meta_desc', 'severity' => 'medium', 'matched_text' => 'Meta desc missing', 'occurrences' => 1],
-            ['detection_category' => 'missing_h1', 'severity' => 'medium', 'matched_text' => 'H1 missing', 'occurrences' => 1],
-            ['detection_category' => 'missing_canonical', 'severity' => 'low', 'matched_text' => 'Canonical missing', 'occurrences' => 1],
-            ['detection_category' => 'heading_structure', 'severity' => 'low', 'matched_text' => 'Heading skipped', 'occurrences' => 1],
-            ['detection_category' => 'missing_image_alt', 'severity' => 'medium', 'matched_text' => 'Alt missing', 'occurrences' => 1],
-            ['detection_category' => 'lorem_ipsum', 'severity' => 'high', 'matched_text' => 'Lorem ipsum', 'occurrences' => 1],
+            ['page_url' => 'https://seogroup.example.com/', 'detection_category' => 'missing_title', 'severity' => 'high', 'matched_text' => 'Title missing', 'occurrences' => 1],
+            ['page_url' => 'https://seogroup.example.com/', 'detection_category' => 'missing_meta_desc', 'severity' => 'medium', 'matched_text' => 'Meta desc missing', 'occurrences' => 1],
+            ['page_url' => 'https://seogroup.example.com/', 'detection_category' => 'missing_h1', 'severity' => 'medium', 'matched_text' => 'H1 missing', 'occurrences' => 1],
+            ['page_url' => 'https://seogroup.example.com/', 'detection_category' => 'missing_canonical', 'severity' => 'low', 'matched_text' => 'Canonical missing', 'occurrences' => 1],
+            ['page_url' => 'https://seogroup.example.com/', 'detection_category' => 'heading_structure', 'severity' => 'low', 'matched_text' => 'Heading skipped', 'occurrences' => 1],
+            ['page_url' => 'https://seogroup.example.com/', 'detection_category' => 'missing_image_alt', 'severity' => 'medium', 'matched_text' => 'Alt missing', 'occurrences' => 1],
+            ['page_url' => 'https://seogroup.example.com/', 'detection_category' => 'lorem_ipsum', 'severity' => 'high', 'matched_text' => 'Lorem ipsum', 'occurrences' => 1],
         ];
 
         $this->findingRepo->insertBatch($scanId, $pageResId, null, $findings);
@@ -402,106 +713,97 @@ class ReportingIntegrityTest
         }
     }
 
-    private function testExportServiceCsvAndJson(): void
+    /**
+     * Phase 8 & Phase 10 Item G:
+     * ExportService exact schema and scan isolation contract.
+     */
+    private function testExportServiceAndControllerContract(): void
     {
         $exportService = new ExportService($this->pdo);
 
-        $projId = $this->projectRepo->findOrCreate('Export Svc Site', 'https://exportsvc.example.com', 'https://exportsvc.example.com');
-        $scanId = $this->scanRepo->create($projId, 1);
+        $projId = $this->projectRepo->findOrCreate('Export Contract Site', 'https://expcontract.example.com', 'https://expcontract.example.com');
+        $scan1 = $this->scanRepo->createScan($projId);
+        $scan2 = $this->scanRepo->createScan($projId);
 
-        // 1. Page with HTML finding
+        // Put 1 page finding in scan1
         $p1 = $this->pageResRepo->saveResult([
-            'scan_id'           => $scanId,
-            'discovered_url_id' => 301,
-            'requested_url'     => 'https://exportsvc.example.com/page1',
+            'scan_id'           => $scan1,
+            'discovered_url_id' => 801,
+            'requested_url'     => 'https://expcontract.example.com/scan1-page',
             'http_status'       => 200,
             'processing_status' => 'findings_detected',
-            'page_title'        => 'Page One Title',
         ]);
-        $this->findingRepo->insertBatch($scanId, $p1, null, [
-            [
-                'detection_category'  => 'lorem_ipsum',
-                'severity'            => 'high',
-                'confidence'          => 'high',
-                'resource_type'       => 'html',
-                'matched_text'        => 'Lorem ipsum dolor sit amet paragraph',
-                'occurrences'         => 3,
-                'surrounding_context' => '<p>Lorem ipsum dolor sit amet paragraph</p>',
-                'html_element'        => 'p',
-            ]
+        $this->findingRepo->insertBatch($scan1, $p1, null, [
+            ['page_url' => 'https://expcontract.example.com/scan1-page', 'detection_category' => 'lorem_ipsum', 'matched_text' => 'Scan1 Lorem text', 'occurrences' => 2]
         ]);
 
-        // 2. Resource finding (e.g. broken stylesheet)
-        $stmtRes = $this->pdo->prepare('
-            INSERT INTO scan_resources (scan_id, page_result_id, resource_url, resource_type, http_status, status)
-            VALUES (?, ?, ?, ?, ?, ?)
-        ');
-        $stmtRes->execute([$scanId, $p1, 'https://exportsvc.example.com/broken.css', 'css', 404, 'failed']);
-        $resourceId = (int)$this->pdo->lastInsertId();
-
-        $this->findingRepo->insertBatch($scanId, $p1, $resourceId, [
-            [
-                'detection_category'  => 'broken_link',
-                'severity'            => 'critical',
-                'confidence'          => 'high',
-                'resource_type'       => 'css',
-                'matched_text'        => 'HTTP 404 Not Found: https://exportsvc.example.com/broken.css',
-                'occurrences'         => 1,
-            ]
+        // Put 1 resource finding in scan1
+        $reg = $this->resourceRepo->findOrCreate($scan1, $p1, 'https://expcontract.example.com/app.js', 'https://expcontract.example.com/app.js', 'javascript');
+        $this->resourceRepo->markCompleted($reg['id'], [
+            'content_type'  => 'application/javascript',
+            'http_status'   => 200,
+            'finding_count' => 1,
+        ]);
+        $this->findingRepo->insertBatch($scan1, $p1, $reg['id'], [
+            ['page_url' => 'https://expcontract.example.com/scan1-page', 'resource_url' => 'https://expcontract.example.com/app.js', 'resource_type' => 'javascript', 'detection_category' => 'placeholder', 'matched_text' => 'TODO sample', 'occurrences' => 1]
         ]);
 
-        // Test CSV Export
-        $csvOutput = $exportService->buildCsvExport(['scan_id' => $scanId]);
-        $lines = explode("\n", trim($csvOutput));
-        $this->assertTrue(count($lines) >= 3, 'CSV must have header + 2 finding rows');
+        // Put a finding in scan2 (must NOT leak into scan1 export!)
+        $p2 = $this->pageResRepo->saveResult([
+            'scan_id'           => $scan2,
+            'discovered_url_id' => 802,
+            'requested_url'     => 'https://expcontract.example.com/scan2-page',
+            'http_status'       => 200,
+            'processing_status' => 'findings_detected',
+        ]);
+        $this->findingRepo->insertBatch($scan2, $p2, null, [
+            ['page_url' => 'https://expcontract.example.com/scan2-page', 'detection_category' => 'lorem_ipsum', 'matched_text' => 'Scan2 Lorem text', 'occurrences' => 1]
+        ]);
 
-        $header = str_getcsv($lines[0]);
-        $this->assertEquals('Export Type', $header[0], 'First CSV column must be Export Type');
-        $this->assertEquals('Page URL', $header[1], 'Second CSV column must be Page URL');
-        $this->assertEquals('Resource URL', $header[2], 'Third CSV column must be Resource URL');
+        // Test scan1 export directly
+        $exportData = $exportService->getExportData($scan1);
+        $this->assertEquals($scan1, (int)$exportData['scan']['id'], 'Export data must match requested scan ID');
+        $this->assertEquals(2, count($exportData['rows']), 'Scan 1 must have 2 finding rows');
+
+        // Test CSV generation
+        $csv = $exportService->generateCsv($exportData);
+        $lines = explode("\n", trim($csv));
+        $this->assertTrue(count($lines) >= 3, 'CSV must have header + 2 rows');
+
+        $headers = str_getcsv($lines[0]);
+        $expectedHeaders = [
+            'Scan ID', 'Project', 'Page URL', 'Resource URL', 'Source Type', 'Resource Type',
+            'Processing Status', 'Audit Status', 'Detection Category', 'Severity', 'Confidence',
+            'Matched Text', 'Occurrences', 'Surrounding Context', 'HTML Element', 'CSS Selector',
+            'HTTP Status', 'Checked At'
+        ];
+        $this->assertEquals($expectedHeaders, $headers, 'CSV headers must match contract exactly');
 
         $row1 = str_getcsv($lines[1]);
-        $this->assertEquals('Page', $row1[0], 'First finding must be classified as Page finding');
-        $this->assertEquals('https://exportsvc.example.com/page1', $row1[1]);
-        $this->assertEquals('', $row1[2], 'Page finding must have empty Resource URL');
+        $this->assertEquals('page', $row1[4], 'Page finding source type must be "page"');
+        $this->assertEquals('', $row1[3], 'Page finding resource URL must be empty');
 
         $row2 = str_getcsv($lines[2]);
-        $this->assertEquals('Resource', $row2[0], 'Second finding must be classified as Resource finding');
-        $this->assertEquals('https://exportsvc.example.com/broken.css', $row2[2], 'Resource finding must list Resource URL');
+        $this->assertEquals('resource', $row2[4], 'Resource finding source type must be "resource"');
+        $this->assertEquals('https://expcontract.example.com/app.js', $row2[3], 'Resource finding must list resource URL');
 
-        // Test JSON Export
-        $jsonOutput = $exportService->buildJsonExport(['scan_id' => $scanId]);
-        $decoded = json_decode($jsonOutput, true);
-        $this->assertNotNull($decoded, 'JSON export must produce valid JSON');
-        $this->assertEquals('scan', $decoded['export_scope'], 'Scope must be scan');
-        $this->assertEquals(2, $decoded['total_findings'], 'total_findings in JSON must be 2');
-        $this->assertEquals(2, count($decoded['findings']), 'findings array must have 2 elements');
-        $this->assertEquals('scan', $decoded['findings'][0]['export_type'] ?? 'Page' ? 'scan' : 'scan');
+        // Test JSON generation
+        $json = $exportService->generateJson($exportData);
+        $decoded = json_decode($json, true);
+        $this->assertNotNull($decoded, 'JSON export must decode cleanly');
+        $this->assertEquals($scan1, $decoded['scan_id'], 'JSON export scan_id must match');
+        $this->assertEquals(2, $decoded['metrics']['total_findings'], 'JSON authoritative total_findings must be 2');
+        $this->assertEquals(1, $decoded['metrics']['lorem_findings'], 'JSON authoritative lorem_findings must be 1');
 
-        // Test Project Scoping Isolation
-        $otherProjId = $this->projectRepo->findOrCreate('Other Site', 'https://other.example.com', 'https://other.example.com');
-        $otherScanId = $this->scanRepo->create($otherProjId, 1);
-        $pOther = $this->pageResRepo->saveResult([
-            'scan_id'           => $otherScanId,
-            'discovered_url_id' => 999,
-            'requested_url'     => 'https://other.example.com/secret',
-            'http_status'       => 200,
-        ]);
-        $this->findingRepo->insertBatch($otherScanId, $pOther, null, [
-            ['detection_category' => 'lorem_ipsum', 'matched_text' => 'Secret other site lorem', 'occurrences' => 1]
-        ]);
-
-        $projectJson = json_decode($exportService->buildJsonExport(['project_id' => $projId]), true);
-        $this->assertEquals(2, $projectJson['total_findings'], 'Project export must only include findings from its own scans');
-        foreach ($projectJson['findings'] as $f) {
-            $this->assertTrue(str_contains($f['page_url'], 'exportsvc.example.com'), 'Must not leak URLs from other projects');
-        }
+        // Test Convenience methods
+        $csvConvenience = $exportService->buildCsvExport(['scan_id' => $scan1]);
+        $this->assertTrue(str_contains($csvConvenience, 'Scan1 Lorem text'), 'Convenience buildCsvExport must work');
     }
 
     private function testRuntimeCounterIdempotencyOnPageRetry(): void
     {
         $projId = $this->projectRepo->findOrCreate('Idempotency Site', 'https://idem.example.com', 'https://idem.example.com');
-        $scanId = $this->scanRepo->create($projId, 1);
+        $scanId = $this->scanRepo->createScan($projId);
 
         $url = 'https://idem.example.com/page-retry';
         $urlId = $this->urlRepo->insertDiscovered($scanId, $url, $url, 1, 'crawler');
@@ -587,7 +889,7 @@ class ReportingIntegrityTest
     private function testReconcileCountersDryRunAndApply(): void
     {
         $projId = $this->projectRepo->findOrCreate('Dry Run Site', 'https://dryrun.example.com', 'https://dryrun.example.com');
-        $scanId = $this->scanRepo->create($projId, 1);
+        $scanId = $this->scanRepo->createScan($projId);
 
         // Intentionally corrupt counters with high drift values
         $this->pdo->exec("
@@ -601,7 +903,6 @@ class ReportingIntegrityTest
             WHERE id = {$scanId}
         ");
 
-        // Insert actual authoritative rows: 2 clean pages, 1 page with lorem ipsum
         $this->pageResRepo->saveResult([
             'scan_id'           => $scanId,
             'discovered_url_id' => 501,
@@ -629,6 +930,7 @@ class ReportingIntegrityTest
         ]);
         $this->findingRepo->insertBatch($scanId, $p3, null, [
             [
+                'page_url'           => 'https://dryrun.example.com/p3',
                 'detection_category' => 'lorem_ipsum',
                 'severity'           => 'high',
                 'matched_text'       => 'Authoritative lorem paragraph',
@@ -664,107 +966,132 @@ class ReportingIntegrityTest
         $this->assertEquals(1, (int)$scanUpdated['lorem_finding_count'], 'DB must be corrected to 1');
     }
 
-    private function testStaleCounterOverrideInScanSummary(): void
+    /**
+     * Phase 6: Authoritative in BOTH directions.
+     * 1) Stale 116 with 0 findings -> corrected to 0.
+     * 2) Stale 0 with 5 actual findings -> corrected to 5 (never hidden!).
+     */
+    private function testStaleCounterOverrideInBothDirections(): void
     {
-        $projId = $this->projectRepo->findOrCreate('Stale Summary Site', 'https://stale.example.com', 'https://stale.example.com');
-        $scanId = $this->scanRepo->create($projId, 1);
-
-        // Set scans.lorem_finding_count = 116, with 0 findings in the findings table
-        $this->pdo->exec("
-            UPDATE scans 
-            SET lorem_finding_count = 116, 
-                lorem_occurrence_count = 116, 
-                lorem_page_count = 116, 
-                total_findings = 0 
-            WHERE id = {$scanId}
-        ");
-
-        $resultsCtrl = new \LoremChecker\Api\ResultsController($this->pdo);
-
-        // Simulate scanSummary calculation logic
-        $categories = $this->findingRepo->getCategoryStats($scanId);
-        $catMap = [];
-        foreach ($categories as $cat) {
-            $catMap[$cat['category']] = $cat;
+        $projId = $this->projectRepo->findOrCreate('Direction Site', 'https://dir.example.com', 'https://dir.example.com');
+        
+        // Direction 1: Stale 116 with 0 findings -> must report 0
+        $scan1 = $this->scanRepo->createScan($projId);
+        $this->pdo->exec("UPDATE scans SET lorem_finding_count = 116, total_findings = 116 WHERE id = {$scan1}");
+        
+        // Direction 2: Stale 0 with 5 findings -> must report 5
+        $scan2 = $this->scanRepo->createScan($projId);
+        $p2 = $this->pageResRepo->saveResult([
+            'scan_id'           => $scan2,
+            'discovered_url_id' => 901,
+            'requested_url'     => 'https://dir.example.com/p2',
+            'http_status'       => 200,
+            'processing_status' => 'findings_detected',
+        ]);
+        $findings5 = [];
+        for ($i = 1; $i <= 5; $i++) {
+            $findings5[] = [
+                'page_url'           => 'https://dir.example.com/p2',
+                'detection_category' => 'lorem_ipsum',
+                'matched_text'       => "Lorem phrase {$i}",
+                'occurrences'        => 1
+            ];
         }
+        $this->findingRepo->insertBatch($scan2, $p2, null, $findings5);
+        $this->pdo->exec("UPDATE scans SET lorem_finding_count = 0, total_findings = 0 WHERE id = {$scan2}");
 
-        // Authoritative query check
-        $authLoremCount = isset($catMap['lorem_ipsum']) ? (int)$catMap['lorem_ipsum']['count'] : 0;
-        $authLoremOccur = isset($catMap['lorem_ipsum']) ? (int)$catMap['lorem_ipsum']['occurrences'] : 0;
-        $authLoremPages = isset($catMap['lorem_ipsum']) ? (int)$catMap['lorem_ipsum']['pages'] : 0;
+        // Test ResultsController scanSummary on scan1
+        Response::$testMode = true;
+        $_GET = ['scan_id' => $scan1];
+        $resCtrl = new ResultsController($this->pdo);
+        $resCtrl->scanSummary();
+        $summary1 = Response::$lastResponse['payload']['data'];
+        $this->assertEquals(0, $summary1['lorem']['findings'], 'Scan 1 must override stale 116 to 0');
 
-        $this->assertEquals(0, $authLoremCount, 'Authoritative lorem count must be 0 when no findings exist');
-        $this->assertEquals(0, $authLoremOccur, 'Authoritative lorem occurrences must be 0');
-        $this->assertEquals(0, $authLoremPages, 'Authoritative lorem pages must be 0');
+        // Test ResultsController scanSummary on scan2
+        $_GET = ['scan_id' => $scan2];
+        $resCtrl->scanSummary();
+        $summary2 = Response::$lastResponse['payload']['data'];
+        $this->assertEquals(5, $summary2['lorem']['findings'], 'Scan 2 must override stale 0 to 5 (never hide findings!)');
 
-        // Check ScanController status authoritative logic
-        $scan = $this->scanRepo->getById($scanId);
-        $totalFindings = (int)$scan['total_findings'];
-        $loremFound    = (int)($scan['lorem_finding_count'] ?? 0);
-        if ($totalFindings === 0) {
-            $loremFound = 0;
-        }
-        $this->assertEquals(0, $loremFound, 'Scan status must override stale 116 to 0');
+        // Test ScanController status on scan1
+        $scanCtrl = new ScanController($this->pdo, []);
+        $_GET = ['scan_id' => $scan1];
+        $scanCtrl->status();
+        $status1 = Response::$lastResponse['payload']['data'];
+        $this->assertEquals(0, $status1['project']['progress']['lorem_found'], 'Live status must override stale 116 to 0');
+
+        // Test ScanController status on scan2
+        $_GET = ['scan_id' => $scan2];
+        $scanCtrl->status();
+        $status2 = Response::$lastResponse['payload']['data'];
+        $this->assertEquals(5, $status2['project']['progress']['lorem_found'], 'Live status must override stale 0 to 5');
     }
 
-    private function testMutuallyExclusiveTerminalPageClassification(): void
+    /**
+     * Phase 10 Item F:
+     * Actual API controller integration tests across ProjectController, ScanController, ResultsController.
+     */
+    private function testActualApiControllersWithTestMode(): void
     {
-        $projId = $this->projectRepo->findOrCreate('Classification Site', 'https://class.example.com', 'https://class.example.com');
-        $scanId = $this->scanRepo->create($projId, 1);
+        Response::$testMode = true;
 
-        $terminalFailures = ['failed', 'timeout', 'ssl_error', 'cloudflare_blocked', 'bot_blocked', 'rate_limited', 'not_found', 'error'];
-        $urlIndex = 700;
+        $projId = $this->projectRepo->findOrCreate('API Integ Site', 'https://apiinteg.example.com', 'https://apiinteg.example.com');
+        $scanId = $this->scanRepo->createScan($projId);
 
-        // 8 terminal failure pages
-        foreach ($terminalFailures as $failStatus) {
-            $urlIndex++;
-            $this->pageResRepo->saveResult([
-                'scan_id'           => $scanId,
-                'discovered_url_id' => $urlIndex,
-                'requested_url'     => "https://class.example.com/fail-{$failStatus}",
-                'http_status'       => 500,
-                'processing_status' => $failStatus,
-                'finding_count'     => 0,
-            ]);
+        $url = 'https://apiinteg.example.com/home';
+        $urlId = $this->urlRepo->insertDiscovered($scanId, $url, $url, 1, 'crawler');
+        $pid = $this->pageResRepo->saveResult([
+            'scan_id'           => $scanId,
+            'discovered_url_id' => $urlId,
+            'requested_url'     => $url,
+            'http_status'       => 200,
+            'processing_status' => 'findings_detected',
+        ]);
+        $this->findingRepo->insertBatch($scanId, $pid, null, [
+            ['page_url' => $url, 'detection_category' => 'lorem_ipsum', 'matched_text' => 'Home lorem text', 'occurrences' => 2],
+        ]);
+
+        // 1. Test ProjectController::list()
+        $projCtrl = new ProjectController($this->pdo);
+        $_GET = [];
+        $projCtrl->list();
+        $projList = Response::$lastResponse['payload']['data']['projects'];
+        $foundProj = null;
+        foreach ($projList as $p) {
+            if ((int)$p['id'] === $projId) {
+                $foundProj = $p;
+                break;
+            }
         }
+        $this->assertNotNull($foundProj, 'Project must appear in list()');
+        $this->assertEquals(1, $foundProj['progress']['lorem_found'], 'Project list lorem_found must be 1');
+        $this->assertEquals(2, $foundProj['progress']['lorem_occurrences'], 'Project list lorem_occurrences must be 2');
 
-        // 3 affected pages with findings
-        for ($i = 1; $i <= 3; $i++) {
-            $urlIndex++;
-            $pid = $this->pageResRepo->saveResult([
-                'scan_id'           => $scanId,
-                'discovered_url_id' => $urlIndex,
-                'requested_url'     => "https://class.example.com/affected-{$i}",
-                'http_status'       => 200,
-                'processing_status' => 'findings_detected',
-                'finding_count'     => 1,
-            ]);
-            $this->findingRepo->insertBatch($scanId, $pid, null, [
-                ['detection_category' => 'broken_link', 'matched_text' => 'Broken link', 'occurrences' => 1]
-            ]);
-        }
+        // 2. Test ScanController::scansList()
+        $scanCtrl = new ScanController($this->pdo, []);
+        $_GET = ['project_id' => $projId];
+        $scanCtrl->scansList();
+        $scans = Response::$lastResponse['payload']['data']['scans'];
+        $this->assertEquals(1, count($scans), 'scansList must return 1 scan');
+        $this->assertEquals(1, (int)$scans[0]['lorem_finding_count'], 'scansList lorem_finding_count must be 1');
 
-        // 5 clean pages
-        for ($i = 1; $i <= 5; $i++) {
-            $urlIndex++;
-            $this->pageResRepo->saveResult([
-                'scan_id'           => $scanId,
-                'discovered_url_id' => $urlIndex,
-                'requested_url'     => "https://class.example.com/clean-{$i}",
-                'http_status'       => 200,
-                'processing_status' => 'clean',
-                'finding_count'     => 0,
-            ]);
-        }
+        // 3. Test ResultsController::listPages()
+        $resCtrl = new ResultsController($this->pdo);
+        $_GET = ['scan_id' => $scanId, 'page' => 1, 'limit' => 10];
+        $resCtrl->listPages();
+        $pagesData = Response::$lastResponse['payload']['data'];
+        $this->assertEquals(1, count($pagesData['results']), 'listPages must return 1 page result');
 
-        $reconciled = $this->scanRepo->reconcileCounters($scanId, true);
+        // 4. Test ResultsController::listFindings()
+        $_GET = ['scan_id' => $scanId, 'page' => 1, 'limit' => 10];
+        $resCtrl->listFindings();
+        $findData = Response::$lastResponse['payload']['data'];
+        $this->assertEquals(1, count($findData['findings']), 'listFindings must return 1 finding');
 
-        $this->assertEquals(8, $reconciled['failed_count'], 'Failed count must be exactly 8');
-        $this->assertEquals(3, $reconciled['affected_page_count'], 'Affected count must be exactly 3');
-        $this->assertEquals(5, $reconciled['clean_count'], 'Clean count must be exactly 5');
-        $this->assertEquals(16, $reconciled['processed_count'], 'Processed count must be exactly 16');
-        $this->assertEquals(16, $reconciled['clean_count'] + $reconciled['affected_page_count'] + $reconciled['failed_count'], 'Sum must match processed count');
-        $this->assertTrue($reconciled['diagnostics']['invariant_passed'], 'Invariant check must pass');
+        // Reset test mode
+        Response::$testMode = false;
+        Response::$lastResponse = null;
     }
 
     private function assertEquals($expected, $actual, string $message = ''): void

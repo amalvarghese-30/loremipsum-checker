@@ -104,7 +104,16 @@ echo " SCAN COUNTERS RECONCILIATION — " . $modeLabel . "\n";
 echo " Total target scans: " . count($scansToReconcile) . "\n";
 echo "========================================================================\n\n";
 
-$activeStatuses = ['initializing', 'discovering', 'scanning', 'pause_requested'];
+$activeStatuses = [
+    'queued',
+    'initializing',
+    'discovering',
+    'scanning',
+    'pause_requested',
+    'paused',
+    'interrupted',
+    'cancel_requested',
+];
 $successCount = 0;
 $skippedCount = 0;
 $invariantFailureCount = 0;
@@ -120,8 +129,8 @@ foreach ($scansToReconcile as $sId) {
 
     $currentStatus = (string)($before['status'] ?? 'unknown');
     if (in_array($currentStatus, $activeStatuses, true) && !$forceActive) {
-        echo "[WARN] Scan #{$sId} is active (status: '{$currentStatus}'). Skipping to avoid race condition.\n";
-        echo "       Pass --force-active to override this guard.\n\n";
+        echo "[WARN] Scan #{$sId} is active or resumable (status: '{$currentStatus}'). Skipping to avoid race conditions.\n";
+        echo "       Pass --force-active to override this protection.\n\n";
         $skippedCount++;
         if ($scanId && count($scansToReconcile) === 1) {
             exit(2);
@@ -138,9 +147,23 @@ foreach ($scansToReconcile as $sId) {
     }
 
     $diag = $result['diagnostics'] ?? [];
-    $invariantPassed = !empty($diag['invariant_passed']);
+    $invariantPassed = !empty($diag['invariant_passed']) || !empty($result['invariant_passed']);
     if (!$invariantPassed) {
         $invariantFailureCount++;
+    }
+
+    // On apply mode, verify stored counters match by reading back
+    if ($apply) {
+        $afterStored = $scanRepo->getById($sId);
+        $p = (int)($afterStored['processed_count'] ?? 0);
+        $c = (int)($afterStored['clean_count'] ?? 0);
+        $a = (int)($afterStored['affected_page_count'] ?? 0);
+        $f = (int)($afterStored['failed_count'] ?? 0);
+        if ($p !== ($c + $a + $f)) {
+            echo "[ERROR] Read-back invariant check failed after apply: {$p} != {$c} + {$a} + {$f}\n";
+            $invariantFailureCount++;
+            $invariantPassed = false;
+        }
     }
 
     echo "------------------------------------------------------------------------\n";
@@ -158,6 +181,7 @@ foreach ($scansToReconcile as $sId) {
         'lorem_finding_count'    => 'Lorem Findings',
         'lorem_occurrence_count' => 'Lorem Occurrences',
         'lorem_page_count'       => 'Lorem Pages',
+        'resource_finding_count' => 'Resource Findings',
     ];
 
     foreach ($fields as $key => $label) {
@@ -169,11 +193,13 @@ foreach ($scansToReconcile as $sId) {
     }
 
     echo "\nDiagnostics:\n";
+    echo "  - Canonical pages count:               " . ($diag['canonical_pages_count'] ?? 0) . "\n";
     echo "  - Duplicate page results found:        " . ($diag['duplicate_pages_count'] ?? 0) . "\n";
     echo "  - Unclassified page results:           " . ($diag['unclassified_pages_count'] ?? 0) . "\n";
+    echo "  - Inconsistent clean pages repaired:   " . ($diag['inconsistent_clean_count'] ?? 0) . "\n";
     echo "  - has_lorem_ipsum discrepancies:       " . ($diag['lorem_flag_discrepancy_count'] ?? 0) . ($apply ? " (repaired)" : " (pending repair)") . "\n";
     echo "  - Invariant check (P = C + A + F):     " . ($invariantPassed ? "[PASS]" : "[FAIL]") . "\n";
-    echo "  - Status:                              " . ($apply ? "[APPLIED]" : "[DRY-RUN SIMULATED]") . "\n\n";
+    echo "  - Mode:                                " . ($apply ? "[APPLIED]" : "[DRY-RUN SIMULATED — NO DATABASE WRITES]") . "\n\n";
 
     $successCount++;
 }

@@ -509,6 +509,11 @@ class ScanScheduler
 
             if ($resFetch['error_type'] !== null || $resFetch['http_status'] !== 200 || empty($resFetch['content'])) {
                 $this->resourceRepo->markFailed($resourceId, $resFetch['error_message'] ?: "HTTP {$resFetch['http_status']}");
+                // If resource previously had findings from an earlier attempt, clean them up and adjust counters
+                $oldDeleted = $this->findingRepo->deleteByResourceId($scanId, $resourceId);
+                if ($oldDeleted > 0) {
+                    $this->scanRepo->recordResourceFindings($scanId, 0, $oldDeleted);
+                }
                 continue;
             }
 
@@ -523,19 +528,34 @@ class ScanScheduler
                 $resFindings = $this->detector->scanJson($resBody, $resolved, $pageUrl);
             }
 
+            $newFindingCount = count($resFindings);
+
             $this->resourceRepo->markCompleted($resourceId, [
                 'content_type'  => $resFetch['content_type'],
                 'http_status'   => $resFetch['http_status'],
                 'response_size' => $resFetch['response_size'],
                 'duration_ms'   => $resFetch['duration_ms'],
-                'finding_count' => count($resFindings),
+                'finding_count' => $newFindingCount,
             ]);
 
-            if (!empty($resFindings)) {
-                $oldDeleted = $this->findingRepo->deleteByResourceId($scanId, $resourceId);
+            // Purge any prior findings for this resource to maintain complete idempotency
+            $oldDeleted = $this->findingRepo->deleteByResourceId($scanId, $resourceId);
+
+            if ($newFindingCount > 0) {
+                // Ensure page_url and resource_url are populated for export and query clarity
+                foreach ($resFindings as &$rf) {
+                    $rf['page_url']     = $rf['page_url'] ?? $pageUrl;
+                    $rf['resource_url'] = $rf['resource_url'] ?? $resolved;
+                }
+                unset($rf);
+
                 $this->findingRepo->insertBatch($scanId, $pageResultId, $resourceId, $resFindings);
-                $this->scanRepo->recordResourceFindings($scanId, count($resFindings), $oldDeleted);
                 $this->logRepo->log($scanId, $projectId, 'WARNING', "Placeholder found in external {$type}: {$resolved}", 'detection', $resolved);
+            }
+
+            // Atomically update resource finding counters with signed delta
+            if ($newFindingCount > 0 || $oldDeleted > 0) {
+                $this->scanRepo->recordResourceFindings($scanId, $newFindingCount, $oldDeleted);
             }
         }
     }

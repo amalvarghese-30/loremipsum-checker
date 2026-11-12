@@ -135,6 +135,42 @@ class ScanTransactionRecoveryTest
                 updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
 
+            CREATE TABLE url_discovery_sources (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                discovered_url_id INTEGER NOT NULL,
+                scan_id INTEGER NOT NULL,
+                source_type VARCHAR(100) NOT NULL,
+                source_url TEXT NULL,
+                crawl_depth INTEGER NOT NULL DEFAULT 0,
+                discovered_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+
+            CREATE TABLE scan_resources (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                scan_id INTEGER NOT NULL,
+                page_result_id INTEGER NULL,
+                resource_url TEXT NOT NULL,
+                normalized_resource_url VARCHAR(2048) NOT NULL,
+                resource_hash CHAR(64) NOT NULL,
+                resource_type TEXT NOT NULL DEFAULT "other",
+                content_type VARCHAR(255) NULL,
+                http_status INTEGER NULL,
+                processing_status TEXT NOT NULL DEFAULT "pending",
+                response_size INTEGER NULL,
+                duration_ms INTEGER NULL,
+                finding_count INTEGER NOT NULL DEFAULT 0,
+                error_message TEXT NULL,
+                fetched_at DATETIME NULL
+            );
+
+            CREATE TABLE page_resource_relations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                scan_id INTEGER NOT NULL,
+                page_result_id INTEGER NOT NULL,
+                resource_id INTEGER NOT NULL,
+                created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+
             CREATE TABLE page_results (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 scan_id INTEGER NOT NULL,
@@ -168,6 +204,7 @@ class ScanTransactionRecoveryTest
                 resource_url TEXT NULL,
                 resource_type VARCHAR(50) NOT NULL DEFAULT "html",
                 matched_text TEXT NOT NULL,
+                occurrences INTEGER NOT NULL DEFAULT 1,
                 surrounding_context TEXT NULL,
                 html_element VARCHAR(100) NULL,
                 css_selector VARCHAR(500) NULL,

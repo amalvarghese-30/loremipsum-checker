@@ -28,18 +28,18 @@ class PageResultRepository
         $scanId          = (int)$data['scan_id'];
         $discoveredUrlId = (int)$data['discovered_url_id'];
 
-        // Check for existing result for this URL within the scan
-        $checkStmt = $this->db->prepare('SELECT * FROM page_results WHERE scan_id = ? AND discovered_url_id = ? LIMIT 1');
+        // Check for existing canonical result for this URL within the scan deterministically
+        $checkStmt = $this->db->prepare('SELECT * FROM page_results WHERE scan_id = ? AND discovered_url_id = ? ORDER BY id DESC LIMIT 1');
         $checkStmt->execute([$scanId, $discoveredUrlId]);
         $existing = $checkStmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($existing) {
+        if ($existing && empty($data['force_insert'])) {
             $pageResId = (int)$existing['id'];
 
-            // Capture prior metrics before removing old findings
+            // Capture prior PAGE-LEVEL metrics only (resource findings are tracked independently)
             $findStmt = $this->db->prepare('
                 SELECT 
-                    COUNT(*) as total_findings,
+                    COUNT(CASE WHEN resource_id IS NULL THEN 1 END) as total_page_findings,
                     COUNT(CASE WHEN detection_category = "lorem_ipsum" AND resource_id IS NULL THEN 1 END) as lorem_findings,
                     COALESCE(SUM(CASE WHEN detection_category = "lorem_ipsum" AND resource_id IS NULL THEN COALESCE(occurrences, 1) ELSE 0 END), 0) as lorem_occurrences,
                     COUNT(CASE WHEN detection_category != "lorem_ipsum" AND resource_id IS NULL THEN 1 END) as audit_findings
@@ -49,23 +49,37 @@ class PageResultRepository
             $findStmt->execute([$pageResId]);
             $fRow = $findStmt->fetch(PDO::FETCH_ASSOC) ?: [];
 
+            $hasDbFindings = ($fRow['total_page_findings'] ?? 0) > 0;
+            $pageFindingCount = $hasDbFindings 
+                ? (int)$fRow['total_page_findings'] 
+                : (int)($existing['finding_count'] ?? 0);
+            $loremFindings = $hasDbFindings
+                ? (int)($fRow['lorem_findings'] ?? 0)
+                : (!empty($existing['has_lorem_ipsum']) ? $pageFindingCount : 0);
+            $loremOccurrences = $hasDbFindings
+                ? (int)($fRow['lorem_occurrences'] ?? 0)
+                : (!empty($existing['has_lorem_ipsum']) ? $pageFindingCount : 0);
+            $auditFindings = $hasDbFindings
+                ? (int)($fRow['audit_findings'] ?? 0)
+                : (empty($existing['has_lorem_ipsum']) ? $pageFindingCount : 0);
+
             $isFailed = in_array($existing['processing_status'], ['failed', 'cloudflare_blocked', 'bot_blocked', 'rate_limited', 'timeout', 'ssl_error', 'not_found', 'error'], true) || ((int)($existing['http_status'] ?? 0) >= 400);
-            $isClean = ($existing['processing_status'] === 'clean') && !$isFailed;
-            $isAffected = ($existing['processing_status'] === 'findings_detected' || (int)($existing['finding_count'] ?? 0) > 0) && !$isFailed;
+            $isAffected = ($existing['processing_status'] === 'findings_detected' || $pageFindingCount > 0) && !$isFailed;
+            $isClean = ($existing['processing_status'] === 'clean') && !$isFailed && ($pageFindingCount === 0);
 
             $oldMetrics = [
                 'is_clean'          => $isClean ? 1 : 0,
                 'is_affected'       => $isAffected ? 1 : 0,
                 'is_failed'         => $isFailed ? 1 : 0,
                 'has_lorem'         => !empty($existing['has_lorem_ipsum']) ? 1 : 0,
-                'lorem_findings'    => (int)($fRow['lorem_findings'] ?? 0),
-                'lorem_occurrences' => (int)($fRow['lorem_occurrences'] ?? 0),
-                'audit_findings'    => (int)($fRow['audit_findings'] ?? 0),
-                'total_findings'    => (int)($fRow['total_findings'] ?? 0),
+                'lorem_findings'    => $loremFindings,
+                'lorem_occurrences' => $loremOccurrences,
+                'audit_findings'    => $auditFindings,
+                'total_findings'    => $pageFindingCount,
             ];
 
-            // Remove previous findings for this page_result before updating to prevent duplicates
-            $delFindings = $this->db->prepare('DELETE FROM findings WHERE page_result_id = ?');
+            // Remove previous PAGE-LEVEL findings only; preserve external resource findings (resource_id IS NOT NULL)
+            $delFindings = $this->db->prepare('DELETE FROM findings WHERE page_result_id = ? AND resource_id IS NULL');
             $delFindings->execute([$pageResId]);
 
             $upd = QueryHelper::prepare($this->db, '
