@@ -183,7 +183,7 @@ class ParagraphLevelDetectionTest
 
         $ref = new \ReflectionMethod(ScanWorker::class, 'mergeEffectiveConfig');
         $ref->setAccessible(true);
-        $worker = (new \ReflectionClass(ScanWorker::class))->newInstanceWithoutArgs();
+        $worker = (new \ReflectionClass(ScanWorker::class))->newInstanceWithoutConstructor();
 
         $merged = $ref->invoke($worker, $baseConfig, $scanSettings);
 

@@ -296,6 +296,7 @@ class RepositoryIntegrationTest
             'pattern'   => '/__PLACEHOLDER__/i',
             'severity'  => 'high',
             'confidence'=> 'high',
+            'enabled'   => 1,
         ]);
         $this->assertTrue($ruleId > 0, 'Custom rule added');
 

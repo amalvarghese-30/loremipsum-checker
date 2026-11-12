@@ -158,7 +158,7 @@ class RuleRepository
             $rule['rule_name'],
             $rule['pattern'],
             $rule['detection_category'] ?? 'placeholder',
-            !empty($rule['enabled']) ? 1 : 0,
+            isset($rule['enabled']) ? ($rule['enabled'] ? 1 : 0) : 1,
             !empty($rule['case_sensitive']) ? 1 : 0,
             $rule['severity'] ?? 'high',
             $rule['confidence'] ?? 'high',

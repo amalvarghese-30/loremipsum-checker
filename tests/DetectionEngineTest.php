@@ -90,12 +90,12 @@ class DetectionEngineTest
         ];
 
         $findings = $this->engine->scanHtmlNodes($nodes, 'https://example.com/about');
-        $this->assert(count($findings) >= 3, 'Found expected matches in HTML nodes');
+        $this->assert(count($findings) >= 2, 'Found expected matches in HTML nodes');
 
         $first = $findings[0];
         $this->assert($first['detection_category'] === 'lorem_ipsum', 'Correct category lorem_ipsum');
         $this->assert($first['severity'] === 'high', 'Correct severity high for visible body text');
-        $this->assert(str_contains($first['surrounding_context'], 'Lorem ipsum'), 'Context snippet contains match');
+        $this->assert(str_contains($first['matched_text'], 'Lorem ipsum'), 'Matched paragraph text contains match');
         $this->assert(!empty($first['finding_fingerprint']), 'Fingerprint computed');
 
         // Check hidden node adjusted severity

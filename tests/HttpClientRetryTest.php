@@ -167,11 +167,12 @@ class HttpClientRetryTest
         }
     }
 
-    private function assertEquals($expected, $actual, string $message): void
+    private function assertEquals($expected, $actual, string $message = ''): void
     {
         $this->assertions++;
         if ($expected !== $actual) {
-            throw new \RuntimeException("Assertion failed: {$message}. Expected: " . var_export($expected, true) . ", got: " . var_export($actual, true));
+            $msg = $message !== '' ? "Assertion failed: {$message}." : "Assertion failed.";
+            throw new \RuntimeException("{$msg} Expected: " . var_export($expected, true) . ", got: " . var_export($actual, true));
         }
     }
 }

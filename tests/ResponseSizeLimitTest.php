@@ -149,7 +149,7 @@ class ResponseSizeLimitTest
         $refMethod->setAccessible(true);
 
         // Dummy worker instance without invoking constructor DB
-        $worker = (new \ReflectionClass(ScanWorker::class))->newInstanceWithoutArgs();
+        $worker = (new \ReflectionClass(ScanWorker::class))->newInstanceWithoutConstructor();
 
         $scanSettings = [
             'max_response_size' => 20971520, // 20 MB

@@ -317,17 +317,38 @@ class HtmlContentExtractor
 
     private function buildCssSelector(DOMElement $element): string
     {
-        $tag = strtolower($element->tagName);
-        if ($element->hasAttribute('id')) {
-            return $tag . '#' . $element->getAttribute('id');
-        }
-        if ($element->hasAttribute('class')) {
-            $classes = explode(' ', trim($element->getAttribute('class')));
-            $firstClass = trim($classes[0] ?? '');
-            if ($firstClass !== '') {
-                return $tag . '.' . $firstClass;
+        $path = [];
+        $curr = $element;
+
+        while ($curr instanceof DOMElement && strtolower($curr->tagName) !== 'body' && strtolower($curr->tagName) !== 'html') {
+            $tag = strtolower($curr->tagName);
+            if ($curr->hasAttribute('id')) {
+                $path[] = $tag . '#' . $curr->getAttribute('id');
+                break; // IDs are unique, can anchor selector
             }
+
+            // Find index among siblings of same tag
+            $index = 1;
+            $prev = $curr->previousSibling;
+            while ($prev) {
+                if ($prev instanceof DOMElement && strtolower($prev->tagName) === $tag) {
+                    $index++;
+                }
+                $prev = $prev->previousSibling;
+            }
+
+            if ($curr->hasAttribute('class')) {
+                $classes = explode(' ', trim($curr->getAttribute('class')));
+                $firstClass = trim($classes[0] ?? '');
+                if ($firstClass !== '') {
+                    $tag .= '.' . $firstClass;
+                }
+            }
+
+            $path[] = "{$tag}:nth-of-type({$index})";
+            $curr = $curr->parentNode;
         }
-        return $tag;
+
+        return !empty($path) ? implode(' > ', array_reverse($path)) : strtolower($element->tagName);
     }
 }
