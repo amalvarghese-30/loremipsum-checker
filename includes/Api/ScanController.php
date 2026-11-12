@@ -206,6 +206,28 @@ class ScanController
         $processed = (int)$scan['processed_count'];
         $percentage = $totalUrls > 0 ? round(($processed / $totalUrls) * 100, 2) : 0;
 
+        $totalFindings    = (int)$scan['total_findings'];
+        $loremFound       = (int)($scan['lorem_finding_count'] ?? 0);
+        $loremPages       = (int)($scan['lorem_page_count'] ?? 0);
+        $loremOccurrences = (int)($scan['lorem_occurrence_count'] ?? $loremFound);
+        $affectedPages    = (int)$scan['affected_page_count'];
+
+        // Authoritative verification: zero persisted findings must yield 0 lorem findings
+        if ($totalFindings === 0) {
+            $loremFound       = 0;
+            $loremPages       = 0;
+            $loremOccurrences = 0;
+            $affectedPages    = 0;
+        } elseif ($loremFound > 0) {
+            $chk = $this->db->prepare("SELECT COUNT(*) FROM findings WHERE scan_id = ? AND detection_category = 'lorem_ipsum' AND resource_id IS NULL");
+            $chk->execute([$scanId]);
+            if ((int)$chk->fetchColumn() === 0) {
+                $loremFound       = 0;
+                $loremPages       = 0;
+                $loremOccurrences = 0;
+            }
+        }
+
         // Fetch recent logs
         $limit = isset($_GET['limit']) ? min(100, max(1, (int)$_GET['limit'])) : 25;
         $dbLogs = $this->logRepo->getLogs($scanId, $limit);
@@ -249,11 +271,11 @@ class ScanController
                     'total_urls'        => $totalUrls,
                     'processed'         => $processed,
                     'clean'             => (int)$scan['clean_count'],
-                    'lorem_found'       => (int)($scan['lorem_finding_count'] ?? 0),
-                    'lorem_pages'       => (int)($scan['lorem_page_count'] ?? 0),
-                    'lorem_occurrences' => (int)($scan['lorem_occurrence_count'] ?? ($scan['lorem_finding_count'] ?? 0)),
-                    'affected_pages'    => (int)$scan['affected_page_count'],
-                    'total_findings'    => (int)$scan['total_findings'],
+                    'lorem_found'       => $loremFound,
+                    'lorem_pages'       => $loremPages,
+                    'lorem_occurrences' => $loremOccurrences,
+                    'affected_pages'    => $affectedPages,
+                    'total_findings'    => $totalFindings,
                     'errors'            => (int)$scan['failed_count'],
                     'percentage'        => $percentage,
                     'queue_counts'      => $queueCounts,
@@ -283,6 +305,23 @@ class ScanController
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
         $scans = $stmt->fetchAll() ?: [];
+
+        foreach ($scans as &$s) {
+            if ((int)($s['total_findings'] ?? 0) === 0) {
+                $s['lorem_finding_count'] = 0;
+                $s['lorem_page_count'] = 0;
+                $s['lorem_occurrence_count'] = 0;
+            } elseif ((int)($s['lorem_finding_count'] ?? 0) > 0) {
+                $chk = $this->db->prepare("SELECT COUNT(*) FROM findings WHERE scan_id = ? AND detection_category = 'lorem_ipsum' AND resource_id IS NULL");
+                $chk->execute([(int)$s['id']]);
+                if ((int)$chk->fetchColumn() === 0) {
+                    $s['lorem_finding_count'] = 0;
+                    $s['lorem_page_count'] = 0;
+                    $s['lorem_occurrence_count'] = 0;
+                }
+            }
+        }
+        unset($s);
 
         Response::success(['scans' => $scans]);
     }

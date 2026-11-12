@@ -178,7 +178,7 @@ class ScanScheduler
                         try {
                             $uId = (int)$urlMap[$url]['id'];
                             $this->urlRepo->markStatus($uId, 'failed', $url, 'Processing exception: ' . $e->getMessage());
-                            $this->pageResRepo->saveResult([
+                            $res = $this->pageResRepo->saveResultWithMetrics([
                                 'scan_id'           => $scanId,
                                 'discovered_url_id' => $uId,
                                 'requested_url'     => $url,
@@ -194,7 +194,12 @@ class ScanScheduler
                                 'error_message'     => $e->getMessage(),
                                 'has_lorem_ipsum'   => 0,
                             ]);
-                            $this->scanRepo->recordPageResult($scanId, 'failed', 0);
+                            $this->scanRepo->recordPageResult(
+                                $scanId,
+                                'failed',
+                                0, 0, 0, 0, 0, 0,
+                                $res['old_metrics'] ?? null
+                            );
                         } catch (\Throwable $recEx) {}
                     }
                 },
@@ -270,7 +275,7 @@ class ScanScheduler
             $this->db->beginTransaction();
             try {
                 $this->urlRepo->markStatus($urlId, 'failed', $finalUrl, $errorMsg);
-                $this->pageResRepo->saveResult([
+                $res = $this->pageResRepo->saveResultWithMetrics([
                     'scan_id'           => $scanId,
                     'discovered_url_id' => $urlId,
                     'requested_url'     => $url,
@@ -285,7 +290,12 @@ class ScanScheduler
                     'error_message'     => $errorMsg ?: "HTTP {$httpStatus}",
                     'has_lorem_ipsum'   => 0,
                 ]);
-                $this->scanRepo->recordPageResult($scanId, $pStatus, 0);
+                $this->scanRepo->recordPageResult(
+                    $scanId,
+                    $pStatus,
+                    0, 0, 0, 0, 0, 0,
+                    $res['old_metrics'] ?? null
+                );
                 $this->db->commit();
             } catch (\Throwable $e) {
                 if ($this->db->inTransaction()) {
@@ -360,7 +370,7 @@ class ScanScheduler
         $this->db->beginTransaction();
         try {
             $this->urlRepo->markStatus($urlId, 'completed', $finalUrl);
-            $pageResultId = $this->pageResRepo->saveResult([
+            $saveRes = $this->pageResRepo->saveResultWithMetrics([
                 'scan_id'           => $scanId,
                 'discovered_url_id' => $urlId,
                 'requested_url'     => $url,
@@ -380,6 +390,7 @@ class ScanScheduler
                 'content_hash'      => $contentHash,
                 'rendered_with_js'  => $renderedWithJs ? 1 : 0,
             ]);
+            $pageResultId = $saveRes['id'];
 
             if (!empty($allFindings) && $pageResultId) {
                 $this->findingRepo->insertBatch($scanId, $pageResultId, null, $allFindings);
@@ -400,7 +411,8 @@ class ScanScheduler
                 $auditCount,
                 0, // Resource findings recorded separately in inspectDiscoveredResources
                 $hasLorem ? 1 : 0,
-                $loremOccurrences
+                $loremOccurrences,
+                $saveRes['old_metrics'] ?? null
             );
             $this->db->commit();
         } catch (\Throwable $e) {
@@ -520,8 +532,9 @@ class ScanScheduler
             ]);
 
             if (!empty($resFindings)) {
+                $oldDeleted = $this->findingRepo->deleteByResourceId($scanId, $resourceId);
                 $this->findingRepo->insertBatch($scanId, $pageResultId, $resourceId, $resFindings);
-                $this->scanRepo->recordResourceFindings($scanId, count($resFindings));
+                $this->scanRepo->recordResourceFindings($scanId, count($resFindings), $oldDeleted);
                 $this->logRepo->log($scanId, $projectId, 'WARNING', "Placeholder found in external {$type}: {$resolved}", 'detection', $resolved);
             }
         }

@@ -42,6 +42,23 @@ class ProjectController
             $affectedPages    = (int)($r['affected_page_count'] ?? 0);
             $totalFindings    = (int)($r['total_findings'] ?? 0);
 
+            // Authoritative verification: zero persisted findings must always yield 0 lorem metrics
+            $latestScanId = !empty($r['latest_scan_id']) ? (int)$r['latest_scan_id'] : null;
+            if ($totalFindings === 0) {
+                $loremFindings    = 0;
+                $loremPages       = 0;
+                $loremOccurrences = 0;
+                $affectedPages    = 0;
+            } elseif ($latestScanId && $loremFindings > 0) {
+                $chk = $this->db->prepare("SELECT COUNT(*) FROM findings WHERE scan_id = ? AND detection_category = 'lorem_ipsum' AND resource_id IS NULL");
+                $chk->execute([$latestScanId]);
+                if ((int)$chk->fetchColumn() === 0) {
+                    $loremFindings    = 0;
+                    $loremPages       = 0;
+                    $loremOccurrences = 0;
+                }
+            }
+
             // Maintain exact structure expected by index.html loadProjects()
             $projects[] = [
                 'id'           => (string)$r['id'],

@@ -34,6 +34,38 @@ function warn(string $msg): void  { echo "[WARN]  $msg\n"; }
 function migError(string $msg): void { echo "[ERROR] $msg\n"; }
 function head(string $msg): void  { echo "\n$msg\n" . str_repeat('-', 60) . "\n"; }
 
+/**
+ * Check whether a column exists in a given table across SQLite and MySQL.
+ */
+function columnExists(\PDO $pdo, string $driver, string $table, string $column): bool
+{
+    $table = str_replace('`', '', $table);
+    $column = str_replace('`', '', $column);
+
+    if ($driver === 'sqlite') {
+        $stmt = $pdo->query("PRAGMA table_info(`{$table}`)");
+        if ($stmt) {
+            $cols = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            foreach ($cols as $col) {
+                if (isset($col['name']) && strcasecmp((string)$col['name'], $column) === 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    $stmt = $pdo->prepare("
+        SELECT COUNT(*) 
+        FROM information_schema.COLUMNS 
+        WHERE TABLE_SCHEMA = DATABASE() 
+          AND TABLE_NAME = ? 
+          AND COLUMN_NAME = ?
+    ");
+    $stmt->execute([$table, $column]);
+    return (int)$stmt->fetchColumn() > 0;
+}
+
 info("Using database driver: " . strtoupper($driver));
 
 // ── --fresh: drop everything ──────────────────────────────────────────────────
@@ -137,15 +169,18 @@ foreach ($files as $file) {
             if ($stmt === '' || $stmt === ';') {
                 continue;
             }
-            try {
-                $pdo->exec($stmt);
-            } catch (\PDOException $e) {
-                if (stripos($e->getMessage(), 'duplicate column') !== false || stripos($e->getMessage(), 'already exists') !== false) {
-                    warn("Column or index already exists: " . $e->getMessage());
+
+            // Proactively check if adding a column that already exists
+            if (preg_match('/^ALTER\s+TABLE\s+[`"]?(\w+)[`"]?\s+ADD(?:\s+COLUMN)?\s+[`"]?(\w+)[`"]?/i', $stmt, $m)) {
+                $targetTable = $m[1];
+                $targetCol   = $m[2];
+                if (columnExists($pdo, $driver, $targetTable, $targetCol)) {
+                    info("Column `{$targetCol}` already exists in `{$targetTable}` — skipping DDL.");
                     continue;
                 }
-                throw $e;
             }
+
+            $pdo->exec($stmt);
         }
 
         $ins = $pdo->prepare("INSERT INTO `schema_migrations` (`migration`) VALUES (?)");

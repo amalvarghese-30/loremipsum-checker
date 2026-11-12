@@ -66,6 +66,9 @@ class ProjectRepository
                    s.affected_page_count,
                    s.failed_count,
                    s.total_findings,
+                   s.lorem_finding_count,
+                   s.lorem_page_count,
+                   s.lorem_occurrence_count,
                    s.created_at as latest_scan_at
             FROM projects p
             LEFT JOIN (

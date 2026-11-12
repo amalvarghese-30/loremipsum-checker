@@ -205,11 +205,26 @@ class ResultsController
         $projectStmt->execute([(int)$scan['project_id']]);
         $project = $projectStmt->fetch() ?: [];
 
-        // Ensure scan counters accurately reflect source-of-truth rows
+        // Calculate authoritative page-level Lorem metrics directly from findings table
+        // A missing category in findings means ZERO findings - never fall back to stale counters!
         $loremCat = $catMap['lorem_ipsum'] ?? null;
-        $loremFindings = $loremCat ? (int)$loremCat['count'] : (int)($scan['lorem_finding_count'] ?? 0);
-        $loremOccurrences = $loremCat ? (int)$loremCat['occurrences'] : (int)($scan['lorem_occurrence_count'] ?? $loremFindings);
-        $loremPages = isset($health['lorem_pages']) ? (int)$health['lorem_pages'] : (int)($scan['lorem_page_count'] ?? 0);
+        $loremFindings    = $loremCat ? (int)$loremCat['count'] : 0;
+        $loremOccurrences = $loremCat ? (int)$loremCat['occurrences'] : 0;
+
+        $loremPagesStmt = $this->db->prepare('
+            SELECT COUNT(DISTINCT page_result_id)
+            FROM findings
+            WHERE scan_id = ? AND detection_category = "lorem_ipsum" AND resource_id IS NULL
+        ');
+        $loremPagesStmt->execute([$scanId]);
+        $loremPages = (int)$loremPagesStmt->fetchColumn();
+
+        // Always guarantee lorem_ipsum key exists in category_stats with authoritative values
+        $catMap['lorem_ipsum'] = [
+            'count'       => $loremFindings,
+            'occurrences' => $loremOccurrences,
+        ];
+        $health['lorem_pages'] = $loremPages;
 
         $scan['lorem_finding_count']    = $loremFindings;
         $scan['lorem_occurrence_count'] = $loremOccurrences;
@@ -219,6 +234,18 @@ class ResultsController
             'scan'           => $scan,
             'project'        => $project,
             'health'         => $health,
+            'pages'          => [
+                'discovered' => (int)($scan['discovered_count'] ?? 0),
+                'processed'  => (int)($health['total_pages'] ?? 0),
+                'clean'      => (int)($health['clean_pages'] ?? 0),
+                'affected'   => (int)($health['affected_pages'] ?? 0),
+                'failed'     => (int)($health['error_pages'] ?? 0),
+            ],
+            'lorem'          => [
+                'pages'       => $loremPages,
+                'paragraphs'  => $loremFindings,
+                'occurrences' => $loremOccurrences,
+            ],
             'categories'     => $categories,
             'category_stats' => $catMap,
             'severities'     => $severities,

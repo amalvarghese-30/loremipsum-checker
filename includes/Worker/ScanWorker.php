@@ -175,6 +175,13 @@ class ScanWorker
 
             // ── PHASE 3: FINALIZE ────────────────────────────────────────────────
             if ($finalState === 'completed') {
+                // Perform final authoritative counter reconciliation to guarantee 100% data integrity
+                try {
+                    $this->scanRepo->reconcileCounters($scanId, true);
+                } catch (\Throwable $recEx) {
+                    $logFn('WARNING', 'Post-scan counter reconciliation note: ' . $recEx->getMessage(), 'completion');
+                }
+
                 $compOk = $this->scanRepo->completeScan($scanId);
                 if (!$compOk) {
                     $counts = $this->urlRepo->getCountsByStatus($scanId);

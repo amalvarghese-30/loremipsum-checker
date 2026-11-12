@@ -33,6 +33,7 @@ require_once BASE_DIR . '/includes/Repository/LogRepository.php';
 require_once BASE_DIR . '/includes/Repository/RuleRepository.php';
 
 // Include API layer
+require_once BASE_DIR . '/includes/Export/ExportService.php';
 require_once BASE_DIR . '/includes/Api/Response.php';
 require_once BASE_DIR . '/includes/Api/RequestValidator.php';
 require_once BASE_DIR . '/includes/Api/ProjectController.php';

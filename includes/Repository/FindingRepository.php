@@ -161,6 +161,16 @@ class FindingRepository
         return $inserted;
     }
 
+    /**
+     * Delete previous findings for a specific scan resource to maintain idempotency.
+     */
+    public function deleteByResourceId(int $scanId, int $resourceId): int
+    {
+        $stmt = $this->db->prepare('DELETE FROM findings WHERE scan_id = ? AND resource_id = ?');
+        $stmt->execute([$scanId, $resourceId]);
+        return $stmt->rowCount();
+    }
+
     public function listPaginated(int $scanId, int $page = 1, int $pageSize = 50, array $filters = []): array
     {
         $offset = ($page - 1) * $pageSize;
