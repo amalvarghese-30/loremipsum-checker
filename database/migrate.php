@@ -105,7 +105,8 @@ $skipped = 0;
 foreach ($files as $file) {
     $filename = basename($file);
 
-    if (!$seed && stripos($filename, 'seed') !== false) {
+    // Only skip seeder files if they are not standard numbered migrations
+    if (!$seed && stripos($filename, 'seed') !== false && !preg_match('/^\d+/', $filename)) {
         warn("Skipping seeder (use --seed to run): {$filename}");
         $skipped++;
         continue;
@@ -198,6 +199,10 @@ function convertMysqlToSqlite(string $sql): string
     $sql = preg_replace('/\bDATETIME\(\d+\)\b/i', 'DATETIME', $sql);
     $sql = preg_replace('/ON UPDATE CURRENT_TIMESTAMP/i', '', $sql);
     $sql = preg_replace('/COMMENT\s+\'[^\']*\'/i', '', $sql);
+
+    // In SQLite string literals, backslash is not an escape character.
+    // Unescape MySQL double-escaped regex tokens (\\s, \\b, etc.) so SQLite stores literal \s, \b
+    $sql = str_replace(['\\\\s', '\\\\b', '\\\\w', '\\\\d'], ['\\s', '\\b', '\\w', '\\d'], $sql);
 
     return $sql;
 }

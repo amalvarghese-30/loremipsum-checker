@@ -42,7 +42,7 @@ class DetectionEngine
                 $severity = $this->adjustSeverity($m['rule']['severity'], $node);
                 $confidence = $m['rule']['confidence'];
 
-                $fingerprint = $this->calcFingerprint($pageUrl, 'html', $m['matched_text']);
+                $fingerprint = $this->calcFingerprint($pageUrl, 'html', $m['matched_text'], $node['css_selector'] ?? '', $m['offset']);
 
                 $findings[] = [
                     'page_url'            => $pageUrl,
@@ -191,6 +191,7 @@ class DetectionEngine
     {
         $matches = [];
         $normalizedText = html_entity_decode($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $normalizedText = preg_replace('/[\s\xc2\xa0]+/u', ' ', $normalizedText);
 
         foreach ($this->rules as $rule) {
             // Check if rule applies to this source type
@@ -201,6 +202,9 @@ class DetectionEngine
             }
 
             $pattern = $rule['pattern'];
+            // Normalize any double-escaped whitespace or word boundary tokens stored in SQLite/DB
+            $pattern = str_replace(['\\\\s', '\\\\b', '\\\\w', '\\\\d'], ['\\s', '\\b', '\\w', '\\d'], $pattern);
+
             // Safe regex check
             if (@preg_match_all($pattern, $normalizedText, $m, PREG_OFFSET_CAPTURE)) {
                 foreach ($m[0] as $matchTuple) {
@@ -257,9 +261,9 @@ class DetectionEngine
         return $baseSeverity;
     }
 
-    private function calcFingerprint(string $pageUrl, string $resourceType, string $matchedText): string
+    private function calcFingerprint(string $pageUrl, string $resourceType, string $matchedText, string $cssSelector = '', int $offset = 0): string
     {
-        return hash('sha256', $pageUrl . '|' . $resourceType . '|' . strtolower(trim($matchedText)));
+        return hash('sha256', $pageUrl . '|' . $resourceType . '|' . strtolower(trim($matchedText)) . '|' . $cssSelector . '|' . $offset);
     }
 
     private function calcLineNumber(string $text, int $offset): int

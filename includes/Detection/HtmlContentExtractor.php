@@ -187,7 +187,7 @@ class HtmlContentExtractor
         ];
     }
 
-    private function walkDom(DOMNode $node, array &$nodes, string &$allText, bool $parentHidden = false, string $section = 'Main Content'): void
+    private function walkDom(DOMNode $node, array &$nodes, string &$allText, bool $parentHidden = false, string $section = 'Main Content', bool $inLeafBlock = false): void
     {
         $isHidden = $parentHidden;
 
@@ -220,32 +220,78 @@ class HtmlContentExtractor
                 $section = 'Heading: ' . strtoupper($tag);
             }
 
-            // Check if element has direct text content
-            $directText = '';
+            $blockTags = ['p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'blockquote', 'td', 'th', 'button', 'figcaption', 'label', 'dt', 'dd', 'caption', 'summary'];
+            $genericContainers = ['div', 'section', 'article', 'aside', 'header', 'footer', 'nav', 'main', 'form'];
+
+            $isBlockTag = in_array($tag, $blockTags, true);
+            $isGenericContainer = in_array($tag, $genericContainers, true);
+
+            // Check if element has child block elements
+            $hasBlockChildren = false;
             foreach ($node->childNodes as $child) {
-                if ($child instanceof DOMText) {
-                    $directText .= $child->wholeText;
+                if ($child instanceof DOMElement) {
+                    $cTag = strtolower($child->tagName);
+                    if (in_array($cTag, $blockTags, true) || in_array($cTag, $genericContainers, true)) {
+                        $hasBlockChildren = true;
+                        break;
+                    }
                 }
             }
-            $directText = trim(preg_replace('/\s+/', ' ', $directText));
 
-            if ($directText !== '') {
-                $allText .= ' ' . $directText;
-                $nodes[] = [
-                    'source_type'  => $isHidden ? 'html_hidden' : 'html_visible',
-                    'text'         => $directText,
-                    'html_element' => $tag,
-                    'css_selector' => $this->buildCssSelector($node),
-                    'section_name' => $section,
-                    'is_visible'   => !$isHidden,
-                    'line_number'  => $node->getLineNo(),
-                ];
+            $isLeafBlock = $isBlockTag || ($isGenericContainer && !$hasBlockChildren);
+
+            // Only extract text if we are not already inside an extracted leaf block
+            if (!$inLeafBlock) {
+                if ($isLeafBlock) {
+                    // Extract full text of the leaf block, preserving words split across inline formatting (strong, em, span, a)
+                    $rawText = $node->textContent;
+                    $cleanText = html_entity_decode($rawText, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    $cleanText = preg_replace('/[\s\xc2\xa0]+/u', ' ', $cleanText);
+                    $cleanText = trim($cleanText);
+
+                    if ($cleanText !== '') {
+                        $allText .= ' ' . $cleanText;
+                        $nodes[] = [
+                            'source_type'  => $isHidden ? 'html_hidden' : 'html_visible',
+                            'text'         => $cleanText,
+                            'html_element' => $tag,
+                            'css_selector' => $this->buildCssSelector($node),
+                            'section_name' => $section,
+                            'is_visible'   => !$isHidden,
+                            'line_number'  => $node->getLineNo(),
+                        ];
+                    }
+                } elseif ($hasBlockChildren) {
+                    // Extract any direct loose text within container before/between block children
+                    $directText = '';
+                    foreach ($node->childNodes as $child) {
+                        if ($child instanceof DOMText) {
+                            $directText .= $child->wholeText;
+                        }
+                    }
+                    $cleanDirect = html_entity_decode($directText, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    $cleanDirect = trim(preg_replace('/[\s\xc2\xa0]+/u', ' ', $cleanDirect));
+                    if ($cleanDirect !== '') {
+                        $allText .= ' ' . $cleanDirect;
+                        $nodes[] = [
+                            'source_type'  => $isHidden ? 'html_hidden' : 'html_visible',
+                            'text'         => $cleanDirect,
+                            'html_element' => $tag,
+                            'css_selector' => $this->buildCssSelector($node),
+                            'section_name' => $section,
+                            'is_visible'   => !$isHidden,
+                            'line_number'  => $node->getLineNo(),
+                        ];
+                    }
+                }
             }
 
-            // Also check attributes containing relevant text (e.g. placeholder, title, alt)
+            // Also check attributes containing relevant text (e.g. placeholder, title, alt, aria-label)
             foreach (['placeholder', 'title', 'alt', 'aria-label'] as $attr) {
                 if ($node->hasAttribute($attr)) {
                     $attrVal = trim($node->getAttribute($attr));
+                    $attrVal = html_entity_decode($attrVal, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    $attrVal = trim(preg_replace('/[\s\xc2\xa0]+/u', ' ', $attrVal));
                     if ($attrVal !== '') {
                         $nodes[] = [
                             'source_type'  => 'html_attribute',
@@ -261,9 +307,10 @@ class HtmlContentExtractor
             }
         }
 
+        $nowInLeaf = $inLeafBlock || (!empty($isLeafBlock));
         foreach ($node->childNodes as $child) {
             if ($child instanceof DOMElement) {
-                $this->walkDom($child, $nodes, $allText, $isHidden, $section);
+                $this->walkDom($child, $nodes, $allText, $isHidden, $section, $nowInLeaf);
             }
         }
     }

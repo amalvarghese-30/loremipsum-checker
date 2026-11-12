@@ -47,6 +47,19 @@ class DiscoveryManager
 
         $this->log('INFO', "Starting URL discovery for: {$websiteUrl} (Global URL limit: {$maxUrls})", 'discovery');
 
+        // 0. Seed URL — the initial target URL itself must always be included in the audit queue
+        $seedNorm = $this->normalizer->normalize($websiteUrl) ?: $websiteUrl;
+        $seedHash = $this->normalizer->getUrlHash($seedNorm);
+        $allUrls[$seedHash] = [
+            'url'            => $websiteUrl,
+            'normalized_url' => $seedNorm,
+            'url_hash'       => $seedHash,
+            'source'         => 'seed',
+            'depth'          => 0,
+            'metadata'       => ['is_seed' => true],
+            'extra_sources'  => [],
+        ];
+
         // 1. robots.txt — discover additional sitemap declarations
         $robotsSitemaps = [];
         if ($discCfg['robots_sitemap'] ?? true) {

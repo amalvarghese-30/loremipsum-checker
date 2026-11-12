@@ -97,7 +97,7 @@ class HttpClientRetryTest
         $this->assertTrue(!HttpClient::isRetryable('http_error', 404), 'B6: HTTP 404 Not Found is NOT retryable');
 
         // B7. SSL certificate failure is not automatically retried
-        $sslErrno = defined('CURLE_PEER_FAILED_VERIFICATION') ? CURLE_PEER_FAILED_VERIFICATION : 60;
+        $sslErrno = defined('CURLE_SSL_CACERT') ? CURLE_SSL_CACERT : 60;
         $this->assertTrue(
             !HttpClient::isRetryable('ssl_error', null, $sslErrno),
             'B7: SSL certificate verification failure is NOT retryable'

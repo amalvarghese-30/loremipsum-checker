@@ -164,7 +164,39 @@ class ScanScheduler
             $this->http->fetchMulti(
                 $urlStrings,
                 function (string $url, array $response) use ($scanId, $projectId, $websiteUrl, $urlMap) {
-                    $this->handlePageCompleted($scanId, $projectId, $websiteUrl, $urlMap[$url], $response);
+                    try {
+                        $this->handlePageCompleted($scanId, $projectId, $websiteUrl, $urlMap[$url], $response);
+                    } catch (\Throwable $e) {
+                        $this->logRepo->log(
+                            $scanId,
+                            $projectId,
+                            'ERROR',
+                            "Unexpected error processing page [{$url}]: " . $e->getMessage() . "\n" . $e->getTraceAsString(),
+                            'error',
+                            $url
+                        );
+                        try {
+                            $uId = (int)$urlMap[$url]['id'];
+                            $this->urlRepo->markStatus($uId, 'failed', $url, 'Processing exception: ' . $e->getMessage());
+                            $this->pageResRepo->saveResult([
+                                'scan_id'           => $scanId,
+                                'discovered_url_id' => $uId,
+                                'requested_url'     => $url,
+                                'final_url'         => $url,
+                                'http_status'       => null,
+                                'content_type'      => 'unknown',
+                                'processing_status' => 'failed',
+                                'audit_status'      => 'clean',
+                                'finding_count'     => 0,
+                                'duration_ms'       => 0,
+                                'retry_count'       => (int)($urlMap[$url]['retry_count'] ?? 0),
+                                'error_type'        => 'worker_error',
+                                'error_message'     => $e->getMessage(),
+                                'has_lorem_ipsum'   => 0,
+                            ]);
+                            $this->scanRepo->recordPageResult($scanId, 'failed', 0);
+                        } catch (\Throwable $recEx) {}
+                    }
                 },
                 [
                     'concurrency' => $concurrency,
@@ -223,6 +255,14 @@ class ScanScheduler
             $pStatus = 'failed';
             if ($errorType === 'cloudflare_blocked') {
                 $pStatus = 'cloudflare_blocked';
+            } elseif ($httpStatus === 429 || $errorType === 'rate_limited') {
+                $pStatus = 'rate_limited';
+            } elseif ($httpStatus === 404) {
+                $pStatus = 'not_found';
+            } elseif ($errorType === 'timeout') {
+                $pStatus = 'timeout';
+            } elseif ($errorType === 'ssl_error') {
+                $pStatus = 'ssl_error';
             }
 
             $this->db->beginTransaction();
@@ -305,9 +345,10 @@ class ScanScheduler
         $loremCount   = count($findings);
         $auditCount   = count($auditFindings);
 
-        // Status separation
-        $pageStatus   = $hasLorem ? 'findings_detected' : 'clean';
-        $auditStatus  = $hasAudit ? ($hasLorem ? 'findings_detected' : 'audit_issues') : 'clean';
+        // Result classification: If ANY finding is detected, status is findings_detected (Needs Attention)
+        $hasFindings  = ($findingCount > 0);
+        $pageStatus   = $hasFindings ? 'findings_detected' : 'clean';
+        $auditStatus  = $hasAudit ? ($hasLorem ? 'findings_detected' : 'audit_issues') : ($hasLorem ? 'lorem_only' : 'clean');
 
         // Compute content hash for duplicate page detection
         $contentHash  = $this->auditModules->computeContentHash($extracted['full_text'] ?? '');

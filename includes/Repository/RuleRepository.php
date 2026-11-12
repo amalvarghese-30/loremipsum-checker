@@ -26,7 +26,60 @@ class RuleRepository
             WHERE enabled = 1
             ORDER BY is_builtin DESC, id ASC
         ');
-        return $stmt->fetchAll();
+        $rules = $stmt ? $stmt->fetchAll() : [];
+        if (!empty($rules)) {
+            return $rules;
+        }
+
+        // Auto-seed built-in rules if detection_rules table has zero rows
+        $this->seedBuiltinRules();
+        $retryStmt = $this->db->query('
+            SELECT * FROM detection_rules
+            WHERE enabled = 1
+            ORDER BY is_builtin DESC, id ASC
+        ');
+        return $retryStmt ? $retryStmt->fetchAll() : [];
+    }
+
+    public function seedBuiltinRules(): void
+    {
+        try {
+            $countStmt = $this->db->query('SELECT COUNT(*) FROM detection_rules');
+            if ($countStmt && (int)$countStmt->fetchColumn() > 0) {
+                return;
+            }
+        } catch (\Throwable $e) {
+            return;
+        }
+
+        $defaults = [
+            ['Lorem Ipsum Classic',       '/\blorem\s+ipsum\b/i',                 'lorem_ipsum', 'high',   'high'],
+            ['Dolor Sit Amet',            '/\bdolor\s+sit\s+amet\b/i',           'lorem_ipsum', 'high',   'high'],
+            ['Consectetur Adipiscing',    '/\bconsectetur\s+adipiscing\b/i',      'lorem_ipsum', 'high',   'high'],
+            ['Sed Do Eiusmod',            '/\bsed\s+do\s+eiusmod\b/i',            'lorem_ipsum', 'high',   'high'],
+            ['Ut Labore Et Dolore',       '/\but\s+labore\s+et\s+dolore\b/i',     'lorem_ipsum', 'high',   'high'],
+            ['Magna Aliqua',              '/\bmagna\s+aliqua\b/i',                'lorem_ipsum', 'high',   'high'],
+            ['Duis Aute Irure',           '/\bduis\s+aute\s+irure\b/i',           'lorem_ipsum', 'high',   'high'],
+            ['Excepteur Sint',            '/\bexcepteur\s+sint\b/i',              'lorem_ipsum', 'high',   'high'],
+            ['Nulla Pariatur',            '/\bnulla\s+pariatur\b/i',              'lorem_ipsum', 'high',   'high'],
+            ['Quis Nostrud Exercitation', '/\bquis\s+nostrud\s+exercitation\b/i', 'lorem_ipsum', 'high',   'high'],
+            ['Your Content Goes Here',    '/\byour\s+content\s+goes\s+here\b/i',  'placeholder', 'high',   'high'],
+            ['Insert Text Here',          '/\binsert\s+text\s+here\b/i',         'placeholder', 'high',   'high'],
+            ['Sample Text',               '/\bsample\s+text\b/i',                 'placeholder', 'medium', 'medium'],
+            ['Placeholder Text',          '/\bplaceholder\s+text\b/i',            'placeholder', 'medium', 'medium'],
+            ['Developer TODO Marker',     '/\b(?:TODO|FIXME|XXX)\b/',             'developer_mock', 'medium', 'high'],
+        ];
+
+        try {
+            $ins = QueryHelper::prepare($this->db, '
+                INSERT INTO detection_rules (rule_name, pattern, detection_category, enabled, case_sensitive, severity, confidence, source_types, is_builtin, created_at, updated_at)
+                VALUES (?, ?, ?, 1, 0, ?, ?, "html,javascript,css,json,text", 1, NOW(), NOW())
+            ');
+
+            foreach ($defaults as $r) {
+                $ins->execute([$r[0], $r[1], $r[2], $r[3], $r[4]]);
+            }
+        } catch (\Throwable $te) {}
     }
 
     public function listAll(): array

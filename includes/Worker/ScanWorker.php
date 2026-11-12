@@ -202,7 +202,14 @@ class ScanWorker
             }
 
         } catch (\Throwable $e) {
-            $logFn('ERROR', 'Worker fatal exception: ' . $e->getMessage(), 'error');
+            $logFn('ERROR', 'Worker fatal exception: ' . $e->getMessage() . "\n" . $e->getTraceAsString(), 'error');
+            try {
+                // Safe recovery: ensure in-flight 'processing' URLs are not left dangling
+                $recovered = $this->urlRepo->resetProcessingToPending($scanId);
+                if ($recovered > 0) {
+                    $logFn('WARNING', "Recovered {$recovered} in-flight processing URLs back to pending on worker shutdown", 'recovery');
+                }
+            } catch (\Throwable $re) {}
             $this->scanRepo->failScan($scanId, $e->getMessage());
             exit(1);
         }

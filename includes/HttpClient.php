@@ -470,54 +470,147 @@ class HttpClient
     }
 
     /**
+     * Resolves a cURL error code from a constant name safely, using defined() / constant().
+     * Falls back to standard numeric libcurl error code if constant is not defined in current PHP runtime.
+     */
+    public static function getCurlErrno(string $constantName, int $fallback): int
+    {
+        if (defined($constantName)) {
+            return (int)constant($constantName);
+        }
+        return $fallback;
+    }
+
+    /**
+     * Set of cURL error codes classified as SSL / certificate verification failures (permanent).
+     */
+    public static function getSslErrorCodes(): array
+    {
+        static $codes = null;
+        if ($codes === null) {
+            $names = [
+                'CURLE_SSL_CONNECT_ERROR'   => 35,
+                'CURLE_SSL_CERTPROBLEM'     => 58,
+                'CURLE_SSL_CIPHER'          => 59,
+                'CURLE_SSL_CACERT'          => 60,
+                'CURLE_SSL_CACERT_BADFILE'  => 77,
+                'CURLE_SSL_SHUTDOWN_FAILED' => 80,
+                'CURLE_SSL_CRL_BADFILE'     => 82,
+                'CURLE_SSL_ISSUER_ERROR'    => 83,
+            ];
+            $codes = [];
+            foreach ($names as $name => $fallback) {
+                $code = defined($name) ? (int)constant($name) : $fallback;
+                $codes[$code] = true;
+            }
+        }
+        return $codes;
+    }
+
+    /**
+     * Set of cURL error codes that are permanent configuration/URL errors (never retry).
+     */
+    public static function getPermanentErrorCodes(): array
+    {
+        static $codes = null;
+        if ($codes === null) {
+            $names = [
+                'CURLE_UNSUPPORTED_PROTOCOL' => 1,
+                'CURLE_URL_MALFORMAT'        => 3,
+                'CURLE_WRITE_ERROR'          => 23,
+                'CURLE_ABORTED_BY_CALLBACK'  => 42,
+            ];
+            $codes = self::getSslErrorCodes();
+            foreach ($names as $name => $fallback) {
+                $code = defined($name) ? (int)constant($name) : $fallback;
+                $codes[$code] = true;
+            }
+        }
+        return $codes;
+    }
+
+    /**
+     * Set of cURL error codes that are transient network errors (eligible for retry).
+     */
+    public static function getTransientErrorCodes(): array
+    {
+        static $codes = null;
+        if ($codes === null) {
+            $names = [
+                'CURLE_COULDNT_RESOLVE_PROXY' => 5,
+                'CURLE_COULDNT_RESOLVE_HOST'  => 6,
+                'CURLE_COULDNT_CONNECT'       => 7,
+                'CURLE_OPERATION_TIMEDOUT'    => 28,
+                'CURLE_GOT_NOTHING'           => 52,
+                'CURLE_SEND_ERROR'            => 55,
+                'CURLE_RECV_ERROR'            => 56,
+            ];
+            $codes = [];
+            foreach ($names as $name => $fallback) {
+                $code = defined($name) ? (int)constant($name) : $fallback;
+                $codes[$code] = true;
+            }
+        }
+        return $codes;
+    }
+
+    /**
      * Classify raw cURL error numbers and messages into structured failure types.
      */
     public static function classifyCurlError(int $errno, string $errorMsg): string
     {
-        switch ($errno) {
-            case CURLE_OPERATION_TIMEDOUT:
-                return 'timeout';
-            case CURLE_COULDNT_RESOLVE_HOST:
-            case CURLE_COULDNT_RESOLVE_PROXY:
-                return 'dns_error';
-            case CURLE_COULDNT_CONNECT:
-                return 'connection_error';
-            case CURLE_RECV_ERROR:
-            case CURLE_SEND_ERROR:
-            case CURLE_GOT_NOTHING:
-                return 'connection_reset';
-            case CURLE_SSL_CONNECT_ERROR:
-            case CURLE_PEER_FAILED_VERIFICATION:
-            case CURLE_SSL_CERTPROBLEM:
-            case CURLE_SSL_CIPHER:
-            case CURLE_SSL_CACERT:
-                return 'ssl_error';
-            case CURLE_URL_MALFORMAT:
-                return 'invalid_url';
-            case CURLE_UNSUPPORTED_PROTOCOL:
-                return 'unsupported_protocol';
-            case CURLE_WRITE_ERROR:
-            case CURLE_ABORTED_BY_CALLBACK:
-                return 'response_too_large';
-            default:
-                $msgLower = strtolower($errorMsg);
-                if (str_contains($msgLower, 'timed out') || str_contains($msgLower, 'timeout')) {
-                    return 'timeout';
-                }
-                if (str_contains($msgLower, 'could not resolve host') || str_contains($msgLower, 'name or service not known')) {
-                    return 'dns_error';
-                }
-                if (str_contains($msgLower, 'connection reset') || str_contains($msgLower, 'empty reply') || str_contains($msgLower, 'recv error')) {
-                    return 'connection_reset';
-                }
-                if (str_contains($msgLower, 'failed to connect') || str_contains($msgLower, 'connection refused')) {
-                    return 'connection_error';
-                }
-                if (str_contains($msgLower, 'ssl') || str_contains($msgLower, 'certificate')) {
-                    return 'ssl_error';
-                }
-                return 'curl_error';
+        // 1. SSL-related errors (permanent)
+        $sslCodes = self::getSslErrorCodes();
+        if ($errno > 0 && isset($sslCodes[$errno])) {
+            return 'ssl_error';
         }
+
+        // 2. Specific cURL error codes using safe resolution
+        if ($errno === self::getCurlErrno('CURLE_OPERATION_TIMEDOUT', 28)) {
+            return 'timeout';
+        }
+        if ($errno === self::getCurlErrno('CURLE_COULDNT_RESOLVE_HOST', 6)
+            || $errno === self::getCurlErrno('CURLE_COULDNT_RESOLVE_PROXY', 5)) {
+            return 'dns_error';
+        }
+        if ($errno === self::getCurlErrno('CURLE_COULDNT_CONNECT', 7)) {
+            return 'connection_error';
+        }
+        if ($errno === self::getCurlErrno('CURLE_RECV_ERROR', 56)
+            || $errno === self::getCurlErrno('CURLE_SEND_ERROR', 55)
+            || $errno === self::getCurlErrno('CURLE_GOT_NOTHING', 52)) {
+            return 'connection_reset';
+        }
+        if ($errno === self::getCurlErrno('CURLE_URL_MALFORMAT', 3)) {
+            return 'invalid_url';
+        }
+        if ($errno === self::getCurlErrno('CURLE_UNSUPPORTED_PROTOCOL', 1)) {
+            return 'unsupported_protocol';
+        }
+        if ($errno === self::getCurlErrno('CURLE_WRITE_ERROR', 23)
+            || $errno === self::getCurlErrno('CURLE_ABORTED_BY_CALLBACK', 42)) {
+            return 'response_too_large';
+        }
+
+        // 3. Fallback string matching on error message
+        $msgLower = strtolower($errorMsg);
+        if (str_contains($msgLower, 'timed out') || str_contains($msgLower, 'timeout')) {
+            return 'timeout';
+        }
+        if (str_contains($msgLower, 'could not resolve host') || str_contains($msgLower, 'name or service not known')) {
+            return 'dns_error';
+        }
+        if (str_contains($msgLower, 'connection reset') || str_contains($msgLower, 'empty reply') || str_contains($msgLower, 'recv error')) {
+            return 'connection_reset';
+        }
+        if (str_contains($msgLower, 'failed to connect') || str_contains($msgLower, 'connection refused')) {
+            return 'connection_error';
+        }
+        if (str_contains($msgLower, 'ssl') || str_contains($msgLower, 'certificate') || str_contains($msgLower, 'cert problem')) {
+            return 'ssl_error';
+        }
+
+        return 'curl_error';
     }
 
     /**
@@ -525,40 +618,29 @@ class HttpClient
      */
     public static function isRetryable(?string $errorType, ?int $httpStatus, int $curlErrno = 0): bool
     {
-        // 1. Explicitly NON-retryable categories
-        if ($errorType === 'response_too_large' || $errorType === 'invalid_url' || $errorType === 'unsupported_protocol' || $errorType === 'ssl_error') {
+        // 1. Explicitly NON-retryable error types
+        if (in_array($errorType, ['response_too_large', 'invalid_url', 'unsupported_protocol', 'ssl_error', 'cloudflare_blocked'], true)) {
             return false;
         }
 
-        if (in_array($curlErrno, [
-            CURLE_URL_MALFORMAT,
-            CURLE_UNSUPPORTED_PROTOCOL,
-            CURLE_PEER_FAILED_VERIFICATION,
-            CURLE_SSL_CACERT,
-            CURLE_SSL_CERTPROBLEM,
-            CURLE_SSL_CIPHER,
-        ], true)) {
+        // 2. Explicitly NON-retryable cURL errno (SSL, malformed URL, unsupported protocol, write/size errors)
+        $permanentCodes = self::getPermanentErrorCodes();
+        if ($curlErrno > 0 && isset($permanentCodes[$curlErrno])) {
             return false;
         }
 
-        // 2. Retryable network/cURL errors
-        if (in_array($errorType, ['timeout', 'dns_error', 'connection_error', 'connection_reset'], true)) {
+        // 3. Transient error types
+        if (in_array($errorType, ['timeout', 'dns_error', 'connection_error', 'connection_reset', 'rate_limited'], true)) {
             return true;
         }
 
-        if (in_array($curlErrno, [
-            CURLE_OPERATION_TIMEDOUT,
-            CURLE_COULDNT_RESOLVE_HOST,
-            CURLE_COULDNT_RESOLVE_PROXY,
-            CURLE_COULDNT_CONNECT,
-            CURLE_RECV_ERROR,
-            CURLE_SEND_ERROR,
-            CURLE_GOT_NOTHING,
-        ], true)) {
+        // 4. Transient cURL error codes
+        $transientCodes = self::getTransientErrorCodes();
+        if ($curlErrno > 0 && isset($transientCodes[$curlErrno])) {
             return true;
         }
 
-        // 3. Retryable HTTP response codes
+        // 5. Retryable HTTP response codes
         if ($httpStatus !== null && in_array($httpStatus, self::RETRYABLE_CODES, true)) {
             return true;
         }
