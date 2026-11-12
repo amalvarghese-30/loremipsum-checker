@@ -570,7 +570,7 @@ class ScanRepository
             'diagnostics'                  => [
                 'canonical_pages_count'        => $canonicalPagesCount,
                 'duplicate_pages_count'        => $duplicatePagesCount,
-                'duplicate_rows'               => $duplicateRows,
+                'duplicate_rows'               => $dupRows,
                 'unclassified_pages_count'     => $unclassifiedCount,
                 'inconsistent_clean_count'     => $inconsistentCleanDiscrepancies,
                 'lorem_flag_discrepancy_count' => $loremFlagDiscrepancyCount,

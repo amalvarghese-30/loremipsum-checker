@@ -171,9 +171,6 @@ class ExportService
             throw new \RuntimeException('Unable to open memory stream for CSV export.');
         }
 
-        // UTF-8 BOM for Excel compatibility
-        fputs($out, "\xEF\xBB\xBF");
-
         fputcsv($out, [
             'Scan ID',
             'Project',
