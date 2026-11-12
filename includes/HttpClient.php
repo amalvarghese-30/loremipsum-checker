@@ -635,13 +635,6 @@ class HttpClient
         $response['is_retryable'] = false;
         return $response;
     }
-            $response['error_type']    = 'http_error';
-            $response['error_message'] = "HTTP {$status}";
-            return $response;
-        }
-
-        return $response;
-    }
 
     private function detectProtection(string $content, ?int $httpCode): ?string
     {
