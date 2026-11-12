@@ -270,12 +270,13 @@ class HttpClient
 
                     if (!empty($isOversized[$id])) {
                         $maxSize = (int)($options['max_response_size'] ?? $this->config['max_response_size']);
+                        $limitMb = round($maxSize / 1048576, 2);
                         $response = $this->errorResponse(
                             $url,
                             'response_too_large',
-                            "Response size exceeded limit ({$maxSize} bytes)",
+                            "Response size exceeded configured maximum limit of {$limitMb} MB ({$maxSize} bytes)",
                             $curlErrno,
-                            $httpCode ?: null,
+                            $httpCode ?: 200,
                             $parsedHeaders,
                             false
                         );
@@ -395,12 +396,13 @@ class HttpClient
         $detectedType  = $this->detectContentType($contentType, $url, $body);
 
         if ($isOversized) {
+            $limitMb = round($maxSize / 1048576, 2);
             return $this->errorResponse(
                 $url,
                 'response_too_large',
-                "Response size exceeded limit ({$maxSize} bytes)",
+                "Response size exceeded configured maximum limit of {$limitMb} MB ({$maxSize} bytes)",
                 $curlErrno,
-                $httpCode ?: null,
+                $httpCode ?: 200,
                 $parsedHeaders,
                 false
             );

@@ -1272,6 +1272,15 @@
                         />
                       </div>
                     </div>
+                    <div>
+                      <label class="deploy-label">Max Response Size</label>
+                      <select class="deploy-input" id="maxResponseSizeMb" name="max_response_size_mb" style="cursor: pointer;">
+                        <option value="5">5 MB</option>
+                        <option value="10" selected>10 MB (Recommended)</option>
+                        <option value="25">25 MB</option>
+                        <option value="50">50 MB</option>
+                      </select>
+                    </div>
                     <button type="submit" id="submitBtn" class="deploy-submit">
                       <span>Initialize Engine</span>
                       <i class="fas fa-arrow-right" style="font-size: 11px"></i>

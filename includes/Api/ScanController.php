@@ -53,6 +53,27 @@ class ScanController
         // 1. Find or create project
         $projectId = $this->projectRepo->findOrCreate($projectName, $rawUrl, $normalizedUrl);
 
+        // Normalize and safely bound max_response_size (default 10 MB = 10485760 bytes)
+        $rawResponseSize = $_POST['max_response_size'] ?? $_POST['max_response_size_mb'] ?? null;
+        $maxResponseSize = 10485760; // 10 MiB default
+        if ($rawResponseSize !== null && is_numeric($rawResponseSize)) {
+            $num = (float)$rawResponseSize;
+            if ($num <= 0) {
+                $maxResponseSize = 10485760;
+            } elseif ($num <= 100) {
+                // Supplied in Megabytes (e.g. 5, 10, 25, 50 MB)
+                $maxResponseSize = (int)round($num * 1048576);
+            } elseif ($num <= 102400) {
+                // Supplied in Kilobytes (e.g. 5120 KB -> 5 MB)
+                $maxResponseSize = (int)round($num * 1024);
+            } else {
+                // Supplied directly in Bytes
+                $maxResponseSize = (int)round($num);
+            }
+            // Enforce safe boundary limits: 1 MiB (1048576 bytes) to 100 MiB (104857600 bytes)
+            $maxResponseSize = max(1048576, min(104857600, $maxResponseSize));
+        }
+
         // 2. Prepare scan settings snapshot from POST overrides
         $scanSettings = [
             'use_sitemap'            => isset($_POST['use_sitemap']) ? (($_POST['use_sitemap'] === '1' || $_POST['use_sitemap'] === 'true' || $_POST['use_sitemap'] === 'auto')) : true,
@@ -68,7 +89,8 @@ class ScanController
             'max_retry_delay'        => isset($_POST['max_retry_delay']) && is_numeric($_POST['max_retry_delay']) ? (int)$_POST['max_retry_delay'] : null,
             'follow_redirects'       => isset($_POST['follow_redirects']) ? ($_POST['follow_redirects'] === '1' || $_POST['follow_redirects'] === 'true') : true,
             'max_redirects'          => isset($_POST['max_redirects']) && is_numeric($_POST['max_redirects']) ? (int)$_POST['max_redirects'] : null,
-            'max_response_size'      => isset($_POST['max_response_size']) && is_numeric($_POST['max_response_size']) ? (int)$_POST['max_response_size'] : null,
+            'max_response_size'      => $maxResponseSize,
+            'max_response_size_mb'   => round($maxResponseSize / 1048576, 1),
             'verify_ssl'             => isset($_POST['verify_ssl']) ? ($_POST['verify_ssl'] === '1' || $_POST['verify_ssl'] === 'true') : false,
             'js_rendering'           => isset($_POST['js_rendering']) ? ($_POST['js_rendering'] === '1' || $_POST['js_rendering'] === 'true') : false,
             'scan_javascript'        => isset($_POST['scan_javascript']) ? ($_POST['scan_javascript'] === '1' || $_POST['scan_javascript'] === 'true') : false,

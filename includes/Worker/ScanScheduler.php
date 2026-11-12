@@ -263,6 +263,8 @@ class ScanScheduler
                 $pStatus = 'timeout';
             } elseif ($errorType === 'ssl_error') {
                 $pStatus = 'ssl_error';
+            } elseif ($errorType === 'response_too_large') {
+                $pStatus = 'failed';
             }
 
             $this->db->beginTransaction();
