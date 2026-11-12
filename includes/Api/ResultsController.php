@@ -35,7 +35,10 @@ class ResultsController
 
         $filters = [
             'status'          => !empty($_GET['status']) ? trim($_GET['status']) : null,
+            'audit_status'    => !empty($_GET['audit_status']) ? trim($_GET['audit_status']) : null,
             'has_lorem_ipsum' => isset($_GET['has_lorem']) ? (bool)$_GET['has_lorem'] : null,
+            'has_findings'    => isset($_GET['has_findings']) ? (bool)$_GET['has_findings'] : null,
+            'category'        => !empty($_GET['category']) ? trim($_GET['category']) : null,
             'search'          => !empty($_GET['search']) ? trim($_GET['search']) : null,
             'sort_by'         => RequestValidator::sanitizeSortField($_GET['sort_by'] ?? null, ['id', 'duration_ms', 'finding_count', 'http_status'], 'id'),
             'sort_dir'        => $_GET['sort_dir'] ?? 'DESC',
@@ -158,7 +161,9 @@ class ResultsController
             SELECT 
                 COUNT(CASE WHEN processing_status = "clean" THEN 1 END) as clean_pages,
                 COUNT(CASE WHEN processing_status = "findings_detected" THEN 1 END) as affected_pages,
+                COUNT(CASE WHEN has_lorem_ipsum = 1 THEN 1 END) as lorem_pages,
                 COUNT(CASE WHEN processing_status IN ("failed", "cloudflare_blocked", "error") OR http_status >= 400 THEN 1 END) as error_pages,
+                COUNT(CASE WHEN audit_status = "audit_issues" THEN 1 END) as audit_issue_pages,
                 COUNT(*) as total_pages
             FROM page_results
             WHERE scan_id = ?
@@ -166,8 +171,9 @@ class ResultsController
         $statusStmt->execute([$scanId]);
         $health = $statusStmt->fetch() ?: [];
 
+        // Category breakdown with finding counts and occurrence sums
         $catStmt = $this->db->prepare('
-            SELECT detection_category, COUNT(*) as count
+            SELECT detection_category, COUNT(*) as count, COALESCE(SUM(occurrences), COUNT(*)) as occurrences
             FROM findings
             WHERE scan_id = ?
             GROUP BY detection_category
@@ -175,6 +181,15 @@ class ResultsController
         ');
         $catStmt->execute([$scanId]);
         $categories = $catStmt->fetchAll();
+
+        // Specific category counts
+        $catMap = [];
+        foreach ($categories as $c) {
+            $catMap[$c['detection_category']] = [
+                'count'       => (int)$c['count'],
+                'occurrences' => (int)$c['occurrences']
+            ];
+        }
 
         $sevStmt = $this->db->prepare('
             SELECT severity, COUNT(*) as count
@@ -186,11 +201,12 @@ class ResultsController
         $severities = $sevStmt->fetchAll();
 
         Response::success([
-            'scan'       => $scan,
-            'health'     => $health,
-            'categories' => $categories,
-            'severities' => $severities,
-            'settings'   => $scan['settings'] ?? [],
+            'scan'           => $scan,
+            'health'         => $health,
+            'categories'     => $categories,
+            'category_stats' => $catMap,
+            'severities'     => $severities,
+            'settings'       => $scan['settings'] ?? [],
         ]);
     }
 

@@ -140,9 +140,28 @@ class PageResultRepository
             $params[] = $filters['status'];
         }
 
+        if (!empty($filters['audit_status'])) {
+            $sql .= ' AND audit_status = ?';
+            $params[] = $filters['audit_status'];
+        }
+
         if (isset($filters['has_lorem_ipsum'])) {
             $sql .= ' AND has_lorem_ipsum = ?';
             $params[] = $filters['has_lorem_ipsum'] ? 1 : 0;
+        }
+
+        if (isset($filters['has_findings'])) {
+            if ($filters['has_findings']) {
+                $sql .= ' AND finding_count > 0';
+            } else {
+                $sql .= ' AND finding_count = 0';
+            }
+        }
+
+        if (!empty($filters['category'])) {
+            $sql .= ' AND id IN (SELECT page_result_id FROM findings WHERE scan_id = ? AND detection_category = ?)';
+            $params[] = $scanId;
+            $params[] = $filters['category'];
         }
 
         if (!empty($filters['search'])) {
@@ -181,9 +200,28 @@ class PageResultRepository
             $params[] = $filters['status'];
         }
 
+        if (!empty($filters['audit_status'])) {
+            $sql .= ' AND audit_status = ?';
+            $params[] = $filters['audit_status'];
+        }
+
         if (isset($filters['has_lorem_ipsum'])) {
             $sql .= ' AND has_lorem_ipsum = ?';
             $params[] = $filters['has_lorem_ipsum'] ? 1 : 0;
+        }
+
+        if (isset($filters['has_findings'])) {
+            if ($filters['has_findings']) {
+                $sql .= ' AND finding_count > 0';
+            } else {
+                $sql .= ' AND finding_count = 0';
+            }
+        }
+
+        if (!empty($filters['category'])) {
+            $sql .= ' AND id IN (SELECT page_result_id FROM findings WHERE scan_id = ? AND detection_category = ?)';
+            $params[] = $scanId;
+            $params[] = $filters['category'];
         }
 
         if (!empty($filters['search'])) {

@@ -75,20 +75,56 @@ class ScanController
         }
 
         // 2. Prepare scan settings snapshot from POST overrides
+        // Discovery methods array parsing
+        $discoveryMethods = null;
+        if (isset($_POST['discovery_methods']) && is_array($_POST['discovery_methods'])) {
+            $discoveryMethods = [];
+            foreach ($_POST['discovery_methods'] as $dmKey => $dmVal) {
+                $discoveryMethods[$dmKey] = ($dmVal === '1' || $dmVal === 'true' || $dmVal === true);
+            }
+        } else {
+            // Also accept direct fields if submitted individually
+            $discKeys = ['sitemap', 'robots_sitemap', 'rss_atom', 'html_sitemap', 'internal_crawler', 'wordpress_api', 'pagination'];
+            $hasDiscKeys = false;
+            $tempDisc = [];
+            foreach ($discKeys as $dk) {
+                if (isset($_POST["disc_{$dk}"])) {
+                    $hasDiscKeys = true;
+                    $tempDisc[$dk] = ($_POST["disc_{$dk}"] === '1' || $_POST["disc_{$dk}"] === 'true');
+                }
+            }
+            if ($hasDiscKeys) {
+                $discoveryMethods = $tempDisc;
+            }
+        }
+
+        // Validate numerical bounds
+        $maxUrls = isset($_POST['max_urls']) && is_numeric($_POST['max_urls']) ? max(1, min(50000, (int)$_POST['max_urls'])) : null;
+        $maxDepth = isset($_POST['max_depth']) && is_numeric($_POST['max_depth']) ? max(1, min(20, (int)$_POST['max_depth'])) : null;
+        $concurrency = isset($_POST['concurrency']) && is_numeric($_POST['concurrency']) ? max(1, min(50, (int)$_POST['concurrency'])) : null;
+        $perDomainConcurrency = isset($_POST['per_domain_concurrency']) && is_numeric($_POST['per_domain_concurrency']) ? max(1, min(20, (int)$_POST['per_domain_concurrency'])) : null;
+        $requestDelay = isset($_POST['request_delay']) && is_numeric($_POST['request_delay']) ? max(0, min(60, (int)$_POST['request_delay'])) : null;
+        $requestTimeout = isset($_POST['request_timeout']) && is_numeric($_POST['request_timeout']) ? max(1, min(300, (int)$_POST['request_timeout'])) : null;
+        $connectionTimeout = isset($_POST['connection_timeout']) && is_numeric($_POST['connection_timeout']) ? max(1, min(120, (int)$_POST['connection_timeout'])) : null;
+        $maxRetries = isset($_POST['max_retries']) && is_numeric($_POST['max_retries']) ? max(0, min(10, (int)$_POST['max_retries'])) : null;
+        $retryBaseDelay = isset($_POST['retry_base_delay']) && is_numeric($_POST['retry_base_delay']) ? max(1, min(60, (int)$_POST['retry_base_delay'])) : null;
+        $maxRetryDelay = isset($_POST['max_retry_delay']) && is_numeric($_POST['max_retry_delay']) ? max(1, min(600, (int)$_POST['max_retry_delay'])) : null;
+        $maxRedirects = isset($_POST['max_redirects']) && is_numeric($_POST['max_redirects']) ? max(0, min(30, (int)$_POST['max_redirects'])) : null;
+
         $scanSettings = [
             'use_sitemap'            => isset($_POST['use_sitemap']) ? (($_POST['use_sitemap'] === '1' || $_POST['use_sitemap'] === 'true' || $_POST['use_sitemap'] === 'auto')) : true,
-            'max_urls'               => isset($_POST['max_urls']) && is_numeric($_POST['max_urls']) ? (int)$_POST['max_urls'] : null,
-            'max_depth'              => isset($_POST['max_depth']) && is_numeric($_POST['max_depth']) ? (int)$_POST['max_depth'] : null,
-            'concurrency'            => isset($_POST['concurrency']) && is_numeric($_POST['concurrency']) ? (int)$_POST['concurrency'] : null,
-            'per_domain_concurrency' => isset($_POST['per_domain_concurrency']) && is_numeric($_POST['per_domain_concurrency']) ? (int)$_POST['per_domain_concurrency'] : null,
-            'request_delay'          => isset($_POST['request_delay']) && is_numeric($_POST['request_delay']) ? (int)$_POST['request_delay'] : null,
-            'request_timeout'        => isset($_POST['request_timeout']) && is_numeric($_POST['request_timeout']) ? (int)$_POST['request_timeout'] : null,
-            'connection_timeout'     => isset($_POST['connection_timeout']) && is_numeric($_POST['connection_timeout']) ? (int)$_POST['connection_timeout'] : null,
-            'max_retries'            => isset($_POST['max_retries']) && is_numeric($_POST['max_retries']) ? (int)$_POST['max_retries'] : null,
-            'retry_base_delay'       => isset($_POST['retry_base_delay']) && is_numeric($_POST['retry_base_delay']) ? (int)$_POST['retry_base_delay'] : null,
-            'max_retry_delay'        => isset($_POST['max_retry_delay']) && is_numeric($_POST['max_retry_delay']) ? (int)$_POST['max_retry_delay'] : null,
+            'max_urls'               => $maxUrls,
+            'max_depth'              => $maxDepth,
+            'concurrency'            => $concurrency,
+            'per_domain_concurrency' => $perDomainConcurrency,
+            'request_delay'          => $requestDelay,
+            'request_timeout'        => $requestTimeout,
+            'connection_timeout'     => $connectionTimeout,
+            'max_retries'            => $maxRetries,
+            'retry_base_delay'       => $retryBaseDelay,
+            'max_retry_delay'        => $maxRetryDelay,
             'follow_redirects'       => isset($_POST['follow_redirects']) ? ($_POST['follow_redirects'] === '1' || $_POST['follow_redirects'] === 'true') : true,
-            'max_redirects'          => isset($_POST['max_redirects']) && is_numeric($_POST['max_redirects']) ? (int)$_POST['max_redirects'] : null,
+            'max_redirects'          => $maxRedirects,
             'max_response_size'      => $maxResponseSize,
             'max_response_size_mb'   => round($maxResponseSize / 1048576, 1),
             'verify_ssl'             => isset($_POST['verify_ssl']) ? ($_POST['verify_ssl'] === '1' || $_POST['verify_ssl'] === 'true') : false,
@@ -96,7 +132,7 @@ class ScanController
             'scan_javascript'        => isset($_POST['scan_javascript']) ? ($_POST['scan_javascript'] === '1' || $_POST['scan_javascript'] === 'true') : false,
             'scan_css'               => isset($_POST['scan_css']) ? ($_POST['scan_css'] === '1' || $_POST['scan_css'] === 'true') : false,
             'scan_json'              => isset($_POST['scan_json']) ? ($_POST['scan_json'] === '1' || $_POST['scan_json'] === 'true') : false,
-            'discovery_methods'      => isset($_POST['discovery_methods']) && is_array($_POST['discovery_methods']) ? $_POST['discovery_methods'] : null,
+            'discovery_methods'      => $discoveryMethods,
             'audit_modules'          => isset($_POST['audit_modules']) && is_array($_POST['audit_modules']) ? $_POST['audit_modules'] : null,
         ];
 

@@ -22,6 +22,10 @@ class DetectionEngine
 
     /**
      * Scan extracted HTML nodes for matches.
+     * Enforces paragraph-level grouping:
+     * One paragraph / leaf container = ONE finding.
+     * Multiple phrase occurrences within the paragraph are counted in 'occurrences'.
+     * The complete paragraph text is stored as evidence in 'matched_text'.
      *
      * @param array  $nodes   List of nodes from HtmlContentExtractor
      * @param string $pageUrl The webpage URL
@@ -30,6 +34,7 @@ class DetectionEngine
     public function scanHtmlNodes(array $nodes, string $pageUrl): array
     {
         $findings = [];
+        $seenFingerprints = [];
 
         foreach ($nodes as $node) {
             $text = $node['text'] ?? '';
@@ -38,26 +43,70 @@ class DetectionEngine
             }
 
             $matches = $this->matchText($text, 'html');
-            foreach ($matches as $m) {
-                $severity = $this->adjustSeverity($m['rule']['severity'], $node);
-                $confidence = $m['rule']['confidence'];
+            if (empty($matches)) {
+                continue;
+            }
 
-                $fingerprint = $this->calcFingerprint($pageUrl, 'html', $m['matched_text'], $node['css_selector'] ?? '', $m['offset']);
+            // Group matches for this paragraph/node by detection category (e.g. lorem_ipsum, placeholder)
+            $groupedByCategory = [];
+            foreach ($matches as $m) {
+                $cat = $m['rule']['detection_category'] ?? 'lorem_ipsum';
+                if (!isset($groupedByCategory[$cat])) {
+                    $groupedByCategory[$cat] = [
+                        'rule'        => $m['rule'],
+                        'occurrences' => 0,
+                        'phrases'     => [],
+                        'first_offset'=> $m['offset'],
+                    ];
+                }
+                $groupedByCategory[$cat]['occurrences']++;
+                $groupedByCategory[$cat]['phrases'][] = $m['matched_text'];
+                // Keep highest severity rule
+                if (($m['rule']['severity'] ?? '') === 'high') {
+                    $groupedByCategory[$cat]['rule'] = $m['rule'];
+                }
+            }
+
+            foreach ($groupedByCategory as $category => $groupData) {
+                $rule = $groupData['rule'];
+                $severity = $this->adjustSeverity($rule['severity'], $node);
+                $confidence = $rule['confidence'];
+                $selector = $node['css_selector'] ?? '';
+
+                // Deduplication check: smallest meaningful text block / DOM selector
+                // Clean normalized paragraph string
+                $normalizedParagraph = trim($text);
+                $fingerprint = hash(
+                    'sha256',
+                    $pageUrl . '|html|' . $category . '|' . strtolower($normalizedParagraph) . '|' . $selector
+                );
+
+                if (isset($seenFingerprints[$fingerprint])) {
+                    continue;
+                }
+                $seenFingerprints[$fingerprint] = true;
+
+                $uniquePhrases = array_unique($groupData['phrases']);
+                $contextSummary = count($uniquePhrases) > 1 
+                    ? implode(', ', array_slice($uniquePhrases, 0, 3)) . ' (' . $groupData['occurrences'] . ' occurrences)'
+                    : $uniquePhrases[0] . ' (' . $groupData['occurrences'] . ' occurrence' . ($groupData['occurrences'] > 1 ? 's' : '') . ')';
 
                 $findings[] = [
                     'page_url'            => $pageUrl,
                     'resource_url'        => null,
                     'resource_type'       => 'html',
-                    'matched_text'        => $m['matched_text'],
-                    'surrounding_context' => $m['context'],
+                    'matched_text'        => $normalizedParagraph, // Store complete paragraph text
+                    'occurrences'         => $groupData['occurrences'], // Total phrase matches in paragraph
+                    'matched_phrases'     => $groupData['phrases'],
+                    'surrounding_context' => "Matched: {$contextSummary}",
                     'html_element'        => $node['html_element'] ?? null,
-                    'css_selector'        => $node['css_selector'] ?? null,
+                    'css_selector'        => $selector,
                     'section_name'        => $node['section_name'] ?? null,
                     'line_number'         => $node['line_number'] ?? null,
-                    'character_position'  => $m['offset'],
+                    'character_position'  => $groupData['first_offset'],
                     'is_visible'          => $node['is_visible'] ?? true,
-                    'detection_rule_id'   => $m['rule']['id'] ?? null,
-                    'detection_category'  => $m['rule']['detection_category'] ?? 'lorem_ipsum',
+                    'detection_rule_id'   => $rule['id'] ?? null,
+                    'detection_category'  => $category,
                     'severity'            => $severity,
                     'confidence'          => $confidence,
                     'finding_fingerprint' => $fingerprint,

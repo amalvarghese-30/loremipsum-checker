@@ -1075,6 +1075,194 @@
           grid-template-columns: 1fr !important;
         }
       }
+    
+      /* SCAN CONFIGURATION & PRESETS */
+      .config-toggle-btn {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: var(--r-md);
+        padding: 9px 12px;
+        color: var(--deploy-text);
+        font-size: 11px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        transition: all 0.2s ease;
+      }
+      .config-toggle-btn:hover {
+        background: rgba(255, 255, 255, 0.14);
+        border-color: rgba(255, 255, 255, 0.25);
+      }
+      .preset-chip {
+        font-size: 10px;
+        font-weight: 700;
+        padding: 4px 9px;
+        border-radius: var(--r-sm);
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: var(--deploy-sub);
+        transition: all 0.18s;
+      }
+      .preset-chip:hover {
+        background: rgba(255, 255, 255, 0.16);
+        color: var(--deploy-text);
+      }
+      .preset-chip.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #FFFFFF;
+      }
+      .config-section-title {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: rgba(255, 255, 255, 0.6);
+        margin: 12px 0 8px 0;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .config-grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .config-check-item {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 11px;
+        color: var(--deploy-sub);
+        cursor: pointer;
+        user-select: none;
+      }
+      .config-check-item input[type="checkbox"] {
+        accent-color: var(--accent);
+        width: 13px;
+        height: 13px;
+        cursor: pointer;
+      }
+
+      /* REPORT DASHBOARD VIEW */
+      #reportView {
+        display: none;
+      }
+      .rep-stat-card {
+        background: var(--surface-1);
+        border: 1px solid var(--border-1);
+        border-radius: var(--r-xl);
+        padding: 18px 20px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.22s ease;
+      }
+      .rep-stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+        border-color: var(--accent);
+      }
+      .rep-stat-card.active {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px var(--accent-border);
+      }
+      .rep-tab-btn {
+        padding: 9px 16px;
+        border-radius: var(--r-md);
+        font-size: 12px;
+        font-weight: 700;
+        font-family: 'DM Sans', sans-serif;
+        cursor: pointer;
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        transition: all 0.18s;
+      }
+      .rep-tab-btn:hover {
+        color: var(--text-primary);
+        background: var(--surface-2);
+      }
+      .rep-tab-btn.active {
+        background: var(--surface-2);
+        color: var(--accent);
+        border-color: var(--border-2);
+      }
+      .rep-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 12.5px;
+      }
+      .rep-table th {
+        background: var(--surface-2);
+        color: var(--text-secondary);
+        font-weight: 700;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border-2);
+        text-align: left;
+      }
+      .rep-table td {
+        padding: 13px 16px;
+        border-bottom: 1px solid var(--border-1);
+        color: var(--text-primary);
+        vertical-align: middle;
+      }
+      .rep-table tr:hover td {
+        background: var(--surface-2);
+      }
+
+      /* INSPECTION DRAWER / MODAL */
+      .drawer-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(4px);
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: flex-end;
+      }
+      .drawer-body {
+        width: min(720px, 95vw);
+        height: 100vh;
+        background: var(--surface-1);
+        border-left: 1px solid var(--border-2);
+        box-shadow: -8px 0 32px rgba(0,0,0,0.45);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        animation: slideIn 0.25s cubic-bezier(0.16,1,0.3,1);
+      }
+      .evidence-box {
+        background: var(--surface-2);
+        border: 1px solid var(--border-2);
+        border-radius: var(--r-md);
+        padding: 14px 16px;
+        margin-bottom: 12px;
+        font-size: 12px;
+        line-height: 1.6;
+        color: var(--text-primary);
+      }
+      .evidence-highlight {
+        background: rgba(239, 68, 68, 0.25);
+        color: #FB7185;
+        font-weight: 700;
+        padding: 1px 4px;
+        border-radius: 3px;
+        border: 1px solid rgba(239, 68, 68, 0.4);
+      }
+
     </style>
   </head>
   <body>
@@ -1435,6 +1623,137 @@
       </div>
     </main>
 
+    <!-- DEDICATED REPORT DASHBOARD VIEW -->
+    <div id="reportView" class="page-wrap" style="padding: 32px 0;">
+      <!-- Report Header -->
+      <div style="background:var(--surface-1); border:1px solid var(--border-1); border-radius:var(--r-2xl); padding:24px 28px; margin-bottom:28px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+              <button onclick="closeReportView()" class="exp-btn" style="padding:4px 10px; font-size:11px;">
+                <i class="fas fa-arrow-left"></i> Back to Scans
+              </button>
+              <span id="repScanStatusBadge"></span>
+            </div>
+            <h1 id="repProjectName" style="font-family:'Bricolage Grotesque',sans-serif; font-size:24px; font-weight:700; color:var(--text-primary); margin-bottom:4px;">Audit Report</h1>
+            <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--text-secondary);">
+              <span><i class="fas fa-globe" style="color:var(--accent); margin-right:4px;"></i> <a id="repTargetUrl" href="#" target="_blank" style="color:var(--accent); text-decoration:underline;"></a></span>
+              <span><i class="fas fa-fingerprint" style="margin-right:4px;"></i> Scan <strong id="repScanId"></strong></span>
+              <span><i class="fas fa-calendar" style="margin-right:4px;"></i> <span id="repStartedAt"></span></span>
+              <span><i class="fas fa-stopwatch" style="margin-right:4px;"></i> Duration: <strong id="repDuration"></strong></span>
+            </div>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button onclick="exportCurrentReport('csv')" class="exp-btn"><i class="fas fa-file-csv" style="color:var(--success);"></i> Export CSV</button>
+            <button onclick="exportCurrentReport('json')" class="exp-btn"><i class="fas fa-code" style="color:var(--accent);"></i> Export JSON</button>
+            <button onclick="window.print()" class="exp-btn"><i class="fas fa-print"></i> Print</button>
+            <button onclick="closeReportView()" class="resume-btn"><i class="fas fa-plus"></i> New Scan</button>
+          </div>
+        </div>
+
+        <!-- Collapsible Scan Configuration Snapshot -->
+        <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--border-1);">
+          <div style="display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleRepConfigSnapshot()">
+            <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary);">
+              <i class="fas fa-sliders" style="margin-right:6px;"></i> Effective Scan Configuration Snapshot
+            </span>
+            <i class="fas fa-chevron-down" id="repConfigChevron" style="font-size:11px; color:var(--text-tertiary); transition:transform 0.2s;"></i>
+          </div>
+          <div id="repConfigSnapshotBody" style="display:none; margin-top:12px; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:10px; font-size:11px;">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Statistics Dashboard (All Clickable) -->
+      <div style="margin-bottom:24px;">
+        <h3 style="font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary); margin-bottom:12px;">
+          Interactive Finding Metrics <span style="font-size:11px; font-weight:400; text-transform:none; color:var(--text-tertiary);">(Click card to filter results)</span>
+        </h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px;" id="repStatsGrid">
+          <!-- Dynamically populated cards -->
+        </div>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div style="display:flex; gap:8px; border-bottom:1px solid var(--border-1); padding-bottom:12px; margin-bottom:20px; overflow-x:auto;">
+        <button class="rep-tab-btn active" onclick="switchReportTab('pages')"><i class="fas fa-file-lines"></i> Scanned Pages (<span id="repTabPagesCount">0</span>)</button>
+        <button class="rep-tab-btn" onclick="switchReportTab('findings')"><i class="fas fa-magnifying-glass"></i> All Findings (<span id="repTabFindingsCount">0</span>)</button>
+        <button class="rep-tab-btn" onclick="switchReportTab('lorem')"><i class="fas fa-align-left" style="color:var(--error);"></i> Lorem Ipsum (<span id="repTabLoremCount">0</span>)</button>
+        <button class="rep-tab-btn" onclick="switchReportTab('seo')"><i class="fas fa-chart-line"></i> SEO Issues (<span id="repTabSeoCount">0</span>)</button>
+        <button class="rep-tab-btn" onclick="switchReportTab('a11y')"><i class="fas fa-universal-access"></i> Accessibility (<span id="repTabA11yCount">0</span>)</button>
+        <button class="rep-tab-btn" onclick="switchReportTab('errors')"><i class="fas fa-triangle-exclamation" style="color:var(--warning);"></i> Technical Errors (<span id="repTabErrorsCount">0</span>)</button>
+      </div>
+
+      <!-- Filter / Search Toolbar -->
+      <div style="background:var(--surface-1); border:1px solid var(--border-1); border-radius:var(--r-lg); padding:14px 18px; margin-bottom:18px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+        <div style="flex:1; min-width:240px; position:relative;">
+          <i class="fas fa-search" style="position:absolute; left:12px; top:11px; font-size:11px; color:var(--text-tertiary);"></i>
+          <input type="text" id="repSearchInput" oninput="applyReportFilters()" placeholder="Search URL or matched text..." class="deploy-input" style="padding-left:32px; font-size:12px; background:var(--surface-2); border-color:var(--border-2); color:var(--text-primary);" />
+        </div>
+        <select id="repStatusFilter" onchange="applyReportFilters()" class="deploy-input" style="width:auto; font-size:12px; background:var(--surface-2); border-color:var(--border-2); color:var(--text-primary);">
+          <option value="">All Health Statuses</option>
+          <option value="findings_detected">Needs Attention (Findings)</option>
+          <option value="clean">Clean (No Findings)</option>
+          <option value="failed">Failed / Error</option>
+        </select>
+        <button onclick="clearReportFilters()" class="exp-btn" style="font-size:11px;">Clear Filters</button>
+      </div>
+
+      <!-- Report Content Display Area -->
+      <div style="background:var(--surface-1); border:1px solid var(--border-1); border-radius:var(--r-xl); overflow:hidden;">
+        <div id="repTableContainer" style="overflow-x:auto; min-height:280px;">
+          <!-- Dynamically filled with Pages or Findings table -->
+        </div>
+        <div id="repPagination" style="padding:14px 20px; border-top:1px solid var(--border-1); display:flex; justify-content:space-between; align-items:center; font-size:11px; color:var(--text-secondary);">
+          <span id="repPaginationInfo">Showing records</span>
+          <div style="display:flex; gap:6px;">
+            <button id="repPrevPageBtn" onclick="changeRepPage(-1)" class="exp-btn" style="padding:4px 10px;">Prev</button>
+            <button id="repNextPageBtn" onclick="changeRepPage(1)" class="exp-btn" style="padding:4px 10px;">Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE DETAIL & EVIDENCE INSPECTION DRAWER -->
+    <div id="inspectionDrawer" class="drawer-overlay" onclick="closeInspectionDrawer(event)">
+      <div class="drawer-body" onclick="event.stopPropagation()">
+        <div style="padding:20px 24px; border-bottom:1px solid var(--border-1); display:flex; justify-content:space-between; align-items:flex-start;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+              <span id="drawerHttpBadge" class="rep-badge"></span>
+              <span id="drawerHealthBadge" class="rep-badge"></span>
+            </div>
+            <h2 id="drawerUrlTitle" style="font-size:16px; font-weight:700; color:var(--text-primary); word-break:break-all;"></h2>
+            <a id="drawerUrlLink" href="#" target="_blank" style="font-size:11px; color:var(--accent); text-decoration:underline; display:flex; align-items:center; gap:4px; margin-top:2px;">
+              Open URL in new tab <i class="fas fa-external-link-alt" style="font-size:9px;"></i>
+            </a>
+          </div>
+          <button onclick="closeInspectionDrawer()" class="del-btn" style="width:36px; height:36px;"><i class="fas fa-xmark" style="font-size:14px;"></i></button>
+        </div>
+
+        <div style="flex:1; overflow-y:auto; padding:24px;">
+          <!-- Page Metadata Overview -->
+          <div style="background:var(--surface-2); border:1px solid var(--border-2); border-radius:var(--r-md); padding:14px 18px; margin-bottom:20px; display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; font-size:11px;">
+            <div><span style="color:var(--text-tertiary); display:block;">Page Title:</span><strong id="drawerPageTitle" style="color:var(--text-primary);">-</strong></div>
+            <div><span style="color:var(--text-tertiary); display:block;">Word Count:</span><strong id="drawerWordCount" style="color:var(--text-primary);">0</strong></div>
+            <div><span style="color:var(--text-tertiary); display:block;">Response Time:</span><strong id="drawerDuration" style="color:var(--text-primary);">0 ms</strong></div>
+          </div>
+
+          <!-- Paragraph-Level Lorem Ipsum & Evidence Section -->
+          <div>
+            <h3 style="font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary); margin-bottom:12px;">
+              Detected Findings & Evidence (<span id="drawerFindingCount">0</span>)
+            </h3>
+            <div id="drawerFindingsList" style="display:flex; flex-direction:column; gap:12px;">
+              <!-- Evidence blocks inserted here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <footer class="footer-wrap" style="margin-top: 56px; padding: 20px 0">
       <div
         style="
@@ -1617,7 +1936,7 @@
         } catch (e) {
           host = p.website_url || "";
         }
-        return `<div id="card-${p.id}" class="proj-card anim-enter"><div class="proj-hd-div" style="padding:18px 22px;border-bottom:1px solid var(--border-1);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;"><div style="display:flex;align-items:center;gap:14px;"><div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;${ic.bg}"><i class="fas ${ic.cls}" style="font-size:17px;color:${ic.col};"></i></div><div><h3 class="proj-name">${esc(p.project_name)}</h3><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span class="proj-id">${p.id.split("_")[1] || p.id.slice(-8)}</span><a href="${esc(p.website_url)}" target="_blank" class="proj-link">${host} <i class="fas fa-external-link-alt" style="font-size:8px;"></i></a></div></div></div><div>${buildBadge(p.status)}</div></div><div style="padding:18px 22px;">${ia || (pct > 0 && p.status !== "completed") ? `<div style="margin-bottom:20px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span class="prg-lbl" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Processing</span><span class="prg-pct" style="font-size:11px;font-weight:700;font-family:'DM Mono',monospace;" data-pct>${pct}%</span></div><div class="prg-bar prg-track" style="width:100%;"><div class="prg-fill shimmer-bar" data-bar style="height:100%;border-radius:999px;width:${pct}%;transition:width 0.7s ease;"></div></div></div>` : ""}<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px;"><div class="sc-neutral" style="padding:10px 12px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">URLs</p><p class="sc-val-n" style="font-size:19px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-total>${pr.total_urls || 0}</p></div><div class="sc-neutral" style="padding:10px 12px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">Done</p><p class="sc-val-n" style="font-size:19px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-done>${pr.processed || 0}</p></div><div class="sc-clean" style="padding:10px 12px;border-radius:10px;"><p class="sc-lbl-c" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">Clean</p><p class="sc-val-c" style="font-size:19px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-clean>${pr.clean || 0}</p></div><div class="sc-issue" style="padding:10px 12px;border-radius:10px;"><p class="sc-lbl-i" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">Lorem</p><p class="sc-val-i" style="font-size:19px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-lorem>${pr.lorem_found || 0}</p></div><div class="sc-amber" style="padding:10px 12px;border-radius:10px;"><p class="sc-lbl-a" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">Log</p><p class="sc-val-a" style="font-size:19px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-errors>${pr.errors || 0}</p></div></div><div class="act-div" style="border-top:1px solid var(--border-1);padding-top:14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;"><div style="display:flex;flex-wrap:wrap;gap:7px;">${p.status === "completed" ? `<button onclick="exportResults('${p.id}','csv')" class="exp-btn"><i class="fas fa-file-csv" style="color:var(--success);"></i> CSV</button><button onclick="exportResults('${p.id}','json')" class="exp-btn"><i class="fas fa-code" style="color:var(--accent);"></i> JSON</button>` : ""}${p.status === "paused" ? `<button onclick="manageProject('${p.id}','resume')" class="resume-btn"><i class="fas fa-play" style="font-size:9px;"></i> Resume</button>` : ia ? `<button onclick="manageProject('${p.id}','pause')" class="pause-btn"><i class="fas fa-pause" style="font-size:9px;"></i> Pause</button>` : ""}</div><div style="display:flex;align-items:center;gap:8px;"><button id="logbtn-${p.id}" onclick="toggleLogs('${p.id}')" class="log-btn ${lo ? "open" : ""}"><i class="fas fa-terminal" style="font-size:10px;"></i> Console</button><button onclick="deleteProject('${p.id}')" class="del-btn"><i class="fas fa-trash-alt" style="font-size:11px;"></i></button></div></div><div id="logpanel-${p.id}" style="${lo ? "" : "display:none;"}margin-top:14px;" class="anim-enter"><div class="terminal" style="padding:0;font-family:'DM Mono',monospace;"><div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.2);"><div style="display:flex;gap:5px;"><div style="width:10px;height:10px;border-radius:50%;background:#f43f5e;"></div><div style="width:10px;height:10px;border-radius:50%;background:#f59e0b;"></div><div style="width:10px;height:10px;border-radius:50%;background:#22c55e;"></div></div><span style="font-size:9px;color:#a8b2e8;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;">agent_runtime.log</span></div><div id="logs-${p.id}" class="log-txt" style="max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;font-size:11px;line-height:1.7;padding:14px;"><span style="color:#6370a8;font-style:italic;">Initializing socket connectionâ€¦</span></div></div></div></div></div>`;
+        return `<div id="card-${p.id}" class="proj-card anim-enter"><div class="proj-hd-div" style="padding:18px 22px;border-bottom:1px solid var(--border-1);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;"><div style="display:flex;align-items:center;gap:14px;"><div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;${ic.bg}"><i class="fas ${ic.cls}" style="font-size:17px;color:${ic.col};"></i></div><div><h3 class="proj-name">${esc(p.project_name)}</h3><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span class="proj-id">${p.id.split("_")[1] || p.id.slice(-8)}</span><a href="${esc(p.website_url)}" target="_blank" class="proj-link">${host} <i class="fas fa-external-link-alt" style="font-size:8px;"></i></a></div></div></div><div>${buildBadge(p.status)}</div></div><div style="padding:18px 22px;">${ia || (pct > 0 && p.status !== "completed") ? `<div style="margin-bottom:20px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span class="prg-lbl" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Processing</span><span class="prg-pct" style="font-size:11px;font-weight:700;font-family:'DM Mono',monospace;" data-pct>${pct}%</span></div><div class="prg-bar prg-track" style="width:100%;"><div class="prg-fill shimmer-bar" data-bar style="height:100%;border-radius:999px;width:${pct}%;transition:width 0.7s ease;"></div></div></div>` : ""}<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px;"><div class="sc-neutral" style="padding:10px 12px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">URLs</p><p class="sc-val-n" style="font-size:19px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-total>${pr.total_urls || 0}</p></div><div class="sc-neutral" style="padding:10px 12px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">Done</p><p class="sc-val-n" style="font-size:19px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-done>${pr.processed || 0}</p></div><div class="sc-clean" style="padding:10px 12px;border-radius:10px;"><p class="sc-lbl-c" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">Clean</p><p class="sc-val-c" style="font-size:19px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-clean>${pr.clean || 0}</p></div><div class="sc-issue" style="padding:10px 12px;border-radius:10px;"><p class="sc-lbl-i" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">Lorem</p><p class="sc-val-i" style="font-size:19px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-lorem>${pr.lorem_found || 0}</p></div><div class="sc-amber" style="padding:10px 12px;border-radius:10px;"><p class="sc-lbl-a" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">Log</p><p class="sc-val-a" style="font-size:19px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-errors>${pr.errors || 0}</p></div></div><div class="act-div" style="border-top:1px solid var(--border-1);padding-top:14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;"><div style="display:flex;flex-wrap:wrap;gap:7px;">${p.status === "completed" ? `<button onclick="viewReport('${p.id}')" class="exp-btn" style="background:var(--accent); color:#FFF; border-color:var(--accent);"><i class="fas fa-chart-pie" style="color:#FFF;"></i> View Report</button><button onclick="exportResults('${p.id}','csv')" class="exp-btn"><i class="fas fa-file-csv" style="color:var(--success);"></i> CSV</button><button onclick="exportResults('${p.id}','json')" class="exp-btn"><i class="fas fa-code" style="color:var(--accent);"></i> JSON</button>` : ""}${p.status === "paused" ? `<button onclick="manageProject('${p.id}','resume')" class="resume-btn"><i class="fas fa-play" style="font-size:9px;"></i> Resume</button>` : ia ? `<button onclick="manageProject('${p.id}','pause')" class="pause-btn"><i class="fas fa-pause" style="font-size:9px;"></i> Pause</button>` : ""}</div><div style="display:flex;align-items:center;gap:8px;"><button id="logbtn-${p.id}" onclick="toggleLogs('${p.id}')" class="log-btn ${lo ? "open" : ""}"><i class="fas fa-terminal" style="font-size:10px;"></i> Console</button><button onclick="deleteProject('${p.id}')" class="del-btn"><i class="fas fa-trash-alt" style="font-size:11px;"></i></button></div></div><div id="logpanel-${p.id}" style="${lo ? "" : "display:none;"}margin-top:14px;" class="anim-enter"><div class="terminal" style="padding:0;font-family:'DM Mono',monospace;"><div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.2);"><div style="display:flex;gap:5px;"><div style="width:10px;height:10px;border-radius:50%;background:#f43f5e;"></div><div style="width:10px;height:10px;border-radius:50%;background:#f59e0b;"></div><div style="width:10px;height:10px;border-radius:50%;background:#22c55e;"></div></div><span style="font-size:9px;color:#a8b2e8;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;">agent_runtime.log</span></div><div id="logs-${p.id}" class="log-txt" style="max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;font-size:11px;line-height:1.7;padding:14px;"><span style="color:#6370a8;font-style:italic;">Initializing socket connectionâ€¦</span></div></div></div></div></div>`;
       }
       function sIcon(s) {
         if (ACTIVE.has(s))
@@ -1927,6 +2246,654 @@
           setTimeout(() => el.remove(), 300);
         }, 4200);
       }
+    
+      // =========================================================================
+      // SCAN CONFIGURATION PRESETS & ADVANCED CONTROLS
+      // =========================================================================
+      function toggleScanConfig() {
+        const p = document.getElementById('advancedConfigPanel');
+        const chevron = document.getElementById('configChevron');
+        if (!p) return;
+        const isHidden = p.style.display === 'none' || p.style.display === '';
+        p.style.display = isHidden ? 'block' : 'none';
+        if (chevron) chevron.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+      }
+
+      function applyScanPreset(preset) {
+        document.querySelectorAll('.preset-chip').forEach(c => {
+          c.classList.toggle('active', c.textContent.trim().toLowerCase() === preset);
+        });
+
+        const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = val; };
+        const setCheck = (name, checked) => { const el = document.querySelector(`input[name="${name}"]`); if (el) el.checked = checked; };
+
+        switch (preset) {
+          case 'quick':
+            setVal('maxUrlsInput', 50);
+            setVal('maxDepthInput', 2);
+            setVal('concurrencyInput', 5);
+            setVal('perDomainInput', 2);
+            setVal('requestDelayInput', 0);
+            setVal('reqTimeoutInput', 15);
+            setVal('maxRetriesInput', 1);
+            setCheck('disc_wordpress_api', false);
+            setCheck('disc_pagination', false);
+            break;
+          case 'standard':
+            setVal('maxUrlsInput', 500);
+            setVal('maxDepthInput', 3);
+            setVal('concurrencyInput', 5);
+            setVal('perDomainInput', 2);
+            setVal('requestDelayInput', 1);
+            setVal('reqTimeoutInput', 30);
+            setVal('maxRetriesInput', 3);
+            setCheck('disc_wordpress_api', true);
+            setCheck('disc_pagination', true);
+            break;
+          case 'deep':
+            setVal('maxUrlsInput', 2500);
+            setVal('maxDepthInput', 6);
+            setVal('concurrencyInput', 8);
+            setVal('perDomainInput', 3);
+            setVal('requestDelayInput', 1);
+            setVal('reqTimeoutInput', 45);
+            setVal('maxRetriesInput', 3);
+            setCheck('disc_wordpress_api', true);
+            setCheck('disc_pagination', true);
+            break;
+          case 'custom':
+            // Open panel for customization
+            const p = document.getElementById('advancedConfigPanel');
+            if (p && p.style.display === 'none') toggleScanConfig();
+            break;
+        }
+      }
+
+      function resetScanConfigToDefaults() {
+        applyScanPreset('standard');
+        const sizeSelect = document.getElementById('maxResponseSizeMb');
+        if (sizeSelect) sizeSelect.value = '10';
+        toast('Configuration Reset', 'Default scan configuration restored', 'info');
+      }
+
+      // =========================================================================
+      // DEDICATED PER-SCAN INTERACTIVE REPORTING ENGINE
+      // =========================================================================
+      let currentReportScanId = null;
+      let currentReportData = null;
+      let currentReportTab = 'pages'; // 'pages' | 'findings' | 'lorem' | 'seo' | 'a11y' | 'errors'
+      let reportPageNumber = 1;
+      let reportPageLimit = 20;
+      let activeStatFilter = null; // e.g. { category: 'lorem_ipsum' } or { status: 'clean' }
+
+      async function viewReport(scanOrProjectId) {
+        // Resolve numeric scan ID
+        let scanId = scanOrProjectId;
+        if (typeof scanOrProjectId === 'string' && scanOrProjectId.includes('_')) {
+          // It was project ID, lookup latest scan
+          try {
+            const stRes = await (await fetch(API_URL + '?action=status&project_id=' + scanOrProjectId)).json();
+            if (stRes.success && stRes.data && stRes.data.project) {
+              const p = stRes.data.project;
+              if (p.results && p.results.length) scanId = p.results[0].scan_id;
+            }
+          } catch(e) {}
+        }
+
+        currentReportScanId = scanId;
+        reportPageNumber = 1;
+        activeStatFilter = null;
+        currentReportTab = 'pages';
+
+        // Switch main view to report view
+        const mainGrid = document.getElementById('mainGrid');
+        const statsGrid = document.getElementById('statsGrid');
+        const reportView = document.getElementById('reportView');
+        if (mainGrid) mainGrid.style.display = 'none';
+        if (statsGrid) statsGrid.style.display = 'none';
+        if (reportView) reportView.style.display = 'block';
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        await loadScanReportData();
+      }
+
+      function closeReportView() {
+        currentReportScanId = null;
+        currentReportData = null;
+        const mainGrid = document.getElementById('mainGrid');
+        const statsGrid = document.getElementById('statsGrid');
+        const reportView = document.getElementById('reportView');
+        if (mainGrid) mainGrid.style.display = 'grid';
+        if (statsGrid) statsGrid.style.display = 'grid';
+        if (reportView) reportView.style.display = 'none';
+        loadProjects();
+      }
+
+      function toggleRepConfigSnapshot() {
+        const body = document.getElementById('repConfigSnapshotBody');
+        const chev = document.getElementById('repConfigChevron');
+        if (!body) return;
+        const isHidden = body.style.display === 'none' || body.style.display === '';
+        body.style.display = isHidden ? 'grid' : 'none';
+        if (chev) chev.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+      }
+
+      async function loadScanReportData() {
+        if (!currentReportScanId) return;
+        try {
+          // Fetch scan summary
+          const res = await (await fetch(API_URL + '?action=scan_summary&scan_id=' + currentReportScanId)).json();
+          if (!res.success) {
+            toast('Report Error', res.error || 'Failed to load report', 'error');
+            return;
+          }
+          currentReportData = res.data;
+          renderReportHeader(res.data);
+          renderReportStatsCards(res.data);
+          await loadReportTableData();
+        } catch(e) {
+          toast('Network Error', e.message, 'error');
+        }
+      }
+
+      function renderReportHeader(data) {
+        const s = data.scan || {};
+        const p = data.project || {};
+        const settings = data.settings || {};
+
+        const nameEl = document.getElementById('repProjectName');
+        if (nameEl) nameEl.textContent = s.project_name || p.project_name || 'Website Audit Report';
+
+        const urlEl = document.getElementById('repTargetUrl');
+        if (urlEl) {
+          urlEl.textContent = s.website_url || p.website_url || '#';
+          urlEl.href = s.website_url || p.website_url || '#';
+        }
+
+        const idEl = document.getElementById('repScanId');
+        if (idEl) idEl.textContent = '#' + (s.id || currentReportScanId);
+
+        const startEl = document.getElementById('repStartedAt');
+        if (startEl) startEl.textContent = s.started_at ? new Date(s.started_at).toLocaleString() : 'Recent';
+
+        const durEl = document.getElementById('repDuration');
+        if (durEl) {
+          const sec = s.elapsed_time || 0;
+          durEl.textContent = sec >= 60 ? Math.floor(sec/60) + 'm ' + (sec%60) + 's' : sec + 's';
+        }
+
+        const statusBadge = document.getElementById('repScanStatusBadge');
+        if (statusBadge) statusBadge.innerHTML = buildBadge(s.status || 'completed');
+
+        // Render configuration snapshot
+        const snapBody = document.getElementById('repConfigSnapshotBody');
+        if (snapBody) {
+          const maxUrls = settings.max_urls || 500;
+          const maxDepth = settings.max_depth || 3;
+          const conc = settings.concurrency || 5;
+          const perDomain = settings.per_domain_concurrency || 2;
+          const delay = settings.request_delay !== undefined ? settings.request_delay + 's' : '1s';
+          const sizeMb = settings.max_response_size_mb || (settings.max_response_size ? (settings.max_response_size/1048576).toFixed(1) : '10') + ' MB';
+          const retries = settings.max_retries !== undefined ? settings.max_retries : 3;
+          const ssl = settings.verify_ssl ? 'Enabled' : 'Disabled';
+          const redirects = settings.follow_redirects ? 'Follow (max ' + (settings.max_redirects || 10) + ')' : 'No';
+
+          snapBody.innerHTML = `
+            <div style="background:var(--surface-2); padding:10px 12px; border-radius:var(--r-md);"><span style="color:var(--text-tertiary);">Max URLs:</span> <strong style="color:var(--text-primary);">${maxUrls}</strong></div>
+            <div style="background:var(--surface-2); padding:10px 12px; border-radius:var(--r-md);"><span style="color:var(--text-tertiary);">Max Depth:</span> <strong style="color:var(--text-primary);">${maxDepth}</strong></div>
+            <div style="background:var(--surface-2); padding:10px 12px; border-radius:var(--r-md);"><span style="color:var(--text-tertiary);">Concurrency:</span> <strong style="color:var(--text-primary);">${conc} (per-domain: ${perDomain})</strong></div>
+            <div style="background:var(--surface-2); padding:10px 12px; border-radius:var(--r-md);"><span style="color:var(--text-tertiary);">Request Delay:</span> <strong style="color:var(--text-primary);">${delay}</strong></div>
+            <div style="background:var(--surface-2); padding:10px 12px; border-radius:var(--r-md);"><span style="color:var(--text-tertiary);">Max Response Size:</span> <strong style="color:var(--text-primary);">${sizeMb}</strong></div>
+            <div style="background:var(--surface-2); padding:10px 12px; border-radius:var(--r-md);"><span style="color:var(--text-tertiary);">Max Retries:</span> <strong style="color:var(--text-primary);">${retries}</strong></div>
+            <div style="background:var(--surface-2); padding:10px 12px; border-radius:var(--r-md);"><span style="color:var(--text-tertiary);">SSL Verification:</span> <strong style="color:var(--text-primary);">${ssl}</strong></div>
+            <div style="background:var(--surface-2); padding:10px 12px; border-radius:var(--r-md);"><span style="color:var(--text-tertiary);">Redirects:</span> <strong style="color:var(--text-primary);">${redirects}</strong></div>
+          `;
+        }
+      }
+
+      function renderReportStatsCards(data) {
+        const s = data.scan || {};
+        const h = data.health || {};
+        const catMap = data.category_stats || {};
+
+        const totalDiscovered = s.discovered_count || 0;
+        const totalProcessed  = s.processed_count || 0;
+        const cleanPages      = parseInt(h.clean_pages) || s.clean_count || 0;
+        const affectedPages   = parseInt(h.affected_pages) || s.affected_page_count || 0;
+        const errorPages      = parseInt(h.error_pages) || s.failed_count || 0;
+
+        const loremItem = catMap['lorem_ipsum'] || { count: s.lorem_finding_count || 0, occurrences: s.lorem_finding_count || 0 };
+        const demoItem  = catMap['placeholder'] || { count: 0, occurrences: 0 };
+        const emptyItem = catMap['empty_page'] || { count: 0, occurrences: 0 };
+        const seoItem   = (catMap['missing_title']?.count || 0) + (catMap['missing_meta_desc']?.count || 0) + (catMap['heading_structure']?.count || 0);
+        const a11yItem  = catMap['missing_image_alt']?.count || 0;
+        const resItem   = (catMap['broken_link']?.count || 0) + (s.resource_finding_count || 0);
+
+        // Update Tab counter labels
+        const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+        setEl('repTabPagesCount', totalProcessed);
+        setEl('repTabFindingsCount', s.total_findings || 0);
+        setEl('repTabLoremCount', loremItem.count);
+        setEl('repTabSeoCount', seoItem);
+        setEl('repTabA11yCount', a11yItem);
+        setEl('repTabErrorsCount', errorPages);
+
+        const grid = document.getElementById('repStatsGrid');
+        if (!grid) return;
+
+        const cards = [
+          { key: 'all_pages', title: 'Pages Discovered', val: totalDiscovered, sub: 'Total in queue', icon: 'fa-globe', col: '#635bff' },
+          { key: 'clean_pages', title: 'Clean Pages', val: cleanPages, sub: 'Zero findings detected', icon: 'fa-circle-check', col: '#16A34A', filter: { status: 'clean' } },
+          { key: 'affected_pages', title: 'Needs Attention', val: affectedPages, sub: 'Pages with findings', icon: 'fa-triangle-exclamation', col: '#FBB024', filter: { has_findings: true } },
+          { key: 'lorem_ipsum', title: 'Lorem Ipsum Paragraphs', val: loremItem.count, sub: (loremItem.occurrences || loremItem.count) + ' phrase occurrences', icon: 'fa-align-left', col: '#FB7185', tab: 'lorem' },
+          { key: 'demo_mock', title: 'Demo / Mock Content', val: demoItem.count, sub: 'Placeholder phrases', icon: 'fa-tags', col: '#E879F9', filter: { category: 'placeholder' } },
+          { key: 'missing_content', title: 'Missing / Empty Content', val: emptyItem.count, sub: 'Low text content pages', icon: 'fa-file-circle-xmark', col: '#F59E0B', filter: { category: 'empty_page' } },
+          { key: 'seo_issues', title: 'SEO Issues', val: seoItem, sub: 'Title, meta, headings', icon: 'fa-chart-line', col: '#38BDF8', tab: 'seo' },
+          { key: 'a11y_issues', title: 'Accessibility / Images', val: a11yItem, sub: 'Missing alt text', icon: 'fa-universal-access', col: '#A78BFA', tab: 'a11y' },
+          { key: 'resource_issues', title: 'Broken Links / Assets', val: resItem, sub: 'Network & asset failures', icon: 'fa-link-slash', col: '#FB923C', filter: { category: 'broken_link' } },
+          { key: 'scan_errors', title: 'Scan Errors (HTTP / Net)', val: errorPages, sub: 'HTTP & timeout errors', icon: 'fa-circle-xmark', col: '#C8243C', tab: 'errors' },
+        ];
+
+        grid.innerHTML = cards.map(c => {
+          const isActive = (activeStatFilter && activeStatFilter.key === c.key);
+          return `
+            <div class="rep-stat-card ${isActive ? 'active' : ''}" onclick="filterByStatCard('${c.key}')" title="Click to filter report by ${c.title}">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
+                <span style="font-size:11px; font-weight:700; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.06em;">${c.title}</span>
+                <i class="fas ${c.icon}" style="color:${c.col}; font-size:14px;"></i>
+              </div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif; font-size:26px; font-weight:700; color:var(--text-primary); line-height:1.1; margin-bottom:4px;">${c.val}</div>
+              <div style="font-size:11px; color:var(--text-tertiary);">${c.sub}</div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function filterByStatCard(key) {
+        if (key === 'lorem_ipsum') {
+          switchReportTab('lorem');
+        } else if (key === 'seo_issues') {
+          switchReportTab('seo');
+        } else if (key === 'a11y_issues') {
+          switchReportTab('a11y');
+        } else if (key === 'scan_errors') {
+          switchReportTab('errors');
+        } else if (key === 'clean_pages') {
+          activeStatFilter = { key, status: 'clean' };
+          switchReportTab('pages');
+        } else if (key === 'affected_pages') {
+          activeStatFilter = { key, has_findings: true };
+          switchReportTab('pages');
+        } else if (key === 'demo_mock') {
+          activeStatFilter = { key, category: 'placeholder' };
+          switchReportTab('findings');
+        } else if (key === 'missing_content') {
+          activeStatFilter = { key, category: 'empty_page' };
+          switchReportTab('findings');
+        } else if (key === 'resource_issues') {
+          activeStatFilter = { key, category: 'broken_link' };
+          switchReportTab('findings');
+        } else {
+          activeStatFilter = null;
+          switchReportTab('pages');
+        }
+      }
+
+      function switchReportTab(tab) {
+        currentReportTab = tab;
+        reportPageNumber = 1;
+        document.querySelectorAll('.rep-tab-btn').forEach(b => {
+          b.classList.toggle('active', b.getAttribute('onclick').includes(tab));
+        });
+        loadReportTableData();
+      }
+
+      function applyReportFilters() {
+        reportPageNumber = 1;
+        loadReportTableData();
+      }
+
+      function clearReportFilters() {
+        const s = document.getElementById('repSearchInput');
+        if (s) s.value = '';
+        const f = document.getElementById('repStatusFilter');
+        if (f) f.value = '';
+        activeStatFilter = null;
+        reportPageNumber = 1;
+        loadReportTableData();
+      }
+
+      function changeRepPage(delta) {
+        reportPageNumber = Math.max(1, reportPageNumber + delta);
+        loadReportTableData();
+      }
+
+      async function loadReportTableData() {
+        const container = document.getElementById('repTableContainer');
+        if (!container || !currentReportScanId) return;
+
+        container.innerHTML = '<div style="padding:48px; text-align:center; color:var(--text-tertiary);"><i class="fas fa-spinner fa-spin" style="font-size:24px; color:var(--accent); margin-bottom:12px;"></i><p>Loading audit records...</p></div>';
+
+        const searchVal = document.getElementById('repSearchInput')?.value?.trim() || '';
+        const statusVal = document.getElementById('repStatusFilter')?.value?.trim() || '';
+
+        let url = API_URL + '?';
+        const isFindingsMode = ['findings', 'lorem', 'seo', 'a11y'].includes(currentReportTab);
+
+        if (isFindingsMode) {
+          url += 'action=findings&scan_id=' + currentReportScanId + '&page=' + reportPageNumber + '&limit=' + reportPageLimit;
+          if (searchVal) url += '&search=' + encodeURIComponent(searchVal);
+          if (currentReportTab === 'lorem') url += '&category=lorem_ipsum';
+          if (currentReportTab === 'seo') url += '&category=missing_title'; // Can also filter by group in frontend
+          if (currentReportTab === 'a11y') url += '&category=missing_image_alt';
+          if (activeStatFilter && activeStatFilter.category) url += '&category=' + encodeURIComponent(activeStatFilter.category);
+        } else {
+          url += 'action=results&scan_id=' + currentReportScanId + '&page=' + reportPageNumber + '&limit=' + reportPageLimit;
+          if (searchVal) url += '&search=' + encodeURIComponent(searchVal);
+          if (statusVal) url += '&status=' + encodeURIComponent(statusVal);
+          if (currentReportTab === 'errors') url += '&status=failed';
+          if (activeStatFilter && activeStatFilter.status) url += '&status=' + encodeURIComponent(activeStatFilter.status);
+          if (activeStatFilter && activeStatFilter.has_findings !== undefined) url += '&has_findings=' + (activeStatFilter.has_findings ? 1 : 0);
+        }
+
+        try {
+          const res = await (await fetch(url)).json();
+          if (!res.success) {
+            container.innerHTML = '<div style="padding:48px; text-align:center; color:var(--error);"><i class="fas fa-circle-exclamation"></i> ' + (res.error || 'Failed to fetch table') + '</div>';
+            return;
+          }
+
+          if (isFindingsMode) {
+            renderFindingsTable(res.data.findings || [], res.data.pagination || {});
+          } else {
+            renderPagesTable(res.data.results || [], res.data.pagination || {});
+          }
+        } catch(e) {
+          container.innerHTML = '<div style="padding:48px; text-align:center; color:var(--error);"><i class="fas fa-circle-exclamation"></i> Network error: ' + e.message + '</div>';
+        }
+      }
+
+      function renderPagesTable(pages, pagination) {
+        const container = document.getElementById('repTableContainer');
+        if (!pages || !pages.length) {
+          container.innerHTML = '<div style="padding:56px; text-align:center; color:var(--text-tertiary);"><i class="fas fa-inbox" style="font-size:28px; margin-bottom:12px; display:block;"></i>No scanned pages match the selected criteria.</div>';
+          updatePaginationControls(pagination);
+          return;
+        }
+
+        let html = `
+          <table class="rep-table">
+            <thead>
+              <tr>
+                <th style="width:40%;">Scanned Page URL</th>
+                <th>Fetch Status</th>
+                <th>Health</th>
+                <th>Findings</th>
+                <th>Lorem Ipsum</th>
+                <th>Response Time</th>
+                <th style="text-align:right;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+        `;
+
+        pages.forEach(p => {
+          const isClean = p.processing_status === 'clean';
+          const isError = ['failed', 'cloudflare_blocked'].includes(p.processing_status) || (p.http_status && p.http_status >= 400);
+          const fCount = p.finding_count || 0;
+          const hasLorem = p.has_lorem_ipsum || false;
+
+          const healthBadge = isClean 
+            ? '<span class="rep-badge" style="background:rgba(22,163,74,0.12); color:#4ADE80; border:1px solid rgba(34,197,94,0.3);">Clean</span>'
+            : isError 
+              ? '<span class="rep-badge" style="background:rgba(200,36,60,0.12); color:#FB7185; border:1px solid rgba(244,63,94,0.3);">Error</span>'
+              : '<span class="rep-badge" style="background:rgba(245,158,11,0.12); color:#FBB024; border:1px solid rgba(245,158,11,0.3);">Needs Attention (' + fCount + ')</span>';
+
+          const httpBadge = p.http_status 
+            ? '<span class="rep-badge" style="background:var(--surface-3); color:var(--text-secondary);">' + p.http_status + '</span>'
+            : '<span class="rep-badge" style="background:var(--surface-3); color:var(--text-secondary);">N/A</span>';
+
+          const loremBadge = hasLorem
+            ? '<span class="rep-badge" style="background:rgba(239,68,68,0.14); color:#FB7185; border:1px solid rgba(239,68,68,0.3);"><i class="fas fa-align-left" style="font-size:9px; margin-right:4px;"></i>Found</span>'
+            : '<span style="color:var(--text-tertiary); font-size:11px;">None</span>';
+
+          html += `
+            <tr>
+              <td>
+                <div style="font-weight:600; color:var(--text-primary); margin-bottom:2px; word-break:break-all;">${esc(p.requested_url)}</div>
+                <div style="font-size:11px; color:var(--text-tertiary);">${esc(p.page_title || 'No Title')}</div>
+              </td>
+              <td>${httpBadge}</td>
+              <td>${healthBadge}</td>
+              <td><strong style="color:${fCount > 0 ? 'var(--warning)' : 'var(--text-secondary)'};">${fCount}</strong></td>
+              <td>${loremBadge}</td>
+              <td style="font-family:'DM Mono',monospace; font-size:11px; color:var(--text-secondary);">${p.duration_ms ? p.duration_ms + 'ms' : '-'}</td>
+              <td style="text-align:right;">
+                <button onclick="inspectPageDetails(${p.id})" class="exp-btn" style="padding:4px 10px; font-size:11px; display:inline-flex;">
+                  <i class="fas fa-magnifying-glass"></i> Inspect
+                </button>
+              </td>
+            </tr>
+          `;
+        });
+
+        html += '</tbody></table>';
+        container.innerHTML = html;
+        updatePaginationControls(pagination);
+      }
+
+      function renderFindingsTable(findings, pagination) {
+        const container = document.getElementById('repTableContainer');
+        if (!findings || !findings.length) {
+          container.innerHTML = '<div style="padding:56px; text-align:center; color:var(--text-tertiary);"><i class="fas fa-inbox" style="font-size:28px; margin-bottom:12px; display:block;"></i>No findings match the current category / filters.</div>';
+          updatePaginationControls(pagination);
+          return;
+        }
+
+        let html = `
+          <table class="rep-table">
+            <thead>
+              <tr>
+                <th style="width:25%;">Category & Type</th>
+                <th style="width:40%;">Matched Paragraph / Evidence</th>
+                <th>Occurrences</th>
+                <th>Severity</th>
+                <th>Affected URL</th>
+                <th style="text-align:right;">Inspect</th>
+              </tr>
+            </thead>
+            <tbody>
+        `;
+
+        findings.forEach(f => {
+          const occ = f.occurrences || 1;
+          const sevCol = f.severity === 'high' ? '#FB7185' : f.severity === 'medium' ? '#FBB024' : '#94A3B8';
+          const sevBadge = '<span class="rep-badge" style="background:rgba(255,255,255,0.06); color:' + sevCol + '; border:1px solid ' + sevCol + '40;">' + (f.severity || 'medium').toUpperCase() + '</span>';
+
+          html += `
+            <tr>
+              <td>
+                <div style="font-weight:700; color:var(--text-primary); text-transform:capitalize;">${(f.detection_category || 'lorem_ipsum').replace('_', ' ')}</div>
+                <div style="font-size:10px; color:var(--text-tertiary); font-family:'DM Mono',monospace;">${esc(f.html_element || 'element')}</div>
+              </td>
+              <td>
+                <div style="max-height:80px; overflow-y:auto; font-size:11.5px; line-height:1.5; color:var(--text-primary); background:var(--surface-2); padding:6px 10px; border-radius:6px; border:1px solid var(--border-2);">
+                  ${esc(f.matched_text)}
+                </div>
+              </td>
+              <td>
+                <span class="rep-badge" style="background:rgba(99,91,255,0.12); color:var(--accent);">${occ} phrase${occ > 1 ? 's' : ''}</span>
+              </td>
+              <td>${sevBadge}</td>
+              <td style="max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11px;">
+                <a href="${esc(f.page_url)}" target="_blank" style="color:var(--accent); text-decoration:underline;">${esc(f.page_url)}</a>
+              </td>
+              <td style="text-align:right;">
+                <button onclick="inspectPageDetails(${f.page_result_id})" class="exp-btn" style="padding:4px 10px; font-size:11px; display:inline-flex;">
+                  <i class="fas fa-eye"></i> View
+                </button>
+              </td>
+            </tr>
+          `;
+        });
+
+        html += '</tbody></table>';
+        container.innerHTML = html;
+        updatePaginationControls(pagination);
+      }
+
+      function updatePaginationControls(p) {
+        const info = document.getElementById('repPaginationInfo');
+        const prev = document.getElementById('repPrevPageBtn');
+        const next = document.getElementById('repNextPageBtn');
+        if (!info || !p) return;
+
+        const page = p.page || reportPageNumber;
+        const total = p.total_items || 0;
+        const totalPages = p.total_pages || Math.ceil(total / reportPageLimit) || 1;
+
+        info.textContent = 'Showing page ' + page + ' of ' + totalPages + ' (' + total + ' total records)';
+        if (prev) prev.disabled = (page <= 1);
+        if (next) next.disabled = (page >= totalPages);
+      }
+
+      // =========================================================================
+      // DEDICATED PAGE INSPECTION DRAWER & EVIDENCE HIGHLIGHTING
+      // =========================================================================
+      async function inspectPageDetails(pageResultId) {
+        if (!pageResultId) return;
+        const drawer = document.getElementById('inspectionDrawer');
+        if (!drawer) return;
+
+        drawer.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+
+        const list = document.getElementById('drawerFindingsList');
+        if (list) list.innerHTML = '<div style="padding:24px; text-align:center; color:var(--text-tertiary);"><i class="fas fa-spinner fa-spin"></i> Loading page evidence...</div>';
+
+        try {
+          const res = await (await fetch(API_URL + '?action=page_detail&page_result_id=' + pageResultId)).json();
+          if (!res.success) {
+            if (list) list.innerHTML = '<div style="color:var(--error); padding:20px;">' + (res.error || 'Failed to load details') + '</div>';
+            return;
+          }
+
+          const page = res.data.page || {};
+          const findings = res.data.findings || [];
+
+          document.getElementById('drawerUrlTitle').textContent = page.requested_url || 'Page Details';
+          const link = document.getElementById('drawerUrlLink');
+          if (link) link.href = page.final_url || page.requested_url || '#';
+
+          document.getElementById('drawerPageTitle').textContent = page.page_title || '(No Title Detected)';
+          document.getElementById('drawerWordCount').textContent = page.word_count || '0';
+          document.getElementById('drawerDuration').textContent = (page.duration_ms || 0) + ' ms';
+          document.getElementById('drawerFindingCount').textContent = findings.length;
+
+          // Badges
+          const httpEl = document.getElementById('drawerHttpBadge');
+          if (httpEl) {
+            httpEl.textContent = page.http_status ? page.http_status + ' HTTP' : 'Unknown Status';
+            httpEl.style.background = (page.http_status && page.http_status < 400) ? 'rgba(22,163,74,0.12)' : 'rgba(200,36,60,0.12)';
+            httpEl.style.color = (page.http_status && page.http_status < 400) ? '#4ADE80' : '#FB7185';
+          }
+
+          const healthEl = document.getElementById('drawerHealthBadge');
+          if (healthEl) {
+            healthEl.textContent = (page.processing_status || 'clean').toUpperCase();
+            healthEl.style.background = (page.processing_status === 'clean') ? 'rgba(22,163,74,0.12)' : 'rgba(245,158,11,0.12)';
+            healthEl.style.color = (page.processing_status === 'clean') ? '#4ADE80' : '#FBB024';
+          }
+
+          if (!findings.length) {
+            list.innerHTML = `
+              <div style="background:var(--surface-2); border:1px solid var(--border-2); border-radius:var(--r-md); padding:24px; text-align:center; color:var(--success);">
+                <i class="fas fa-circle-check" style="font-size:24px; margin-bottom:8px; display:block;"></i>
+                <strong>No placeholder or audit issues found on this page.</strong>
+                <p style="font-size:11px; color:var(--text-secondary); margin-top:4px;">Verified clean content.</p>
+              </div>
+            `;
+            return;
+          }
+
+          list.innerHTML = findings.map((f, idx) => {
+            const isLorem = (f.detection_category === 'lorem_ipsum');
+            const occ = f.occurrences || 1;
+            const highlightedText = highlightLoremPhrases(esc(f.matched_text));
+
+            return `
+              <div class="evidence-box">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid var(--border-1); padding-bottom:8px;">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span class="rep-badge" style="background:var(--accent-muted); color:var(--accent);">#${idx + 1} ${esc(f.detection_category || 'lorem_ipsum')}</span>
+                    ${f.html_element ? `<span style="font-size:10px; color:var(--text-tertiary); font-family:'DM Mono',monospace;">&lt;${esc(f.html_element)}&gt;</span>` : ''}
+                  </div>
+                  <span class="rep-badge" style="background:rgba(239,68,68,0.14); color:#FB7185; border:1px solid rgba(239,68,68,0.3);">
+                    ${occ} Phrase Occurrence${occ > 1 ? 's' : ''}
+                  </span>
+                </div>
+
+                <div style="margin-bottom:8px;">
+                  <span style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-tertiary); display:block; margin-bottom:4px;">
+                    Captured Paragraph Text:
+                  </span>
+                  <div style="font-size:12.5px; line-height:1.6; color:var(--text-primary); white-space:pre-wrap;">
+                    ${highlightedText}
+                  </div>
+                </div>
+
+                ${f.css_selector ? `
+                  <div style="margin-top:8px; padding-top:6px; border-top:1px dashed var(--border-2); font-size:10px; color:var(--text-tertiary); font-family:'DM Mono',monospace;">
+                    DOM Selector: ${esc(f.css_selector)}
+                  </div>
+                ` : ''}
+              </div>
+            `;
+          }).join('');
+
+        } catch(e) {
+          if (list) list.innerHTML = '<div style="color:var(--error); padding:20px;">' + e.message + '</div>';
+        }
+      }
+
+      function highlightLoremPhrases(escapedHtml) {
+        if (!escapedHtml) return '';
+        // Safely highlight common Lorem phrases
+        const phrases = [
+          /\blorem\s+ipsum\b/gi,
+          /\bdolor\s+sit\s+amet\b/gi,
+          /\bconsectetur\s+adipiscing\b/gi,
+          /\bsed\s+do\s+eiusmod\b/gi,
+          /\but\s+labore\s+et\s+dolore\b/gi,
+          /\bmagna\s+aliqua\b/gi,
+          /\bduis\s+aute\s+irure\b/gi,
+          /\bexcepteur\s+sint\b/gi,
+          /\bnulla\s+pariatur\b/gi,
+          /\bquis\s+nostrud\b/gi,
+          /\bplaceholder\s+text\b/gi,
+          /\bsample\s+text\b/gi,
+          /\binsert\s+text\s+here\b/gi
+        ];
+
+        let res = escapedHtml;
+        phrases.forEach(regex => {
+          res = res.replace(regex, (match) => `<span class="evidence-highlight">${match}</span>`);
+        });
+        return res;
+      }
+
+      function closeInspectionDrawer(e) {
+        if (e && e.target && e.target.id !== 'inspectionDrawer') return;
+        const drawer = document.getElementById('inspectionDrawer');
+        if (drawer) drawer.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+
+      function exportCurrentReport(format) {
+        if (!currentReportScanId) return;
+        window.open(API_URL + '?action=export&scan_id=' + currentReportScanId + '&format=' + format, '_blank');
+      }
+
     </script>
   </body>
 </html>

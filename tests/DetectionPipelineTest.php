@@ -113,30 +113,33 @@ class DetectionPipelineTest
         $extractor = new HtmlContentExtractor();
         $detector  = new DetectionEngine($rules, 100);
 
-        // FIXTURE 1: Standard Lorem Ipsum paragraph
+        // FIXTURE 1: Standard Lorem Ipsum paragraph — should be 1 paragraph finding with complete text
         $f1 = '<html><body><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></body></html>';
         $ext1 = $extractor->extract($f1, 'https://test.local/f1');
         $find1 = $detector->scanHtmlNodes($ext1['nodes'], 'https://test.local/f1');
-        $this->assertTrue(count($find1) >= 2, 'Fixture 1: Standard Lorem Ipsum paragraph detected');
+        $this->assertEquals(1, count($find1), 'Fixture 1: Standard paragraph grouped into ONE finding');
+        $this->assertEquals('Lorem ipsum dolor sit amet, consectetur adipiscing elit.', $find1[0]['matched_text'], 'Fixture 1: Stores full paragraph as evidence');
+        $this->assertTrue(($find1[0]['occurrences'] ?? 1) >= 2, 'Fixture 1: Counts multiple phrase occurrences in paragraph');
 
         // FIXTURE 2: Uppercase LOREM IPSUM DOLOR
         $f2 = '<html><body><h5>LOREM IPSUM DOLOR</h5></body></html>';
         $ext2 = $extractor->extract($f2, 'https://test.local/f2');
         $find2 = $detector->scanHtmlNodes($ext2['nodes'], 'https://test.local/f2');
-        $this->assertTrue(count($find2) >= 1, 'Fixture 2: Uppercase LOREM IPSUM detected');
-        $this->assertEquals('LOREM IPSUM', strtoupper(substr($find2[0]['matched_text'], 0, 11)), 'Fixture 2 matches uppercase');
+        $this->assertEquals(1, count($find2), 'Fixture 2: Uppercase LOREM IPSUM detected as ONE finding');
+        $this->assertEquals('LOREM IPSUM DOLOR', $find2[0]['matched_text'], 'Fixture 2 matches uppercase');
 
-        // FIXTURE 3: Multiple Lorem Ipsum paragraphs
+        // FIXTURE 3: Multiple Lorem Ipsum paragraphs (2 distinct paragraphs)
         $f3 = '<html><body><p>Lorem ipsum dolor sit amet.</p><p>Sed do eiusmod tempor incididunt.</p></body></html>';
         $ext3 = $extractor->extract($f3, 'https://test.local/f3');
         $find3 = $detector->scanHtmlNodes($ext3['nodes'], 'https://test.local/f3');
-        $this->assertTrue(count($find3) >= 2, 'Fixture 3: Multiple paragraphs each detected');
+        $this->assertEquals(2, count($find3), 'Fixture 3: Two paragraphs detected as TWO separate findings');
 
         // FIXTURE 4: Split across nested HTML tags
         $f4 = '<html><body><p><strong>Lorem</strong> <span>ipsum</span> <em>dolor</em> sit amet.</p></body></html>';
         $ext4 = $extractor->extract($f4, 'https://test.local/f4');
         $find4 = $detector->scanHtmlNodes($ext4['nodes'], 'https://test.local/f4');
-        $this->assertTrue(count($find4) >= 1, 'Fixture 4: Text split across strong/span/em detected');
+        $this->assertEquals(1, count($find4), 'Fixture 4: Text split across strong/span/em detected as ONE paragraph finding');
+        $this->assertEquals('Lorem ipsum dolor sit amet.', $find4[0]['matched_text'], 'Fixture 4: Preserves complete concatenated text');
 
         // FIXTURE 5: HTML-encoded content
         $f5 = '<html><body><p>&ldquo;Lorem&nbsp;ipsum&nbsp;dolor&nbsp;sit&nbsp;amet&rdquo;</p></body></html>';

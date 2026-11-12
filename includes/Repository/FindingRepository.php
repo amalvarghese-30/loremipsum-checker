@@ -20,6 +20,37 @@ class FindingRepository
         $this->db = $db;
     }
 
+    private ?bool $hasOccurrencesColumn = null;
+
+    private function checkOccurrencesColumn(): bool
+    {
+        if ($this->hasOccurrencesColumn !== null) {
+            return $this->hasOccurrencesColumn;
+        }
+
+        try {
+            $isSqlite = QueryHelper::isSqlite($this->db);
+            if ($isSqlite) {
+                $cols = $this->db->query("PRAGMA table_info(findings)")->fetchAll();
+                $found = false;
+                foreach ($cols as $col) {
+                    if (($col['name'] ?? '') === 'occurrences') {
+                        $found = true;
+                        break;
+                    }
+                }
+                $this->hasOccurrencesColumn = $found;
+            } else {
+                $stmt = $this->db->query("SHOW COLUMNS FROM findings LIKE 'occurrences'");
+                $this->hasOccurrencesColumn = ($stmt && $stmt->rowCount() > 0);
+            }
+        } catch (\Throwable $e) {
+            $this->hasOccurrencesColumn = false;
+        }
+
+        return $this->hasOccurrencesColumn;
+    }
+
     /**
      * Batch insert findings for a page or resource.
      */
@@ -29,25 +60,44 @@ class FindingRepository
             return 0;
         }
 
-        $stmt = QueryHelper::prepare($this->db, '
-            INSERT INTO findings (
-                scan_id, page_result_id, resource_id, page_url, resource_url,
-                resource_type, matched_text, surrounding_context, html_element,
-                css_selector, section_name, line_number, character_position,
-                is_visible, detection_rule_id, detection_category, severity,
-                confidence, finding_fingerprint, created_at
-            ) VALUES (
-                ?, ?, ?, ?, ?,
-                ?, ?, ?, ?,
-                ?, ?, ?, ?,
-                ?, ?, ?, ?,
-                ?, ?, NOW()
-            )
-        ');
+        $hasOcc = $this->checkOccurrencesColumn();
+
+        if ($hasOcc) {
+            $stmt = QueryHelper::prepare($this->db, '
+                INSERT INTO findings (
+                    scan_id, page_result_id, resource_id, page_url, resource_url,
+                    resource_type, matched_text, occurrences, surrounding_context, html_element,
+                    css_selector, section_name, line_number, character_position,
+                    is_visible, detection_rule_id, detection_category, severity,
+                    confidence, finding_fingerprint, created_at
+                ) VALUES (
+                    ?, ?, ?, ?, ?,
+                    ?, ?, ?, ?, ?,
+                    ?, ?, ?, ?,
+                    ?, ?, ?, ?,
+                    ?, ?, NOW()
+                )
+            ');
+        } else {
+            $stmt = QueryHelper::prepare($this->db, '
+                INSERT INTO findings (
+                    scan_id, page_result_id, resource_id, page_url, resource_url,
+                    resource_type, matched_text, surrounding_context, html_element,
+                    css_selector, section_name, line_number, character_position,
+                    is_visible, detection_rule_id, detection_category, severity,
+                    confidence, finding_fingerprint, created_at
+                ) VALUES (
+                    ?, ?, ?, ?, ?,
+                    ?, ?, ?, ?,
+                    ?, ?, ?, ?,
+                    ?, ?, ?, ?,
+                    ?, ?, NOW()
+                )
+            ');
+        }
 
         $inserted = 0;
         foreach ($findings as $f) {
-            // Generate distinct stable fingerprint with offset and category if not already set
             $fingerprint = $f['finding_fingerprint'] ?? hash(
                 'sha256',
                 ($f['page_url'] ?? '') . '|' .
@@ -57,27 +107,54 @@ class FindingRepository
                 ($f['character_position'] ?? 0)
             );
 
-            $stmt->execute([
-                $scanId,
-                $pageResultId,
-                $resourceId,
-                $f['page_url'],
-                $f['resource_url'] ?? null,
-                $f['resource_type'] ?? 'html',
-                $f['matched_text'],
-                $f['surrounding_context'] ?? null,
-                $f['html_element'] ?? null,
-                $f['css_selector'] ?? null,
-                $f['section_name'] ?? null,
-                $f['line_number'] ?? null,
-                $f['character_position'] ?? null,
-                isset($f['is_visible']) ? ($f['is_visible'] ? 1 : 0) : 1,
-                $f['detection_rule_id'] ?? null,
-                $f['detection_category'] ?? 'lorem_ipsum',
-                $f['severity'] ?? 'high',
-                $f['confidence'] ?? 'high',
-                $fingerprint
-            ]);
+            $occurrences = max(1, (int)($f['occurrences'] ?? 1));
+
+            if ($hasOcc) {
+                $stmt->execute([
+                    $scanId,
+                    $pageResultId,
+                    $resourceId,
+                    $f['page_url'],
+                    $f['resource_url'] ?? null,
+                    $f['resource_type'] ?? 'html',
+                    $f['matched_text'],
+                    $occurrences,
+                    $f['surrounding_context'] ?? null,
+                    $f['html_element'] ?? null,
+                    $f['css_selector'] ?? null,
+                    $f['section_name'] ?? null,
+                    $f['line_number'] ?? null,
+                    $f['character_position'] ?? null,
+                    isset($f['is_visible']) ? ($f['is_visible'] ? 1 : 0) : 1,
+                    $f['detection_rule_id'] ?? null,
+                    $f['detection_category'] ?? 'lorem_ipsum',
+                    $f['severity'] ?? 'high',
+                    $f['confidence'] ?? 'high',
+                    $fingerprint
+                ]);
+            } else {
+                $stmt->execute([
+                    $scanId,
+                    $pageResultId,
+                    $resourceId,
+                    $f['page_url'],
+                    $f['resource_url'] ?? null,
+                    $f['resource_type'] ?? 'html',
+                    $f['matched_text'],
+                    $f['surrounding_context'] ?? null,
+                    $f['html_element'] ?? null,
+                    $f['css_selector'] ?? null,
+                    $f['section_name'] ?? null,
+                    $f['line_number'] ?? null,
+                    $f['character_position'] ?? null,
+                    isset($f['is_visible']) ? ($f['is_visible'] ? 1 : 0) : 1,
+                    $f['detection_rule_id'] ?? null,
+                    $f['detection_category'] ?? 'lorem_ipsum',
+                    $f['severity'] ?? 'high',
+                    $f['confidence'] ?? 'high',
+                    $fingerprint
+                ]);
+            }
             $inserted++;
         }
 
