@@ -33,7 +33,7 @@ class PageResultRepository
         $checkStmt->execute([$scanId, $discoveredUrlId]);
         $existing = $checkStmt->fetch(PDO::FETCH_ASSOC);
 
-        if ($existing) {
+        if ($existing && empty($data['force_insert'])) {
             $pageResId = (int)$existing['id'];
 
             // Capture prior PAGE-LEVEL metrics only (resource findings are tracked independently)

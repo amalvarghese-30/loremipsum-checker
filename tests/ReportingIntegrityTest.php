@@ -568,6 +568,7 @@ class ReportingIntegrityTest
             'processing_status' => 'clean',
             'finding_count'     => 0,
             'has_lorem_ipsum'   => 0,
+            'force_insert'      => true,
         ]);
 
         $this->assertTrue($p2 > $p1, 'Latest page result must have higher ID');
