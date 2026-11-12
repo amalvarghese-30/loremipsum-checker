@@ -15,6 +15,9 @@ namespace LoremChecker\Api;
 
 class Response
 {
+    public static bool $testMode = false;
+    public static ?array $lastResponse = null;
+
     private array $allowedOrigins;
 
     public function __construct(array $allowedOrigins = [])
@@ -57,6 +60,10 @@ class Response
 
     public static function json(array $payload, int $statusCode = 200): void
     {
+        self::$lastResponse = ['status' => $statusCode, 'payload' => $payload];
+        if (self::$testMode) {
+            return;
+        }
         http_response_code($statusCode);
         header('Content-Type: application/json; charset=utf-8');
         echo json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT);

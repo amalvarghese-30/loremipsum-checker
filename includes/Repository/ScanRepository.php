@@ -309,9 +309,11 @@ class ScanRepository
         $dupRows = $dupStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
         $duplicatePagesCount = count($dupRows);
 
-        // Fetch all distinct page results for classification
+        // Fetch all canonical page results with actual page-level finding counts
         $pagesStmt = $this->db->prepare('
-            SELECT pr.id, pr.discovered_url_id, pr.processing_status, pr.http_status, pr.finding_count, pr.has_lorem_ipsum
+            SELECT pr.id, pr.discovered_url_id, pr.processing_status, pr.http_status, pr.finding_count, pr.has_lorem_ipsum,
+                   COALESCE(pf.page_finding_count, 0) as actual_page_finding_count,
+                   COALESCE(pf.lorem_finding_count, 0) as actual_lorem_finding_count
             FROM page_results pr
             INNER JOIN (
                 SELECT MAX(id) as max_id
@@ -319,22 +321,31 @@ class ScanRepository
                 WHERE scan_id = ?
                 GROUP BY CASE WHEN discovered_url_id IS NOT NULL THEN discovered_url_id ELSE id END
             ) latest ON pr.id = latest.max_id
+            LEFT JOIN (
+                SELECT page_result_id,
+                       COUNT(CASE WHEN resource_id IS NULL THEN 1 END) as page_finding_count,
+                       COUNT(CASE WHEN detection_category = "lorem_ipsum" AND resource_id IS NULL THEN 1 END) as lorem_finding_count
+                FROM findings
+                WHERE scan_id = ?
+                GROUP BY page_result_id
+            ) pf ON pr.id = pf.page_result_id
             WHERE pr.scan_id = ?
         ');
-        $pagesStmt->execute([$scanId, $scanId]);
-        $distinctPages = $pagesStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+        $pagesStmt->execute([$scanId, $scanId, $scanId]);
+        $canonicalPages = $pagesStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+        $canonicalPagesCount = count($canonicalPages);
 
-        $cleanCount        = 0;
-        $affectedCount     = 0;
-        $failedCount       = 0;
-        $unclassifiedCount = 0;
+        $cleanCount                     = 0;
+        $affectedCount                  = 0;
+        $failedCount                    = 0;
+        $unclassifiedCount              = 0;
+        $inconsistentCleanDiscrepancies = 0;
 
-        foreach ($distinctPages as $p) {
-            $status     = (string)($p['processing_status'] ?? '');
-            $httpStatus = (int)($p['http_status'] ?? 0);
-            $fCount     = (int)($p['finding_count'] ?? 0);
+        foreach ($canonicalPages as $p) {
+            $status       = (string)($p['processing_status'] ?? '');
+            $httpStatus   = (int)($p['http_status'] ?? 0);
+            $actualFCount = (int)($p['actual_page_finding_count'] ?? 0);
 
-            // Mutually exclusive terminal classification hierarchy:
             // 1) Terminal Fetch Failure
             $isTerminalFailure = in_array($status, [
                 'failed', 'cloudflare_blocked', 'bot_blocked', 'rate_limited',
@@ -346,57 +357,84 @@ class ScanRepository
                 continue;
             }
 
-            // 2) Successfully fetched with findings (affected)
-            if ($status === 'findings_detected' || $fCount > 0) {
+            // Flag discrepancy: marked 'clean' in status but has actual page findings
+            if ($status === 'clean' && $actualFCount > 0) {
+                $inconsistentCleanDiscrepancies++;
                 $affectedCount++;
                 continue;
             }
 
-            // 3) Successfully fetched clean page
-            if ($status === 'clean' || $fCount === 0) {
+            // 2) Successfully fetched with page findings (affected)
+            if ($actualFCount > 0 || $status === 'findings_detected') {
+                $affectedCount++;
+                continue;
+            }
+
+            // 3) Successfully fetched clean page with zero findings
+            if ($status === 'clean' && $actualFCount === 0) {
                 $cleanCount++;
                 continue;
             }
 
-            // 4) Unclassified / nonterminal status
+            // 4) Unclassified / nonterminal status (pending, queued, processing, retry_wait, unknown)
             $unclassifiedCount++;
         }
 
+        // Independently calculated terminal processed count
         $processedCount = $cleanCount + $affectedCount + $failedCount;
 
-        // 3. Authoritative findings breakdown
-        // Use canonical resource_id to cleanly separate HTML page findings from external resources
+        // Strict independent invariant verification:
+        // Must equal canonical pages, and there must be 0 unclassified/nonterminal pages
+        $invariantPassed = ($canonicalPagesCount === ($cleanCount + $affectedCount + $failedCount)) && ($unclassifiedCount === 0);
+
+        // 3. Authoritative findings breakdown joined to canonical page results
         $loremStmt = $this->db->prepare('
             SELECT 
                 COUNT(*) as lorem_findings,
-                COALESCE(SUM(COALESCE(occurrences, 1)), 0) as lorem_occurrences,
-                COUNT(DISTINCT page_result_id) as lorem_pages
-            FROM findings
-            WHERE scan_id = ?
-              AND detection_category = "lorem_ipsum"
-              AND resource_id IS NULL
+                COALESCE(SUM(COALESCE(f.occurrences, 1)), 0) as lorem_occurrences,
+                COUNT(DISTINCT f.page_result_id) as lorem_pages
+            FROM findings f
+            INNER JOIN (
+                SELECT MAX(id) as canonical_id
+                FROM page_results
+                WHERE scan_id = ?
+                GROUP BY CASE WHEN discovered_url_id IS NOT NULL THEN discovered_url_id ELSE id END
+            ) cp ON f.page_result_id = cp.canonical_id
+            WHERE f.scan_id = ?
+              AND f.detection_category = "lorem_ipsum"
+              AND f.resource_id IS NULL
         ');
-        $loremStmt->execute([$scanId]);
+        $loremStmt->execute([$scanId, $scanId]);
         $loremData = $loremStmt->fetch(PDO::FETCH_ASSOC) ?: [];
 
         $loremFindings    = (int)($loremData['lorem_findings'] ?? 0);
         $loremOccurrences = (int)($loremData['lorem_occurrences'] ?? 0);
         $loremPages       = (int)($loremData['lorem_pages'] ?? 0);
 
-        // Total findings across all sources
-        $totFindStmt = $this->db->prepare('SELECT COUNT(*) FROM findings WHERE scan_id = ?');
-        $totFindStmt->execute([$scanId]);
-        $totalFindings = (int)$totFindStmt->fetchColumn();
-
         // Resource findings (linked to scan_resources via canonical resource_id)
         $resFindStmt = $this->db->prepare('SELECT COUNT(*) FROM findings WHERE scan_id = ? AND resource_id IS NOT NULL');
         $resFindStmt->execute([$scanId]);
         $resourceFindings = (int)$resFindStmt->fetchColumn();
 
-        // Non-Lorem Page Audit findings (page-level only)
-        $auditFindStmt = $this->db->prepare('SELECT COUNT(*) FROM findings WHERE scan_id = ? AND detection_category != "lorem_ipsum" AND resource_id IS NULL');
-        $auditFindStmt->execute([$scanId]);
+        // Non-Lorem Page Audit findings (page-level only, canonical)
+        $auditFindStmt = $this->db->prepare('
+            SELECT COUNT(*)
+            FROM findings f
+            INNER JOIN (
+                SELECT MAX(id) as canonical_id
+                FROM page_results
+                WHERE scan_id = ?
+                GROUP BY CASE WHEN discovered_url_id IS NOT NULL THEN discovered_url_id ELSE id END
+            ) cp ON f.page_result_id = cp.canonical_id
+            WHERE f.scan_id = ?
+              AND f.detection_category != "lorem_ipsum"
+              AND f.resource_id IS NULL
+        ');
+        $auditFindStmt->execute([$scanId, $scanId]);
         $auditFindings = (int)$auditFindStmt->fetchColumn();
+
+        // Total findings across canonical page findings + resource findings
+        $totalFindings = $loremFindings + $auditFindings + $resourceFindings;
 
         // Check discrepancies between page_results.has_lorem_ipsum and actual page-level findings
         $discStmt = $this->db->prepare('
@@ -414,8 +452,6 @@ class ScanRepository
         ');
         $discStmt->execute([$scanId]);
         $loremFlagDiscrepancyCount = (int)$discStmt->fetchColumn();
-
-        $invariantPassed = ($processedCount === ($cleanCount + $affectedCount + $failedCount));
 
         // If apply requested, persist corrections inside a transaction
         if ($apply) {
@@ -529,11 +565,17 @@ class ScanRepository
             'audit_finding_count'          => $auditFindings,
             'resource_finding_count'       => $resourceFindings,
             'total_findings'               => $totalFindings,
-            'duplicate_pages_count'        => $duplicatePagesCount,
-            'unclassified_pages_count'     => $unclassifiedCount,
-            'lorem_flag_discrepancy_count' => $loremFlagDiscrepancyCount,
-            'invariant_passed'             => $invariantPassed,
             'applied'                      => $apply,
+            'invariant_passed'             => $invariantPassed,
+            'diagnostics'                  => [
+                'canonical_pages_count'        => $canonicalPagesCount,
+                'duplicate_pages_count'        => $duplicatePagesCount,
+                'duplicate_rows'               => $duplicateRows,
+                'unclassified_pages_count'     => $unclassifiedCount,
+                'inconsistent_clean_count'     => $inconsistentCleanDiscrepancies,
+                'lorem_flag_discrepancy_count' => $loremFlagDiscrepancyCount,
+                'invariant_passed'             => $invariantPassed,
+            ],
         ];
     }
 
