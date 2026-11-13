@@ -32,63 +32,31 @@ class ProjectController
         $projects = [];
 
         foreach ($rows as $r) {
-            $totalUrls = (int)($r['discovered_count'] ?? 0);
-            $processed = (int)($r['processed_count'] ?? 0);
-            $percentage = $totalUrls > 0 ? round(($processed / $totalUrls) * 100, 2) : 0;
-
             $latestScanId = !empty($r['latest_scan_id']) ? (int)$r['latest_scan_id'] : null;
 
             if ($latestScanId) {
-                // Unconditional authoritative page-level Lorem metrics from persisted findings
-                $loremStmt = $this->db->prepare('
-                    SELECT 
-                        COUNT(*) as lorem_findings,
-                        COALESCE(SUM(COALESCE(f.occurrences, 1)), 0) as lorem_occurrences,
-                        COUNT(DISTINCT f.page_result_id) as lorem_pages
-                    FROM findings f
-                    INNER JOIN (
-                        SELECT MAX(id) as canonical_id
-                        FROM page_results
-                        WHERE scan_id = ?
-                        GROUP BY CASE WHEN discovered_url_id IS NOT NULL THEN discovered_url_id ELSE id END
-                    ) cp ON f.page_result_id = cp.canonical_id
-                    WHERE f.scan_id = ?
-                      AND f.detection_category = "lorem_ipsum"
-                      AND f.resource_id IS NULL
-                ');
-                $loremStmt->execute([$latestScanId, $latestScanId]);
-                $lData = $loremStmt->fetch(PDO::FETCH_ASSOC) ?: [];
-
-                $loremFindings    = (int)($lData['lorem_findings'] ?? 0);
-                $loremOccurrences = (int)($lData['lorem_occurrences'] ?? 0);
-                $loremPages       = (int)($lData['lorem_pages'] ?? 0);
-
-                // Authoritative total findings
-                $totStmt = $this->db->prepare('
-                    SELECT COUNT(*)
-                    FROM findings f
-                    LEFT JOIN (
-                        SELECT MAX(id) as canonical_id
-                        FROM page_results
-                        WHERE scan_id = ?
-                        GROUP BY CASE WHEN discovered_url_id IS NOT NULL THEN discovered_url_id ELSE id END
-                    ) cp ON f.page_result_id = cp.canonical_id
-                    WHERE f.scan_id = ?
-                      AND (f.resource_id IS NOT NULL OR cp.canonical_id IS NOT NULL)
-                ');
-                $totStmt->execute([$latestScanId, $latestScanId]);
-                $totalFindings = (int)$totStmt->fetchColumn();
-
-                $affectedPages = (int)($r['affected_page_count'] ?? 0);
-                if ($totalFindings === 0) {
-                    $affectedPages = 0;
-                }
+                $metrics = $this->scanRepo->getAuthoritativeMetrics($latestScanId);
+                $totalUrls        = $metrics['discovered_count'];
+                $processed        = $metrics['processed_count'];
+                $percentage       = $totalUrls > 0 ? round(($processed / $totalUrls) * 100, 2) : 0;
+                $cleanPages       = $metrics['clean_count'];
+                $affectedPages    = $metrics['affected_page_count'];
+                $errorPages       = $metrics['failed_count'];
+                $loremFindings    = $metrics['lorem_finding_count'];
+                $loremPages       = $metrics['lorem_page_count'];
+                $loremOccurrences = $metrics['lorem_occurrence_count'];
+                $totalFindings    = $metrics['total_findings'];
             } else {
+                $totalUrls        = (int)($r['discovered_count'] ?? 0);
+                $processed        = (int)($r['processed_count'] ?? 0);
+                $percentage       = $totalUrls > 0 ? round(($processed / $totalUrls) * 100, 2) : 0;
+                $cleanPages       = (int)($r['clean_count'] ?? 0);
+                $affectedPages    = (int)($r['affected_page_count'] ?? 0);
+                $errorPages       = (int)($r['failed_count'] ?? 0);
                 $loremFindings    = 0;
                 $loremPages       = 0;
                 $loremOccurrences = 0;
                 $totalFindings    = 0;
-                $affectedPages    = 0;
             }
 
             // Maintain exact structure expected by index.html loadProjects()
@@ -102,16 +70,16 @@ class ProjectController
                 'progress'     => [
                     'total_urls'        => $totalUrls,
                     'processed'         => $processed,
-                    'clean'             => (int)($r['clean_count'] ?? 0),
+                    'clean'             => $cleanPages,
                     'lorem_found'       => $loremFindings,
                     'lorem_pages'       => $loremPages,
                     'lorem_occurrences' => $loremOccurrences,
                     'affected_pages'    => $affectedPages,
                     'total_findings'    => $totalFindings,
-                    'errors'            => (int)($r['failed_count'] ?? 0),
+                    'errors'            => $errorPages,
                     'percentage'        => $percentage,
                 ],
-                'latest_scan_id' => $r['latest_scan_id'] ? (int)$r['latest_scan_id'] : null,
+                'latest_scan_id' => $latestScanId,
             ];
         }
 

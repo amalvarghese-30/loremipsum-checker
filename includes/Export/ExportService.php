@@ -105,52 +105,20 @@ class ExportService
         $stmt->execute([$scanId, $scanId]);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
 
-        // Authoritative metrics calculated directly from canonical rows
-        $loremStmt = $this->db->prepare('
-            SELECT 
-                COUNT(*) as lorem_findings,
-                COALESCE(SUM(COALESCE(f.occurrences, 1)), 0) as lorem_occurrences,
-                COUNT(DISTINCT f.page_result_id) as lorem_pages
-            FROM findings f
-            INNER JOIN (
-                SELECT MAX(id) as canonical_id
-                FROM page_results
-                WHERE scan_id = ?
-                GROUP BY CASE WHEN discovered_url_id IS NOT NULL THEN discovered_url_id ELSE id END
-            ) cp ON f.page_result_id = cp.canonical_id
-            WHERE f.scan_id = ?
-              AND f.detection_category = "lorem_ipsum"
-              AND f.resource_id IS NULL
-        ');
-        $loremStmt->execute([$scanId, $scanId]);
-        $loremData = $loremStmt->fetch(PDO::FETCH_ASSOC) ?: [];
+        // Authoritative metrics calculated from canonical rows via ScanRepository
+        $authMetrics = $this->scanRepo->getAuthoritativeMetrics($scanId);
 
-        $totFindStmt = $this->db->prepare('
-            SELECT COUNT(*)
-            FROM findings f
-            LEFT JOIN (
-                SELECT MAX(id) as canonical_id
-                FROM page_results
-                WHERE scan_id = ?
-                GROUP BY CASE WHEN discovered_url_id IS NOT NULL THEN discovered_url_id ELSE id END
-            ) cp ON f.page_result_id = cp.canonical_id
-            WHERE f.scan_id = ?
-              AND (f.resource_id IS NOT NULL OR cp.canonical_id IS NOT NULL)
-        ');
-        $totFindStmt->execute([$scanId, $scanId]);
-        $totalFindings = (int)$totFindStmt->fetchColumn();
-
-        $metrics = [
-            'discovered'        => (int)$scan['discovered_count'],
-            'processed'         => (int)$scan['processed_count'],
-            'clean'             => (int)$scan['clean_count'],
-            'affected_pages'    => (int)$scan['affected_page_count'],
-            'failed'            => (int)$scan['failed_count'],
-            'total_findings'    => $totalFindings,
-            'lorem_findings'    => (int)($loremData['lorem_findings'] ?? 0),
-            'lorem_pages'       => (int)($loremData['lorem_pages'] ?? 0),
-            'lorem_occurrences' => (int)($loremData['lorem_occurrences'] ?? 0),
-        ];
+        $metrics = array_merge($authMetrics, [
+            'discovered'        => $authMetrics['discovered_count'],
+            'processed'         => $authMetrics['processed_count'],
+            'clean'             => $authMetrics['clean_count'],
+            'affected_pages'    => $authMetrics['affected_page_count'],
+            'failed'            => $authMetrics['failed_count'],
+            'total_findings'    => $authMetrics['total_findings'],
+            'lorem_findings'    => $authMetrics['lorem_finding_count'],
+            'lorem_pages'       => $authMetrics['lorem_page_count'],
+            'lorem_occurrences' => $authMetrics['lorem_occurrence_count'],
+        ]);
 
         return [
             'scan'      => $scan,

@@ -19,23 +19,25 @@ require_once __DIR__ . '/DetectionPipelineTest.php';
 require_once __DIR__ . '/ResponseSizeLimitTest.php';
 require_once __DIR__ . '/ParagraphLevelDetectionTest.php';
 require_once __DIR__ . '/ReportingIntegrityTest.php';
+require_once __DIR__ . '/InteractiveReportingAccuracyTest.php';
 
 echo "========================================================\n";
 echo "       LOREM IPSUM CHECKER - AUTOMATED TEST SUITE        \n";
 echo "========================================================\n\n";
 
 $tests = [
-    'UrlNormalizerTest'            => new UrlNormalizerTest(),
-    'DetectionEngineTest'          => new DetectionEngineTest(),
-    'HtmlContentExtractorTest'     => new HtmlContentExtractorTest(),
-    'AuditModulesTest'             => new AuditModulesTest(),
-    'RepositoryIntegrationTest'    => new RepositoryIntegrationTest(),
-    'ScanTransactionRecoveryTest'  => new ScanTransactionRecoveryTest(),
-    'HttpClientRetryTest'          => new HttpClientRetryTest(),
-    'DetectionPipelineTest'        => new DetectionPipelineTest(),
-    'ResponseSizeLimitTest'        => new ResponseSizeLimitTest(),
-    'ParagraphLevelDetectionTest'  => new ParagraphLevelDetectionTest(),
-    'ReportingIntegrityTest'       => new ReportingIntegrityTest(),
+    'UrlNormalizerTest'                  => new UrlNormalizerTest(),
+    'DetectionEngineTest'                => new DetectionEngineTest(),
+    'HtmlContentExtractorTest'           => new HtmlContentExtractorTest(),
+    'AuditModulesTest'                   => new AuditModulesTest(),
+    'RepositoryIntegrationTest'          => new RepositoryIntegrationTest(),
+    'ScanTransactionRecoveryTest'        => new ScanTransactionRecoveryTest(),
+    'HttpClientRetryTest'                => new HttpClientRetryTest(),
+    'DetectionPipelineTest'              => new DetectionPipelineTest(),
+    'ResponseSizeLimitTest'              => new ResponseSizeLimitTest(),
+    'ParagraphLevelDetectionTest'        => new ParagraphLevelDetectionTest(),
+    'ReportingIntegrityTest'             => new ReportingIntegrityTest(),
+    'InteractiveReportingAccuracyTest'   => new InteractiveReportingAccuracyTest(),
 ];
 
 $passedSuites = 0;

@@ -174,45 +174,75 @@ class FindingRepository
     public function listPaginated(int $scanId, int $page = 1, int $pageSize = 50, array $filters = []): array
     {
         $offset = ($page - 1) * $pageSize;
-        $sql = 'SELECT * FROM findings WHERE scan_id = ?';
-        $params = [$scanId];
+        $sql = '
+            SELECT f.* 
+            FROM findings f
+            LEFT JOIN (
+                SELECT MAX(id) as canonical_id
+                FROM page_results
+                WHERE scan_id = ?
+                GROUP BY CASE WHEN discovered_url_id IS NOT NULL THEN discovered_url_id ELSE id END
+            ) cp ON f.page_result_id = cp.canonical_id
+            WHERE f.scan_id = ?
+              AND (f.resource_id IS NOT NULL OR cp.canonical_id IS NOT NULL)
+        ';
+        $params = [$scanId, $scanId];
 
         if (!empty($filters['category'])) {
             $cat = trim($filters['category']);
-            if (strtolower($cat) === 'seo') {
-                $sql .= ' AND detection_category IN ("missing_title", "missing_meta_desc", "missing_h1", "missing_canonical", "heading_structure")';
+            if (in_array(strtolower($cat), ['seo', 'seo_issues'], true)) {
+                $sql .= ' AND f.detection_category IN ("missing_title", "missing_meta_desc", "missing_h1", "multiple_h1", "missing_canonical", "heading_structure")';
+            } elseif (in_array(strtolower($cat), ['a11y', 'accessibility', 'a11y_issues'], true)) {
+                $sql .= ' AND f.detection_category IN ("missing_image_alt", "missing_lang")';
+            } elseif (in_array(strtolower($cat), ['empty_page', 'missing_content'], true)) {
+                $sql .= ' AND f.detection_category IN ("empty_page", "incomplete_sections")';
+            } elseif (in_array(strtolower($cat), ['broken_link', 'broken_links', 'resource_issues'], true)) {
+                $sql .= ' AND (f.detection_category IN ("broken_link", "failed_resource", "asset_error") OR f.resource_id IS NOT NULL)';
+            } elseif (strtolower($cat) === 'lorem_ipsum') {
+                $sql .= ' AND f.detection_category = "lorem_ipsum" AND f.resource_id IS NULL';
             } elseif (str_contains($cat, ',')) {
                 $parts = array_filter(array_map('trim', explode(',', $cat)));
                 $ph = implode(',', array_fill(0, count($parts), '?'));
-                $sql .= " AND detection_category IN ({$ph})";
+                $sql .= " AND f.detection_category IN ({$ph})";
                 foreach ($parts as $p) { $params[] = $p; }
             } else {
-                $sql .= ' AND detection_category = ?';
+                $sql .= ' AND f.detection_category = ?';
                 $params[] = $cat;
             }
         }
+        if (!empty($filters['page_url'])) {
+            $sql .= ' AND f.page_url = ?';
+            $params[] = $filters['page_url'];
+        }
+        if (!empty($filters['page_result_id'])) {
+            $sql .= ' AND f.page_result_id = ?';
+            $params[] = (int)$filters['page_result_id'];
+        }
+        if (isset($filters['is_resource'])) {
+            $sql .= $filters['is_resource'] ? ' AND f.resource_id IS NOT NULL' : ' AND f.resource_id IS NULL';
+        }
         if (!empty($filters['severity'])) {
-            $sql .= ' AND severity = ?';
+            $sql .= ' AND f.severity = ?';
             $params[] = $filters['severity'];
         }
         if (!empty($filters['confidence'])) {
-            $sql .= ' AND confidence = ?';
+            $sql .= ' AND f.confidence = ?';
             $params[] = $filters['confidence'];
         }
         if (!empty($filters['resource_type'])) {
-            $sql .= ' AND resource_type = ?';
+            $sql .= ' AND f.resource_type = ?';
             $params[] = $filters['resource_type'];
         }
         if (!empty($filters['search'])) {
-            $sql .= ' AND (matched_text LIKE ? OR page_url LIKE ?)';
+            $sql .= ' AND (f.matched_text LIKE ? OR f.page_url LIKE ?)';
             $searchWild = '%' . $filters['search'] . '%';
             $params[] = $searchWild;
             $params[] = $searchWild;
         }
 
-        $sortField = 'id';
+        $sortField = 'f.id';
         if (!empty($filters['sort_by']) && in_array($filters['sort_by'], ['id', 'severity', 'confidence', 'created_at'])) {
-            $sortField = $filters['sort_by'];
+            $sortField = 'f.' . $filters['sort_by'];
         }
         $sortDir = (!empty($filters['sort_dir']) && strtolower($filters['sort_dir']) === 'asc') ? 'ASC' : 'DESC';
 
@@ -231,37 +261,67 @@ class FindingRepository
 
     public function countFiltered(int $scanId, array $filters = []): int
     {
-        $sql = 'SELECT COUNT(*) FROM findings WHERE scan_id = ?';
-        $params = [$scanId];
+        $sql = '
+            SELECT COUNT(*) 
+            FROM findings f
+            LEFT JOIN (
+                SELECT MAX(id) as canonical_id
+                FROM page_results
+                WHERE scan_id = ?
+                GROUP BY CASE WHEN discovered_url_id IS NOT NULL THEN discovered_url_id ELSE id END
+            ) cp ON f.page_result_id = cp.canonical_id
+            WHERE f.scan_id = ?
+              AND (f.resource_id IS NOT NULL OR cp.canonical_id IS NOT NULL)
+        ';
+        $params = [$scanId, $scanId];
 
         if (!empty($filters['category'])) {
             $cat = trim($filters['category']);
-            if (strtolower($cat) === 'seo') {
-                $sql .= ' AND detection_category IN ("missing_title", "missing_meta_desc", "missing_h1", "missing_canonical", "heading_structure")';
+            if (in_array(strtolower($cat), ['seo', 'seo_issues'], true)) {
+                $sql .= ' AND f.detection_category IN ("missing_title", "missing_meta_desc", "missing_h1", "multiple_h1", "missing_canonical", "heading_structure")';
+            } elseif (in_array(strtolower($cat), ['a11y', 'accessibility', 'a11y_issues'], true)) {
+                $sql .= ' AND f.detection_category IN ("missing_image_alt", "missing_lang")';
+            } elseif (in_array(strtolower($cat), ['empty_page', 'missing_content'], true)) {
+                $sql .= ' AND f.detection_category IN ("empty_page", "incomplete_sections")';
+            } elseif (in_array(strtolower($cat), ['broken_link', 'broken_links', 'resource_issues'], true)) {
+                $sql .= ' AND (f.detection_category IN ("broken_link", "failed_resource", "asset_error") OR f.resource_id IS NOT NULL)';
+            } elseif (strtolower($cat) === 'lorem_ipsum') {
+                $sql .= ' AND f.detection_category = "lorem_ipsum" AND f.resource_id IS NULL';
             } elseif (str_contains($cat, ',')) {
                 $parts = array_filter(array_map('trim', explode(',', $cat)));
                 $ph = implode(',', array_fill(0, count($parts), '?'));
-                $sql .= " AND detection_category IN ({$ph})";
+                $sql .= " AND f.detection_category IN ({$ph})";
                 foreach ($parts as $p) { $params[] = $p; }
             } else {
-                $sql .= ' AND detection_category = ?';
+                $sql .= ' AND f.detection_category = ?';
                 $params[] = $cat;
             }
         }
+        if (!empty($filters['page_url'])) {
+            $sql .= ' AND f.page_url = ?';
+            $params[] = $filters['page_url'];
+        }
+        if (!empty($filters['page_result_id'])) {
+            $sql .= ' AND f.page_result_id = ?';
+            $params[] = (int)$filters['page_result_id'];
+        }
+        if (isset($filters['is_resource'])) {
+            $sql .= $filters['is_resource'] ? ' AND f.resource_id IS NOT NULL' : ' AND f.resource_id IS NULL';
+        }
         if (!empty($filters['severity'])) {
-            $sql .= ' AND severity = ?';
+            $sql .= ' AND f.severity = ?';
             $params[] = $filters['severity'];
         }
         if (!empty($filters['confidence'])) {
-            $sql .= ' AND confidence = ?';
+            $sql .= ' AND f.confidence = ?';
             $params[] = $filters['confidence'];
         }
         if (!empty($filters['resource_type'])) {
-            $sql .= ' AND resource_type = ?';
+            $sql .= ' AND f.resource_type = ?';
             $params[] = $filters['resource_type'];
         }
         if (!empty($filters['search'])) {
-            $sql .= ' AND (matched_text LIKE ? OR page_url LIKE ?)';
+            $sql .= ' AND (f.matched_text LIKE ? OR f.page_url LIKE ?)';
             $searchWild = '%' . $filters['search'] . '%';
             $params[] = $searchWild;
             $params[] = $searchWild;

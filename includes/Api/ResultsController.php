@@ -33,12 +33,19 @@ class ResultsController
         $scanId = RequestValidator::validateId($_GET['scan_id'] ?? null, 'scan_id');
         $pagination = RequestValidator::sanitizePagination($_GET);
 
+        $statusParam = !empty($_GET['status']) ? trim($_GET['status']) : null;
+        $isError = isset($_GET['is_error']) 
+            ? (bool)$_GET['is_error'] 
+            : ($statusParam === 'failed' || $statusParam === 'error');
+
         $filters = [
-            'status'          => !empty($_GET['status']) ? trim($_GET['status']) : null,
+            'status'          => $statusParam,
             'audit_status'    => !empty($_GET['audit_status']) ? trim($_GET['audit_status']) : null,
+            'is_error'        => $isError,
             'has_lorem_ipsum' => isset($_GET['has_lorem']) ? (bool)$_GET['has_lorem'] : null,
             'has_findings'    => isset($_GET['has_findings']) ? (bool)$_GET['has_findings'] : null,
             'category'        => !empty($_GET['category']) ? trim($_GET['category']) : null,
+            'page_url'        => !empty($_GET['page_url']) ? trim($_GET['page_url']) : null,
             'search'          => !empty($_GET['search']) ? trim($_GET['search']) : null,
             'sort_by'         => RequestValidator::sanitizeSortField($_GET['sort_by'] ?? null, ['id', 'duration_ms', 'finding_count', 'http_status'], 'id'),
             'sort_dir'        => $_GET['sort_dir'] ?? 'DESC',
@@ -69,13 +76,16 @@ class ResultsController
         $pagination = RequestValidator::sanitizePagination($_GET);
 
         $filters = [
-            'category'      => !empty($_GET['category']) ? trim($_GET['category']) : null,
-            'severity'      => !empty($_GET['severity']) ? trim($_GET['severity']) : null,
-            'confidence'    => !empty($_GET['confidence']) ? trim($_GET['confidence']) : null,
-            'resource_type' => !empty($_GET['resource_type']) ? trim($_GET['resource_type']) : null,
-            'search'        => !empty($_GET['search']) ? trim($_GET['search']) : null,
-            'sort_by'       => RequestValidator::sanitizeSortField($_GET['sort_by'] ?? null, ['id', 'severity', 'confidence', 'created_at'], 'id'),
-            'sort_dir'      => $_GET['sort_dir'] ?? 'DESC',
+            'category'       => !empty($_GET['category']) ? trim($_GET['category']) : null,
+            'page_url'       => !empty($_GET['page_url']) ? trim($_GET['page_url']) : null,
+            'page_result_id' => !empty($_GET['page_result_id']) ? (int)$_GET['page_result_id'] : null,
+            'severity'       => !empty($_GET['severity']) ? trim($_GET['severity']) : null,
+            'confidence'     => !empty($_GET['confidence']) ? trim($_GET['confidence']) : null,
+            'resource_type'  => !empty($_GET['resource_type']) ? trim($_GET['resource_type']) : null,
+            'is_resource'    => isset($_GET['is_resource']) ? (bool)$_GET['is_resource'] : null,
+            'search'         => !empty($_GET['search']) ? trim($_GET['search']) : null,
+            'sort_by'        => RequestValidator::sanitizeSortField($_GET['sort_by'] ?? null, ['id', 'severity', 'confidence', 'created_at'], 'id'),
+            'sort_dir'       => $_GET['sort_dir'] ?? 'DESC',
         ];
 
         $findings = $this->findingRepo->listPaginated($scanId, $pagination['page'], $pagination['limit'], $filters);
@@ -167,63 +177,14 @@ class ResultsController
             Response::error('Scan not found.', 'NOT_FOUND', 404);
         }
 
-        // Fetch all CANONICAL page results for this scan
-        $pagesStmt = $this->db->prepare('
-            SELECT pr.id, pr.discovered_url_id, pr.processing_status, pr.http_status,
-                   COALESCE(pf.page_finding_count, 0) as actual_page_finding_count
-            FROM page_results pr
-            INNER JOIN (
-                SELECT MAX(id) as max_id
-                FROM page_results
-                WHERE scan_id = ?
-                GROUP BY CASE WHEN discovered_url_id IS NOT NULL THEN discovered_url_id ELSE id END
-            ) latest ON pr.id = latest.max_id
-            LEFT JOIN (
-                SELECT page_result_id,
-                       COUNT(CASE WHEN resource_id IS NULL THEN 1 END) as page_finding_count
-                FROM findings
-                WHERE scan_id = ?
-                GROUP BY page_result_id
-            ) pf ON pr.id = pf.page_result_id
-            WHERE pr.scan_id = ?
-        ');
-        $pagesStmt->execute([$scanId, $scanId, $scanId]);
-        $canonicalPages = $pagesStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+        $metrics = $this->scanRepo->getAuthoritativeMetrics($scanId);
 
-        $cleanPages        = 0;
-        $affectedPages     = 0;
-        $errorPages        = 0;
-        $unclassifiedPages = 0;
-
-        foreach ($canonicalPages as $p) {
-            $status     = (string)($p['processing_status'] ?? '');
-            $httpStatus = (int)($p['http_status'] ?? 0);
-            $fCount     = (int)($p['actual_page_finding_count'] ?? 0);
-
-            $isTerminalFailure = in_array($status, [
-                'failed', 'cloudflare_blocked', 'bot_blocked', 'rate_limited',
-                'timeout', 'ssl_error', 'not_found', 'error'
-            ], true) || ($httpStatus >= 400);
-
-            if ($isTerminalFailure) {
-                $errorPages++;
-                continue;
-            }
-
-            if ($fCount > 0 || $status === 'findings_detected') {
-                $affectedPages++;
-                continue;
-            }
-
-            if ($status === 'clean' && $fCount === 0) {
-                $cleanPages++;
-                continue;
-            }
-
-            $unclassifiedPages++;
-        }
-
-        $processedPages = $cleanPages + $affectedPages + $errorPages;
+        $cleanPages        = $metrics['clean_count'];
+        $affectedPages     = $metrics['affected_page_count'];
+        $errorPages        = $metrics['failed_count'];
+        $unclassifiedPages = $metrics['unclassified_pages'];
+        $processedPages    = $metrics['processed_count'];
+        $totalDiscovered   = $metrics['discovered_count'];
 
         $health = [
             'clean_pages'        => $cleanPages,
@@ -231,79 +192,18 @@ class ResultsController
             'error_pages'        => $errorPages,
             'unclassified_pages' => $unclassifiedPages,
             'total_pages'        => $processedPages,
+            'lorem_pages'        => $metrics['lorem_page_count'],
         ];
 
-        // Authoritative page-level findings breakdown by category
-        $catStmt = $this->db->prepare('
-            SELECT f.detection_category, COUNT(*) as count, COALESCE(SUM(COALESCE(f.occurrences, 1)), COUNT(*)) as occurrences
-            FROM findings f
-            INNER JOIN (
-                SELECT MAX(id) as canonical_id
-                FROM page_results
-                WHERE scan_id = ?
-                GROUP BY CASE WHEN discovered_url_id IS NOT NULL THEN discovered_url_id ELSE id END
-            ) cp ON f.page_result_id = cp.canonical_id
-            WHERE f.scan_id = ? AND f.resource_id IS NULL
-            GROUP BY f.detection_category
-            ORDER BY count DESC
-        ');
-        $catStmt->execute([$scanId, $scanId]);
-        $categories = $catStmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+        $categories = $metrics['categories'];
+        $catMap     = $metrics['category_stats'];
 
-        $catMap = [];
-        foreach ($categories as $c) {
-            $catMap[$c['detection_category']] = [
-                'count'       => (int)$c['count'],
-                'occurrences' => (int)$c['occurrences']
-            ];
-        }
+        $pageLoremFindings    = $metrics['lorem_finding_count'];
+        $pageLoremOccurrences = $metrics['lorem_occurrence_count'];
+        $pageLoremPages       = $metrics['lorem_page_count'];
 
-        // Authoritative page-level Lorem metrics
-        $loremStmt = $this->db->prepare('
-            SELECT 
-                COUNT(*) as lorem_findings,
-                COALESCE(SUM(COALESCE(f.occurrences, 1)), 0) as lorem_occurrences,
-                COUNT(DISTINCT f.page_result_id) as lorem_pages
-            FROM findings f
-            INNER JOIN (
-                SELECT MAX(id) as canonical_id
-                FROM page_results
-                WHERE scan_id = ?
-                GROUP BY CASE WHEN discovered_url_id IS NOT NULL THEN discovered_url_id ELSE id END
-            ) cp ON f.page_result_id = cp.canonical_id
-            WHERE f.scan_id = ?
-              AND f.detection_category = "lorem_ipsum"
-              AND f.resource_id IS NULL
-        ');
-        $loremStmt->execute([$scanId, $scanId]);
-        $loremData = $loremStmt->fetch(PDO::FETCH_ASSOC) ?: [];
-
-        $pageLoremFindings    = (int)($loremData['lorem_findings'] ?? 0);
-        $pageLoremOccurrences = (int)($loremData['lorem_occurrences'] ?? 0);
-        $pageLoremPages       = (int)($loremData['lorem_pages'] ?? 0);
-
-        // Resource-level Lorem metrics
-        $resLoremStmt = $this->db->prepare('
-            SELECT 
-                COUNT(*) as res_findings,
-                COALESCE(SUM(COALESCE(occurrences, 1)), 0) as res_occurrences
-            FROM findings
-            WHERE scan_id = ?
-              AND detection_category = "lorem_ipsum"
-              AND resource_id IS NOT NULL
-        ');
-        $resLoremStmt->execute([$scanId]);
-        $resLoremData = $resLoremStmt->fetch(PDO::FETCH_ASSOC) ?: [];
-        $resourceLoremFindings    = (int)($resLoremData['res_findings'] ?? 0);
-        $resourceLoremOccurrences = (int)($resLoremData['res_occurrences'] ?? 0);
-
-        // Always guarantee lorem_ipsum key exists in category_stats with authoritative values
-        $catMap['lorem_ipsum'] = [
-            'count'       => $pageLoremFindings,
-            'occurrences' => $pageLoremOccurrences,
-            'pages'       => $pageLoremPages,
-        ];
-        $health['lorem_pages'] = $pageLoremPages;
+        $resourceLoremFindings    = $metrics['resource_finding_count'];
+        $resourceLoremOccurrences = $metrics['resource_occurrences'];
 
         $sevStmt = $this->db->prepare('
             SELECT severity, COUNT(*) as count
@@ -323,16 +223,19 @@ class ResultsController
         $scan['affected_page_count']    = $affectedPages;
         $scan['failed_count']           = $errorPages;
         $scan['processed_count']        = $processedPages;
+        $scan['discovered_count']       = $totalDiscovered;
+        $scan['total_findings']         = $metrics['total_findings'];
         $scan['lorem_finding_count']    = $pageLoremFindings;
         $scan['lorem_occurrence_count'] = $pageLoremOccurrences;
         $scan['lorem_page_count']       = $pageLoremPages;
+        $scan['resource_finding_count'] = $resourceLoremFindings;
 
         Response::success([
             'scan'           => $scan,
             'project'        => $project,
             'health'         => $health,
             'pages'          => [
-                'discovered'   => (int)($scan['discovered_count'] ?? 0),
+                'discovered'   => $totalDiscovered,
                 'processed'    => $processedPages,
                 'clean'        => $cleanPages,
                 'affected'     => $affectedPages,

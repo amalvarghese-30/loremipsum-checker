@@ -1262,6 +1262,52 @@
         border-radius: 3px;
         border: 1px solid rgba(239, 68, 68, 0.4);
       }
+      .issue-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 10px;
+        font-weight: 600;
+        padding: 2px 7px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.18s ease;
+      }
+      .issue-chip:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.25);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      }
+      .guidance-box {
+        margin-top: 10px;
+        padding: 9px 12px;
+        border-radius: var(--r-md);
+        background: var(--surface-3);
+        border: 1px solid var(--border-2);
+        font-size: 11px;
+        line-height: 1.5;
+      }
+      .guidance-why {
+        color: var(--text-secondary);
+        margin-bottom: 4px;
+      }
+      .guidance-fix {
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .drawer-group-hdr {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-secondary);
+        padding: 10px 0 6px 0;
+        margin-top: 12px;
+        border-bottom: 1px solid var(--border-2);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
 
     </style>
   </head>
@@ -1937,7 +1983,9 @@
         } catch (e) {
           host = p.website_url || "";
         }
-        return `<div id="card-${p.id}" class="proj-card anim-enter"><div class="proj-hd-div" style="padding:18px 22px;border-bottom:1px solid var(--border-1);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;"><div style="display:flex;align-items:center;gap:14px;"><div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;${ic.bg}"><i class="fas ${ic.cls}" style="font-size:17px;color:${ic.col};"></i></div><div><h3 class="proj-name">${esc(p.project_name)}</h3><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span class="proj-id">${p.id.split("_")[1] || p.id.slice(-8)}</span><a href="${esc(p.website_url)}" target="_blank" class="proj-link">${host} <i class="fas fa-external-link-alt" style="font-size:8px;"></i></a></div></div></div><div>${buildBadge(p.status)}</div></div><div style="padding:18px 22px;">${ia || (pct > 0 && p.status !== "completed") ? `<div style="margin-bottom:20px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span class="prg-lbl" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Processing</span><span class="prg-pct" style="font-size:11px;font-weight:700;font-family:'DM Mono',monospace;" data-pct>${pct}%</span></div><div class="prg-bar prg-track" style="width:100%;"><div class="prg-fill shimmer-bar" data-bar style="height:100%;border-radius:999px;width:${pct}%;transition:width 0.7s ease;"></div></div></div>` : ""}<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:18px;"><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">URLs</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-total>${pr.total_urls || 0}</p></div><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Done</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-done>${pr.processed || 0}</p></div><div class="sc-clean" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-c" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Clean</p><p class="sc-val-c" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-clean>${pr.clean || 0}</p></div><div class="sc-amber" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-a" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Issues</p><p class="sc-val-a" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-affected>${pr.affected_pages || 0}</p></div><div class="sc-issue" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-i" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Lorem</p><p class="sc-val-i" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-lorem>${pr.lorem_found || 0}</p></div><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Errors</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;color:var(--error);" data-errors>${pr.errors || 0}</p></div></div><div class="act-div" style="border-top:1px solid var(--border-1);padding-top:14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;"><div style="display:flex;flex-wrap:wrap;gap:7px;">${p.status === "completed" ? `<button onclick="viewReport('${p.id}')" class="exp-btn" style="background:var(--accent); color:#FFF; border-color:var(--accent);"><i class="fas fa-chart-pie" style="color:#FFF;"></i> View Report</button><button onclick="exportResults('${p.id}','csv')" class="exp-btn"><i class="fas fa-file-csv" style="color:var(--success);"></i> CSV</button><button onclick="exportResults('${p.id}','json')" class="exp-btn"><i class="fas fa-code" style="color:var(--accent);"></i> JSON</button>` : ""}${p.status === "paused" ? `<button onclick="manageProject('${p.id}','resume')" class="resume-btn"><i class="fas fa-play" style="font-size:9px;"></i> Resume</button>` : ia ? `<button onclick="manageProject('${p.id}','pause')" class="pause-btn"><i class="fas fa-pause" style="font-size:9px;"></i> Pause</button>` : ""}</div><div style="display:flex;align-items:center;gap:8px;"><button id="logbtn-${p.id}" onclick="toggleLogs('${p.id}')" class="log-btn ${lo ? "open" : ""}"><i class="fas fa-terminal" style="font-size:10px;"></i> Console</button><button onclick="deleteProject('${p.id}')" class="del-btn"><i class="fas fa-trash-alt" style="font-size:11px;"></i></button></div></div><div id="logpanel-${p.id}" style="${lo ? "" : "display:none;"}margin-top:14px;" class="anim-enter"><div class="terminal" style="padding:0;font-family:'DM Mono',monospace;"><div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.2);"><div style="display:flex;gap:5px;"><div style="width:10px;height:10px;border-radius:50%;background:#f43f5e;"></div><div style="width:10px;height:10px;border-radius:50%;background:#f59e0b;"></div><div style="width:10px;height:10px;border-radius:50%;background:#22c55e;"></div></div><span style="font-size:9px;color:#a8b2e8;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;">agent_runtime.log</span></div><div id="logs-${p.id}" class="log-txt" style="max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;font-size:11px;line-height:1.7;padding:14px;"><span style="color:#6370a8;font-style:italic;">Initializing socket connectionâ€¦</span></div></div></div></div></div>`;
+        const scanIdArg = p.latest_scan_id ? p.latest_scan_id : 'null';
+        const loremTitle = `${(pr.lorem_found || 0).toLocaleString()} paragraph findings, ${(pr.lorem_occurrences || pr.lorem_found || 0).toLocaleString()} phrase occurrences across ${(pr.lorem_pages || 0).toLocaleString()} affected pages`;
+        return `<div id="card-${p.id}" class="proj-card anim-enter"><div class="proj-hd-div" style="padding:18px 22px;border-bottom:1px solid var(--border-1);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;"><div style="display:flex;align-items:center;gap:14px;"><div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;${ic.bg}"><i class="fas ${ic.cls}" style="font-size:17px;color:${ic.col};"></i></div><div><h3 class="proj-name">${esc(p.project_name)}</h3><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span class="proj-id">${p.id.split("_")[1] || p.id.slice(-8)}</span><a href="${esc(p.website_url)}" target="_blank" class="proj-link">${host} <i class="fas fa-external-link-alt" style="font-size:8px;"></i></a></div></div></div><div>${buildBadge(p.status)}</div></div><div style="padding:18px 22px;">${ia || (pct > 0 && p.status !== "completed") ? `<div style="margin-bottom:20px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span class="prg-lbl" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Processing</span><span class="prg-pct" style="font-size:11px;font-weight:700;font-family:'DM Mono',monospace;" data-pct>${pct}%</span></div><div class="prg-bar prg-track" style="width:100%;"><div class="prg-fill shimmer-bar" data-bar style="height:100%;border-radius:999px;width:${pct}%;transition:width 0.7s ease;"></div></div></div>` : ""}<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:18px;"><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">URLs</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-total>${pr.total_urls || 0}</p></div><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Done</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-done>${pr.processed || 0}</p></div><div class="sc-clean" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-c" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Clean</p><p class="sc-val-c" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-clean>${pr.clean || 0}</p></div><div class="sc-amber" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-a" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Issues</p><p class="sc-val-a" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-affected>${pr.affected_pages || 0}</p></div><div class="sc-issue" style="padding:10px 8px;border-radius:10px;" title="${loremTitle}"><p class="sc-lbl-i" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Lorem</p><p class="sc-val-i" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-lorem>${pr.lorem_found || 0}</p></div><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Errors</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;color:var(--error);" data-errors>${pr.errors || 0}</p></div></div><div class="act-div" style="border-top:1px solid var(--border-1);padding-top:14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;"><div style="display:flex;flex-wrap:wrap;gap:7px;">${p.status === "completed" ? `<button onclick="viewReport(${scanIdArg})" class="exp-btn" style="background:var(--accent); color:#FFF; border-color:var(--accent);"><i class="fas fa-chart-pie" style="color:#FFF;"></i> View Report</button><button onclick="exportResults(${scanIdArg},'csv')" class="exp-btn"><i class="fas fa-file-csv" style="color:var(--success);"></i> CSV</button><button onclick="exportResults(${scanIdArg},'json')" class="exp-btn"><i class="fas fa-code" style="color:var(--accent);"></i> JSON</button>` : ""}${p.status === "paused" ? `<button onclick="manageProject('${p.id}','resume')" class="resume-btn"><i class="fas fa-play" style="font-size:9px;"></i> Resume</button>` : ia ? `<button onclick="manageProject('${p.id}','pause')" class="pause-btn"><i class="fas fa-pause" style="font-size:9px;"></i> Pause</button>` : ""}</div><div style="display:flex;align-items:center;gap:8px;"><button id="logbtn-${p.id}" onclick="toggleLogs('${p.id}')" class="log-btn ${lo ? "open" : ""}"><i class="fas fa-terminal" style="font-size:10px;"></i> Console</button><button onclick="deleteProject('${p.id}')" class="del-btn"><i class="fas fa-trash-alt" style="font-size:11px;"></i></button></div></div><div id="logpanel-${p.id}" style="${lo ? "" : "display:none;"}margin-top:14px;" class="anim-enter"><div class="terminal" style="padding:0;font-family:'DM Mono',monospace;"><div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.2);"><div style="display:flex;gap:5px;"><div style="width:10px;height:10px;border-radius:50%;background:#f43f5e;"></div><div style="width:10px;height:10px;border-radius:50%;background:#f59e0b;"></div><div style="width:10px;height:10px;border-radius:50%;background:#22c55e;"></div></div><span style="font-size:9px;color:#a8b2e8;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;">agent_runtime.log</span></div><div id="logs-${p.id}" class="log-txt" style="max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;font-size:11px;line-height:1.7;padding:14px;"><span style="color:#6370a8;font-style:italic;">Initializing socket connectionâ€¦</span></div></div></div></div></div>`;
       }
       function sIcon(s) {
         if (ACTIVE.has(s))
@@ -2198,10 +2246,15 @@
         } catch (e) {}
       }
       function exportResults(id, fmt) {
-        window.open(
-          API_URL + "?action=export&project_id=" + id + "&format=" + fmt,
-          "_blank",
-        );
+        if (!id) {
+          toast("Export Error", "A completed scan is required for export.", "error");
+          return;
+        }
+        const isNumeric = (typeof id === 'number' || (!isNaN(Number(id)) && !String(id).includes('_')));
+        const param = isNumeric 
+          ? 'scan_id=' + Number(id) 
+          : 'project_id=' + encodeURIComponent(id);
+        window.open(API_URL + "?action=export&" + param + "&format=" + fmt, "_blank");
       }
       function esc(t) {
         if (!t) return "Unnamed";
@@ -2327,21 +2380,107 @@
       let reportPageLimit = 20;
       let activeStatFilter = null; // e.g. { category: 'lorem_ipsum' } or { status: 'clean' }
 
-      async function viewReport(scanOrProjectId) {
-        // Resolve numeric scan ID
-        let scanId = scanOrProjectId;
-        if (typeof scanOrProjectId === 'string' && scanOrProjectId.includes('_')) {
-          // It was project ID, lookup latest scan
-          try {
-            const stRes = await (await fetch(API_URL + '?action=status&project_id=' + scanOrProjectId)).json();
-            if (stRes.success && stRes.data && stRes.data.project) {
-              const p = stRes.data.project;
-              if (p.results && p.results.length) scanId = p.results[0].scan_id;
-            }
-          } catch(e) {}
+      const FINDING_GUIDANCE = {
+        'lorem_ipsum': {
+          title: 'Lorem Ipsum Placeholder Text',
+          group: 'Content Quality',
+          why: 'Lorem ipsum dummy text signals unfinished development, degrades credibility with visitors, and harms search engine ranking.',
+          fix: 'Replace Latin placeholder text with approved, finalized production copy.'
+        },
+        'placeholder': {
+          title: 'Template / Demo Placeholder',
+          group: 'Content Quality',
+          why: 'Mock phrases (e.g. "Sample Text", "Insert Name Here") expose incomplete template setup to real users.',
+          fix: 'Provide real data or customized copy matching the intended design component.'
+        },
+        'empty_page': {
+          title: 'Empty / Low Word Count Page',
+          group: 'Content Quality',
+          why: 'Search engines penalize thin content, and visitors receive no useful information.',
+          fix: 'Add substantial, informative body text, or remove this URL if it serves no purpose.'
+        },
+        'incomplete_sections': {
+          title: 'Incomplete / Empty Content Section',
+          group: 'Content Quality',
+          why: 'Leaves visual gaps or empty containers in the website layout.',
+          fix: 'Populate layout containers with relevant content or hide empty sections in template.'
+        },
+        'missing_title': {
+          title: 'Missing Page Title (<title>)',
+          group: 'SEO',
+          why: 'Crucial for search engine results snippets, browser tab titles, and bookmarking.',
+          fix: 'Add a descriptive, unique <title> tag inside <head> (50–60 characters recommended).'
+        },
+        'missing_meta_desc': {
+          title: 'Missing Meta Description',
+          group: 'SEO',
+          why: 'Search engines use meta description for search result snippets, influencing click-through rates.',
+          fix: 'Add <meta name="description" content="..."> summarizing the page content (150–160 chars).'
+        },
+        'missing_h1': {
+          title: 'Missing Primary H1 Heading',
+          group: 'SEO',
+          why: 'H1 establishes the primary topic for assistive technologies and search engine indexing.',
+          fix: 'Add a single, clear <h1> heading near the top of the main content area.'
+        },
+        'multiple_h1': {
+          title: 'Multiple H1 Headings',
+          group: 'SEO',
+          why: 'Multiple H1s dilute the document semantic hierarchy for screen readers and search bots.',
+          fix: 'Keep one primary <h1> and demote secondary section headings to <h2> or <h3>.'
+        },
+        'missing_canonical': {
+          title: 'Missing Canonical Tag',
+          group: 'SEO',
+          why: 'Protects against duplicate content penalties if the page is reachable via multiple URLs or query strings.',
+          fix: 'Add <link rel="canonical" href="..."> in the <head> pointing to the authoritative page URL.'
+        },
+        'heading_structure': {
+          title: 'Heading Hierarchy Issue',
+          group: 'SEO',
+          why: 'Skipping heading levels (e.g. H1 to H3) confuses screen reader navigation.',
+          fix: 'Ensure sequential heading hierarchy (H1 -> H2 -> H3).'
+        },
+        'missing_image_alt': {
+          title: 'Missing Image Alt Attribute',
+          group: 'Accessibility',
+          why: 'Screen readers require alt attributes to describe images to visually impaired visitors. Also improves image SEO.',
+          fix: 'Add descriptive alt="..." text to the <img> tag, or alt="" if the image is purely decorative.'
+        },
+        'missing_lang': {
+          title: 'Missing Language Attribute (<html lang>)',
+          group: 'Accessibility',
+          why: 'Screen readers use the lang attribute to choose correct pronunciation rules and accents.',
+          fix: 'Add the lang attribute to the root element, e.g. <html lang="en">.'
+        },
+        'broken_link': {
+          title: 'Broken Hyperlink (HTTP 4xx / 5xx)',
+          group: 'Technical & Network',
+          why: 'Broken links frustrate visitors, increase bounce rates, and waste search engine crawl budget.',
+          fix: 'Update the href URL to a working destination or remove the obsolete hyperlink.'
+        },
+        'failed_resource': {
+          title: 'Failed External Asset',
+          group: 'Technical & Network',
+          why: 'Missing stylesheets or scripts cause broken visuals or dysfunctional user features.',
+          fix: 'Verify the asset URL exists, returns HTTP 200, and is served over valid HTTPS.'
+        },
+        'duplicate_content': {
+          title: 'Duplicate Page Content',
+          group: 'SEO',
+          why: 'Identical content across multiple URLs causes keyword cannibalization.',
+          fix: 'Add a canonical tag pointing to the original page or redirect duplicate URLs.'
+        }
+      };
+
+      async function viewReport(scanId) {
+        const numId = Number(scanId);
+        if (!scanId || isNaN(numId) || numId <= 0 || !Number.isInteger(numId)) {
+          toast('Scan Resolution Error', 'A valid completed scan ID is required to view the report.', 'error');
+          return;
         }
 
-        currentReportScanId = scanId;
+        currentReportScanId = numId;
         reportPageNumber = 1;
         activeStatFilter = null;
         currentReportTab = 'pages';
@@ -2361,6 +2500,7 @@
       function closeReportView() {
         currentReportScanId = null;
         currentReportData = null;
+        activeStatFilter = null;
         const mainGrid = document.getElementById('mainGrid');
         const statsGrid = document.getElementById('statsGrid');
         const reportView = document.getElementById('reportView');
@@ -2382,10 +2522,10 @@
       async function loadScanReportData() {
         if (!currentReportScanId) return;
         try {
-          // Fetch scan summary
+          // Fetch authoritative scan summary
           const res = await (await fetch(API_URL + '?action=scan_summary&scan_id=' + currentReportScanId)).json();
           if (!res.success) {
-            toast('Report Error', res.error || 'Failed to load report', 'error');
+            toast('Report Error', res.error || 'Failed to load report for scan #' + currentReportScanId, 'error');
             return;
           }
           currentReportData = res.data;
@@ -2412,10 +2552,16 @@
         }
 
         const idEl = document.getElementById('repScanId');
-        if (idEl) idEl.textContent = '#' + (s.id || currentReportScanId);
+        if (idEl) {
+          const scanNumStr = s.scan_number ? ` #${s.scan_number} (Run ID: ${s.id})` : ` #${s.id}`;
+          idEl.textContent = scanNumStr;
+        }
 
         const startEl = document.getElementById('repStartedAt');
-        if (startEl) startEl.textContent = s.started_at ? new Date(s.started_at).toLocaleString() : 'Recent';
+        if (startEl) {
+          const dtStr = s.started_at || s.created_at;
+          startEl.textContent = dtStr ? new Date(dtStr).toLocaleString() : 'Recent';
+        }
 
         const durEl = document.getElementById('repDuration');
         if (durEl) {
@@ -2457,25 +2603,39 @@
         const s = data.scan || {};
         const h = data.health || {};
         const catMap = data.category_stats || {};
+        const lorem = data.lorem || {};
 
-        const totalDiscovered = s.discovered_count || 0;
-        const totalProcessed  = s.processed_count || 0;
+        const totalDiscovered = s.discovered_count || h.discovered || 0;
+        const totalProcessed  = s.processed_count || h.processed || 0;
         const cleanPages      = parseInt(h.clean_pages) || s.clean_count || 0;
         const affectedPages   = parseInt(h.affected_pages) || s.affected_page_count || 0;
         const errorPages      = parseInt(h.error_pages) || s.failed_count || 0;
 
-        const loremItem = catMap['lorem_ipsum'] || { count: s.lorem_finding_count || 0, occurrences: s.lorem_finding_count || 0 };
-        const demoItem  = catMap['placeholder'] || { count: 0, occurrences: 0 };
-        const emptyItem = catMap['empty_page'] || { count: 0, occurrences: 0 };
-        const seoItem   = (catMap['missing_title']?.count || 0) + (catMap['missing_meta_desc']?.count || 0) + (catMap['missing_h1']?.count || 0) + (catMap['missing_canonical']?.count || 0) + (catMap['heading_structure']?.count || 0);
-        const a11yItem  = catMap['missing_image_alt']?.count || 0;
-        const resItem   = (catMap['broken_link']?.count || 0) + (s.resource_finding_count || 0);
+        const loremFindings    = lorem.findings !== undefined ? lorem.findings : (catMap['lorem_ipsum']?.count || s.lorem_finding_count || 0);
+        const loremOccurrences = lorem.occurrences !== undefined ? lorem.occurrences : (catMap['lorem_ipsum']?.occurrences || s.lorem_occurrence_count || 0);
+        const loremPages       = lorem.pages !== undefined ? lorem.pages : (h.lorem_pages || s.lorem_page_count || 0);
+
+        const demoItem   = catMap['placeholder'] || { count: 0, occurrences: 0, affected_pages: 0 };
+        const emptyItem  = catMap['empty_page'] || { count: 0, occurrences: 0, affected_pages: 0 };
+        const incompItem = catMap['incomplete_sections'] || { count: 0, occurrences: 0, affected_pages: 0 };
+        const emptyTotal = (emptyItem.count || 0) + (incompItem.count || 0);
+
+        const seoItem = (catMap['missing_title']?.count || 0) + 
+                        (catMap['missing_meta_desc']?.count || 0) + 
+                        (catMap['missing_h1']?.count || 0) + 
+                        (catMap['multiple_h1']?.count || 0) + 
+                        (catMap['missing_canonical']?.count || 0) + 
+                        (catMap['heading_structure']?.count || 0);
+
+        const a11yItem  = (catMap['missing_image_alt']?.count || 0) + (catMap['missing_lang']?.count || 0);
+        const a11yPages = (catMap['missing_image_alt']?.affected_pages || 0);
+        const resItem   = (catMap['broken_link']?.count || 0) + (catMap['failed_resource']?.count || 0) + (s.resource_finding_count || 0);
 
         // Update Tab counter labels
         const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
         setEl('repTabPagesCount', totalProcessed);
         setEl('repTabFindingsCount', s.total_findings || 0);
-        setEl('repTabLoremCount', loremItem.count);
+        setEl('repTabLoremCount', loremFindings);
         setEl('repTabSeoCount', seoItem);
         setEl('repTabA11yCount', a11yItem);
         setEl('repTabErrorsCount', errorPages);
@@ -2484,16 +2644,16 @@
         if (!grid) return;
 
         const cards = [
-          { key: 'all_pages', title: 'Pages Discovered', val: totalDiscovered, sub: 'Total in queue', icon: 'fa-globe', col: '#635bff' },
-          { key: 'clean_pages', title: 'Clean Pages', val: cleanPages, sub: 'Zero findings detected', icon: 'fa-circle-check', col: '#16A34A', filter: { status: 'clean' } },
-          { key: 'affected_pages', title: 'Needs Attention', val: affectedPages, sub: 'Pages with findings', icon: 'fa-triangle-exclamation', col: '#FBB024', filter: { has_findings: true } },
-          { key: 'lorem_ipsum', title: 'Lorem Ipsum Paragraphs', val: loremItem.count, sub: (loremItem.occurrences || loremItem.count) + ' phrase occurrences', icon: 'fa-align-left', col: '#FB7185', tab: 'lorem' },
-          { key: 'demo_mock', title: 'Demo / Mock Content', val: demoItem.count, sub: 'Placeholder phrases', icon: 'fa-tags', col: '#E879F9', filter: { category: 'placeholder' } },
-          { key: 'missing_content', title: 'Missing / Empty Content', val: emptyItem.count, sub: 'Low text content pages', icon: 'fa-file-circle-xmark', col: '#F59E0B', filter: { category: 'empty_page' } },
-          { key: 'seo_issues', title: 'SEO Issues', val: seoItem, sub: 'Title, meta, headings', icon: 'fa-chart-line', col: '#38BDF8', tab: 'seo' },
-          { key: 'a11y_issues', title: 'Accessibility / Images', val: a11yItem, sub: 'Missing alt text', icon: 'fa-universal-access', col: '#A78BFA', tab: 'a11y' },
-          { key: 'resource_issues', title: 'Broken Links / Assets', val: resItem, sub: 'Network & asset failures', icon: 'fa-link-slash', col: '#FB923C', filter: { category: 'broken_link' } },
-          { key: 'scan_errors', title: 'Scan Errors (HTTP / Net)', val: errorPages, sub: 'HTTP & timeout errors', icon: 'fa-circle-xmark', col: '#C8243C', tab: 'errors' },
+          { key: 'all_pages', title: 'Pages Discovered', val: totalDiscovered.toLocaleString(), sub: `${totalProcessed.toLocaleString()} processed`, icon: 'fa-globe', col: '#635bff', type: 'pages', filter: {} },
+          { key: 'clean_pages', title: 'Clean Pages', val: cleanPages.toLocaleString(), sub: 'Zero findings detected', icon: 'fa-circle-check', col: '#16A34A', type: 'pages', filter: { status: 'clean' } },
+          { key: 'affected_pages', title: 'Needs Attention', val: affectedPages.toLocaleString(), sub: 'Pages with findings', icon: 'fa-triangle-exclamation', col: '#FBB024', type: 'pages', filter: { has_findings: true } },
+          { key: 'lorem_ipsum', title: 'Lorem Ipsum Findings', val: `${loremFindings.toLocaleString()} paragraphs`, sub: `${loremOccurrences.toLocaleString()} occurrences • ${loremPages.toLocaleString()} pages`, icon: 'fa-align-left', col: '#FB7185', type: 'findings', tab: 'lorem', filter: { category: 'lorem_ipsum' } },
+          { key: 'demo_mock', title: 'Demo / Mock Content', val: `${demoItem.count.toLocaleString()} placeholders`, sub: `${demoItem.occurrences || demoItem.count} phrase occurrences`, icon: 'fa-tags', col: '#E879F9', type: 'findings', filter: { category: 'placeholder' } },
+          { key: 'missing_content', title: 'Missing / Empty Content', val: `${emptyTotal.toLocaleString()} issues`, sub: 'Low text volume & empty sections', icon: 'fa-file-circle-xmark', col: '#F59E0B', type: 'findings', filter: { category: 'missing_content' } },
+          { key: 'seo_issues', title: 'SEO Issues', val: `${seoItem.toLocaleString()} issues`, sub: 'Title, meta, H1, canonical tags', icon: 'fa-chart-line', col: '#38BDF8', type: 'findings', tab: 'seo', filter: { category: 'seo' } },
+          { key: 'a11y_issues', title: 'Accessibility / Images', val: `${a11yItem.toLocaleString()} issues`, sub: `${a11yPages.toLocaleString()} pages with missing alt`, icon: 'fa-universal-access', col: '#A78BFA', type: 'findings', tab: 'a11y', filter: { category: 'a11y' } },
+          { key: 'resource_issues', title: 'Broken Links / Assets', val: `${resItem.toLocaleString()} issues`, sub: 'Network & asset failures', icon: 'fa-link-slash', col: '#FB923C', type: 'findings', filter: { category: 'broken_links' } },
+          { key: 'scan_errors', title: 'Scan Errors (HTTP / Net)', val: `${errorPages.toLocaleString()} pages`, sub: 'HTTP 4xx/5xx & network timeouts', icon: 'fa-circle-xmark', col: '#C8243C', type: 'pages', tab: 'errors', filter: { is_error: true } },
         ];
 
         grid.innerHTML = cards.map(c => {
@@ -2504,7 +2664,7 @@
                 <span style="font-size:11px; font-weight:700; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.06em;">${c.title}</span>
                 <i class="fas ${c.icon}" style="color:${c.col}; font-size:14px;"></i>
               </div>
-              <div style="font-family:'Bricolage Grotesque',sans-serif; font-size:26px; font-weight:700; color:var(--text-primary); line-height:1.1; margin-bottom:4px;">${c.val}</div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif; font-size:22px; font-weight:700; color:var(--text-primary); line-height:1.15; margin-bottom:4px;">${c.val}</div>
               <div style="font-size:11px; color:var(--text-tertiary);">${c.sub}</div>
             </div>
           `;
@@ -2512,41 +2672,107 @@
       }
 
       function filterByStatCard(key) {
-        if (key === 'lorem_ipsum') {
-          switchReportTab('lorem');
-        } else if (key === 'seo_issues') {
-          switchReportTab('seo');
-        } else if (key === 'a11y_issues') {
-          switchReportTab('a11y');
-        } else if (key === 'scan_errors') {
-          switchReportTab('errors');
-        } else if (key === 'clean_pages') {
-          activeStatFilter = { key, status: 'clean' };
-          switchReportTab('pages');
-        } else if (key === 'affected_pages') {
-          activeStatFilter = { key, has_findings: true };
-          switchReportTab('pages');
-        } else if (key === 'demo_mock') {
-          activeStatFilter = { key, category: 'placeholder' };
-          switchReportTab('findings');
-        } else if (key === 'missing_content') {
-          activeStatFilter = { key, category: 'empty_page' };
-          switchReportTab('findings');
-        } else if (key === 'resource_issues') {
-          activeStatFilter = { key, category: 'broken_link' };
-          switchReportTab('findings');
+        reportPageNumber = 1;
+        const cardDefs = {
+          'all_pages':       { key: 'all_pages', title: 'All Discovered Pages', type: 'pages', filter: {} },
+          'clean_pages':     { key: 'clean_pages', title: 'Clean Pages (0 Findings)', type: 'pages', filter: { status: 'clean' } },
+          'affected_pages':  { key: 'affected_pages', title: 'Needs Attention (Pages With Findings)', type: 'pages', filter: { has_findings: true } },
+          'lorem_ipsum':     { key: 'lorem_ipsum', title: 'Lorem Ipsum Findings', type: 'findings', tab: 'lorem', filter: { category: 'lorem_ipsum' } },
+          'demo_mock':       { key: 'demo_mock', title: 'Demo / Mock Content', type: 'findings', filter: { category: 'placeholder' } },
+          'missing_content': { key: 'missing_content', title: 'Missing / Empty Content', type: 'findings', filter: { category: 'missing_content' } },
+          'seo_issues':      { key: 'seo_issues', title: 'SEO Issues', type: 'findings', tab: 'seo', filter: { category: 'seo' } },
+          'a11y_issues':     { key: 'a11y_issues', title: 'Accessibility / Image Alt Issues', type: 'findings', tab: 'a11y', filter: { category: 'a11y' } },
+          'resource_issues': { key: 'resource_issues', title: 'Broken Links & Failed Assets', type: 'findings', filter: { category: 'broken_links' } },
+          'scan_errors':     { key: 'scan_errors', title: 'Scan Errors (HTTP / Network Failures)', type: 'pages', tab: 'errors', filter: { is_error: true } },
+        };
+
+        const target = cardDefs[key];
+        if (!target) return;
+
+        activeStatFilter = target;
+        if (target.tab) {
+          currentReportTab = target.tab;
+        } else if (target.type === 'findings') {
+          currentReportTab = 'findings';
         } else {
-          activeStatFilter = null;
-          switchReportTab('pages');
+          currentReportTab = 'pages';
+        }
+
+        document.querySelectorAll('.rep-tab-btn').forEach(b => {
+          b.classList.toggle('active', b.getAttribute('onclick')?.includes(currentReportTab));
+        });
+
+        if (currentReportData) renderReportStatsCards(currentReportData);
+        loadReportTableData();
+      }
+
+      function filterByPageCategory(pageUrl, category, label, pageResultId) {
+        reportPageNumber = 1;
+        activeStatFilter = {
+          key: 'page_cat',
+          title: label || category,
+          detail: 'Page: ' + pageUrl,
+          type: 'findings',
+          tab: 'findings',
+          filter: {
+            category: category,
+            page_url: pageUrl,
+            page_result_id: pageResultId
+          }
+        };
+        currentReportTab = 'findings';
+        document.querySelectorAll('.rep-tab-btn').forEach(b => {
+          b.classList.toggle('active', b.getAttribute('onclick')?.includes('findings'));
+        });
+        if (currentReportData) renderReportStatsCards(currentReportData);
+        loadReportTableData();
+      }
+
+      function renderActiveFilterBanner() {
+        let banner = document.getElementById('repActiveFilterBanner');
+        if (!banner) {
+          const tableControls = document.getElementById('repTableContainer');
+          if (!tableControls || !tableControls.parentElement) return;
+          banner = document.createElement('div');
+          banner.id = 'repActiveFilterBanner';
+          banner.style.margin = '0 0 16px 0';
+          banner.style.padding = '10px 16px';
+          banner.style.borderRadius = 'var(--r-md)';
+          banner.style.background = 'var(--surface-2)';
+          banner.style.border = '1px solid var(--accent-border)';
+          banner.style.display = 'none';
+          banner.style.alignItems = 'center';
+          banner.style.justifyContent = 'space-between';
+          banner.style.fontSize = '12px';
+          tableControls.parentElement.insertBefore(banner, tableControls);
+        }
+
+        if (activeStatFilter) {
+          banner.style.display = 'flex';
+          banner.innerHTML = `
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+              <span style="color:var(--text-tertiary); font-weight:700; text-transform:uppercase; font-size:10px; letter-spacing:0.08em;">Active Filter:</span>
+              <strong style="color:var(--accent); font-weight:700;">${esc(activeStatFilter.title)}</strong>
+              ${activeStatFilter.detail ? `<span style="color:var(--text-secondary); font-size:11px;">(${esc(activeStatFilter.detail)})</span>` : ''}
+            </div>
+            <button onclick="clearReportFilters()" class="exp-btn" style="padding:4px 10px; font-size:11px; background:var(--surface-3); border-color:var(--border-2); color:var(--text-secondary); display:inline-flex; align-items:center; gap:4px;">
+              <i class="fas fa-times" style="font-size:10px;"></i> Clear Filter
+            </button>
+          `;
+        } else {
+          banner.style.display = 'none';
+          banner.innerHTML = '';
         }
       }
 
       function switchReportTab(tab) {
         currentReportTab = tab;
         reportPageNumber = 1;
+        activeStatFilter = null;
         document.querySelectorAll('.rep-tab-btn').forEach(b => {
-          b.classList.toggle('active', b.getAttribute('onclick').includes(tab));
+          b.classList.toggle('active', b.getAttribute('onclick')?.includes(tab));
         });
+        if (currentReportData) renderReportStatsCards(currentReportData);
         loadReportTableData();
       }
 
@@ -2562,6 +2788,7 @@
         if (f) f.value = '';
         activeStatFilter = null;
         reportPageNumber = 1;
+        if (currentReportData) renderReportStatsCards(currentReportData);
         loadReportTableData();
       }
 
@@ -2574,28 +2801,52 @@
         const container = document.getElementById('repTableContainer');
         if (!container || !currentReportScanId) return;
 
+        renderActiveFilterBanner();
+
         container.innerHTML = '<div style="padding:48px; text-align:center; color:var(--text-tertiary);"><i class="fas fa-spinner fa-spin" style="font-size:24px; color:var(--accent); margin-bottom:12px;"></i><p>Loading audit records...</p></div>';
 
         const searchVal = document.getElementById('repSearchInput')?.value?.trim() || '';
         const statusVal = document.getElementById('repStatusFilter')?.value?.trim() || '';
 
         let url = API_URL + '?';
-        const isFindingsMode = ['findings', 'lorem', 'seo', 'a11y'].includes(currentReportTab);
+        const isFindingsMode = ['findings', 'lorem', 'seo', 'a11y'].includes(currentReportTab) || (activeStatFilter && activeStatFilter.type === 'findings');
 
         if (isFindingsMode) {
           url += 'action=findings&scan_id=' + currentReportScanId + '&page=' + reportPageNumber + '&limit=' + reportPageLimit;
           if (searchVal) url += '&search=' + encodeURIComponent(searchVal);
-          if (currentReportTab === 'lorem') url += '&category=lorem_ipsum';
-          if (currentReportTab === 'seo') url += '&category=seo';
-          if (currentReportTab === 'a11y') url += '&category=missing_image_alt';
-          if (activeStatFilter && activeStatFilter.category) url += '&category=' + encodeURIComponent(activeStatFilter.category);
+          
+          if (activeStatFilter && activeStatFilter.filter && activeStatFilter.filter.category) {
+            url += '&category=' + encodeURIComponent(activeStatFilter.filter.category);
+          } else if (currentReportTab === 'lorem') {
+            url += '&category=lorem_ipsum';
+          } else if (currentReportTab === 'seo') {
+            url += '&category=seo';
+          } else if (currentReportTab === 'a11y') {
+            url += '&category=a11y';
+          }
+
+          if (activeStatFilter && activeStatFilter.filter && activeStatFilter.filter.page_url) {
+            url += '&page_url=' + encodeURIComponent(activeStatFilter.filter.page_url);
+          }
+          if (activeStatFilter && activeStatFilter.filter && activeStatFilter.filter.page_result_id) {
+            url += '&page_result_id=' + encodeURIComponent(activeStatFilter.filter.page_result_id);
+          }
         } else {
           url += 'action=results&scan_id=' + currentReportScanId + '&page=' + reportPageNumber + '&limit=' + reportPageLimit;
           if (searchVal) url += '&search=' + encodeURIComponent(searchVal);
           if (statusVal) url += '&status=' + encodeURIComponent(statusVal);
-          if (currentReportTab === 'errors') url += '&status=failed';
-          if (activeStatFilter && activeStatFilter.status) url += '&status=' + encodeURIComponent(activeStatFilter.status);
-          if (activeStatFilter && activeStatFilter.has_findings !== undefined) url += '&has_findings=' + (activeStatFilter.has_findings ? 1 : 0);
+
+          if (currentReportTab === 'errors') {
+            url += '&is_error=1';
+          }
+
+          if (activeStatFilter && activeStatFilter.filter) {
+            if (activeStatFilter.filter.status) url += '&status=' + encodeURIComponent(activeStatFilter.filter.status);
+            if (activeStatFilter.filter.has_findings !== undefined) url += '&has_findings=' + (activeStatFilter.filter.has_findings ? 1 : 0);
+            if (activeStatFilter.filter.is_error) url += '&is_error=1';
+            if (activeStatFilter.filter.category) url += '&category=' + encodeURIComponent(activeStatFilter.filter.category);
+            if (activeStatFilter.filter.page_url) url += '&page_url=' + encodeURIComponent(activeStatFilter.filter.page_url);
+          }
         }
 
         try {
@@ -2618,7 +2869,17 @@
       function renderPagesTable(pages, pagination) {
         const container = document.getElementById('repTableContainer');
         if (!pages || !pages.length) {
-          container.innerHTML = '<div style="padding:56px; text-align:center; color:var(--text-tertiary);"><i class="fas fa-inbox" style="font-size:28px; margin-bottom:12px; display:block;"></i>No scanned pages match the selected criteria.</div>';
+          const reason = activeStatFilter 
+            ? `No records found matching filter "${activeStatFilter.title}".`
+            : 'No scanned pages match the selected criteria.';
+          container.innerHTML = `
+            <div style="padding:64px 24px; text-align:center; color:var(--text-tertiary);">
+              <i class="fas fa-inbox" style="font-size:32px; margin-bottom:12px; display:block; color:var(--text-tertiary);"></i>
+              <div style="font-size:14px; font-weight:600; color:var(--text-primary); margin-bottom:4px;">No Matching Records</div>
+              <p style="font-size:12px; max-width:380px; margin:0 auto 16px auto;">${esc(reason)}</p>
+              ${activeStatFilter ? `<button onclick="clearReportFilters()" class="exp-btn" style="padding:6px 14px; font-size:12px; display:inline-flex; align-items:center; gap:6px;"><i class="fas fa-filter-circle-xmark"></i> Clear Active Filter</button>` : ''}
+            </div>
+          `;
           updatePaginationControls(pagination);
           return;
         }
@@ -2627,23 +2888,22 @@
           <table class="rep-table">
             <thead>
               <tr>
-                <th style="width:40%;">Scanned Page URL</th>
-                <th>Fetch Status</th>
-                <th>Health</th>
-                <th>Findings</th>
-                <th>Lorem Ipsum</th>
-                <th>Response Time</th>
-                <th style="text-align:right;">Action</th>
+                <th style="width:30%;">Scanned Page URL</th>
+                <th style="width:10%;">Fetch Status</th>
+                <th style="width:12%;">Health</th>
+                <th style="width:30%;">Detected Issues & Breakdown</th>
+                <th style="width:8%;">Severity</th>
+                <th style="width:8%;">Response</th>
+                <th style="text-align:right; width:6%;">Action</th>
               </tr>
             </thead>
             <tbody>
         `;
 
         pages.forEach(p => {
-          const isClean = p.processing_status === 'clean';
-          const isError = ['failed', 'cloudflare_blocked', 'bot_blocked', 'rate_limited', 'timeout', 'ssl_error', 'not_found', 'error'].includes(p.processing_status) || (p.http_status && p.http_status >= 400);
+          const isClean = p.processing_status === 'clean' && (!p.http_status || p.http_status < 400) && (!p.finding_count || p.finding_count === 0);
+          const isError = p.is_error || in_array_client(p.processing_status, ['failed', 'cloudflare_blocked', 'bot_blocked', 'rate_limited', 'timeout', 'ssl_error', 'not_found', 'error']) || (p.http_status && p.http_status >= 400);
           const fCount = p.finding_count || 0;
-          const hasLorem = p.has_lorem_ipsum || false;
 
           const healthBadge = isClean 
             ? '<span class="rep-badge" style="background:rgba(22,163,74,0.12); color:#4ADE80; border:1px solid rgba(34,197,94,0.3);">Clean</span>'
@@ -2652,12 +2912,21 @@
               : '<span class="rep-badge" style="background:rgba(245,158,11,0.12); color:#FBB024; border:1px solid rgba(245,158,11,0.3);">Needs Attention (' + fCount + ')</span>';
 
           const httpBadge = p.http_status 
-            ? '<span class="rep-badge" style="background:var(--surface-3); color:var(--text-secondary);">' + p.http_status + '</span>'
+            ? `<span class="rep-badge" style="background:var(--surface-3); color:${p.http_status < 400 ? 'var(--text-secondary)' : '#FB7185'};">${p.http_status}</span>`
             : '<span class="rep-badge" style="background:var(--surface-3); color:var(--text-secondary);">N/A</span>';
 
-          const loremBadge = hasLorem
-            ? '<span class="rep-badge" style="background:rgba(239,68,68,0.14); color:#FB7185; border:1px solid rgba(239,68,68,0.3);"><i class="fas fa-align-left" style="font-size:9px; margin-right:4px;"></i>Found</span>'
-            : '<span style="color:var(--text-tertiary); font-size:11px;">None</span>';
+          const maxSev = p.max_severity || (isError ? 'high' : 'low');
+          const maxSevCol = maxSev === 'high' ? '#FB7185' : (maxSev === 'medium' ? '#FBB024' : '#94A3B8');
+          const maxSevBadge = (fCount > 0 || isError) 
+            ? `<span class="rep-badge" style="background:rgba(255,255,255,0.06); color:${maxSevCol}; border:1px solid ${maxSevCol}40;">${esc(maxSev.toUpperCase())}</span>`
+            : '<span style="color:var(--text-tertiary); font-size:11px;">-</span>';
+
+          const issueChips = (p.issues && p.issues.length) ? p.issues.map(iss => {
+            const sevCol = iss.severity === 'high' ? '#FB7185' : (iss.severity === 'medium' ? '#FBB024' : '#94A3B8');
+            return `<span class="issue-chip" onclick="filterByPageCategory('${esc(p.requested_url)}', '${esc(iss.category)}', '${esc(iss.label)}', ${p.id})" title="Click to filter findings for ${esc(iss.label)} on this page" style="background:var(--surface-3); border:1px solid ${sevCol}40; color:${sevCol}; margin:2px 3px 2px 0;">
+              <i class="fas fa-tag" style="font-size:8px;"></i> ${esc(iss.label)}
+            </span>`;
+          }).join('') : (isClean ? '<span style="color:var(--success); font-size:11px;"><i class="fas fa-circle-check" style="font-size:10px;"></i> Verified Clean (0 issues)</span>' : (isError ? `<span style="color:var(--error); font-size:11px;"><i class="fas fa-circle-exclamation"></i> ${esc(p.error_type || p.error_message || 'Fetch Failure')}</span>` : '<span style="color:var(--text-tertiary); font-size:11px;">None</span>'));
 
           html += `
             <tr>
@@ -2667,8 +2936,8 @@
               </td>
               <td>${httpBadge}</td>
               <td>${healthBadge}</td>
-              <td><strong style="color:${fCount > 0 ? 'var(--warning)' : 'var(--text-secondary)'};">${fCount}</strong></td>
-              <td>${loremBadge}</td>
+              <td>${issueChips}</td>
+              <td>${maxSevBadge}</td>
               <td style="font-family:'DM Mono',monospace; font-size:11px; color:var(--text-secondary);">${p.duration_ms ? p.duration_ms + 'ms' : '-'}</td>
               <td style="text-align:right;">
                 <button onclick="inspectPageDetails(${p.id})" class="exp-btn" style="padding:4px 10px; font-size:11px; display:inline-flex;">
@@ -2687,7 +2956,17 @@
       function renderFindingsTable(findings, pagination) {
         const container = document.getElementById('repTableContainer');
         if (!findings || !findings.length) {
-          container.innerHTML = '<div style="padding:56px; text-align:center; color:var(--text-tertiary);"><i class="fas fa-inbox" style="font-size:28px; margin-bottom:12px; display:block;"></i>No findings match the current category / filters.</div>';
+          const reason = activeStatFilter 
+            ? `No findings match the filter "${activeStatFilter.title}".`
+            : 'No findings match the current category / filters.';
+          container.innerHTML = `
+            <div style="padding:64px 24px; text-align:center; color:var(--text-tertiary);">
+              <i class="fas fa-inbox" style="font-size:32px; margin-bottom:12px; display:block; color:var(--text-tertiary);"></i>
+              <div style="font-size:14px; font-weight:600; color:var(--text-primary); margin-bottom:4px;">No Findings Detected</div>
+              <p style="font-size:12px; max-width:380px; margin:0 auto 16px auto;">${esc(reason)}</p>
+              ${activeStatFilter ? `<button onclick="clearReportFilters()" class="exp-btn" style="padding:6px 14px; font-size:12px; display:inline-flex; align-items:center; gap:6px;"><i class="fas fa-filter-circle-xmark"></i> Clear Active Filter</button>` : ''}
+            </div>
+          `;
           updatePaginationControls(pagination);
           return;
         }
@@ -2696,8 +2975,8 @@
           <table class="rep-table">
             <thead>
               <tr>
-                <th style="width:25%;">Category & Type</th>
-                <th style="width:40%;">Matched Paragraph / Evidence</th>
+                <th style="width:24%;">Category & Element</th>
+                <th style="width:42%;">Matched Paragraph / Evidence</th>
                 <th>Occurrences</th>
                 <th>Severity</th>
                 <th>Affected URL</th>
@@ -2709,22 +2988,24 @@
 
         findings.forEach(f => {
           const occ = f.occurrences || 1;
-          const sevCol = f.severity === 'high' ? '#FB7185' : f.severity === 'medium' ? '#FBB024' : '#94A3B8';
+          const sevCol = f.severity === 'high' ? '#FB7185' : (f.severity === 'medium' ? '#FBB024' : '#94A3B8');
           const sevBadge = '<span class="rep-badge" style="background:rgba(255,255,255,0.06); color:' + sevCol + '; border:1px solid ' + sevCol + '40;">' + (f.severity || 'medium').toUpperCase() + '</span>';
+          const info = FINDING_GUIDANCE[f.detection_category] || {};
+          const catTitle = info.title || (f.detection_category || 'lorem_ipsum').replace(/_/g, ' ');
 
           html += `
             <tr>
               <td>
-                <div style="font-weight:700; color:var(--text-primary); text-transform:capitalize;">${(f.detection_category || 'lorem_ipsum').replace('_', ' ')}</div>
-                <div style="font-size:10px; color:var(--text-tertiary); font-family:'DM Mono',monospace;">${esc(f.html_element || 'element')}</div>
+                <div style="font-weight:700; color:var(--text-primary); text-transform:capitalize;">${esc(catTitle)}</div>
+                <div style="font-size:10px; color:var(--text-tertiary); font-family:'DM Mono',monospace;">${esc(f.html_element ? '<' + f.html_element + '>' : (f.resource_type || 'html'))}</div>
               </td>
               <td>
-                <div style="max-height:80px; overflow-y:auto; font-size:11.5px; line-height:1.5; color:var(--text-primary); background:var(--surface-2); padding:6px 10px; border-radius:6px; border:1px solid var(--border-2);">
-                  ${esc(f.matched_text)}
+                <div style="max-height:85px; overflow-y:auto; font-size:11.5px; line-height:1.5; color:var(--text-primary); background:var(--surface-2); padding:6px 10px; border-radius:6px; border:1px solid var(--border-2);">
+                  ${highlightLoremPhrases(esc(f.matched_text))}
                 </div>
               </td>
               <td>
-                <span class="rep-badge" style="background:rgba(99,91,255,0.12); color:var(--accent);">${occ} phrase${occ > 1 ? 's' : ''}</span>
+                <span class="rep-badge" style="background:rgba(99,91,255,0.12); color:var(--accent); font-weight:700;">${occ} phrase${occ > 1 ? 's' : ''}</span>
               </td>
               <td>${sevBadge}</td>
               <td style="max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11px;">
@@ -2754,7 +3035,7 @@
         const total = p.total_items || 0;
         const totalPages = p.total_pages || Math.ceil(total / reportPageLimit) || 1;
 
-        info.textContent = 'Showing page ' + page + ' of ' + totalPages + ' (' + total + ' total records)';
+        info.textContent = 'Showing page ' + page + ' of ' + totalPages + ' (' + total.toLocaleString() + ' total records)';
         if (prev) prev.disabled = (page <= 1);
         if (next) next.disabled = (page >= totalPages);
       }
@@ -2788,7 +3069,7 @@
           if (link) link.href = page.final_url || page.requested_url || '#';
 
           document.getElementById('drawerPageTitle').textContent = page.page_title || '(No Title Detected)';
-          document.getElementById('drawerWordCount').textContent = page.word_count || '0';
+          document.getElementById('drawerWordCount').textContent = (page.word_count || '0').toLocaleString();
           document.getElementById('drawerDuration').textContent = (page.duration_ms || 0) + ' ms';
           document.getElementById('drawerFindingCount').textContent = findings.length;
 
@@ -2800,62 +3081,163 @@
             httpEl.style.color = (page.http_status && page.http_status < 400) ? '#4ADE80' : '#FB7185';
           }
 
+          const isClean = page.processing_status === 'clean' && (!page.http_status || page.http_status < 400) && (!page.finding_count || page.finding_count === 0);
+          const isError = in_array_client(page.processing_status, ['failed', 'cloudflare_blocked', 'bot_blocked', 'rate_limited', 'timeout', 'ssl_error', 'not_found', 'error']) || (page.http_status && page.http_status >= 400);
+
           const healthEl = document.getElementById('drawerHealthBadge');
           if (healthEl) {
-            healthEl.textContent = (page.processing_status || 'clean').toUpperCase();
-            healthEl.style.background = (page.processing_status === 'clean') ? 'rgba(22,163,74,0.12)' : 'rgba(245,158,11,0.12)';
-            healthEl.style.color = (page.processing_status === 'clean') ? '#4ADE80' : '#FBB024';
+            healthEl.textContent = isClean ? 'VERIFIED CLEAN' : (isError ? 'SCAN ERROR' : 'NEEDS ATTENTION');
+            healthEl.style.background = isClean ? 'rgba(22,163,74,0.12)' : (isError ? 'rgba(200,36,60,0.12)' : 'rgba(245,158,11,0.12)');
+            healthEl.style.color = isClean ? '#4ADE80' : (isError ? '#FB7185' : '#FBB024');
           }
 
           if (!findings.length) {
             list.innerHTML = `
-              <div style="background:var(--surface-2); border:1px solid var(--border-2); border-radius:var(--r-md); padding:24px; text-align:center; color:var(--success);">
-                <i class="fas fa-circle-check" style="font-size:24px; margin-bottom:8px; display:block;"></i>
+              <div style="background:var(--surface-2); border:1px solid var(--border-2); border-radius:var(--r-md); padding:28px 20px; text-align:center; color:var(--success);">
+                <i class="fas fa-circle-check" style="font-size:28px; margin-bottom:10px; display:block;"></i>
                 <strong>No placeholder or audit issues found on this page.</strong>
-                <p style="font-size:11px; color:var(--text-secondary); margin-top:4px;">Verified clean content.</p>
+                <p style="font-size:11.5px; color:var(--text-secondary); margin-top:6px;">This page has been audited and verified clean.</p>
               </div>
             `;
             return;
           }
 
-          list.innerHTML = findings.map((f, idx) => {
-            const isLorem = (f.detection_category === 'lorem_ipsum');
-            const occ = f.occurrences || 1;
-            const highlightedText = highlightLoremPhrases(esc(f.matched_text));
+          // Group findings by category group
+          const groups = {
+            'SEO': [],
+            'Content Quality': [],
+            'Accessibility': [],
+            'Technical & Network': []
+          };
 
-            return `
-              <div class="evidence-box">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid var(--border-1); padding-bottom:8px;">
-                  <div style="display:flex; align-items:center; gap:8px;">
-                    <span class="rep-badge" style="background:var(--accent-muted); color:var(--accent);">#${idx + 1} ${esc(f.detection_category || 'lorem_ipsum')}</span>
-                    ${f.html_element ? `<span style="font-size:10px; color:var(--text-tertiary); font-family:'DM Mono',monospace;">&lt;${esc(f.html_element)}&gt;</span>` : ''}
-                  </div>
-                  <span class="rep-badge" style="background:rgba(239,68,68,0.14); color:#FB7185; border:1px solid rgba(239,68,68,0.3);">
-                    ${occ} Phrase Occurrence${occ > 1 ? 's' : ''}
-                  </span>
-                </div>
+          findings.forEach((f, idx) => {
+            const cat = f.detection_category || 'lorem_ipsum';
+            const info = FINDING_GUIDANCE[cat] || {
+              title: cat.replace(/_/g, ' '),
+              group: (cat.startsWith('missing_') || cat.includes('h1') || cat.includes('canonical')) ? 'SEO' : 'Content Quality',
+              why: 'Identified website quality issue affecting standards or visitor experience.',
+              fix: 'Review this element in your HTML template and update accordingly.'
+            };
+            const grp = info.group || 'Content Quality';
+            if (!groups[grp]) groups[grp] = [];
+            groups[grp].push({ f, info, idx: idx + 1 });
+          });
 
-                <div style="margin-bottom:8px;">
-                  <span style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-tertiary); display:block; margin-bottom:4px;">
-                    Captured Paragraph Text:
-                  </span>
-                  <div style="font-size:12.5px; line-height:1.6; color:var(--text-primary); white-space:pre-wrap;">
-                    ${highlightedText}
-                  </div>
-                </div>
+          let drawerHtml = '';
+          const grpIcons = {
+            'SEO': 'fa-chart-line',
+            'Content Quality': 'fa-align-left',
+            'Accessibility': 'fa-universal-access',
+            'Technical & Network': 'fa-link-slash'
+          };
 
-                ${f.css_selector ? `
-                  <div style="margin-top:8px; padding-top:6px; border-top:1px dashed var(--border-2); font-size:10px; color:var(--text-tertiary); font-family:'DM Mono',monospace;">
-                    DOM Selector: ${esc(f.css_selector)}
-                  </div>
-                ` : ''}
+          for (const [grpName, items] of Object.entries(groups)) {
+            if (!items.length) continue;
+            const icon = grpIcons[grpName] || 'fa-tag';
+            drawerHtml += `
+              <div class="drawer-group-hdr">
+                <i class="fas ${icon}" style="color:var(--accent);"></i>
+                <span>${esc(grpName)} (${items.length})</span>
               </div>
             `;
-          }).join('');
+
+            items.forEach(({ f, info, idx }) => {
+              const occ = f.occurrences || 1;
+              const sevCol = f.severity === 'high' ? '#FB7185' : (f.severity === 'medium' ? '#FBB024' : '#94A3B8');
+              const highlightedText = highlightLoremPhrases(esc(f.matched_text));
+
+              drawerHtml += `
+                <div class="evidence-box">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid var(--border-1); padding-bottom:8px;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                      <span class="rep-badge" style="background:var(--accent-muted); color:var(--accent); font-weight:700;">#${idx} ${esc(info.title)}</span>
+                      ${f.html_element ? `<span style="font-size:10px; color:var(--text-tertiary); font-family:'DM Mono',monospace;">&lt;${esc(f.html_element)}&gt;</span>` : ''}
+                    </div>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                      <span class="rep-badge" style="background:rgba(255,255,255,0.06); color:${sevCol}; border:1px solid ${sevCol}40;">${esc((f.severity || 'medium').toUpperCase())}</span>
+                      <span class="rep-badge" style="background:rgba(99,91,255,0.12); color:var(--accent);">
+                        ${occ} Occurrence${occ > 1 ? 's' : ''}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div style="margin-bottom:8px;">
+                    <span style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-tertiary); display:block; margin-bottom:4px;">
+                      Captured Evidence / Matched Text:
+                    </span>
+                    <div style="font-size:12.5px; line-height:1.6; color:var(--text-primary); white-space:pre-wrap; background:var(--surface-1); padding:8px 12px; border-radius:6px; border:1px solid var(--border-2);">
+                      ${highlightedText}
+                    </div>
+                  </div>
+
+                  ${f.surrounding_context ? `
+                    <div style="margin-bottom:8px; font-size:11px; color:var(--text-secondary);">
+                      <strong style="color:var(--text-tertiary); font-size:10px; text-transform:uppercase;">Context:</strong> ${esc(f.surrounding_context)}
+                    </div>
+                  ` : ''}
+
+                  ${f.css_selector ? `
+                    <div style="margin-top:6px; font-size:10.5px; color:var(--text-tertiary); font-family:'DM Mono',monospace;">
+                      DOM Selector: <code style="background:var(--surface-3); padding:2px 6px; border-radius:3px;">${esc(f.css_selector)}</code>
+                    </div>
+                  ` : ''}
+
+                  <!-- Why this matters & recommended correction -->
+                  <div class="guidance-box">
+                    <div class="guidance-why"><strong style="color:var(--text-primary);"><i class="fas fa-circle-info" style="color:var(--warning); margin-right:4px;"></i> Why it matters:</strong> ${esc(info.why)}</div>
+                    <div class="guidance-fix"><strong style="color:var(--accent);"><i class="fas fa-wrench" style="margin-right:4px;"></i> Recommended Fix:</strong> ${esc(info.fix)}</div>
+                  </div>
+                </div>
+              `;
+            });
+          }
+
+          list.innerHTML = drawerHtml;
 
         } catch(e) {
           if (list) list.innerHTML = '<div style="color:var(--error); padding:20px;">' + e.message + '</div>';
         }
+      }
+
+      function in_array_client(needle, haystack) {
+        return Array.isArray(haystack) && haystack.includes(needle);
+      }
+
+      function highlightLoremPhrases(escapedHtml) {
+        if (!escapedHtml) return '';
+        const phrases = [
+          /\blorem\s+ipsum\b/gi,
+          /\bdolor\s+sit\s+amet\b/gi,
+          /\bconsectetur\s+adipiscing\b/gi,
+          /\bsed\s+do\s+eiusmod\b/gi,
+          /\but\s+labore\s+et\s+dolore\b/gi,
+          /\bmagna\s+aliqua\b/gi,
+          /\bduis\s+aute\s+irure\b/gi,
+          /\bexcepteur\s+sint\b/gi,
+          /\bnulla\s+pariatur\b/gi,
+          /\bquis\s+nostrud\b/gi,
+          /\bplaceholder\s+text\b/gi,
+          /\bsample\s+text\b/gi,
+          /\binsert\s+text\s+here\b/gi
+        ];
+
+        let res = escapedHtml;
+        phrases.forEach(regex => {
+          res = res.replace(regex, (match) => `<span class="evidence-highlight">${match}</span>`);
+        });
+        return res;
+      }
+
+      function closeInspectionDrawer(e) {
+        if (e && e.target && e.target.id !== 'inspectionDrawer') return;
+        const drawer = document.getElementById('inspectionDrawer');
+        if (drawer) drawer.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+
+      function exportCurrentReport(format) {
+        if (!currentReportScanId) return;
+        window.open(API_URL + '?action=export&scan_id=' + currentReportScanId + '&format=' + format, '_blank');
       }
 
       function highlightLoremPhrases(escapedHtml) {

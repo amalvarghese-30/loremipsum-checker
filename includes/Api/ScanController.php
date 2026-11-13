@@ -202,54 +202,18 @@ class ScanController
         }
 
         $scanId = (int)$scan['id'];
-        $totalUrls = (int)$scan['discovered_count'];
-        $processed = (int)$scan['processed_count'];
-        $percentage = $totalUrls > 0 ? round(($processed / $totalUrls) * 100, 2) : 0;
+        $metrics = $this->scanRepo->getAuthoritativeMetrics($scanId);
 
-        // Authoritative page-level Lorem metrics from canonical findings
-        $loremStmt = $this->db->prepare('
-            SELECT 
-                COUNT(*) as lorem_findings,
-                COALESCE(SUM(COALESCE(f.occurrences, 1)), 0) as lorem_occurrences,
-                COUNT(DISTINCT f.page_result_id) as lorem_pages
-            FROM findings f
-            INNER JOIN (
-                SELECT MAX(id) as canonical_id
-                FROM page_results
-                WHERE scan_id = ?
-                GROUP BY CASE WHEN discovered_url_id IS NOT NULL THEN discovered_url_id ELSE id END
-            ) cp ON f.page_result_id = cp.canonical_id
-            WHERE f.scan_id = ?
-              AND f.detection_category = "lorem_ipsum"
-              AND f.resource_id IS NULL
-        ');
-        $loremStmt->execute([$scanId, $scanId]);
-        $lData = $loremStmt->fetch(PDO::FETCH_ASSOC) ?: [];
-
-        $loremFound       = (int)($lData['lorem_findings'] ?? 0);
-        $loremOccurrences = (int)($lData['lorem_occurrences'] ?? 0);
-        $loremPages       = (int)($lData['lorem_pages'] ?? 0);
-
-        // Authoritative total findings across canonical pages and resources
-        $totStmt = $this->db->prepare('
-            SELECT COUNT(*)
-            FROM findings f
-            LEFT JOIN (
-                SELECT MAX(id) as canonical_id
-                FROM page_results
-                WHERE scan_id = ?
-                GROUP BY CASE WHEN discovered_url_id IS NOT NULL THEN discovered_url_id ELSE id END
-            ) cp ON f.page_result_id = cp.canonical_id
-            WHERE f.scan_id = ?
-              AND (f.resource_id IS NOT NULL OR cp.canonical_id IS NOT NULL)
-        ');
-        $totStmt->execute([$scanId, $scanId]);
-        $totalFindings = (int)$totStmt->fetchColumn();
-
-        $affectedPages = (int)$scan['affected_page_count'];
-        if ($totalFindings === 0) {
-            $affectedPages = 0;
-        }
+        $totalUrls        = $metrics['discovered_count'];
+        $processed        = $metrics['processed_count'];
+        $percentage       = $totalUrls > 0 ? round(($processed / $totalUrls) * 100, 2) : 0;
+        $cleanPages       = $metrics['clean_count'];
+        $affectedPages    = $metrics['affected_page_count'];
+        $errorPages       = $metrics['failed_count'];
+        $loremFound       = $metrics['lorem_finding_count'];
+        $loremPages       = $metrics['lorem_page_count'];
+        $loremOccurrences = $metrics['lorem_occurrence_count'];
+        $totalFindings    = $metrics['total_findings'];
 
         // Fetch recent logs
         $limit = isset($_GET['limit']) ? min(100, max(1, (int)$_GET['limit'])) : 25;
@@ -278,33 +242,34 @@ class ScanController
 
         Response::success([
             'project' => [
-                'id'           => (string)$project['id'],
-                'scan_id'      => $scanId,
-                'scan_number'  => (int)($scan['scan_number'] ?? 1),
-                'project_name' => $project['project_name'],
-                'website_url'  => $project['website_url'],
-                'status'       => $scan['status'],
-                'worker_pid'   => $scan['worker_pid'] ?? null,
-                'started_at'   => $scan['started_at'] ?? null,
-                'completed_at' => $scan['completed_at'] ?? null,
-                'created_at'   => $scan['created_at'],
-                'updated_at'   => $scan['updated_at'],
-                'settings'     => $scan['settings'] ?? [],
-                'progress'     => [
+                'id'             => (string)$project['id'],
+                'scan_id'        => $scanId,
+                'latest_scan_id' => $scanId,
+                'scan_number'    => (int)($scan['scan_number'] ?? 1),
+                'project_name'   => $project['project_name'],
+                'website_url'    => $project['website_url'],
+                'status'         => $scan['status'],
+                'worker_pid'     => $scan['worker_pid'] ?? null,
+                'started_at'     => $scan['started_at'] ?? null,
+                'completed_at'   => $scan['completed_at'] ?? null,
+                'created_at'     => $scan['created_at'],
+                'updated_at'     => $scan['updated_at'],
+                'settings'       => $scan['settings'] ?? [],
+                'progress'       => [
                     'total_urls'        => $totalUrls,
                     'processed'         => $processed,
-                    'clean'             => (int)$scan['clean_count'],
+                    'clean'             => $cleanPages,
                     'lorem_found'       => $loremFound,
                     'lorem_pages'       => $loremPages,
                     'lorem_occurrences' => $loremOccurrences,
                     'affected_pages'    => $affectedPages,
                     'total_findings'    => $totalFindings,
-                    'errors'            => (int)$scan['failed_count'],
+                    'errors'            => $errorPages,
                     'percentage'        => $percentage,
                     'queue_counts'      => $queueCounts,
                 ],
-                'recent_urls'  => $recentUrls,
-                'results'      => [],
+                'recent_urls'    => $recentUrls,
+                'results'        => [],
             ],
             'logs' => $formattedLogs,
         ]);
