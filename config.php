@@ -130,10 +130,10 @@ return [
     // HTTP fetching
     // -------------------------------------------------------------------------
     'fetching' => [
-        'concurrency'              => 5,
-        'per_domain_concurrency'   => 2,
+        'concurrency'              => 1,        // Sequential scanning (one-by-one to prevent rate limits)
+        'per_domain_concurrency'   => 1,        // Sequential scanning per domain
         'max_retries'              => 3,
-        'retry_base_delay'         => 2,
+        'retry_base_delay'         => 3,
         'max_retry_delay'          => 60,
         'max_response_size'        => 10485760, // 10 MB
         'request_delay'            => 1,        // seconds between requests to same domain

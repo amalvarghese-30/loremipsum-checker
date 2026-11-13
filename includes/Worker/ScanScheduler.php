@@ -2,8 +2,8 @@
 /**
  * Scan Scheduler
  *
- * Coordinates concurrent batch processing of URLs:
- * - Controlled concurrency via cURL Multi
+ * Coordinates sequential page processing of URLs:
+ * - Polite sequential scanning (one-by-one) with automatic domain delay and rate-limit backoff
  * - Real-time incremental persistence of page results and findings
  * - Per-page asset inspection (external JS/CSS/JSON)
  * - Safe interruption on pause/cancel requests
@@ -78,8 +78,8 @@ class ScanScheduler
      */
     public function run(int $scanId, int $projectId, string $websiteUrl): string
     {
-        $concurrency = (int)($this->config['fetching']['concurrency'] ?? 5);
-        $batchSize   = max(10, $concurrency * 2);
+        $batchSize      = 25;
+        $requestTimeout = (int)($this->config['crawler']['request_timeout'] ?? $this->config['fetching']['request_timeout'] ?? 30);
 
         while (true) {
             // 1. Check scan state before fetching next batch
@@ -103,10 +103,10 @@ class ScanScheduler
             // Update heartbeat
             $this->scanRepo->updateHeartbeat($scanId, getmypid());
 
-            // 2. Fetch next batch of pending URLs
+            // 2. Fetch next batch of pending URLs for sequential processing
             $batch = $this->urlRepo->fetchPendingBatch($scanId, $batchSize);
             if (empty($batch)) {
-                // Safeguard against premature completion (e.g. Scan 5 issue):
+                // Safeguard against premature completion:
                 // Verify whether any unfinished URLs remain in pending, queued, processing, or retry_wait.
                 $counts     = $this->urlRepo->getCountsByStatus($scanId);
                 $pending    = ($counts['pending'] ?? 0) + ($counts['queued'] ?? 0);
@@ -151,63 +151,82 @@ class ScanScheduler
                 continue;
             }
 
-            // Mark batch as 'processing'
-            $urlMap = []; // url_string => urlRecord
-            $urlStrings = [];
+            // 3. Process URLs sequentially one-by-one to prevent origin rate limiting and 429 alerts
             foreach ($batch as $record) {
-                $this->urlRepo->markStatus((int)$record['id'], 'processing');
-                $urlMap[$record['original_url']] = $record;
-                $urlStrings[] = $record['original_url'];
-            }
-
-            // 3. Process concurrently via HttpClient fetchMulti
-            $this->http->fetchMulti(
-                $urlStrings,
-                function (string $url, array $response) use ($scanId, $projectId, $websiteUrl, $urlMap) {
-                    try {
-                        $this->handlePageCompleted($scanId, $projectId, $websiteUrl, $urlMap[$url], $response);
-                    } catch (\Throwable $e) {
-                        $this->logRepo->log(
-                            $scanId,
-                            $projectId,
-                            'ERROR',
-                            "Unexpected error processing page [{$url}]: " . $e->getMessage() . "\n" . $e->getTraceAsString(),
-                            'error',
-                            $url
-                        );
-                        try {
-                            $uId = (int)$urlMap[$url]['id'];
-                            $this->urlRepo->markStatus($uId, 'failed', $url, 'Processing exception: ' . $e->getMessage());
-                            $res = $this->pageResRepo->saveResultWithMetrics([
-                                'scan_id'           => $scanId,
-                                'discovered_url_id' => $uId,
-                                'requested_url'     => $url,
-                                'final_url'         => $url,
-                                'http_status'       => null,
-                                'content_type'      => 'unknown',
-                                'processing_status' => 'failed',
-                                'audit_status'      => 'clean',
-                                'finding_count'     => 0,
-                                'duration_ms'       => 0,
-                                'retry_count'       => (int)($urlMap[$url]['retry_count'] ?? 0),
-                                'error_type'        => 'worker_error',
-                                'error_message'     => $e->getMessage(),
-                                'has_lorem_ipsum'   => 0,
-                            ]);
-                            $this->scanRepo->recordPageResult(
-                                $scanId,
-                                'failed',
-                                0, 0, 0, 0, 0, 0,
-                                $res['old_metrics'] ?? null
-                            );
-                        } catch (\Throwable $recEx) {}
+                // Immediate pause / cancel check between each individual page request
+                $scanCheck = $this->scanRepo->getById($scanId);
+                if ($scanCheck) {
+                    if ($scanCheck['status'] === 'pause_requested' || $scanCheck['status'] === 'paused') {
+                        $this->scanRepo->updateStatus($scanId, 'paused');
+                        $this->logRepo->log($scanId, $projectId, 'WARNING', 'Scan paused as requested', 'scheduler');
+                        return 'paused';
                     }
-                },
-                [
-                    'concurrency' => $concurrency,
-                    'timeout'     => $this->config['crawler']['request_timeout'] ?? 30,
-                ]
-            );
+                    if ($scanCheck['status'] === 'cancel_requested' || $scanCheck['status'] === 'cancelled') {
+                        $this->scanRepo->updateStatus($scanId, 'cancelled');
+                        $this->logRepo->log($scanId, $projectId, 'WARNING', 'Scan cancelled as requested', 'scheduler');
+                        return 'cancelled';
+                    }
+                }
+
+                $this->scanRepo->updateHeartbeat($scanId, getmypid());
+
+                $urlId = (int)$record['id'];
+                $url   = $record['original_url'];
+                $this->urlRepo->markStatus($urlId, 'processing');
+
+                try {
+                    $response = $this->http->fetch($url, [
+                        'timeout'     => $requestTimeout,
+                        'apply_delay' => true,
+                    ]);
+                    $this->handlePageCompleted($scanId, $projectId, $websiteUrl, $record, $response);
+
+                    // Rate limit protection: If origin responds with 429 or rate_limited, pause gracefully
+                    if (($response['error_type'] ?? '') === 'rate_limited' || ($response['http_status'] ?? 0) === 429) {
+                        $retryAfterHeader = $response['headers']['retry-after'] ?? null;
+                        $pauseSec = HttpClient::parseRetryAfter($retryAfterHeader, 60);
+                        if ($pauseSec <= 0) {
+                            $pauseSec = 5;
+                        }
+                        $this->logRepo->log($scanId, $projectId, 'WARNING', "Origin rate limit encountered on {$url}. Pausing for {$pauseSec}s before next request...", 'scheduler', $url);
+                        sleep($pauseSec);
+                    }
+                } catch (\Throwable $e) {
+                    $this->logRepo->log(
+                        $scanId,
+                        $projectId,
+                        'ERROR',
+                        "Unexpected error processing page [{$url}]: " . $e->getMessage() . "\n" . $e->getTraceAsString(),
+                        'error',
+                        $url
+                    );
+                    try {
+                        $this->urlRepo->markStatus($urlId, 'failed', $url, 'Processing exception: ' . $e->getMessage());
+                        $res = $this->pageResRepo->saveResultWithMetrics([
+                            'scan_id'           => $scanId,
+                            'discovered_url_id' => $urlId,
+                            'requested_url'     => $url,
+                            'final_url'         => $url,
+                            'http_status'       => null,
+                            'content_type'      => 'unknown',
+                            'processing_status' => 'failed',
+                            'audit_status'      => 'clean',
+                            'finding_count'     => 0,
+                            'duration_ms'       => 0,
+                            'retry_count'       => (int)($record['retry_count'] ?? 0),
+                            'error_type'        => 'worker_error',
+                            'error_message'     => $e->getMessage(),
+                            'has_lorem_ipsum'   => 0,
+                        ]);
+                        $this->scanRepo->recordPageResult(
+                            $scanId,
+                            'failed',
+                            0, 0, 0, 0, 0, 0,
+                            $res['old_metrics'] ?? null
+                        );
+                    } catch (\Throwable $recEx) {}
+                }
+            }
         }
 
         return 'completed';

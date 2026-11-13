@@ -2272,9 +2272,9 @@
           case 'quick':
             setVal('maxUrlsInput', 50);
             setVal('maxDepthInput', 2);
-            setVal('concurrencyInput', 5);
-            setVal('perDomainInput', 2);
-            setVal('requestDelayInput', 0);
+            setVal('concurrencyInput', 1);
+            setVal('perDomainInput', 1);
+            setVal('requestDelayInput', 1);
             setVal('reqTimeoutInput', 15);
             setVal('maxRetriesInput', 1);
             setCheck('disc_wordpress_api', false);
@@ -2283,8 +2283,8 @@
           case 'standard':
             setVal('maxUrlsInput', 500);
             setVal('maxDepthInput', 3);
-            setVal('concurrencyInput', 5);
-            setVal('perDomainInput', 2);
+            setVal('concurrencyInput', 1);
+            setVal('perDomainInput', 1);
             setVal('requestDelayInput', 1);
             setVal('reqTimeoutInput', 30);
             setVal('maxRetriesInput', 3);
@@ -2294,8 +2294,8 @@
           case 'deep':
             setVal('maxUrlsInput', 2500);
             setVal('maxDepthInput', 6);
-            setVal('concurrencyInput', 8);
-            setVal('perDomainInput', 3);
+            setVal('concurrencyInput', 1);
+            setVal('perDomainInput', 1);
             setVal('requestDelayInput', 1);
             setVal('reqTimeoutInput', 45);
             setVal('maxRetriesInput', 3);
@@ -2431,8 +2431,9 @@
         if (snapBody) {
           const maxUrls = settings.max_urls || 500;
           const maxDepth = settings.max_depth || 3;
-          const conc = settings.concurrency || 5;
-          const perDomain = settings.per_domain_concurrency || 2;
+          const conc = settings.concurrency || 1;
+          const perDomain = settings.per_domain_concurrency || 1;
+          const scanModeLabel = conc > 1 ? `Parallel (${conc} workers)` : 'Sequential (1-by-1)';
           const delay = settings.request_delay !== undefined ? settings.request_delay + 's' : '1s';
           const sizeMb = settings.max_response_size_mb || (settings.max_response_size ? (settings.max_response_size/1048576).toFixed(1) : '10') + ' MB';
           const retries = settings.max_retries !== undefined ? settings.max_retries : 3;
@@ -2442,7 +2443,7 @@
           snapBody.innerHTML = `
             <div style="background:var(--surface-2); padding:10px 12px; border-radius:var(--r-md);"><span style="color:var(--text-tertiary);">Max URLs:</span> <strong style="color:var(--text-primary);">${maxUrls}</strong></div>
             <div style="background:var(--surface-2); padding:10px 12px; border-radius:var(--r-md);"><span style="color:var(--text-tertiary);">Max Depth:</span> <strong style="color:var(--text-primary);">${maxDepth}</strong></div>
-            <div style="background:var(--surface-2); padding:10px 12px; border-radius:var(--r-md);"><span style="color:var(--text-tertiary);">Concurrency:</span> <strong style="color:var(--text-primary);">${conc} (per-domain: ${perDomain})</strong></div>
+            <div style="background:var(--surface-2); padding:10px 12px; border-radius:var(--r-md);"><span style="color:var(--text-tertiary);">Scan Mode:</span> <strong style="color:var(--text-primary);">${scanModeLabel}</strong></div>
             <div style="background:var(--surface-2); padding:10px 12px; border-radius:var(--r-md);"><span style="color:var(--text-tertiary);">Request Delay:</span> <strong style="color:var(--text-primary);">${delay}</strong></div>
             <div style="background:var(--surface-2); padding:10px 12px; border-radius:var(--r-md);"><span style="color:var(--text-tertiary);">Max Response Size:</span> <strong style="color:var(--text-primary);">${sizeMb}</strong></div>
             <div style="background:var(--surface-2); padding:10px 12px; border-radius:var(--r-md);"><span style="color:var(--text-tertiary);">Max Retries:</span> <strong style="color:var(--text-primary);">${retries}</strong></div>

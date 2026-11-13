@@ -101,9 +101,9 @@ class ScanController
         // Validate numerical bounds
         $maxUrls = isset($_POST['max_urls']) && is_numeric($_POST['max_urls']) ? max(1, min(50000, (int)$_POST['max_urls'])) : null;
         $maxDepth = isset($_POST['max_depth']) && is_numeric($_POST['max_depth']) ? max(1, min(20, (int)$_POST['max_depth'])) : null;
-        $concurrency = isset($_POST['concurrency']) && is_numeric($_POST['concurrency']) ? max(1, min(50, (int)$_POST['concurrency'])) : null;
-        $perDomainConcurrency = isset($_POST['per_domain_concurrency']) && is_numeric($_POST['per_domain_concurrency']) ? max(1, min(20, (int)$_POST['per_domain_concurrency'])) : null;
-        $requestDelay = isset($_POST['request_delay']) && is_numeric($_POST['request_delay']) ? max(0, min(60, (int)$_POST['request_delay'])) : null;
+        $concurrency = isset($_POST['concurrency']) && is_numeric($_POST['concurrency']) ? max(1, min(50, (int)$_POST['concurrency'])) : 1;
+        $perDomainConcurrency = isset($_POST['per_domain_concurrency']) && is_numeric($_POST['per_domain_concurrency']) ? max(1, min(20, (int)$_POST['per_domain_concurrency'])) : 1;
+        $requestDelay = isset($_POST['request_delay']) && is_numeric($_POST['request_delay']) ? max(0, min(60, (int)$_POST['request_delay'])) : 1;
         $requestTimeout = isset($_POST['request_timeout']) && is_numeric($_POST['request_timeout']) ? max(1, min(300, (int)$_POST['request_timeout'])) : null;
         $connectionTimeout = isset($_POST['connection_timeout']) && is_numeric($_POST['connection_timeout']) ? max(1, min(120, (int)$_POST['connection_timeout'])) : null;
         $maxRetries = isset($_POST['max_retries']) && is_numeric($_POST['max_retries']) ? max(0, min(10, (int)$_POST['max_retries'])) : null;

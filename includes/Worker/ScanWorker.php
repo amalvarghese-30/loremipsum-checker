@@ -143,9 +143,9 @@ class ScanWorker
                 $logFn('INFO', "Resuming scan with {$totalUrls} existing URL(s) in queue", 'resume');
             }
 
-            // ── PHASE 2: CONCURRENT SCANNING & DETECTION ────────────────────────
+            // ── PHASE 2: SEQUENTIAL SCANNING & DETECTION ────────────────────────
             $this->scanRepo->updateStatus($scanId, 'scanning');
-            $logFn('INFO', 'Starting concurrent content inspection...', 'scanning');
+            $logFn('INFO', 'Starting sequential content inspection...', 'scanning');
 
             // Load detection rules (DB + config defaults)
             $dbRules = $this->ruleRepo->getActiveRules();
