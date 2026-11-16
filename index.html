@@ -1,5 +1,5 @@
-﻿<!doctype html>
-<html lang="en" class="light">
+<!doctype html>
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,9 +15,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <style>
+
       :root,
       html.light {
-        /* âœ¨ Aurora Light â€” crisp whites, violet-indigo accent, warm gold highlight */
+        /* ✨ Aurora Light — crisp whites, violet-indigo accent, warm gold highlight */
         --bg: #f4f6fb;
         --surface-0: #ffffff;
         --surface-1: #ffffff;
@@ -56,7 +57,7 @@
         --r-xl: 18px;
         --r-2xl: 24px;
         --r-full: 9999px;
-        /* Deploy panel â€” soft violet-indigo gradient for light mode */
+        /* Deploy panel — soft violet-indigo gradient for light mode */
         --deploy-bg: #635bff;
         --deploy-card: #4f48e0;
         --deploy-input: rgba(255, 255, 255, 0.15);
@@ -65,7 +66,7 @@
         --deploy-sub: rgba(255, 255, 255, 0.7);
       }
       html.dark {
-        /* ðŸŒŒ Midnight Aurora â€” deep navy, vivid violet, gold shimmer */
+        /* 🌌 Midnight Aurora — deep navy, vivid violet, gold shimmer */
         --bg: #080c1a;
         --surface-0: #080c1a;
         --surface-1: #0d1228;
@@ -98,7 +99,7 @@
           0 4px 22px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
         --shadow-lg:
           0 12px 44px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
-        /* Deploy panel â€” ultra deep navy */
+        /* Deploy panel — ultra deep navy */
         --deploy-bg: #050810;
         --deploy-card: #080c1a;
         --deploy-input: rgba(3, 5, 14, 0.65);
@@ -1075,88 +1076,334 @@
           grid-template-columns: 1fr !important;
         }
       }
-    
-      /* SCAN CONFIGURATION & PRESETS */
-      .config-toggle-btn {
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: var(--r-md);
-        padding: 9px 12px;
-        color: var(--deploy-text);
-        font-size: 11px;
-        font-weight: 700;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        transition: all 0.2s ease;
-      }
-      .config-toggle-btn:hover {
-        background: rgba(255, 255, 255, 0.14);
-        border-color: rgba(255, 255, 255, 0.25);
-      }
-      .preset-chip {
-        font-size: 10px;
-        font-weight: 700;
-        padding: 4px 9px;
-        border-radius: var(--r-sm);
-        cursor: pointer;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        color: var(--deploy-sub);
-        transition: all 0.18s;
-      }
-      .preset-chip:hover {
-        background: rgba(255, 255, 255, 0.16);
-        color: var(--deploy-text);
-      }
-      .preset-chip.active {
-        background: var(--accent);
-        border-color: var(--accent);
-        color: #FFFFFF;
-      }
-      .config-section-title {
-        font-size: 10px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: rgba(255, 255, 255, 0.6);
-        margin: 12px 0 8px 0;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-      }
-      .config-grid-2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-      .config-check-item {
-        display: flex;
-        align-items: center;
-        gap: 7px;
-        font-size: 11px;
-        color: var(--deploy-sub);
-        cursor: pointer;
-        user-select: none;
-      }
-      .config-check-item input[type="checkbox"] {
-        accent-color: var(--accent);
-        width: 13px;
-        height: 13px;
-        cursor: pointer;
+
+      /* =========================================================
+         LOREM CHECK — BLACK / ELECTRIC BLUE DESIGN SYSTEM
+         ========================================================= */
+      html.dark {
+        --bg: #03060b;
+        --surface-0: #05080e;
+        --surface-1: #090e17;
+        --surface-2: #0d1522;
+        --surface-3: #142238;
+        --border-1: rgba(47, 178, 127, .10);
+        --border-2: rgba(47, 178, 127, .18);
+        --border-3: rgba(47, 178, 127, .32);
+        --text-primary: #f5f8ff;
+        --text-secondary: #a7b5c9;
+        --text-tertiary: #71839d;
+        --text-disabled: #45546a;
+        --accent: #2fb27f;
+        --accent-hover: #45c991;
+        --accent-muted: rgba(47, 178, 127, .13);
+        --accent-border: rgba(47, 178, 127, .35);
+        --success: #38d996;
+        --success-muted: rgba(56, 217, 150, .10);
+        --success-border: rgba(56, 217, 150, .25);
+        --warning: #ffbf5f;
+        --warning-muted: rgba(255, 191, 95, .10);
+        --warning-border: rgba(255, 191, 95, .25);
+        --error: #ff657a;
+        --error-muted: rgba(255, 101, 122, .10);
+        --error-border: rgba(255, 101, 122, .25);
+        --shadow-xs: 0 2px 8px rgba(0,0,0,.35);
+        --shadow-sm: 0 5px 20px rgba(0,0,0,.38), 0 0 0 1px rgba(91,166,255,.05);
+        --shadow-md: 0 10px 30px rgba(0,0,0,.48), 0 0 0 1px rgba(91,166,255,.08);
+        --shadow-lg: 0 18px 50px rgba(0,0,0,.6), 0 0 0 1px rgba(91,166,255,.12);
+        --deploy-bg: #071a32;
+        --deploy-card: #071a32;
+        --deploy-input: rgba(0,0,0,.42);
+        --deploy-border: rgba(91,166,255,.25);
+        --deploy-text: #f5f8ff;
+        --deploy-sub: #9bb8da;
       }
 
-      /* REPORT DASHBOARD VIEW */
-      #reportView {
-        display: none;
+      html.light {
+        --bg: #f5f7fb;
+        --surface-0: #ffffff;
+        --surface-1: #ffffff;
+        --surface-2: #f1f4f8;
+        --surface-3: #e8edf3;
+        --border-1: rgba(29, 56, 86, .08);
+        --border-2: rgba(29, 56, 86, .13);
+        --border-3: rgba(8, 121, 232, .28);
+        --text-primary: #17372c;
+        --text-secondary: #4d675b;
+        --text-tertiary: #71857a;
+        --text-disabled: #aeb9c7;
+        --accent: #0879e8;
+        --accent-hover: #0564c5;
+        --accent-muted: #eaf3ff;
+        --accent-border: #bfd9f8;
+        --success: #079866;
+        --success-muted: #e9fbf3;
+        --success-border: #b7efd7;
+        --warning: #b7791f;
+        --warning-muted: #fff7e8;
+        --warning-border: #f5d79b;
+        --error: #d83d59;
+        --error-muted: #fff0f2;
+        --error-border: #f4c0ca;
+        --shadow-xs: 0 1px 3px rgba(24,43,66,.04);
+        --shadow-sm: 0 4px 14px rgba(24,43,66,.055);
+        --shadow-md: 0 10px 28px rgba(24,43,66,.075);
+        --shadow-lg: 0 18px 44px rgba(24,43,66,.10);
+        --deploy-bg: #e8f3ff;
+        --deploy-card: #ffffff;
+        --deploy-input: #f5f9ff;
+        --deploy-border: #c8ddf5;
+        --deploy-text: #10243b;
+        --deploy-sub: #637d9b;
+      }
+
+      body {
+        min-height: 100vh;
+        background:
+          radial-gradient(ellipse 55% 45% at 66% 42%, rgba(0,105,255,.22), transparent 72%),
+          radial-gradient(ellipse 38% 32% at 56% 72%, rgba(0,70,180,.12), transparent 75%),
+          var(--bg);
+        display: block;
+      }
+      html.light body { background:var(--bg); }
+      .app-shell { min-height:100vh; }
+      .sidebar { display:none; }
+      html.light .sidebar { background:#fff; border-right-color:var(--border-2); }
+      .brand { display:flex; align-items:center; gap:10px; padding:3px 10px 28px; color:var(--text-primary); }
+      .brand-mark { width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#0879e8,#24a4ff);box-shadow:0 0 24px rgba(0,130,255,.35); }
+      .brand-name { font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:16px;letter-spacing:.04em; }
+      .side-label { color:var(--text-tertiary);font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:12px 12px 8px; }
+      .side-nav { display:flex;flex-direction:column;gap:5px; }
+      .side-link { width:100%;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;text-decoration:none;color:var(--text-secondary);font-size:12px;font-weight:600;border:1px solid transparent;transition:.18s ease; }
+      .side-link:hover,.side-link.active { color:#fff;background:linear-gradient(100deg,rgba(0,115,230,.25),rgba(0,115,230,.06));border-color:rgba(34,142,255,.22);box-shadow:inset 0 0 18px rgba(0,110,255,.08),0 0 18px rgba(0,110,255,.08); }
+      html.light .side-link:hover,html.light .side-link.active { color:#075db5;background:#eaf4ff;border-color:#c7e1ff; }
+      .side-link i { width:16px;text-align:center;font-size:13px; }
+      .sidebar-bottom { margin-top:auto;padding:14px 10px 4px;border-top:1px solid var(--border-1); }
+      .sidebar-note { font-size:10px;color:var(--text-tertiary);line-height:1.6; }
+      .app-main { min-width:0;position:relative;isolation:isolate;overflow:hidden; }
+      .app-main::before { content:"";position:absolute;z-index:-1;pointer-events:none;top:-150px;left:50%;width:min(1500px,110vw);height:min(1500px,110vw);transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,transparent 0%,transparent 48%,rgba(0,91,232,.14) 51%,rgba(0,115,255,.56) 56%,rgba(22,151,255,.82) 61%,rgba(0,115,255,.68) 66%,rgba(0,66,190,.34) 72%,transparent 81%);filter:blur(20px); }
+      .app-main::after { content:"";position:absolute;z-index:-1;pointer-events:none;top:-150px;left:50%;width:min(1500px,110vw);height:min(1500px,110vw);transform:translateX(-50%);border-radius:50%;background:conic-gradient(from 210deg,rgba(0,112,255,.52),rgba(26,206,229,.55),rgba(40,190,128,.38),rgba(0,112,255,.52));-webkit-mask:radial-gradient(circle,transparent 0 50%,#000 55% 63%,transparent 69%);mask:radial-gradient(circle,transparent 0 50%,#000 55% 63%,transparent 69%);filter:blur(30px);opacity:.64; }
+      html.dark body { background:var(--bg); }
+      html.dark .app-main::before { background:radial-gradient(circle,transparent 0%,transparent 48%,rgba(0,91,232,.14) 51%,rgba(0,115,255,.56) 56%,rgba(22,151,255,.82) 61%,rgba(0,115,255,.68) 66%,rgba(0,66,190,.34) 72%,transparent 81%); }
+      html.dark .app-main::after { background:conic-gradient(from 210deg,rgba(0,112,255,.62),rgba(26,206,229,.70),rgba(40,190,128,.48),rgba(0,112,255,.62));opacity:.72; }
+      html.light .app-main::before { top:-150px;background:radial-gradient(circle,transparent 0%,transparent 48%,rgba(34,157,105,.10) 51%,rgba(47,178,127,.30) 56%,rgba(47,178,127,.46) 61%,rgba(47,178,127,.34) 66%,rgba(34,157,105,.18) 72%,transparent 81%);filter:blur(20px); }
+      html.light .app-main::after { background:conic-gradient(from 210deg,rgba(47,178,127,.44),rgba(47,178,127,.44),rgba(47,178,127,.44),rgba(47,178,127,.44));opacity:.52; }
+      .topbar { position:fixed;top:14px;left:50%;transform:translateX(-50%);width:min(1120px,calc(100% - 36px));height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;border:1px solid var(--border-2);border-radius:16px;background:color-mix(in srgb,var(--surface-1) 88%,transparent);backdrop-filter:blur(18px);z-index:500;box-shadow:var(--shadow-md);transition:top .24s ease,opacity .24s ease; }
+      .topbar.is-hidden { top:-82px;opacity:0;pointer-events:none; }
+      html.light .topbar { background:rgba(255,255,255,.72); }
+      .topbar-title { font-size:12px;font-weight:700;color:var(--text-secondary); }
+      .topbar-actions { display:flex;align-items:center;gap:9px; }
+      .top-action { width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#0879e8,#0755b5);color:white;border:1px solid rgba(100,185,255,.35);cursor:pointer;box-shadow:0 0 18px rgba(0,115,255,.22); }
+      .top-action:hover { transform:translateY(-1px);filter:brightness(1.15); }
+      .theme-switch { position:relative;display:grid;place-items:center;width:38px;height:36px;border-radius:10px;border:1px solid var(--border-2);background:var(--surface-2);color:var(--text-secondary);cursor:pointer; }
+      .theme-switch .t-icon { position:static;font-size:14px; }
+      .content-wrap { width:min(1160px,calc(100% - 56px));margin:0 auto;padding:100px 0 70px; }
+      .topbar .brand { display:flex;align-items:center;gap:12px;padding:0;white-space:nowrap;min-width:max-content; }
+      .brand-mark { width:32px;height:32px;border-radius:9px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#0879e8,#24a4ff); }
+      .topbar .brand-name { font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:14px;line-height:1;letter-spacing:.045em; }
+      .top-nav { display:flex;align-items:center;gap:4px; }
+      .top-nav .side-link { width:auto;padding:9px 12px;font-size:11px;white-space:nowrap; }
+      .topbar-title { display:none; }
+      .view { display:none; }
+      .view.active { display:block; }
+      .view-heading { margin:0 0 22px; }
+      .view-heading h1 { font:700 clamp(26px,3vw,36px)/1.15 "Bricolage Grotesque",sans-serif;letter-spacing:-.03em; }
+      .view-heading p { color:var(--text-secondary);margin-top:7px;font-size:13px; }
+      .analytics-grid { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;max-width:1000px;margin:auto; }
+      .analytics-grid .metric-row { grid-column:1/-1;width:100%;max-width:none;margin:0; }
+      .analytics-card { background:var(--surface-1);border:1px solid var(--border-2);border-radius:16px;padding:20px;box-shadow:var(--shadow-sm); }
+      .analytics-card h3 { font-size:13px;margin-bottom:14px; }
+      .analytics-wide { grid-column:1/-1; }
+      .bar-list { display:grid;gap:13px; }
+      .bar-row { display:grid;grid-template-columns:minmax(90px,1fr) 3fr 42px;align-items:center;gap:12px;font-size:11px;color:var(--text-secondary); }
+      .bar-track {height:8px;border-radius:99px;background:var(--surface-3);overflow:hidden}
+      .bar-fill {height:100%;background:linear-gradient(90deg,#0879e8,#39a7ff);border-radius:99px;min-width:2px}
+      .status-breakdown {display:flex;flex-wrap:wrap;gap:10px}
+      .status-chip {padding:8px 12px;border-radius:999px;background:var(--surface-2);font-size:11px;color:var(--text-secondary)}
+      .home-history { max-width:1100px;margin:0 auto; }
+      .recent-projects {display:grid;gap:9px}
+      .recent-row {display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;background:var(--surface-1);border:1px solid var(--border-2);border-radius:12px;cursor:pointer}
+      .recent-row:hover {border-color:var(--accent-border);transform:translateY(-1px)}
+      .recent-name {font-size:12px;font-weight:700}.recent-url,.recent-date {font-size:10px;color:var(--text-tertiary)}
+      .hero { text-align:center;margin:0 auto 26px; }
+      .hero h1 { font-family:"Bricolage Grotesque",sans-serif;font-size:clamp(27px,3.4vw,40px);line-height:1.15;letter-spacing:-.035em;color:var(--text-primary);margin-bottom:9px; }
+      .hero p { font-size:13px;color:var(--text-secondary); }
+      .scan-panel,.history-panel,.metric-panel,.settings-panel { background:rgba(5,9,15,.88);border:1px solid rgba(72,151,240,.19);border-radius:18px;box-shadow:0 14px 42px rgba(0,0,0,.32),0 0 28px rgba(0,105,255,.10); }
+      html.light .scan-panel,html.light .history-panel,html.light .metric-panel,html.light .settings-panel { background:rgba(255,255,255,.94);border-color:var(--border-2);box-shadow:var(--shadow-md); }
+      .scan-panel { padding:30px 32px;max-width:900px;margin:0 auto 28px; }
+      .scan-panel .deploy-outer,html.dark .scan-panel .deploy-outer,html.light .scan-panel .deploy-outer { background:transparent;box-shadow:none;padding:0; }
+      .scan-panel .deploy-inner { background:transparent;padding:0;overflow:visible;border:0;box-shadow:none; }
+      .scan-panel .deploy-glow-1,.scan-panel .deploy-glow-2 { display:none; }
+      .scan-panel .deploy-title { color:var(--text-primary);font-size:15px; }
+      .scan-panel .deploy-icon-wrap { background:var(--accent-muted);border-color:var(--accent-border);color:var(--accent); }
+      .scan-panel .deploy-sub { color:var(--text-tertiary); }
+      .scan-panel .deploy-label { color:var(--text-secondary); }
+      .scan-panel .deploy-input { background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-primary); }
+      .scan-panel .deploy-input::placeholder { color:var(--text-tertiary); }
+      .scan-panel .deploy-input-icon { color:var(--text-tertiary); }
+      .scan-panel .deploy-submit { background:linear-gradient(135deg,#0879e8,#0862c8);color:#fff;box-shadow:0 5px 18px rgba(0,115,255,.25); }
+      html.dark .scan-panel .deploy-submit { background:linear-gradient(135deg,#0879e8,#0862c8);color:#fff;box-shadow:0 5px 22px rgba(0,115,255,.36); }
+      html.dark .scan-panel .deploy-submit:hover:not(:disabled) { box-shadow:0 8px 30px rgba(0,115,255,.48); }
+      .scan-panel .deploy-capacity { display:none; }
+      .scan-panel form { display:grid!important;grid-template-columns:minmax(170px,.7fr) minmax(240px,1.5fr) auto;align-items:end;gap:16px!important; }
+      .scan-panel form > div { min-width:0; }
+      .scan-panel #submitBtn { width:auto;min-width:150px;height:42px;padding:0 18px;white-space:nowrap; }
+      .metric-row { display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 auto 22px;max-width:900px; }
+      .metric-panel { padding:15px 17px; }
+      .metric-panel .stat-card-header { margin-bottom:8px; }
+      .metric-panel .stat-num { font-size:25px;margin:0; }
+      .metric-panel .stat-lbl { font-size:10px; }
+      .history-panel { max-width:1100px;margin:0 auto;overflow:hidden; }
+      .history-head { display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 20px;border-bottom:1px solid var(--border-1); }
+      .history-title { font-size:15px;font-weight:700;color:var(--text-primary); }
+      .history-subtitle { font-size:11px;color:var(--text-tertiary);margin-top:3px; }
+      .history-count {font-size:10px;color:var(--text-tertiary);white-space:nowrap}
+      .history-pagination {display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 22px 18px;border-top:1px solid var(--border-1)}
+      .recent-pagination {padding:10px 2px 0;border:0}
+      .pagination-controls {display:flex;align-items:center;gap:8px}
+      .pagination-btn {height:34px;min-width:38px;padding:0 11px;border:1px solid var(--border-2);border-radius:9px;background:var(--surface-2);color:var(--text-secondary);font:600 11px "DM Sans",sans-serif;cursor:pointer}
+      .pagination-btn:hover:not(:disabled) {border-color:var(--accent-border);color:var(--accent)}
+      .pagination-btn:disabled {opacity:.45;cursor:default}
+      .pagination-page {min-width:72px;text-align:center;font-size:11px;font-weight:700;color:var(--text-secondary)}
+      .history-tools { display:flex;align-items:center;gap:8px; }
+      .history-search { height:34px;width:190px;border-radius:8px;padding:0 11px;background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-primary);outline:none;font:12px "DM Sans",sans-serif; }
+      .history-filter {height:34px;min-width:132px;border-radius:8px;padding:0 10px;background:var(--surface-2);border:1px solid var(--border-2);color:var(--text-secondary);font:11px "DM Sans",sans-serif;outline:none;cursor:pointer}
+      .history-search:focus { border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-muted); }
+      .history-refresh,.history-viewall { height:34px;border-radius:18px;padding:0 13px;border:1px solid var(--border-2);background:var(--surface-2);color:var(--text-secondary);font-size:11px;font-weight:700;cursor:pointer; }
+      .history-viewall { background:linear-gradient(135deg,#0879e8,#0755b5);border-color:#1688ff;color:#fff; }
+      #projectsList { padding:14px 18px 18px;display:flex;flex-direction:column;gap:10px;min-height:170px!important; }
+      .proj-card { background:var(--surface-1);border:1px solid var(--border-1);border-radius:12px;box-shadow:none; }
+      .proj-card:hover { transform:none;border-color:var(--border-3);box-shadow:0 0 18px rgba(0,115,255,.08); }
+      .proj-hd-div { padding:14px 16px!important; }
+      .proj-card > div:nth-child(2) { padding:14px 16px!important; }
+      .proj-name { font-size:13px; }
+      .proj-id { font-size:9px; }
+      .status-badge { font-size:9px;letter-spacing:.06em; }
+      .page-footer { padding:18px 30px;border-top:1px solid var(--border-1);color:var(--text-tertiary);font-size:10px;text-align:center; }
+      /* Final surface pass: one scan card, clear spacing, and a calmer light theme. */
+      .scan-panel { border-radius:22px;margin-bottom:34px; }
+      .scan-panel > .deploy-outer { width:100%; }
+      .scan-panel .deploy-inner > div[style*="position:relative"] { padding:4px 2px; }
+      .scan-panel form { column-gap:18px!important; }
+      .history-panel { border-radius:20px; }
+      .history-head { padding:20px 24px; }
+      #projectsList { padding:18px 22px 22px;gap:14px; }
+      .proj-card { border-radius:15px;overflow:hidden; }
+      .proj-hd-div { padding:17px 19px!important; }
+      .proj-card > div:nth-child(2) { padding:17px 19px!important; }
+      .recent-row { padding:16px 19px;min-height:74px;transition:border-color .18s,transform .18s,box-shadow .18s; }
+      .recent-row:hover { box-shadow:var(--shadow-sm); }
+      .history-filter:focus,.history-search:focus,.deploy-input:focus-visible { outline:none;box-shadow:0 0 0 3px var(--accent-muted); }
+      html.light body { background:linear-gradient(135deg,#edf4ff 0%,#f8faff 42%,#eaf6ff 100%); }
+      html.light .hero h1 { background:linear-gradient(100deg,#173c2d 4%,#248252 58%,#45a276 100%);-webkit-background-clip:text;background-clip:text;color:transparent; }
+      html.light .hero p { color:#4d6d5c; }
+      html.light .scan-panel,html.light .history-panel,html.light .metric-panel,html.light .analytics-card,html.light .recent-row,html.light .proj-card { background:rgba(255,255,255,.97);border-color:#c9dcf4;box-shadow:0 10px 30px rgba(24,74,145,.10); }
+      html.light .scan-panel { background:linear-gradient(135deg,#fff 0%,#f7fbff 64%,#f5f3ff 100%);border-color:#b9d3f4;box-shadow:0 18px 48px rgba(21,91,180,.15),0 0 0 1px rgba(45,130,255,.06); }
+      html.light .scan-panel .deploy-input,html.light .history-search,html.light .history-filter { background:linear-gradient(115deg,#edf5ff,#f2f3ff);border-color:#b9d2f2;color:#17283d; }
+      html.light .scan-panel .deploy-input:focus { border-color:#1688ff;box-shadow:0 0 0 4px rgba(22,136,255,.14); }
+      html.light .scan-panel .deploy-input::placeholder,html.light .history-search::placeholder { color:#7188a4; }
+      html.light .scan-panel .deploy-submit { background:linear-gradient(110deg,#0879e8,#2563eb 60%,#5865f2);box-shadow:0 8px 22px rgba(8,106,224,.27); }
+      html.light .scan-panel .deploy-icon-wrap { background:linear-gradient(145deg,#e2f1ff,#edeaff);border-color:#b7d5ff;color:#076de0; }
+      html.light .recent-row { border-left:4px solid #287cf0;background:linear-gradient(100deg,#fff 65%,#eff6ff); }
+      html.light .recent-row:nth-child(3n+2) { border-left-color:#8055e8;background:linear-gradient(100deg,#fff 65%,#f4efff); }
+      html.light .recent-row:nth-child(3n) { border-left-color:#079ebd;background:linear-gradient(100deg,#fff 65%,#eafaff); }
+      html.light .history-viewall,html.light .top-action { background:linear-gradient(120deg,#0879e8,#2563eb 65%,#5865f2);box-shadow:0 6px 18px rgba(8,106,224,.2); }
+      html.light .status-badge { filter:saturate(1.15); }
+      html.light .history-filter option { background:#fff;color:#17283d; }
+      html.light .topbar { background:rgba(255,255,255,.88);border-color:rgba(42,72,107,.12);box-shadow:0 8px 28px rgba(22,44,70,.08); }
+      html.light .side-link { color:#53657a; }
+      html.light .side-link.active { color:#075db5;background:#eaf3ff;border-color:#c9def8; }
+      html.light .analytics-card h3,html.light .history-title { color:#17372c; }
+      html.light .status-chip { background:#f1f4f8;color:#52647a; }
+      html.light .pagination-btn {background:#f1f6ff;border-color:#c7d9f1;color:#365578}
+      html.light .pagination-btn:hover:not(:disabled) {background:#e8f7ef;border-color:#95d6b4;color:#176b48}
+      html.light .history-viewall,html.light .top-action,html.light .deploy-submit,html.light .scan-panel .deploy-submit { background:linear-gradient(135deg,#23875e,#2fb27f)!important;border-color:#23875e!important;color:#fff!important;box-shadow:0 7px 20px rgba(47,178,127,.25)!important; }
+      html.light .history-viewall:hover,html.light .top-action:hover,html.light .deploy-submit:hover:not(:disabled) { background:linear-gradient(135deg,#1d7651,#269c6d)!important;box-shadow:0 9px 24px rgba(47,178,127,.32)!important; }
+      html.light .brand-mark { background:linear-gradient(135deg,#23875e,#2fb27f);box-shadow:0 0 22px rgba(47,178,127,.28); }
+      html.light .side-link.active,html.light .side-link:hover { color:#176b48;background:#e8f7ef;border-color:#b8e5cc; }
+      html.light .pagination-btn {background:#f2faf5;border-color:#c6e7d3;color:#426b56}
+      html.dark .app-main::before { background:radial-gradient(circle,transparent 0%,transparent 48%,rgba(47,178,127,.10) 51%,rgba(47,178,127,.30) 56%,rgba(47,178,127,.48) 61%,rgba(47,178,127,.34) 66%,rgba(47,178,127,.18) 72%,transparent 81%);filter:blur(20px); }
+      html.dark .app-main::after { background:conic-gradient(from 210deg,rgba(47,178,127,.48),rgba(47,178,127,.48),rgba(47,178,127,.48),rgba(47,178,127,.48));opacity:.65; }
+      html.dark .history-viewall,html.dark .top-action,html.dark .deploy-submit,html.dark .scan-panel .deploy-submit { background:linear-gradient(135deg,#23875e,#2fb27f)!important;border-color:#2fb27f!important;color:#fff!important;box-shadow:0 7px 22px rgba(47,178,127,.24)!important; }
+      html.dark .history-viewall:hover,html.dark .top-action:hover,html.dark .deploy-submit:hover:not(:disabled) { background:linear-gradient(135deg,#1d7651,#269c6d)!important;box-shadow:0 9px 26px rgba(47,178,127,.34)!important; }
+      html.dark .brand-mark { background:linear-gradient(135deg,#23875e,#2fb27f);color:#fff;box-shadow:0 0 24px rgba(47,178,127,.30); }
+      html.dark .side-link.active,html.dark .side-link:hover { color:#8de0b8;background:linear-gradient(100deg,rgba(47,178,127,.16),rgba(47,178,127,.05));border-color:rgba(47,178,127,.26); }
+      .modal-backdrop { display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.68);backdrop-filter:blur(5px);align-items:center;justify-content:center;padding:20px; }
+      .modal-backdrop.open { display:flex; }
+      .settings-modal { width:min(480px,100%);background:var(--surface-1);border:1px solid var(--border-3);border-radius:16px;box-shadow:var(--shadow-lg);padding:22px; }
+      .settings-modal-head { display:flex;justify-content:space-between;align-items:center;margin-bottom:18px; }
+      .settings-modal h2 { font-size:17px;color:var(--text-primary); }
+      .modal-close { width:30px;height:30px;border:1px solid var(--border-2);border-radius:8px;background:var(--surface-2);color:var(--text-secondary);cursor:pointer; }
+      .setting-row { display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0;border-top:1px solid var(--border-1); }
+      .setting-row strong { display:block;font-size:12px;color:var(--text-primary); }
+      .setting-row small { display:block;font-size:10px;color:var(--text-tertiary);margin-top:3px; }
+      .setting-select { background:var(--surface-2);color:var(--text-primary);border:1px solid var(--border-2);border-radius:8px;padding:8px 10px;font:12px "DM Sans",sans-serif; }
+      @media(max-width:900px) {
+        .app-shell { grid-template-columns:190px minmax(0,1fr); }
+        .topbar { padding:0 20px; }
+        .content-wrap { width:calc(100% - 36px);padding-top:96px; }
+        .scan-panel form { grid-template-columns:minmax(125px,.75fr) minmax(180px,1.4fr) auto; }
+        .scan-panel #submitBtn { grid-column:auto;width:auto;min-width:122px; }
+      }
+      @media(max-width:1100px) {
+        .history-head {align-items:flex-start;flex-direction:column}
+        .history-tools {width:100%;flex-wrap:wrap}
+        .history-search {flex:1;min-width:180px}
+      }
+      @media(max-width:650px) {
+        .app-shell { display:block; }
+        .sidebar { position:relative;width:100%;height:auto;padding:12px 14px;border-right:0;border-bottom:1px solid var(--border-1); }
+        .brand { padding:0 4px 10px; }
+        .side-label,.sidebar-bottom { display:none; }
+        .topbar { top:8px;width:calc(100% - 16px);height:54px;padding:0 9px; }
+        .topbar .brand-name { display:none; }
+        .top-nav { gap:1px;overflow:auto; }
+        .top-nav .side-link { padding:8px;font-size:10px; }
+        .top-nav .side-link i { display:none; }
+        .content-wrap { width:calc(100% - 26px);padding:80px 0 45px; }
+        .hero h1 { font-size:27px; }
+        .scan-panel { padding:20px; }
+        .scan-panel form { grid-template-columns:1fr; }
+        .scan-panel #submitBtn { grid-column:auto;width:100%; }
+        .metric-row { grid-template-columns:repeat(2,minmax(0,1fr));gap:8px; }
+        .metric-panel { padding:12px; }
+        .history-head { align-items:flex-start;flex-direction:column; }
+        .history-tools { width:100%;flex-wrap:wrap; }
+        .history-search { flex:1;width:100%;min-width:180px; }
+        .history-filter {flex:1;min-width:120px}
+        .history-pagination {align-items:flex-start;flex-direction:column;padding:14px 18px}
+        .pagination-controls {width:100%;justify-content:space-between}
+        .proj-card .proj-card-metrics { grid-template-columns:repeat(2,1fr)!important; }
+        .analytics-grid {grid-template-columns:1fr}.analytics-wide,.analytics-grid .metric-row {grid-column:auto}
+      }
+
+    
+
+      /* =========================================================
+         AUDIT REPORT & PAGE INSPECTION DRAWER (DESIGN SYSTEM)
+         ========================================================= */
+      .view-report {
+        animation: fadeIn 0.25s ease;
+      }
+      .rep-header-card {
+        background: var(--surface-1);
+        border: 1px solid var(--border-1);
+        border-radius: 20px;
+        padding: 24px 28px;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow-sm);
+        position: relative;
+        overflow: hidden;
+      }
+      html.light .rep-header-card {
+        background: rgba(255, 255, 255, 0.97);
+        border-color: #c9dcf4;
+        box-shadow: 0 10px 30px rgba(24, 74, 145, 0.1);
       }
       .rep-stat-card {
         background: var(--surface-1);
         border: 1px solid var(--border-1);
-        border-radius: var(--r-xl);
-        padding: 18px 20px;
+        border-radius: 14px;
+        padding: 16px 18px;
         cursor: pointer;
         position: relative;
         overflow: hidden;
@@ -1170,10 +1417,20 @@
       .rep-stat-card.active {
         border-color: var(--accent);
         box-shadow: 0 0 0 2px var(--accent-border);
+        background: color-mix(in srgb, var(--surface-1) 85%, var(--accent));
+      }
+      html.light .rep-stat-card {
+        background: rgba(255, 255, 255, 0.97);
+        border-color: #c9dcf4;
+      }
+      html.light .rep-stat-card.active {
+        border-color: #0879e8;
+        box-shadow: 0 0 0 2px rgba(8, 121, 232, 0.25);
+        background: #f0f7ff;
       }
       .rep-tab-btn {
         padding: 9px 16px;
-        border-radius: var(--r-md);
+        border-radius: 10px;
         font-size: 12px;
         font-weight: 700;
         font-family: 'DM Sans', sans-serif;
@@ -1184,6 +1441,7 @@
         display: flex;
         align-items: center;
         gap: 7px;
+        white-space: nowrap;
         transition: all 0.18s;
       }
       .rep-tab-btn:hover {
@@ -1194,6 +1452,24 @@
         background: var(--surface-2);
         color: var(--accent);
         border-color: var(--border-2);
+        box-shadow: inset 0 0 12px rgba(0, 110, 255, 0.06);
+      }
+      html.light .rep-tab-btn.active {
+        background: #eaf4ff;
+        color: #075db5;
+        border-color: #c7e1ff;
+      }
+      .rep-table-card {
+        background: var(--surface-1);
+        border: 1px solid var(--border-1);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+      }
+      html.light .rep-table-card {
+        background: rgba(255, 255, 255, 0.97);
+        border-color: #c9dcf4;
+        box-shadow: 0 10px 30px rgba(24, 74, 145, 0.08);
       }
       .rep-table {
         width: 100%;
@@ -1212,22 +1488,34 @@
         border-bottom: 1px solid var(--border-2);
         text-align: left;
       }
+      html.light .rep-table th {
+        background: #f1f5fa;
+        color: #4a5c70;
+        border-bottom-color: #d8e5f4;
+      }
       .rep-table td {
         padding: 13px 16px;
         border-bottom: 1px solid var(--border-1);
         color: var(--text-primary);
         vertical-align: middle;
       }
+      html.light .rep-table td {
+        border-bottom-color: #e9f0f8;
+      }
       .rep-table tr:hover td {
         background: var(--surface-2);
       }
+      html.light .rep-table tr:hover td {
+        background: #f5f9ff;
+      }
 
-      /* INSPECTION DRAWER / MODAL */
+      /* Page Inspection Drawer */
       .drawer-overlay {
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(4px);
+        background: rgba(3, 6, 11, 0.75);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
         z-index: 1000;
         display: none;
         align-items: center;
@@ -1238,11 +1526,16 @@
         height: 100vh;
         background: var(--surface-1);
         border-left: 1px solid var(--border-2);
-        box-shadow: -8px 0 32px rgba(0,0,0,0.45);
+        box-shadow: -12px 0 40px rgba(0, 0, 0, 0.6);
         display: flex;
         flex-direction: column;
         overflow: hidden;
-        animation: slideIn 0.25s cubic-bezier(0.16,1,0.3,1);
+        animation: slideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      html.light .drawer-body {
+        background: #ffffff;
+        border-left-color: #c9dcf4;
+        box-shadow: -12px 0 40px rgba(24, 74, 145, 0.2);
       }
       .evidence-box {
         background: var(--surface-2);
@@ -1254,13 +1547,22 @@
         line-height: 1.6;
         color: var(--text-primary);
       }
+      html.light .evidence-box {
+        background: #f6f9fd;
+        border-color: #d6e4f3;
+      }
       .evidence-highlight {
-        background: rgba(239, 68, 68, 0.25);
-        color: #FB7185;
+        background: rgba(255, 101, 122, 0.22);
+        color: #ff657a;
         font-weight: 700;
-        padding: 1px 4px;
-        border-radius: 3px;
-        border: 1px solid rgba(239, 68, 68, 0.4);
+        padding: 1px 5px;
+        border-radius: 4px;
+        border: 1px solid rgba(255, 101, 122, 0.4);
+      }
+      html.light .evidence-highlight {
+        background: #ffe6ea;
+        color: #d83d59;
+        border-color: #f7b8c3;
       }
       .issue-chip {
         display: inline-flex;
@@ -1275,17 +1577,21 @@
       }
       .issue-chip:hover {
         transform: translateY(-1px);
-        filter: brightness(1.25);
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        filter: brightness(1.2);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
       }
       .guidance-box {
         margin-top: 10px;
-        padding: 9px 12px;
+        padding: 10px 14px;
         border-radius: var(--r-md);
         background: var(--surface-3);
         border: 1px solid var(--border-2);
         font-size: 11px;
         line-height: 1.5;
+      }
+      html.light .guidance-box {
+        background: #eef4fb;
+        border-color: #d5e3f2;
       }
       .guidance-why {
         color: var(--text-secondary);
@@ -1309,454 +1615,479 @@
         gap: 8px;
       }
 
+      /* Advanced scan preset chips */
+      .preset-chip {
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        border: 1px solid var(--deploy-border);
+        background: var(--deploy-input);
+        color: var(--deploy-sub);
+        cursor: pointer;
+        transition: all 0.18s;
+      }
+      .preset-chip:hover {
+        color: var(--deploy-text);
+        border-color: var(--accent);
+      }
+      .preset-chip.active {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+      }
+      html.light .preset-chip {
+        background: #edf5ff;
+        border-color: #b9d2f2;
+        color: #4a5c70;
+      }
+      html.light .preset-chip.active {
+        background: #0879e8;
+        color: #fff;
+        border-color: #0879e8;
+      }
+
+      /* Responsive form grid */
+      .scan-panel form {
+        display: grid;
+        grid-template-columns: minmax(130px, 0.9fr) minmax(180px, 1.4fr) minmax(110px, 0.7fr) auto;
+        gap: 12px;
+        align-items: end;
+      }
+      @media (max-width: 900px) {
+        .scan-panel form {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 650px) {
+        .scan-panel form {
+          grid-template-columns: 1fr;
+        }
+      }
+
     </style>
   </head>
   <body>
-    <nav class="nav-wrap">
-      <div class="nav-inner">
-        <div
-          style="display: flex; align-items: center; gap: 10px; flex-shrink: 0"
-        >
-          <div class="nav-brand-icon"><i class="fas fa-shield-halved"></i></div>
-          <div>
-            <div class="nav-brand-name">Lorem Ipsum Checker</div>
-            <span class="nav-brand-sub">Enterprise Edition</span>
-          </div>
-        </div>
-        <div class="nav-search-wrap">
-          <i class="fas fa-search nav-search-icon"></i>
-          <input
-            class="nav-search-input"
-            id="searchInput"
-            oninput="filterProjects(this.value)"
-            placeholder="Search registry..."
-            type="text"
-          />
-          <span class="nav-search-kbd">âŒ˜K</span>
-        </div>
-        <div class="nav-right">
-          <div class="sys-pill">
-            <span class="sys-pill-dot-wrap"
-              ><span class="sys-pill-ring"></span
-              ><span class="sys-pill-core"></span
-            ></span>
-            <span class="sys-pill-text">System Operational</span>
-          </div>
-          <button onclick="loadProjects()" class="nav-icon-btn" title="Refresh">
-            <i class="fas fa-arrows-rotate"></i>
-          </button>
-          <button
-            class="toggle-wrap"
-            onclick="toggleTheme()"
-            title="Toggle theme"
-            style="
-              cursor: pointer;
-              border: 1px solid var(--border-2);
-              background: var(--surface-3);
-            "
-          >
-            <div class="toggle-knob"></div>
-            <i class="fas t-icon" id="themeIcon" style="font-size: 11px"></i>
-          </button>
-        </div>
-      </div>
-    </nav>
-
-    <main style="flex: 1; padding: 32px 0">
-      <div class="page-wrap">
-        <div
-          id="statsGrid"
-          style="
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 32px;
-          "
-        >
-          <div class="stat-card">
-            <div class="stat-card-header">
-              <div class="icon-box ic-default">
-                <i class="fas fa-layer-group" style="font-size: 14px"></i>
-              </div>
-              <span class="trend-badge trend-up"
-                ><i class="fas fa-arrow-up" style="font-size: 8px"></i>12%</span
-              >
-            </div>
-            <div id="stat-total-projects" class="stat-num">0</div>
-            <p class="stat-lbl">Total Audits Performed</p>
-            <div class="stat-blob blob-slate"></div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-card-header">
-              <div class="icon-box ic-accent">
-                <i class="fas fa-satellite-dish" style="font-size: 14px"></i>
-              </div>
-              <span
-                style="
-                  display: inline-block;
-                  width: 8px;
-                  height: 8px;
-                  border-radius: 50%;
-                  background: #635bff;
-                  margin-top: 2px;
-                  animation: pingAnim 1.6s ease infinite;
-                "
-              ></span>
-            </div>
-            <div id="stat-active-scans" class="stat-num">0</div>
-            <p class="stat-lbl">Active Scans Running</p>
-            <div class="stat-blob blob-indigo"></div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-card-header">
-              <div class="icon-box ic-rose">
-                <i
-                  class="fas fa-triangle-exclamation"
-                  style="font-size: 14px"
-                ></i>
-              </div>
-            </div>
-            <div id="stat-total-issues" class="stat-num">0</div>
-            <p class="stat-lbl">Lorem Ipsum Found</p>
-            <div class="vuln-strip">
-              <div class="vuln-strip-bg"></div>
-              <div id="vuln-bar"></div>
-            </div>
-            <div class="stat-blob blob-rose"></div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-card-header">
-              <div class="icon-box ic-amber">
-                <i class="fas fa-bolt" style="font-size: 14px"></i>
-              </div>
-              <span
-                class="stat-lbl"
-                style="
-                  font-size: 10px;
-                  font-family: &quot;DM Mono&quot;, monospace;
-                "
-                >99.8%</span
-              >
-            </div>
-            <div id="stat-total-errors" class="stat-num">0</div>
-            <p class="stat-lbl">Scan Log Errors</p>
-            <div class="stat-blob blob-amber"></div>
-          </div>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark"><span style="font-size:11px;font-weight:800;letter-spacing:-.04em">LC</span></div>
+          <div class="brand-name">LOREM IPSUM CHECKER</div>
         </div>
 
-        <div
-          id="mainGrid"
-          style="
-            display: grid;
-            grid-template-columns: 364px 1fr;
-            gap: 24px;
-            align-items: start;
-          "
-        >
-          <div style="position: sticky; top: 88px">
-            <div class="deploy-outer">
-              <div class="deploy-inner">
-                <div class="deploy-glow-1"></div>
-                <div class="deploy-glow-2"></div>
-                <div style="position: relative; z-index: 1">
-                  <div
-                    style="
-                      display: flex;
-                      align-items: center;
-                      gap: 12px;
-                      margin-bottom: 28px;
-                    "
-                  >
-                    <div class="deploy-icon-wrap">
-                      <i
-                        class="fas fa-rocket"
-                        style="color: rgba(255,255,255,0.9); font-size: 16px"
-                      ></i>
-                    </div>
-                    <div>
-                      <div class="deploy-title">Initiate Scan</div>
-                      <div class="deploy-sub">Deploy AI Agent</div>
-                    </div>
-                  </div>
-                  <form
-                    id="checkForm"
-                    style="display: flex; flex-direction: column; gap: 18px"
-                  >
-                    <div>
-                      <label class="deploy-label">Project Reference</label>
-                      <input
-                        class="deploy-input"
-                        id="projectName"
-                        name="project_name"
-                        placeholder="e.g. Q4 Audit Alpha"
-                        type="text"
-                      />
-                    </div>
-                    <div>
-                      <label class="deploy-label">Target Domain</label>
-                      <div style="position: relative">
-                        <i class="fas fa-globe deploy-input-icon"></i>
-                        <input
-                          class="deploy-input has-icon"
-                          id="websiteUrl"
-                          name="website_url"
-                          placeholder="https://domain.com"
-                          required
-                          type="url"
-                        />
+        <div class="side-label">Workspace</div>
+        <nav class="side-nav" aria-label="Main navigation">
+          <a class="side-link active" href="#dashboard" onclick="showView('dashboard');return false;"><i class="fas fa-house"></i> Dashboard</a>
+          <a class="side-link" href="#scan" onclick="showView('dashboard');document.getElementById('websiteUrl')?.focus();return false;"><i class="fas fa-crosshairs"></i> New Scan</a>
+          <a class="side-link" href="#history" onclick="showView('history');return false;"><i class="fas fa-clock-rotate-left"></i> Scan History</a>
+          <a class="side-link" href="#history" onclick="showView('history');return false;"><i class="fas fa-folder-open"></i> Projects</a>
+          <a class="side-link" href="#history" onclick="showView('history');return false;"><i class="fas fa-list-check"></i> URL Registry</a>
+          <a class="side-link" href="#history" onclick="showView('history');return false;"><i class="fas fa-triangle-exclamation"></i> Issues & Findings</a>
+        </nav>
+
+        <div class="side-label" style="margin-top:18px;">Preferences</div>
+        <nav class="side-nav">
+          <a class="side-link" href="#analytics" onclick="showView('analytics');return false;"><i class="fas fa-chart-line"></i> Analytics</a>
+          <a class="side-link" href="#" onclick="openSettings();return false;"><i class="fas fa-gear"></i> Settings</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="sidebar-note"><i class="fas fa-shield-halved"></i> Local scan environment<br>All scan data remains in your project storage.</div>
+        </div>
+      </aside>
+
+      <div class="app-main">
+        <header class="topbar" id="topbar">
+          <div class="brand">
+            <div class="brand-mark"><span style="font-size:11px;font-weight:800;letter-spacing:-.04em">LC</span></div>
+            <div class="brand-name">LOREM IPSUM CHECKER</div>
+          </div>
+          <nav class="top-nav" aria-label="Main navigation">
+            <a class="side-link active" href="#dashboard" data-view="dashboard" onclick="showView('dashboard');return false;"><i class="fas fa-house"></i> Dashboard</a>
+            <a class="side-link" href="#history" data-view="history" onclick="showView('history');return false;"><i class="fas fa-clock-rotate-left"></i> History</a>
+            <a class="side-link" href="#analytics" data-view="analytics" onclick="showView('analytics');return false;"><i class="fas fa-chart-line"></i> Analytics</a>
+          </nav>
+          <div class="topbar-title">Workspace <span style="color:var(--text-tertiary);font-weight:400;">/ Dashboard</span></div>
+          <div class="topbar-actions">
+            <button class="theme-switch" onclick="toggleTheme()" title="Toggle light / dark mode" aria-label="Toggle theme">
+              <i class="fas fa-sun" id="themeIcon"></i>
+            </button>
+            <button class="top-action" onclick="openSettings()" title="Settings" aria-label="Open settings"><i class="fas fa-sliders"></i></button>
+          </div>
+        </header>
+
+        <main class="content-wrap">
+          <!-- VIEW 1: DASHBOARD -->
+          <div id="dashboard" class="view active">
+            <section class="hero">
+              <h1>Scan And Monitor Your Websites</h1>
+              <p>Find placeholder content across your website with clear, actionable scan results.</p>
+            </section>
+
+            <section id="scan" class="scan-panel">
+              <div class="deploy-outer">
+                <div class="deploy-inner">
+                  <div class="deploy-glow-1"></div>
+                  <div class="deploy-glow-2"></div>
+                  <div style="position:relative;z-index:1;">
+                    <div style="display:flex;align-items:center;gap:11px;margin-bottom:17px;">
+                      <div class="deploy-icon-wrap"><i class="fas fa-crosshairs"></i></div>
+                      <div>
+                        <div class="deploy-title">Start a New Scan</div>
+                        <div class="deploy-sub">Enter a website to inspect its pages</div>
                       </div>
                     </div>
-                    <div>
-                      <label class="deploy-label">Max Response Size</label>
-                      <select class="deploy-input" id="maxResponseSizeMb" name="max_response_size_mb" style="cursor: pointer;">
-                        <option value="5">5 MB</option>
-                        <option value="10" selected>10 MB (Recommended)</option>
-                        <option value="25">25 MB</option>
-                        <option value="50">50 MB</option>
-                      </select>
+                    <form id="checkForm">
+                      <div>
+                        <label class="deploy-label" for="projectName">Project Reference</label>
+                        <input class="deploy-input" id="projectName" name="project_name" placeholder="e.g. Main Website Audit" type="text" />
+                      </div>
+                      <div>
+                        <label class="deploy-label" for="websiteUrl">Target Domain / URL</label>
+                        <div style="position:relative;">
+                          <i class="fas fa-link deploy-input-icon"></i>
+                          <input class="deploy-input has-icon" id="websiteUrl" name="website_url" placeholder="https://example.com" required type="url" />
+                        </div>
+                      </div>
+                      <div>
+                        <label class="deploy-label" for="maxResponseSizeMb">Max Response Size</label>
+                        <select class="deploy-input" id="maxResponseSizeMb" name="max_response_size_mb" style="cursor: pointer;">
+                          <option value="5">5 MB</option>
+                          <option value="10" selected>10 MB (Recommended)</option>
+                          <option value="25">25 MB</option>
+                          <option value="50">50 MB</option>
+                        </select>
+                      </div>
+                      <button type="submit" id="submitBtn" class="deploy-submit">
+                        <span>Start Scan</span>
+                        <i class="fas fa-arrow-right" style="font-size:11px;"></i>
+                      </button>
+                    </form>
+
+                    <!-- Collapsible Advanced Scan Configuration -->
+                    <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--deploy-border);">
+                      <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="toggleScanConfig()">
+                        <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--deploy-sub);">
+                          <i class="fas fa-sliders" style="margin-right: 6px;"></i> Advanced Scan Configuration
+                        </span>
+                        <i class="fas fa-chevron-down" id="configChevron" style="font-size: 11px; color: var(--deploy-sub); transition: transform 0.2s;"></i>
+                      </div>
+                      <div id="advancedConfigPanel" style="display: none; margin-top: 14px;">
+                        <!-- Scan Preset Chips -->
+                        <div style="margin-bottom: 12px;">
+                          <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--deploy-sub); margin-bottom: 6px;">Presets</div>
+                          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                            <button type="button" class="preset-chip" onclick="applyScanPreset('quick')">Quick</button>
+                            <button type="button" class="preset-chip active" onclick="applyScanPreset('standard')">Standard</button>
+                            <button type="button" class="preset-chip" onclick="applyScanPreset('deep')">Deep</button>
+                            <button type="button" class="preset-chip" onclick="applyScanPreset('custom')">Custom</button>
+                          </div>
+                        </div>
+                        <!-- Advanced Grid Controls -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; font-size: 11px;">
+                          <div>
+                            <label class="deploy-label" for="maxUrlsInput">Max URLs</label>
+                            <input class="deploy-input" id="maxUrlsInput" name="max_urls" type="number" value="500" min="1" max="10000" style="padding: 7px 10px; font-size: 12px;">
+                          </div>
+                          <div>
+                            <label class="deploy-label" for="maxDepthInput">Max Depth</label>
+                            <input class="deploy-input" id="maxDepthInput" name="max_depth" type="number" value="3" min="1" max="10" style="padding: 7px 10px; font-size: 12px;">
+                          </div>
+                          <div>
+                            <label class="deploy-label" for="concurrencyInput">Concurrency</label>
+                            <input class="deploy-input" id="concurrencyInput" name="concurrency" type="number" value="1" min="1" max="10" style="padding: 7px 10px; font-size: 12px;">
+                          </div>
+                          <div>
+                            <label class="deploy-label" for="perDomainInput">Per Domain</label>
+                            <input class="deploy-input" id="perDomainInput" name="concurrency_per_domain" type="number" value="1" min="1" max="5" style="padding: 7px 10px; font-size: 12px;">
+                          </div>
+                          <div>
+                            <label class="deploy-label" for="requestDelayInput">Request Delay (ms)</label>
+                            <input class="deploy-input" id="requestDelayInput" name="request_delay_ms" type="number" value="1000" min="0" max="10000" style="padding: 7px 10px; font-size: 12px;">
+                          </div>
+                          <div>
+                            <label class="deploy-label" for="reqTimeoutInput">Timeout (s)</label>
+                            <input class="deploy-input" id="reqTimeoutInput" name="request_timeout_sec" type="number" value="30" min="5" max="120" style="padding: 7px 10px; font-size: 12px;">
+                          </div>
+                          <div>
+                            <label class="deploy-label" for="maxRetriesInput">Max Retries</label>
+                            <input class="deploy-input" id="maxRetriesInput" name="max_retries" type="number" value="3" min="0" max="5" style="padding: 7px 10px; font-size: 12px;">
+                          </div>
+                        </div>
+                        <!-- Discovery Toggles & Reset -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--deploy-border);">
+                          <div style="display: flex; gap: 12px; font-size: 11px; color: var(--deploy-sub);">
+                            <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                              <input type="checkbox" name="disc_wordpress_api" value="1" checked> WP REST API
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                              <input type="checkbox" name="disc_pagination" value="1" checked> Pagination
+                            </label>
+                          </div>
+                          <button type="button" onclick="resetScanConfigToDefaults()" style="background: none; border: none; color: var(--deploy-sub); font-size: 11px; cursor: pointer; text-decoration: underline;">Reset to defaults</button>
+                        </div>
+                      </div>
                     </div>
-                    <button type="submit" id="submitBtn" class="deploy-submit">
-                      <span>Initialize Engine</span>
-                      <i class="fas fa-arrow-right" style="font-size: 11px"></i>
-                    </button>
-                  </form>
-                  <div
-                    style="
-                      margin-top: 24px;
-                      padding-top: 20px;
-                      border-top: 1px solid var(--deploy-border);
-                      display: flex;
-                      justify-content: space-between;
-                      align-items: center;
-                    "
-                  >
-                    <span
-                      style="
-                        font-size: 10px;
-                        font-weight: 600;
-                        color: rgba(255, 255, 255, 0.65);
-                        letter-spacing: 0.06em;
-                        text-transform: uppercase;
-                      "
-                      >Capacity</span
-                    >
-                    <div style="display: flex; gap: 4px">
-                      <div
-                        class="deploy-cap-bar"
-                        style="background: rgba(255,255,255,0.85)"
-                      ></div>
-                      <div
-                        class="deploy-cap-bar"
-                        style="background: rgba(255,255,255,0.85)"
-                      ></div>
-                      <div
-                        class="deploy-cap-bar"
-                        style="background: rgba(255,255,255,0.85)"
-                      ></div>
-                      <div
-                        class="deploy-cap-bar"
-                        style="background: rgba(255, 255, 255, 0.08)"
-                      ></div>
+
+                    <!-- Environment Capacity Indicator -->
+                    <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--deploy-border); display: flex; justify-content: space-between; align-items: center;">
+                      <span style="font-size: 10px; font-weight: 600; color: var(--deploy-sub); letter-spacing: 0.06em; text-transform: uppercase;">Engine Status</span>
+                      <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 10px; color: var(--success); font-weight: 700; font-family: 'DM Mono', monospace;">READY</span>
+                        <div style="display: flex; gap: 4px;">
+                          <div class="deploy-cap-bar" style="background: var(--accent);"></div>
+                          <div class="deploy-cap-bar" style="background: var(--accent);"></div>
+                          <div class="deploy-cap-bar" style="background: var(--accent);"></div>
+                          <div class="deploy-cap-bar" style="background: rgba(255, 255, 255, 0.1);"></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </section>
 
-          <div>
-            <div
-              style="
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                margin-bottom: 20px;
-              "
-            >
-              <div>
-                <h2
-                  class="reg-hd"
-                  style="
-                    font-family: &quot;Bricolage Grotesque&quot;, sans-serif;
-                    font-size: 22px;
-                    font-weight: 700;
-                    letter-spacing: -0.02em;
-                    margin-bottom: 3px;
-                  "
-                >
-                  Live Registry
-                </h2>
-                <p class="reg-sub" style="font-size: 13px">
-                  Real-time audit monitoring
-                </p>
+            <!-- Metric Summary Row (Existing IDs Preserved) -->
+            <section class="metric-row" id="statsGrid" aria-label="Scan statistics">
+              <div class="metric-panel stat-card">
+                <div class="stat-card-header"><div class="icon-box ic-default"><i class="fas fa-layer-group"></i></div></div>
+                <div id="stat-total-projects" class="stat-num">0</div>
+                <p class="stat-lbl">Total scans</p>
               </div>
-              <div style="display: flex; align-items: center; gap: 10px">
-                <button
-                  class="reg-sub"
-                  style="
-                    font-size: 12px;
-                    font-weight: 600;
-                    cursor: pointer;
-                    background: none;
-                    border: none;
-                    font-family: &quot;DM Sans&quot;, sans-serif;
-                  "
-                >
-                  Filter
-                </button>
-                <span class="reg-sub" style="opacity: 0.4">|</span>
-                <button
-                  class="reg-sub"
-                  style="
-                    font-size: 12px;
-                    font-weight: 600;
-                    cursor: pointer;
-                    background: none;
-                    border: none;
-                    font-family: &quot;DM Sans&quot;, sans-serif;
-                  "
-                >
-                  Sort
-                </button>
+              <div class="metric-panel stat-card">
+                <div class="stat-card-header"><div class="icon-box ic-accent"><i class="fas fa-satellite-dish"></i></div></div>
+                <div id="stat-active-scans" class="stat-num">0</div>
+                <p class="stat-lbl">Active scans</p>
+              </div>
+              <div class="metric-panel stat-card">
+                <div class="stat-card-header"><div class="icon-box ic-rose"><i class="fas fa-triangle-exclamation"></i></div></div>
+                <div id="stat-total-issues" class="stat-num">0</div>
+                <p class="stat-lbl">Lorem Ipsum findings</p>
+                <div class="vuln-strip" style="margin-top:8px;">
+                  <div class="vuln-strip-bg"></div>
+                  <div id="vuln-bar"></div>
+                </div>
+              </div>
+              <div class="metric-panel stat-card">
+                <div class="stat-card-header"><div class="icon-box ic-amber"><i class="fas fa-bug"></i></div></div>
+                <div id="stat-total-errors" class="stat-num">0</div>
+                <p class="stat-lbl">Scan errors</p>
+              </div>
+            </section>
+
+            <!-- Recent Scans Section -->
+            <section class="home-history">
+              <div class="history-head" style="padding:10px 2px 14px;border:0;">
+                <div>
+                  <div class="history-title">Recent scans</div>
+                  <div class="history-subtitle">Your latest website checks</div>
+                </div>
+                <button class="history-viewall" onclick="showView('history')">View all scans <i class="fas fa-arrow-right"></i></button>
+              </div>
+              <div id="recentProjects" class="recent-projects"></div>
+              <div id="recentPagination" class="history-pagination recent-pagination" style="display:none" aria-label="Recent scans pagination">
+                <span id="recentRange" class="history-count" aria-live="polite"></span>
+                <div class="pagination-controls">
+                  <button id="recentPrev" class="pagination-btn" type="button" onclick="changeRecentPage(-1)" aria-label="Previous recent scans">Previous</button>
+                  <span id="recentPageLabel" class="pagination-page" aria-live="polite">Page 1 of 1</span>
+                  <button id="recentNext" class="pagination-btn" type="button" onclick="changeRecentPage(1)" aria-label="Next recent scans">Next</button>
+                </div>
+              </div>
+              <div id="connectionStatus" role="status" aria-live="polite" style="display:none;margin-top:12px;padding:12px 14px;border:1px solid var(--error-border);border-radius:11px;background:var(--error-muted);color:var(--error);font-size:11px"></div>
+            </section>
+
+            <!-- Hidden mainGrid for DOM reference backward compatibility -->
+            <div id="mainGrid" style="display:none;"></div>
+          </div>
+
+          <!-- VIEW 2: SCAN HISTORY -->
+          <section id="history" class="view">
+            <div class="view-heading">
+              <h1 id="historyPageTitle">Scan history</h1>
+              <p id="historyPageSubtitle">Browse and manage every saved website scan.</p>
+            </div>
+
+            <section id="scan-history" class="history-panel">
+              <div class="history-head">
+                <div>
+                  <div class="history-title">All Scan History</div>
+                  <div class="history-subtitle">Your saved scans, live progress and previous results</div>
+                </div>
+                <div class="history-tools">
+                  <input id="searchInput" class="history-search" oninput="filterProjects(this.value)" placeholder="Search projects or URLs..." type="search" aria-label="Search scan history">
+                  <select id="statusFilter" class="history-filter" aria-label="Filter by scan status" onchange="updateHistoryFilters()">
+                    <option value="all">All statuses</option>
+                    <option value="active">In progress</option>
+                    <option value="completed">Completed</option>
+                    <option value="paused">Paused</option>
+                    <option value="failed">Failed</option>
+                  </select>
+                  <select id="sortFilter" class="history-filter" aria-label="Sort scan history" onchange="updateHistoryFilters()">
+                    <option value="newest">Newest first</option>
+                    <option value="oldest">Oldest first</option>
+                    <option value="findings">Most findings</option>
+                    <option value="urls">Most URLs</option>
+                  </select>
+                  <button class="history-refresh" onclick="loadProjects()" title="Refresh scan history"><i class="fas fa-rotate"></i></button>
+                  <span id="historyCount" class="history-count" aria-live="polite"></span>
+                  <button class="history-viewall" onclick="resetHistoryFilters()">Reset filters <i class="fas fa-rotate-left"></i></button>
+                </div>
+              </div>
+              <div id="projectsList">
+                <div class="empty-card" style="display:flex;align-items:center;justify-content:center;padding:54px 20px;text-align:center;">
+                  <div><i class="fas fa-spinner fa-spin" style="font-size:22px;color:var(--accent);margin-bottom:12px;"></i><p class="reg-sub" style="font-size:12px;">Loading scan history…</p></div>
+                </div>
+              </div>
+              <div id="historyPagination" class="history-pagination" style="display:none" aria-label="Scan history pagination">
+                <span id="historyRange" class="history-count" aria-live="polite"></span>
+                <div class="pagination-controls">
+                  <button id="historyPrev" class="pagination-btn" type="button" onclick="changeHistoryPage(-1)" aria-label="Previous page">Previous</button>
+                  <span id="historyPageLabel" class="pagination-page" aria-live="polite">Page 1 of 1</span>
+                  <button id="historyNext" class="pagination-btn" type="button" onclick="changeHistoryPage(1)" aria-label="Next page">Next</button>
+                  <select id="historyPageSize" class="history-filter" aria-label="Scans per page" onchange="changeHistoryPageSize(this.value)">
+                    <option value="6" selected>6 per page</option>
+                    <option value="12">12 per page</option>
+                    <option value="24">24 per page</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+          </section>
+
+          <!-- VIEW 3: ANALYTICS -->
+          <section id="analytics" class="view">
+            <div class="view-heading">
+              <h1>Analytics</h1>
+              <p>A clear view of findings and scan activity across your projects.</p>
+            </div>
+            <div id="analyticsContent" class="analytics-grid"></div>
+          </section>
+
+          <!-- VIEW 4: DEDICATED AUDIT REPORT (PRESERVED & REDESIGNED) -->
+          <div id="reportView" class="page-wrap view-report" style="display:none; padding: 24px 0 60px;">
+            <!-- Report Header -->
+            <div class="rep-header-card">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
+                <div>
+                  <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                    <button onclick="closeReportView()" class="history-viewall" style="padding:6px 14px; font-size:11px; height:auto; display:inline-flex; align-items:center; gap:6px;">
+                      <i class="fas fa-arrow-left"></i> Back to Scans
+                    </button>
+                    <span id="repScanStatusBadge"></span>
+                  </div>
+                  <h1 id="repProjectName" style="font-family:'Bricolage Grotesque',sans-serif; font-size:24px; font-weight:700; color:var(--text-primary); margin-bottom:6px;">Audit Report</h1>
+                  <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--text-secondary);">
+                    <span><i class="fas fa-globe" style="color:var(--accent); margin-right:4px;"></i> <a id="repTargetUrl" href="#" target="_blank" style="color:var(--accent); text-decoration:underline;"></a></span>
+                    <span><i class="fas fa-fingerprint" style="margin-right:4px;"></i> Scan <strong id="repScanId"></strong></span>
+                    <span><i class="fas fa-calendar" style="margin-right:4px;"></i> <span id="repStartedAt"></span></span>
+                    <span><i class="fas fa-stopwatch" style="margin-right:4px;"></i> Duration: <strong id="repDuration"></strong></span>
+                  </div>
+                </div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                  <button onclick="exportCurrentReport('csv')" class="exp-btn"><i class="fas fa-file-csv" style="color:var(--success);"></i> Export CSV</button>
+                  <button onclick="exportCurrentReport('json')" class="exp-btn"><i class="fas fa-code" style="color:var(--accent);"></i> Export JSON</button>
+                  <button onclick="window.print()" class="exp-btn"><i class="fas fa-print"></i> Print</button>
+                  <button onclick="closeReportView();showView('dashboard');" class="resume-btn"><i class="fas fa-plus"></i> New Scan</button>
+                </div>
+              </div>
+
+              <!-- Collapsible Scan Configuration Snapshot -->
+              <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--border-1);">
+                <div style="display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleRepConfigSnapshot()">
+                  <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary);">
+                    <i class="fas fa-sliders" style="margin-right:6px;"></i> Effective Scan Configuration Snapshot
+                  </span>
+                  <i class="fas fa-chevron-down" id="repConfigChevron" style="font-size:11px; color:var(--text-tertiary); transition:transform 0.2s;"></i>
+                </div>
+                <div id="repConfigSnapshotBody" style="display:none; margin-top:12px; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:10px; font-size:11px;">
+                  <!-- Populated dynamically -->
+                </div>
               </div>
             </div>
-            <div
-              id="projectsList"
-              style="
-                display: flex;
-                flex-direction: column;
-                gap: 14px;
-                min-height: 400px;
-              "
-            >
-              <div
-                class="empty-card"
-                style="
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                  justify-content: center;
-                  padding: 72px 24px;
-                  text-align: center;
-                "
-              >
-                <div
-                  style="
-                    width: 32px;
-                    height: 32px;
-                    border-radius: 50%;
-                    border: 2.5px solid var(--border-2);
-                    border-top-color: var(--accent);
-                    animation: spin 0.85s linear infinite;
-                    margin-bottom: 16px;
-                  "
-                ></div>
-                <p
-                  class="reg-sub"
-                  style="
-                    font-size: 11px;
-                    font-weight: 700;
-                    text-transform: uppercase;
-                    letter-spacing: 0.12em;
-                  "
-                >
-                  Synchronizing Registryâ€¦
-                </p>
+
+            <!-- Interactive Statistics Dashboard (All Clickable) -->
+            <div style="margin-bottom:24px;">
+              <h3 style="font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary); margin-bottom:12px;">
+                Interactive Finding Metrics <span style="font-size:11px; font-weight:400; text-transform:none; color:var(--text-tertiary);">(Click card to filter results)</span>
+              </h3>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px;" id="repStatsGrid">
+                <!-- Dynamically populated cards -->
+              </div>
+            </div>
+
+            <!-- Active Filter Banner (if applied) -->
+            <div id="repActiveFilterBanner" style="display:none; margin-bottom:16px; padding:10px 16px; background:var(--accent-muted); border:1px solid var(--accent-border); border-radius:var(--r-md); font-size:12px; color:var(--text-primary); display:flex; justify-content:space-between; align-items:center;">
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div style="display:flex; gap:8px; border-bottom:1px solid var(--border-1); padding-bottom:12px; margin-bottom:20px; overflow-x:auto;">
+              <button class="rep-tab-btn active" onclick="switchReportTab('pages')"><i class="fas fa-file-lines"></i> Scanned Pages (<span id="repTabPagesCount">0</span>)</button>
+              <button class="rep-tab-btn" onclick="switchReportTab('findings')"><i class="fas fa-magnifying-glass"></i> All Findings (<span id="repTabFindingsCount">0</span>)</button>
+              <button class="rep-tab-btn" onclick="switchReportTab('lorem')"><i class="fas fa-align-left" style="color:var(--error);"></i> Lorem Ipsum (<span id="repTabLoremCount">0</span>)</button>
+              <button class="rep-tab-btn" onclick="switchReportTab('seo')"><i class="fas fa-chart-line"></i> SEO Issues (<span id="repTabSeoCount">0</span>)</button>
+              <button class="rep-tab-btn" onclick="switchReportTab('a11y')"><i class="fas fa-universal-access"></i> Accessibility (<span id="repTabA11yCount">0</span>)</button>
+              <button class="rep-tab-btn" onclick="switchReportTab('errors')"><i class="fas fa-triangle-exclamation" style="color:var(--warning);"></i> Technical Errors (<span id="repTabErrorsCount">0</span>)</button>
+            </div>
+
+            <!-- Filter / Search Toolbar -->
+            <div style="background:var(--surface-1); border:1px solid var(--border-1); border-radius:14px; padding:14px 18px; margin-bottom:18px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+              <div style="flex:1; min-width:240px; position:relative;">
+                <i class="fas fa-search" style="position:absolute; left:12px; top:11px; font-size:11px; color:var(--text-tertiary);"></i>
+                <input type="text" id="repSearchInput" oninput="applyReportFilters()" placeholder="Search URL or matched text..." class="deploy-input" style="padding-left:32px; font-size:12px; background:var(--surface-2); border-color:var(--border-2); color:var(--text-primary);" />
+              </div>
+              <select id="repStatusFilter" onchange="applyReportFilters()" class="deploy-input" style="width:auto; font-size:12px; background:var(--surface-2); border-color:var(--border-2); color:var(--text-primary); cursor:pointer;">
+                <option value="">All Health Statuses</option>
+                <option value="findings_detected">Needs Attention (Findings)</option>
+                <option value="clean">Clean (No Findings)</option>
+                <option value="failed">Failed / Error</option>
+              </select>
+              <button onclick="clearReportFilters()" class="exp-btn" style="font-size:11px;">Clear Filters</button>
+            </div>
+
+            <!-- Report Content Display Area -->
+            <div class="rep-table-card">
+              <div id="repTableContainer" style="overflow-x:auto; min-height:280px;">
+                <!-- Dynamically filled with Pages or Findings table -->
+              </div>
+              <div id="repPagination" style="padding:14px 20px; border-top:1px solid var(--border-1); display:flex; justify-content:space-between; align-items:center; font-size:11px; color:var(--text-secondary);">
+                <span id="repPaginationInfo">Showing records</span>
+                <div style="display:flex; gap:6px;">
+                  <button id="repPrevPageBtn" onclick="changeRepPage(-1)" class="exp-btn" style="padding:4px 10px;">Prev</button>
+                  <button id="repNextPageBtn" onclick="changeRepPage(1)" class="exp-btn" style="padding:4px 10px;">Next</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </main>
+
+        <footer class="page-footer">Lorem Ipsum Checker · Website content auditing workspace</footer>
       </div>
-    </main>
+    </div>
 
-    <!-- DEDICATED REPORT DASHBOARD VIEW -->
-    <div id="reportView" class="page-wrap" style="padding: 32px 0;">
-      <!-- Report Header -->
-      <div style="background:var(--surface-1); border:1px solid var(--border-1); border-radius:var(--r-2xl); padding:24px 28px; margin-bottom:28px;">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
-          <div>
-            <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
-              <button onclick="closeReportView()" class="exp-btn" style="padding:4px 10px; font-size:11px;">
-                <i class="fas fa-arrow-left"></i> Back to Scans
-              </button>
-              <span id="repScanStatusBadge"></span>
-            </div>
-            <h1 id="repProjectName" style="font-family:'Bricolage Grotesque',sans-serif; font-size:24px; font-weight:700; color:var(--text-primary); margin-bottom:4px;">Audit Report</h1>
-            <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap; font-size:12px; color:var(--text-secondary);">
-              <span><i class="fas fa-globe" style="color:var(--accent); margin-right:4px;"></i> <a id="repTargetUrl" href="#" target="_blank" style="color:var(--accent); text-decoration:underline;"></a></span>
-              <span><i class="fas fa-fingerprint" style="margin-right:4px;"></i> Scan <strong id="repScanId"></strong></span>
-              <span><i class="fas fa-calendar" style="margin-right:4px;"></i> <span id="repStartedAt"></span></span>
-              <span><i class="fas fa-stopwatch" style="margin-right:4px;"></i> Duration: <strong id="repDuration"></strong></span>
-            </div>
-          </div>
-          <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <button onclick="exportCurrentReport('csv')" class="exp-btn"><i class="fas fa-file-csv" style="color:var(--success);"></i> Export CSV</button>
-            <button onclick="exportCurrentReport('json')" class="exp-btn"><i class="fas fa-code" style="color:var(--accent);"></i> Export JSON</button>
-            <button onclick="window.print()" class="exp-btn"><i class="fas fa-print"></i> Print</button>
-            <button onclick="closeReportView()" class="resume-btn"><i class="fas fa-plus"></i> New Scan</button>
-          </div>
+    <!-- SETTINGS MODAL -->
+    <div id="settingsModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" onclick="if(event.target===this)closeSettings();">
+      <div class="settings-modal">
+        <div class="settings-modal-head">
+          <h2 id="settingsTitle"><i class="fas fa-gear" style="color:var(--accent);margin-right:8px;"></i>Settings</h2>
+          <button class="modal-close" onclick="closeSettings()" aria-label="Close settings"><i class="fas fa-xmark"></i></button>
         </div>
-
-        <!-- Collapsible Scan Configuration Snapshot -->
-        <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--border-1);">
-          <div style="display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleRepConfigSnapshot()">
-            <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary);">
-              <i class="fas fa-sliders" style="margin-right:6px;"></i> Effective Scan Configuration Snapshot
-            </span>
-            <i class="fas fa-chevron-down" id="repConfigChevron" style="font-size:11px; color:var(--text-tertiary); transition:transform 0.2s;"></i>
-          </div>
-          <div id="repConfigSnapshotBody" style="display:none; margin-top:12px; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:10px; font-size:11px;">
-            <!-- Populated dynamically -->
-          </div>
+        <div class="setting-row">
+          <div><strong>Appearance</strong><small>Choose how the dashboard looks</small></div>
+          <select id="themePreference" class="setting-select" onchange="applyTheme(this.value)">
+            <option value="dark">Dark mode</option>
+            <option value="light">Light mode</option>
+          </select>
         </div>
-      </div>
-
-      <!-- Interactive Statistics Dashboard (All Clickable) -->
-      <div style="margin-bottom:24px;">
-        <h3 style="font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-secondary); margin-bottom:12px;">
-          Interactive Finding Metrics <span style="font-size:11px; font-weight:400; text-transform:none; color:var(--text-tertiary);">(Click card to filter results)</span>
-        </h3>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px;" id="repStatsGrid">
-          <!-- Dynamically populated cards -->
+        <div class="setting-row">
+          <div><strong>Scan history</strong><small>Refresh the latest project and scan records</small></div>
+          <button class="history-refresh" onclick="loadProjects();toast('Updated','Scan history refreshed.','success');">Refresh</button>
         </div>
-      </div>
-
-      <!-- Category Filter Tabs -->
-      <div style="display:flex; gap:8px; border-bottom:1px solid var(--border-1); padding-bottom:12px; margin-bottom:20px; overflow-x:auto;">
-        <button class="rep-tab-btn active" onclick="switchReportTab('pages')"><i class="fas fa-file-lines"></i> Scanned Pages (<span id="repTabPagesCount">0</span>)</button>
-        <button class="rep-tab-btn" onclick="switchReportTab('findings')"><i class="fas fa-magnifying-glass"></i> All Findings (<span id="repTabFindingsCount">0</span>)</button>
-        <button class="rep-tab-btn" onclick="switchReportTab('lorem')"><i class="fas fa-align-left" style="color:var(--error);"></i> Lorem Ipsum (<span id="repTabLoremCount">0</span>)</button>
-        <button class="rep-tab-btn" onclick="switchReportTab('seo')"><i class="fas fa-chart-line"></i> SEO Issues (<span id="repTabSeoCount">0</span>)</button>
-        <button class="rep-tab-btn" onclick="switchReportTab('a11y')"><i class="fas fa-universal-access"></i> Accessibility (<span id="repTabA11yCount">0</span>)</button>
-        <button class="rep-tab-btn" onclick="switchReportTab('errors')"><i class="fas fa-triangle-exclamation" style="color:var(--warning);"></i> Technical Errors (<span id="repTabErrorsCount">0</span>)</button>
-      </div>
-
-      <!-- Filter / Search Toolbar -->
-      <div style="background:var(--surface-1); border:1px solid var(--border-1); border-radius:var(--r-lg); padding:14px 18px; margin-bottom:18px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
-        <div style="flex:1; min-width:240px; position:relative;">
-          <i class="fas fa-search" style="position:absolute; left:12px; top:11px; font-size:11px; color:var(--text-tertiary);"></i>
-          <input type="text" id="repSearchInput" oninput="applyReportFilters()" placeholder="Search URL or matched text..." class="deploy-input" style="padding-left:32px; font-size:12px; background:var(--surface-2); border-color:var(--border-2); color:var(--text-primary);" />
+        <div class="setting-row">
+          <div><strong>Application</strong><small>Lorem Ipsum Checker · Production Enterprise Engine</small></div>
+          <span style="font-size:10px;color:var(--success);font-weight:700;">ACTIVE</span>
         </div>
-        <select id="repStatusFilter" onchange="applyReportFilters()" class="deploy-input" style="width:auto; font-size:12px; background:var(--surface-2); border-color:var(--border-2); color:var(--text-primary);">
-          <option value="">All Health Statuses</option>
-          <option value="findings_detected">Needs Attention (Findings)</option>
-          <option value="clean">Clean (No Findings)</option>
-          <option value="failed">Failed / Error</option>
-        </select>
-        <button onclick="clearReportFilters()" class="exp-btn" style="font-size:11px;">Clear Filters</button>
-      </div>
-
-      <!-- Report Content Display Area -->
-      <div style="background:var(--surface-1); border:1px solid var(--border-1); border-radius:var(--r-xl); overflow:hidden;">
-        <div id="repTableContainer" style="overflow-x:auto; min-height:280px;">
-          <!-- Dynamically filled with Pages or Findings table -->
-        </div>
-        <div id="repPagination" style="padding:14px 20px; border-top:1px solid var(--border-1); display:flex; justify-content:space-between; align-items:center; font-size:11px; color:var(--text-secondary);">
-          <span id="repPaginationInfo">Showing records</span>
-          <div style="display:flex; gap:6px;">
-            <button id="repPrevPageBtn" onclick="changeRepPage(-1)" class="exp-btn" style="padding:4px 10px;">Prev</button>
-            <button id="repNextPageBtn" onclick="changeRepPage(1)" class="exp-btn" style="padding:4px 10px;">Next</button>
-          </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:16px;">
+          <button class="history-viewall" onclick="closeSettings()">Done</button>
         </div>
       </div>
     </div>
@@ -1799,122 +2130,495 @@
       </div>
     </div>
 
-
-    <footer class="footer-wrap" style="margin-top: 56px; padding: 20px 0">
-      <div
-        style="
-          max-width: 1440px;
-          margin: 0 auto;
-          padding: 0 24px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        "
-      >
-        <div style="display: flex; align-items: center; gap: 7px">
-          <i
-            class="fas fa-shield-halved footer-txt"
-            style="font-size: 13px"
-          ></i>
-          <span
-            class="footer-txt"
-            style="
-              font-size: 10px;
-              font-weight: 700;
-              text-transform: uppercase;
-              letter-spacing: 0.12em;
-            "
-            >Secure Environment</span
-          >
-        </div>
-        <p class="footer-txt" style="font-size: 12px">
-          Â© 2026 Lorem Ipsum Checker. Enterprise Grade.
-        </p>
-      </div>
-    </footer>
-
-    <div
-      id="toast-container"
-      style="
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        pointer-events: none;
-      "
-    ></div>
+    <!-- TOAST NOTIFICATIONS -->
+    <div id="toast-container" style="position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none;"></div>
 
     <script>
       const API_URL = "api.php";
-      let allProjects = [],
-        visibleLogs = new Set(),
-        pollInterval = null,
-        isPolling = false,
-        searchQuery = "";
       const ACTIVE = new Set([
         "initializing",
         "detecting_sitemap",
         "generating_sitemap",
         "extracting",
         "checking",
-        "discovering",
         "scanning",
-        "pause_requested",
-        "cancel_requested",
+        "discovering",
       ]);
-      (function () {
-        const s = localStorage.getItem("am-theme") || "light";
-        applyTheme(s, true);
-      })();
+      let allProjects = [];
+      let isPolling = false;
+      let pollInterval = null;
+      const visibleLogs = new Set();
+      let searchQuery = "";
+      let historyPage = 1;
+      let historyPageSize = 6;
+      let recentPage = 1;
+      let currentView = "dashboard";
+
+      // Dedicated Report State
+      let currentReportScanId = null;
+      let currentReportData = null;
+      let currentReportTab = 'pages';
+      let reportPageNumber = 1;
+      const reportPageSize = 10;
+      let activeStatFilter = null;
+      let currentReportFindingCategory = null;
+
+      // Theme Management
       function toggleTheme() {
-        applyTheme(
-          document.documentElement.classList.contains("light")
-            ? "dark"
-            : "light",
-        );
+        applyTheme(document.documentElement.classList.contains("dark") ? "light" : "dark");
       }
-      function applyTheme(m, silent) {
-        const h = document.documentElement;
-        h.classList.remove("light", "dark");
-        h.classList.add(m);
-        if (!silent) localStorage.setItem("am-theme", m);
-        const ic = document.getElementById("themeIcon");
-        if (ic)
-          ic.className = "fas t-icon " + (m === "light" ? "fa-moon" : "fa-sun");
+      function applyTheme(theme) {
+        const isDark = theme === "dark";
+        document.documentElement.classList.toggle("dark", isDark);
+        document.documentElement.classList.toggle("light", !isDark);
+        localStorage.setItem("theme", theme);
+        const icon = document.getElementById("themeIcon");
+        if (icon) icon.className = "fas " + (isDark ? "fa-moon" : "fa-sun");
+        const select = document.getElementById("themePreference");
+        if (select) select.value = theme;
       }
-      document.addEventListener("DOMContentLoaded", loadProjects);
+      (function() {
+        const saved = localStorage.getItem("theme") || "dark";
+        document.documentElement.classList.toggle("dark", saved === "dark");
+        document.documentElement.classList.toggle("light", saved !== "dark");
+      })();
+
+      // View Switching
+      function showView(view) {
+        currentView = view;
+        const reportView = document.getElementById("reportView");
+        if (reportView) reportView.style.display = "none";
+
+        document.querySelectorAll(".view").forEach((el) => {
+          el.classList.toggle("active", el.id === view);
+          el.style.display = el.id === view ? "block" : "none";
+        });
+        document.querySelectorAll(".top-nav [data-view]").forEach((el) => {
+          el.classList.toggle("active", el.dataset.view === view);
+        });
+
+        const titleEl = document.querySelector(".topbar-title");
+        if (titleEl) {
+          const capitalized = view.charAt(0).toUpperCase() + view.slice(1);
+          titleEl.innerHTML = `Workspace <span style="color:var(--text-tertiary);font-weight:400;">/ ${capitalized}</span>`;
+        }
+
+        if (view === "history") {
+          const title = document.getElementById("historyPageTitle");
+          const sub = document.getElementById("historyPageSubtitle");
+          if (title) title.textContent = "Scan history";
+          if (sub) sub.textContent = "Browse and manage every saved website scan.";
+          smartRender(allProjects);
+        }
+        if (view === "analytics") {
+          renderAnalytics(allProjects);
+        }
+        if (view === "dashboard") {
+          renderRecent(allProjects);
+        }
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // Topbar Scroll Behavior
+      let lastScrollY = 0;
+      window.addEventListener("scroll", () => {
+        const bar = document.getElementById("topbar");
+        if (!bar) return;
+        const y = window.scrollY;
+        bar.classList.toggle("is-hidden", y > 120 && y > lastScrollY + 5);
+        if (y < 45 || y < lastScrollY - 5) bar.classList.remove("is-hidden");
+        lastScrollY = y;
+      }, { passive: true });
+
+      // Settings Modal
+      function openSettings() {
+        const modal = document.getElementById("settingsModal");
+        const select = document.getElementById("themePreference");
+        if (select) select.value = document.documentElement.classList.contains("dark") ? "dark" : "light";
+        if (modal) modal.classList.add("open");
+      }
+      function closeSettings() {
+        const modal = document.getElementById("settingsModal");
+        if (modal) modal.classList.remove("open");
+      }
+      document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape") {
+          closeSettings();
+          closeInspectionDrawer();
+        }
+      });
+
+      // Document Initialization
+      document.addEventListener("DOMContentLoaded", () => {
+        loadProjects();
+        const themeIcon = document.getElementById("themeIcon");
+        if (themeIcon) {
+          themeIcon.className = "fas " + (document.documentElement.classList.contains("dark") ? "fa-moon" : "fa-sun");
+        }
+        const checkForm = document.getElementById("checkForm");
+        if (checkForm) {
+          checkForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById("submitBtn"),
+              orig = btn.innerHTML;
+            const fd = new FormData(e.target);
+            fd.append("action", "start");
+            fd.append("use_sitemap", "auto");
+            try {
+              btn.disabled = true;
+              btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Initiating…';
+              const res = await fetch(API_URL, { method: "POST", body: fd });
+              const d = await res.json();
+              if (d.success) {
+                toast("Scan Initiated", d.data.message || "Scan started successfully.", "success");
+                e.target.reset();
+                loadProjects();
+                showView('history');
+              } else {
+                toast("Request Denied", d.error || "Unable to start scan.", "error");
+              }
+            } catch (err) {
+              toast("Connection Failed", err.message, "error");
+            } finally {
+              btn.disabled = false;
+              btn.innerHTML = orig;
+            }
+          });
+        }
+      });
+
+      // Scan Configuration Presets & Controls
+      function toggleScanConfig() {
+        const p = document.getElementById('advancedConfigPanel');
+        const chevron = document.getElementById('configChevron');
+        if (!p) return;
+        const isHidden = p.style.display === 'none' || p.style.display === '';
+        p.style.display = isHidden ? 'block' : 'none';
+        if (chevron) chevron.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+      }
+
+      function applyScanPreset(preset) {
+        document.querySelectorAll('.preset-chip').forEach(c => {
+          c.classList.toggle('active', c.textContent.trim().toLowerCase() === preset);
+        });
+
+        const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = val; };
+        const setCheck = (name, checked) => { const el = document.querySelector(`input[name="${name}"]`); if (el) el.checked = checked; };
+
+        switch (preset) {
+          case 'quick':
+            setVal('maxUrlsInput', 50);
+            setVal('maxDepthInput', 2);
+            setVal('concurrencyInput', 1);
+            setVal('perDomainInput', 1);
+            setVal('requestDelayInput', 500);
+            setVal('reqTimeoutInput', 15);
+            setVal('maxRetriesInput', 1);
+            setCheck('disc_wordpress_api', false);
+            setCheck('disc_pagination', false);
+            break;
+          case 'standard':
+            setVal('maxUrlsInput', 500);
+            setVal('maxDepthInput', 3);
+            setVal('concurrencyInput', 1);
+            setVal('perDomainInput', 1);
+            setVal('requestDelayInput', 1000);
+            setVal('reqTimeoutInput', 30);
+            setVal('maxRetriesInput', 3);
+            setCheck('disc_wordpress_api', true);
+            setCheck('disc_pagination', true);
+            break;
+          case 'deep':
+            setVal('maxUrlsInput', 2000);
+            setVal('maxDepthInput', 6);
+            setVal('concurrencyInput', 2);
+            setVal('perDomainInput', 1);
+            setVal('requestDelayInput', 1000);
+            setVal('reqTimeoutInput', 45);
+            setVal('maxRetriesInput', 4);
+            setCheck('disc_wordpress_api', true);
+            setCheck('disc_pagination', true);
+            break;
+          case 'custom':
+            const p = document.getElementById('advancedConfigPanel');
+            if (p && p.style.display === 'none') toggleScanConfig();
+            break;
+        }
+      }
+
+      function resetScanConfigToDefaults() {
+        applyScanPreset('standard');
+        const sizeSelect = document.getElementById('maxResponseSizeMb');
+        if (sizeSelect) sizeSelect.value = '10';
+      }
+
+      // Project Loading and Polling
       async function loadProjects() {
         try {
-          const d = await (await fetch(API_URL + "?action=list")).json();
+          const response = await fetch(API_URL + "?action=list", { headers: { "Accept": "application/json" } });
+          if (!response.ok) throw new Error(`API returned HTTP ${response.status}`);
+          const d = await response.json();
           if (!d.success) return;
+          const connectionStatus = document.getElementById("connectionStatus");
+          if (connectionStatus) connectionStatus.style.display = "none";
           const inc = d.data.projects;
-          smartRender(inc);
           allProjects = inc;
+          smartRender(inc);
           updateStats(inc);
           const hasActive = inc.some((p) => ACTIVE.has(p.status));
           if (hasActive && !isPolling) startPolling();
           else if (!hasActive && isPolling) stopPolling();
         } catch (e) {
           console.error(e);
+          const status = document.getElementById("connectionStatus");
+          if (status) {
+            status.style.display = "block";
+            status.innerHTML = `<strong>Couldn't connect to the scan service.</strong> Check that the PHP server is running and api.php is reachable. <span style="color:var(--text-tertiary)">${esc(e.message)}</span>`;
+          }
         }
       }
-      function smartRender(incoming) {
-        const list = document.getElementById("projectsList");
-        const data = searchQuery
-          ? incoming.filter(
-              (p) =>
-                (p.project_name || "").toLowerCase().includes(searchQuery) ||
-                (p.website_url || "").toLowerCase().includes(searchQuery),
-            )
-          : incoming;
-        if (!data.length) {
-          list.innerHTML = buildEmpty();
+
+      function updateStats(projects) {
+        let active = 0,
+          issues = 0,
+          errors = 0;
+        projects.forEach((p) => {
+          if (ACTIVE.has(p.status)) active++;
+          if (p.progress) {
+            issues += +(p.progress.lorem_found || 0);
+            errors += +(p.progress.errors || 0);
+          }
+        });
+        const totalEl = document.getElementById("stat-total-projects");
+        if (totalEl) totalEl.textContent = projects.length;
+        const activeEl = document.getElementById("stat-active-scans");
+        if (activeEl) activeEl.textContent = active;
+        const issuesEl = document.getElementById("stat-total-issues");
+        if (issuesEl) issuesEl.textContent = issues;
+        const errorsEl = document.getElementById("stat-total-errors");
+        if (errorsEl) errorsEl.textContent = errors;
+        const vb = document.getElementById("vuln-bar");
+        if (vb) vb.style.width = Math.min(issues * 5, 100) + "%";
+        renderAnalytics(projects);
+        renderRecent(projects);
+      }
+
+      // Recent Scans Rendering
+      function renderRecent(projects) {
+        const el = document.getElementById("recentProjects");
+        if (!el) return;
+        const ordered = [...projects].sort((a,b) => (b.created_at || "").localeCompare(a.created_at || ""));
+        const pageSize = 4;
+        const pageCount = Math.max(1, Math.ceil(ordered.length / pageSize));
+        recentPage = Math.min(Math.max(1, recentPage), pageCount);
+        const startIndex = (recentPage - 1) * pageSize;
+        const recent = ordered.slice(startIndex, startIndex + pageSize);
+        const pagination = document.getElementById("recentPagination");
+        const range = document.getElementById("recentRange");
+        const label = document.getElementById("recentPageLabel");
+        const previous = document.getElementById("recentPrev");
+        const next = document.getElementById("recentNext");
+        if (range) range.textContent = ordered.length ? `Showing ${startIndex + 1}–${Math.min(startIndex + pageSize, ordered.length)} of ${ordered.length} scans` : "No scans to show";
+        if (label) label.textContent = `Page ${recentPage} of ${pageCount}`;
+        if (previous) previous.disabled = recentPage <= 1;
+        if (next) next.disabled = recentPage >= pageCount;
+        if (pagination) pagination.style.display = pageCount > 1 ? "flex" : "none";
+        if (!recent.length) {
+          el.innerHTML = '<div class="analytics-card" style="text-align:center;color:var(--text-tertiary);font-size:12px;padding:28px">Your scans will appear here after your first check.</div>';
           return;
         }
-        const iSet = new Set(data.map((p) => p.id));
+        el.innerHTML = recent.map(p => {
+          let host = p.website_url || "";
+          try { host = new URL(host).hostname; } catch(e){}
+          const pr = p.progress || {};
+          const scanIdArg = p.latest_scan_id ? p.latest_scan_id : null;
+          const isDone = p.status === 'completed';
+          const reportBtn = (isDone && scanIdArg)
+            ? `<button onclick="event.stopPropagation();viewReport(${scanIdArg})" class="exp-btn" style="padding:4px 9px;font-size:10px;background:var(--accent);color:#fff;border-color:var(--accent);"><i class="fas fa-chart-pie"></i> Report</button>`
+            : '';
+          return `
+            <div class="recent-row" onclick="showView('history')" title="View in history" style="cursor:pointer;">
+              <div style="min-width:0;">
+                <div class="recent-name" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${esc(p.project_name || host)}</div>
+                <div class="recent-url">${esc(host)}</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+                <span class="recent-date" style="font-size:11px;color:var(--text-tertiary);">${esc(p.created_at || "")}</span>
+                <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text-secondary);">${pr.total_urls || 0} URLs</span>
+                ${pr.lorem_found ? `<span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--error);font-weight:700;">${pr.lorem_found} Lorem</span>` : ''}
+                ${buildBadge(p.status)}
+                ${reportBtn}
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+      function changeRecentPage(direction) {
+        recentPage += direction;
+        renderRecent(allProjects);
+        document.getElementById("recentProjects")?.scrollIntoView({behavior:"smooth",block:"start"});
+      }
+
+      // Analytics Rendering
+      function renderAnalytics(projects) {
+        const el = document.getElementById("analyticsContent");
+        if (!el) return;
+        const totals = projects.reduce((a,p) => {
+          const pr = p.progress || {};
+          a.urls += +(pr.total_urls || 0);
+          a.done += +(pr.processed || 0);
+          a.findings += +(pr.lorem_found || 0);
+          a.errors += +(pr.errors || 0);
+          a[p.status] = (a[p.status] || 0) + 1;
+          return a;
+        }, {urls:0, done:0, findings:0, errors:0});
+        const sites = projects
+          .map(p => ({
+            name: p.project_name || p.website_url,
+            findings: +((p.progress || {}).lorem_found || 0)
+          }))
+          .sort((a,b) => b.findings - a.findings)
+          .slice(0, 6);
+        const max = Math.max(1, ...sites.map(s => s.findings));
+        const status = Object.entries(totals).filter(([k]) => !["urls","done","findings","errors"].includes(k));
+
+        el.innerHTML = `
+          <section class="metric-row" aria-label="Analytics summary">
+            <div class="metric-panel">
+              <div class="stat-num">${projects.length}</div>
+              <p class="stat-lbl">Total scans</p>
+            </div>
+            <div class="metric-panel">
+              <div class="stat-num">${totals.urls.toLocaleString()}</div>
+              <p class="stat-lbl">URLs discovered</p>
+            </div>
+            <div class="metric-panel">
+              <div class="stat-num">${totals.findings.toLocaleString()}</div>
+              <p class="stat-lbl">Lorem Ipsum findings</p>
+            </div>
+            <div class="metric-panel">
+              <div class="stat-num">${totals.errors.toLocaleString()}</div>
+              <p class="stat-lbl">Scan errors</p>
+            </div>
+          </section>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:20px;margin-top:20px;">
+            <section class="analytics-card">
+              <h3>Scan status distribution</h3>
+              <div class="status-breakdown">
+                ${status.length ? status.map(([s,n]) => `<span class="status-chip">${esc(s.replaceAll("_"," "))} · <b>${n}</b></span>`).join("") : '<span class="status-chip">No scans yet</span>'}
+              </div>
+            </section>
+            <section class="analytics-card">
+              <h3>Scan Coverage</h3>
+              <div style="font-size:32px;font-weight:800;font-family:'DM Mono',monospace;color:var(--accent)">
+                ${totals.urls ? Math.round(totals.done / totals.urls * 100) : 0}%
+              </div>
+              <div class="bar-track" style="margin-top:12px">
+                <div class="bar-fill" style="width:${totals.urls ? Math.min(100, Math.round(totals.done / totals.urls * 100)) : 0}%"></div>
+              </div>
+              <p style="font-size:11px;color:var(--text-tertiary);margin-top:8px">${totals.done.toLocaleString()} of ${totals.urls.toLocaleString()} URLs checked</p>
+            </section>
+          </div>
+          <section class="analytics-card analytics-wide" style="margin-top:20px;">
+            <h3>Findings by project</h3>
+            <div class="bar-list">
+              ${sites.length ? sites.map(s => `
+                <div class="bar-row">
+                  <span title="${esc(s.name)}" style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(s.name)}</span>
+                  <div class="bar-track">
+                    <div class="bar-fill" style="width:${Math.max(s.findings ? 4 : 0, Math.round(s.findings / max * 100))}%"></div>
+                  </div>
+                  <b style="font-family:'DM Mono',monospace;font-size:13px;">${s.findings}</b>
+                </div>
+              `).join("") : '<p style="font-size:11px;color:var(--text-tertiary)">Scan a website to see findings by project.</p>'}
+            </div>
+          </section>
+        `;
+      }
+
+      // History Search & Filters
+      function filterProjects(q) {
+        searchQuery = q.toLowerCase().trim();
+        historyPage = 1;
+        smartRender(allProjects);
+      }
+      function updateHistoryFilters() {
+        historyPage = 1;
+        smartRender(allProjects);
+      }
+      function updateHistoryPagination(total, startIndex, endIndex, pageCount) {
+        const container = document.getElementById("historyPagination");
+        const range = document.getElementById("historyRange");
+        const label = document.getElementById("historyPageLabel");
+        const previous = document.getElementById("historyPrev");
+        const next = document.getElementById("historyNext");
+        if (range) range.textContent = total ? `Showing ${startIndex + 1}–${endIndex} of ${total} scans` : "No scans to show";
+        if (label) label.textContent = `Page ${historyPage} of ${pageCount}`;
+        if (previous) previous.disabled = historyPage <= 1;
+        if (next) next.disabled = historyPage >= pageCount;
+        if (container) container.style.display = pageCount > 1 ? "flex" : "none";
+      }
+      function changeHistoryPage(direction) {
+        historyPage += direction;
+        smartRender(allProjects);
+        document.getElementById("scan-history")?.scrollIntoView({behavior:"smooth",block:"start"});
+      }
+      function changeHistoryPageSize(value) {
+        const size = Number(value);
+        if (![6, 12, 24].includes(size)) return;
+        historyPageSize = size;
+        historyPage = 1;
+        smartRender(allProjects);
+      }
+      function resetHistoryFilters() {
+        const s = document.getElementById("searchInput");
+        const st = document.getElementById("statusFilter");
+        const so = document.getElementById("sortFilter");
+        const ps = document.getElementById("historyPageSize");
+        if (s) s.value = "";
+        if (st) st.value = "all";
+        if (so) so.value = "newest";
+        if (ps) ps.value = "6";
+        historyPageSize = 6;
+        historyPage = 1;
+        searchQuery = "";
+        smartRender(allProjects);
+      }
+
+      // Smart Render for Project Cards
+      function smartRender(incoming) {
+        const list = document.getElementById("projectsList");
+        if (!list) return;
+        const statusFilter = document.getElementById("statusFilter")?.value || "all";
+        const sortFilter = document.getElementById("sortFilter")?.value || "newest";
+        const data = incoming.filter((p) => {
+          const matchesSearch = !searchQuery ||
+            (p.project_name || "").toLowerCase().includes(searchQuery) ||
+            (p.website_url || "").toLowerCase().includes(searchQuery);
+          const matchesStatus = statusFilter === "all" ||
+            (statusFilter === "active" ? ACTIVE.has(p.status) : p.status === statusFilter);
+          return matchesSearch && matchesStatus;
+        });
+        data.sort((a,b) => {
+          if (sortFilter === "oldest") return (a.created_at || "").localeCompare(b.created_at || "");
+          if (sortFilter === "findings") return +((b.progress?.lorem_found) || 0) - +((a.progress?.lorem_found) || 0);
+          if (sortFilter === "urls") return +((b.progress?.total_urls) || 0) - +((a.progress?.total_urls) || 0);
+          return (b.created_at || "").localeCompare(a.created_at || "");
+        });
+        const count = document.getElementById("historyCount");
+        if (count) count.textContent = `${data.length} ${data.length === 1 ? "scan" : "scans"}`;
+        const pageCount = Math.max(1, Math.ceil(data.length / historyPageSize));
+        historyPage = Math.min(Math.max(1, historyPage), pageCount);
+        const startIndex = (historyPage - 1) * historyPageSize;
+        const visibleData = data.slice(startIndex, startIndex + historyPageSize);
+        updateHistoryPagination(data.length, startIndex, Math.min(startIndex + historyPageSize, data.length), pageCount);
+
+        if (!data.length) {
+          list.innerHTML = buildEmpty(Boolean(searchQuery) || statusFilter !== "all");
+          return;
+        }
+
+        const iSet = new Set(visibleData.map((p) => p.id));
         for (const o of allProjects) {
           if (!iSet.has(o.id)) {
             const el = document.getElementById("card-" + o.id);
@@ -1926,7 +2630,8 @@
           !list.firstElementChild.id.startsWith("card-")
         )
           list.innerHTML = "";
-        data.forEach((p, i) => {
+
+        visibleData.forEach((p, i) => {
           const old = allProjects.find((x) => x.id === p.id);
           let el = document.getElementById("card-" + p.id);
           if (!el) {
@@ -1936,21 +2641,27 @@
             if (visibleLogs.has(p.id)) loadLogs(p.id);
             return;
           }
-          if (!ACTIVE.has(p.status) && old && old.status === p.status) return;
+          if (!ACTIVE.has(p.status) && old && old.status === p.status) {
+            list.insertBefore(el, list.children[i] || null);
+            return;
+          }
           if (old && old.status !== p.status) {
             const w = document.createElement("div");
             w.innerHTML = buildCard(p);
             el.replaceWith(w.firstElementChild);
+            list.insertBefore(document.getElementById("card-" + p.id), list.children[i] || null);
             if (visibleLogs.has(p.id)) loadLogs(p.id);
             return;
           }
           patchCard(el, p);
+          list.insertBefore(el, list.children[i] || null);
         });
         for (const id of visibleLogs) {
           const p = data.find((x) => x.id === id);
           if (p && ACTIVE.has(p.status)) loadLogs(id);
         }
       }
+
       function patchCard(el, p) {
         const pr = p.progress || {};
         const pct = pr.percentage || 0;
@@ -1968,9 +2679,24 @@
         const bar = el.querySelector("[data-bar]");
         if (bar) bar.style.width = pct + "%";
       }
-      function buildEmpty() {
-        return `<div class="empty-card anim-enter" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:72px 24px;text-align:center;"><div style="width:52px;height:52px;border-radius:14px;background:var(--surface-3);border:1px solid var(--border-2);display:flex;align-items:center;justify-content:center;margin-bottom:14px;"><i class="fas fa-inbox" style="font-size:22px;color:var(--text-tertiary);"></i></div><h3 class="empty-t" style="font-size:15px;font-weight:700;margin-bottom:6px;">Registry Empty</h3><p class="empty-s" style="font-size:12px;">No active deployments found. Initialize a scan to begin.</p></div>`;
+
+      function buildEmpty(isFiltered) {
+        if (isFiltered) {
+          return `<div class="empty-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:54px 20px;text-align:center;">
+            <i class="fas fa-filter-circle-xmark" style="font-size:24px;color:var(--text-tertiary);margin-bottom:12px;"></i>
+            <h3 style="font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:4px;">No matching scans</h3>
+            <p class="reg-sub" style="font-size:12px;margin-bottom:12px;">Try adjusting your search terms or filters.</p>
+            <button class="history-viewall" onclick="resetHistoryFilters()">Reset filters</button>
+          </div>`;
+        }
+        return `<div class="empty-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:72px 24px;text-align:center;">
+          <i class="fas fa-satellite-dish" style="font-size:32px;color:var(--accent);margin-bottom:14px;"></i>
+          <h3 style="font-size:16px;font-weight:700;color:var(--text-primary);margin-bottom:4px;">No website scans yet</h3>
+          <p class="reg-sub" style="font-size:13px;margin-bottom:16px;">Initiate your first scan above to start auditing website content.</p>
+          <button class="history-viewall" onclick="showView('dashboard');document.getElementById('websiteUrl')?.focus();">Start New Scan</button>
+        </div>`;
       }
+
       function buildCard(p) {
         const pr = p.progress || {};
         const pct = pr.percentage || 0;
@@ -1985,33 +2711,36 @@
         }
         const scanIdArg = p.latest_scan_id ? p.latest_scan_id : 'null';
         const loremTitle = `${(pr.lorem_found || 0).toLocaleString()} paragraph findings, ${(pr.lorem_occurrences || pr.lorem_found || 0).toLocaleString()} phrase occurrences across ${(pr.lorem_pages || 0).toLocaleString()} affected pages`;
-        return `<div id="card-${p.id}" class="proj-card anim-enter"><div class="proj-hd-div" style="padding:18px 22px;border-bottom:1px solid var(--border-1);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;"><div style="display:flex;align-items:center;gap:14px;"><div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;${ic.bg}"><i class="fas ${ic.cls}" style="font-size:17px;color:${ic.col};"></i></div><div><h3 class="proj-name">${esc(p.project_name)}</h3><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span class="proj-id">${p.id.split("_")[1] || p.id.slice(-8)}</span><a href="${esc(p.website_url)}" target="_blank" class="proj-link">${host} <i class="fas fa-external-link-alt" style="font-size:8px;"></i></a></div></div></div><div>${buildBadge(p.status)}</div></div><div style="padding:18px 22px;">${ia || (pct > 0 && p.status !== "completed") ? `<div style="margin-bottom:20px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span class="prg-lbl" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Processing</span><span class="prg-pct" style="font-size:11px;font-weight:700;font-family:'DM Mono',monospace;" data-pct>${pct}%</span></div><div class="prg-bar prg-track" style="width:100%;"><div class="prg-fill shimmer-bar" data-bar style="height:100%;border-radius:999px;width:${pct}%;transition:width 0.7s ease;"></div></div></div>` : ""}<div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:18px;"><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">URLs</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-total>${pr.total_urls || 0}</p></div><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Done</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-done>${pr.processed || 0}</p></div><div class="sc-clean" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-c" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Clean</p><p class="sc-val-c" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-clean>${pr.clean || 0}</p></div><div class="sc-amber" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-a" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Issues</p><p class="sc-val-a" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-affected>${pr.affected_pages || 0}</p></div><div class="sc-issue" style="padding:10px 8px;border-radius:10px;" title="${loremTitle}"><p class="sc-lbl-i" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Lorem</p><p class="sc-val-i" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-lorem>${pr.lorem_found || 0}</p></div><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Errors</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;color:var(--error);" data-errors>${pr.errors || 0}</p></div></div><div class="act-div" style="border-top:1px solid var(--border-1);padding-top:14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;"><div style="display:flex;flex-wrap:wrap;gap:7px;">${p.status === "completed" ? `<button onclick="viewReport(${scanIdArg})" class="exp-btn" style="background:var(--accent); color:#FFF; border-color:var(--accent);"><i class="fas fa-chart-pie" style="color:#FFF;"></i> View Report</button><button onclick="exportResults(${scanIdArg},'csv')" class="exp-btn"><i class="fas fa-file-csv" style="color:var(--success);"></i> CSV</button><button onclick="exportResults(${scanIdArg},'json')" class="exp-btn"><i class="fas fa-code" style="color:var(--accent);"></i> JSON</button>` : ""}${p.status === "paused" ? `<button onclick="manageProject('${p.id}','resume')" class="resume-btn"><i class="fas fa-play" style="font-size:9px;"></i> Resume</button>` : ia ? `<button onclick="manageProject('${p.id}','pause')" class="pause-btn"><i class="fas fa-pause" style="font-size:9px;"></i> Pause</button>` : ""}</div><div style="display:flex;align-items:center;gap:8px;"><button id="logbtn-${p.id}" onclick="toggleLogs('${p.id}')" class="log-btn ${lo ? "open" : ""}"><i class="fas fa-terminal" style="font-size:10px;"></i> Console</button><button onclick="deleteProject('${p.id}')" class="del-btn"><i class="fas fa-trash-alt" style="font-size:11px;"></i></button></div></div><div id="logpanel-${p.id}" style="${lo ? "" : "display:none;"}margin-top:14px;" class="anim-enter"><div class="terminal" style="padding:0;font-family:'DM Mono',monospace;"><div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.2);"><div style="display:flex;gap:5px;"><div style="width:10px;height:10px;border-radius:50%;background:#f43f5e;"></div><div style="width:10px;height:10px;border-radius:50%;background:#f59e0b;"></div><div style="width:10px;height:10px;border-radius:50%;background:#22c55e;"></div></div><span style="font-size:9px;color:#a8b2e8;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;">agent_runtime.log</span></div><div id="logs-${p.id}" class="log-txt" style="max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;font-size:11px;line-height:1.7;padding:14px;"><span style="color:#6370a8;font-style:italic;">Initializing socket connectionâ€¦</span></div></div></div></div></div>`;
+        return `<div id="card-${p.id}" class="proj-card anim-enter"><div class="proj-hd-div" style="padding:18px 22px;border-bottom:1px solid var(--border-1);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;"><div style="display:flex;align-items:center;gap:14px;"><div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;${ic.bg}"><i class="fas ${ic.cls}" style="font-size:17px;color:${ic.col};"></i></div><div><h3 class="proj-name">${esc(p.project_name)}</h3><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span class="proj-id">${p.id.split("_")[1] || p.id.slice(-8)}</span><a href="${esc(p.website_url)}" target="_blank" class="proj-link">${host} <i class="fas fa-external-link-alt" style="font-size:8px;"></i></a></div></div></div><div>${buildBadge(p.status)}</div></div><div style="padding:18px 22px;">${ia || (pct > 0 && p.status !== "completed") ? `<div style="margin-bottom:20px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span class="prg-lbl" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Processing</span><span class="prg-pct" style="font-size:11px;font-weight:700;font-family:'DM Mono',monospace;" data-pct>${pct}%</span></div><div class="prg-bar prg-track" style="width:100%;"><div class="prg-fill shimmer-bar" data-bar style="height:100%;border-radius:999px;width:${pct}%;transition:width 0.7s ease;"></div></div></div>` : ""}<div class="proj-card-metrics" style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:18px;"><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">URLs</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-total>${pr.total_urls || 0}</p></div><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Done</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-done>${pr.processed || 0}</p></div><div class="sc-clean" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-c" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Clean</p><p class="sc-val-c" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-clean>${pr.clean || 0}</p></div><div class="sc-amber" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-a" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Issues</p><p class="sc-val-a" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-affected>${pr.affected_pages || 0}</p></div><div class="sc-issue" style="padding:10px 8px;border-radius:10px;" title="${loremTitle}"><p class="sc-lbl-i" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Lorem</p><p class="sc-val-i" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-lorem>${pr.lorem_found || 0}</p></div><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Errors</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;color:var(--error);" data-errors>${pr.errors || 0}</p></div></div><div class="act-div" style="border-top:1px solid var(--border-1);padding-top:14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;"><div style="display:flex;flex-wrap:wrap;gap:7px;">${p.status === "completed" ? `<button onclick="viewReport(${scanIdArg})" class="exp-btn" style="background:var(--accent); color:#FFF; border-color:var(--accent);"><i class="fas fa-chart-pie" style="color:#FFF;"></i> View Report</button><button onclick="exportResults(${scanIdArg},'csv')" class="exp-btn"><i class="fas fa-file-csv" style="color:var(--success);"></i> CSV</button><button onclick="exportResults(${scanIdArg},'json')" class="exp-btn"><i class="fas fa-code" style="color:var(--accent);"></i> JSON</button>` : ""}${p.status === "paused" ? `<button onclick="manageProject('${p.id}','resume')" class="resume-btn"><i class="fas fa-play" style="font-size:9px;"></i> Resume</button>` : ia ? `<button onclick="manageProject('${p.id}','pause')" class="pause-btn"><i class="fas fa-pause" style="font-size:9px;"></i> Pause</button>` : ""}</div><div style="display:flex;align-items:center;gap:8px;"><button id="logbtn-${p.id}" onclick="toggleLogs('${p.id}')" class="log-btn ${lo ? "open" : ""}"><i class="fas fa-terminal" style="font-size:10px;"></i> Console</button><button onclick="deleteProject('${p.id}')" class="del-btn"><i class="fas fa-trash-alt" style="font-size:11px;"></i></button></div></div><div id="logpanel-${p.id}" style="${lo ? "" : "display:none;"}margin-top:14px;" class="anim-enter"><div class="terminal" style="padding:0;font-family:'DM Mono',monospace;"><div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.2);"><div style="display:flex;gap:5px;"><div style="width:10px;height:10px;border-radius:50%;background:#f43f5e;"></div><div style="width:10px;height:10px;border-radius:50%;background:#f59e0b;"></div><div style="width:10px;height:10px;border-radius:50%;background:#22c55e;"></div></div><span style="font-size:9px;color:#a8b2e8;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;">agent_runtime.log</span></div><div id="logs-${p.id}" class="log-txt" style="max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;font-size:11px;line-height:1.7;padding:14px;"><span style="color:#6370a8;font-style:italic;">Initializing socket connection…</span></div></div></div></div></div>`;
       }
+
       function sIcon(s) {
-        if (ACTIVE.has(s))
-          return {
-            cls: "fa-gear fa-spin",
-            col: "#635bff",
-            bg: "background:rgba(99,91,255,0.10);border:1px solid rgba(99,91,255,0.25);",
-          };
+        const dark = document.documentElement.classList.contains("dark");
         if (s === "completed")
           return {
             cls: "fa-circle-check",
-            col: "#16A34A",
-            bg: "background:rgba(22,163,74,0.10);border:1px solid rgba(34,197,94,0.22);",
+            bg: dark ? "background:rgba(52,211,153,0.12);" : "background:#edfdf6;",
+            col: "var(--success)",
+          };
+        if (s === "failed")
+          return {
+            cls: "fa-triangle-exclamation",
+            bg: dark ? "background:rgba(248,113,113,0.12);" : "background:#fff0f0;",
+            col: "var(--error)",
           };
         if (s === "paused")
           return {
             cls: "fa-circle-pause",
-            col: "#C07B0A",
-            bg: "background:rgba(192,123,10,0.10);border:1px solid rgba(253,230,138,0.45);",
+            bg: dark ? "background:rgba(251,191,36,0.12);" : "background:#fffbeb;",
+            col: "var(--warning)",
           };
         return {
-          cls: "fa-triangle-exclamation",
-          col: "#C8243C",
-          bg: "background:rgba(200,36,60,0.10);border:1px solid rgba(254,205,211,0.55);",
+          cls: "fa-spinner fa-spin",
+          bg: dark ? "background:rgba(99,91,255,0.15);" : "background:#eeeeff;",
+          col: "var(--accent)",
         };
       }
+
       function buildBadge(s) {
         const m = {
           initializing: {
@@ -2115,73 +2844,8 @@
           : "";
         return `<div class="status-badge" style="background:${bg};border:1px solid ${b};color:${c};">${dot}${cfg.t}</div>`;
       }
-      function updateStats(projects) {
-        let active = 0,
-          issues = 0,
-          errors = 0;
-        projects.forEach((p) => {
-          if (ACTIVE.has(p.status)) active++;
-          if (p.progress) {
-            issues += +(p.progress.lorem_found || 0);
-            errors += +(p.progress.errors || 0);
-          }
-        });
-        document.getElementById("stat-total-projects").textContent =
-          projects.length;
-        document.getElementById("stat-active-scans").textContent = active;
-        document.getElementById("stat-total-issues").textContent = issues;
-        document.getElementById("stat-total-errors").textContent = errors;
-        const vb = document.getElementById("vuln-bar");
-        if (vb) vb.style.width = Math.min(issues * 5, 100) + "%";
-      }
-      function filterProjects(q) {
-        searchQuery = q.toLowerCase().trim();
-        smartRender(allProjects);
-      }
-      async function manageProject(id, action) {
-        try {
-          const fd = new FormData();
-          fd.append("action", action);
-          fd.append("project_id", id);
-          const d = await (
-            await fetch(API_URL, { method: "POST", body: fd })
-          ).json();
-          if (d.success) {
-            toast(action, "Scan " + action + "d successfully", "info");
-            loadProjects();
-          } else toast("Error", d.error, "error");
-        } catch (e) {
-          toast("Network Error", e.message, "error");
-        }
-      }
-      document
-        .getElementById("checkForm")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const btn = document.getElementById("submitBtn"),
-            orig = btn.innerHTML;
-          const fd = new FormData(e.target);
-          fd.append("action", "start");
-          fd.append("use_sitemap", "auto");
-          try {
-            btn.disabled = true;
-            btn.innerHTML =
-              '<i class="fas fa-spinner fa-spin"></i> Initiatingâ€¦';
-            const d = await (
-              await fetch(API_URL, { method: "POST", body: fd })
-            ).json();
-            if (d.success) {
-              toast("Scan Initiated", d.data.message, "success");
-              e.target.reset();
-              loadProjects();
-            } else toast("Request Denied", d.error, "error");
-          } catch (e) {
-            toast("Connection Failed", e.message, "error");
-          } finally {
-            btn.disabled = false;
-            btn.innerHTML = orig;
-          }
-        });
+
+      // Project Actions: Manage, Polling, Logs, Delete, Export
       function startPolling() {
         if (pollInterval) clearInterval(pollInterval);
         isPolling = true;
@@ -2192,287 +2856,143 @@
         pollInterval = null;
         isPolling = false;
       }
+
+      async function manageProject(id, act) {
+        const fd = new FormData();
+        fd.append("action", act);
+        fd.append("project_id", id);
+        try {
+          const d = await (
+            await fetch(API_URL, { method: "POST", body: fd })
+          ).json();
+          if (d.success) {
+            toast(
+              act === "pause" ? "Scan Paused" : "Scan Resumed",
+              d.data.message,
+              "success",
+            );
+            loadProjects();
+          } else { toast("Error", d.error, "error"); }
+        } catch (e) {
+          toast("Error", e.message, "error");
+        }
+      }
+
       function toggleLogs(id) {
         const panel = document.getElementById("logpanel-" + id);
         const btn = document.getElementById("logbtn-" + id);
         if (!panel) return;
         const hidden = panel.style.display === "none";
         panel.style.display = hidden ? "" : "none";
-        if (btn) {
-          btn.classList.toggle("open", hidden);
-        }
+        if (btn) btn.classList.toggle("open", hidden);
         if (hidden) {
           visibleLogs.add(id);
           loadLogs(id);
         } else visibleLogs.delete(id);
       }
+
       async function loadLogs(id) {
         try {
           const d = await (
             await fetch(API_URL + "?action=logs&project_id=" + id + "&limit=20")
           ).json();
-          if (!d.success || !d.data.logs.length) return;
-          const el = document.getElementById("logs-" + id);
-          if (!el) return;
-          const lvlMap = {
-            INFO: "#635bff",
-            SUCCESS: "#4ADE80",
-            WARNING: "#FBB024",
-            ERROR: "#FB7185",
-          };
-          el.innerHTML = d.data.logs
+          if (!d.success) return;
+          const box = document.getElementById("logs-" + id);
+          if (!box) return;
+          if (!d.data.logs.length) {
+            box.innerHTML =
+              '<span style="color:#6370a8;font-style:italic;">No log events registered yet.</span>';
+            return;
+          }
+          box.innerHTML = d.data.logs
             .map(
               (l) =>
-                `<div style="display:flex;align-items:flex-start;gap:10px;font-size:11px;"><span style="color:#6370a8;flex-shrink:0;">${l.timestamp.split(" ")[1]}</span><span style="color:${lvlMap[l.level] || "#a8b2e8"};font-weight:600;flex-shrink:0;min-width:54px;">${l.level}</span><span style="color:#a8b2e8;">${esc(l.message)}</span></div>`,
+                `<div><span style="color:#6370a8;margin-right:8px;">[${l.created_at.slice(11, 19)}]</span><span style="color:${l.level === "ERROR" ? "var(--error)" : l.level === "WARNING" ? "var(--warning)" : "var(--text-secondary)"};">[${l.level}]</span> <span style="color:var(--text-primary);">${esc(l.message)}</span></div>`,
             )
             .join("");
-          el.scrollTop = el.scrollHeight;
-        } catch (e) {}
+          box.scrollTop = box.scrollHeight;
+        } catch (e) {
+          console.error(e);
+        }
       }
+
       async function deleteProject(id) {
-        if (!confirm("Permanently delete this audit record?")) return;
+        if (!confirm("Delete this scan project and all associated logs?")) return;
+        const fd = new FormData();
+        fd.append("action", "delete");
+        fd.append("project_id", id);
         try {
-          const fd = new FormData();
-          fd.append("action", "delete");
-          fd.append("project_id", id);
           const d = await (
             await fetch(API_URL, { method: "POST", body: fd })
           ).json();
           if (d.success) {
-            toast("Deleted", "Project removed from registry", "info");
             visibleLogs.delete(id);
-            loadProjects();
-          }
-        } catch (e) {}
-      }
-      function exportResults(id, fmt) {
-        if (!id) {
-          toast("Export Error", "A completed scan is required for export.", "error");
-          return;
+            toast("Removed", d.data.message, "success");
+            const el = document.getElementById("card-" + id);
+            if (el) el.remove();
+            allProjects = allProjects.filter((p) => p.id !== id);
+            smartRender(allProjects);
+            updateStats(allProjects);
+          } else toast("Error", d.error, "error");
+        } catch (e) {
+          toast("Error", e.message, "error");
         }
-        const isNumeric = (typeof id === 'number' || (!isNaN(Number(id)) && !String(id).includes('_')));
-        const param = isNumeric 
-          ? 'scan_id=' + Number(id) 
-          : 'project_id=' + encodeURIComponent(id);
+      }
+
+      function exportResults(scanOrProjectId, fmt) {
+        const isNum = Number.isInteger(Number(scanOrProjectId)) && Number(scanOrProjectId) > 0;
+        const param = isNum ? 'scan_id=' + scanOrProjectId : 'project_id=' + scanOrProjectId;
         window.open(API_URL + "?action=export&" + param + "&format=" + fmt, "_blank");
       }
-      function esc(t) {
-        if (!t) return "Unnamed";
-        const d = document.createElement("div");
-        d.textContent = t;
-        return d.innerHTML;
+
+      function esc(s) {
+        if (!s) return "";
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
       }
-      function toast(title, msg, type) {
+
+      function toast(title, msg, type = "info") {
         const c = document.getElementById("toast-container");
+        if (!c) return;
         const dark = document.documentElement.classList.contains("dark");
-        const cfg = {
-          success: {
-            i: "fa-check",
-            col: "#16A34A",
-            bg: dark ? "rgba(74,222,128,0.09)" : "#F0FDF4",
-            b: dark ? "rgba(74,222,128,0.22)" : "#BBF7D0",
-          },
-          error: {
-            i: "fa-xmark",
-            col: "#C8243C",
-            bg: dark ? "rgba(251,113,133,0.09)" : "#FFF0F2",
-            b: dark ? "rgba(251,113,133,0.22)" : "#FECDD3",
-          },
-          info: {
-            i: "fa-circle-info",
-            col: "#635bff",
-            bg: dark ? "rgba(99,91,255,0.09)" : "#eeeeff",
-            b: dark ? "rgba(99,91,255,0.22)" : "#c4c1ff",
-          },
-        }[type || "info"];
-        const el = document.createElement("div");
-        const surface = dark ? "#0D1228" : "#FFFFFF";
-        const shadow = dark
-          ? "0 8px 32px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.06)"
-          : "0 8px 32px rgba(14,23,38,0.12),0 0 0 1px rgba(14,23,38,0.05)";
-        el.style.cssText = `pointer-events:auto;display:flex;align-items:flex-start;gap:13px;padding:14px 16px;min-width:300px;border-radius:16px;background:${surface};border:1px solid ${cfg.b};box-shadow:${shadow};animation:slideIn 0.3s cubic-bezier(0.16,1,0.3,1);`;
-        el.innerHTML = `<div style="width:32px;height:32px;border-radius:50%;background:${cfg.bg};display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid ${cfg.b};"><i class="fas ${cfg.i}" style="color:${cfg.col};font-size:13px;"></i></div><div style="flex:1;min-width:0;"><p style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:${dark ? "#E8ECFF" : "#0D0F1C"};margin-bottom:3px;">${title}</p><p style="font-size:12px;color:${dark ? "#6B78B8" : "#4A4F7A"};line-height:1.4;">${msg}</p></div>`;
-        c.appendChild(el);
+        const bgs = {
+          success: dark ? "rgba(11,163,96,0.15)" : "var(--success-muted)",
+          error: dark ? "rgba(229,72,77,0.15)" : "var(--error-muted)",
+          info: dark ? "rgba(99,91,255,0.15)" : "var(--accent-muted)",
+        };
+        const bdr = {
+          success: "var(--success-border)",
+          error: "var(--error-border)",
+          info: "var(--accent-border)",
+        };
+        const col = {
+          success: "var(--success)",
+          error: "var(--error)",
+          info: "var(--accent)",
+        };
+        const icons = {
+          success: "fa-circle-check",
+          error: "fa-triangle-exclamation",
+          info: "fa-circle-info",
+        };
+        const t = document.createElement("div");
+        t.className = "toast";
+        t.style.cssText = `background:${dark ? "var(--surface-1)" : "#ffffff"};border:1px solid ${bdr[type] || bdr.info};border-left:4px solid ${col[type] || col.info};border-radius:var(--r-md);padding:12px 16px;box-shadow:var(--shadow-md);display:flex;align-items:flex-start;gap:10px;min-width:280px;max-width:380px;pointer-events:auto;animation:toastIn 0.25s ease forwards;`;
+        t.innerHTML = `<i class="fas ${icons[type] || icons.info}" style="color:${col[type] || col.info};font-size:14px;margin-top:2px;"></i><div style="flex:1;"><div style="font-weight:700;font-size:12px;color:var(--text-primary);margin-bottom:2px;">${esc(title)}</div><div style="font-size:11px;color:var(--text-secondary);line-height:1.4;">${esc(msg)}</div></div><button onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--text-tertiary);cursor:pointer;padding:2px;font-size:12px;"><i class="fas fa-xmark"></i></button>`;
+        c.appendChild(t);
         setTimeout(() => {
-          el.style.opacity = "0";
-          el.style.transform = "translateX(10px)";
-          el.style.transition = "all 0.3s ease";
-          setTimeout(() => el.remove(), 300);
-        }, 4200);
-      }
-    
-      // =========================================================================
-      // SCAN CONFIGURATION PRESETS & ADVANCED CONTROLS
-      // =========================================================================
-      function toggleScanConfig() {
-        const p = document.getElementById('advancedConfigPanel');
-        const chevron = document.getElementById('configChevron');
-        if (!p) return;
-        const isHidden = p.style.display === 'none' || p.style.display === '';
-        p.style.display = isHidden ? 'block' : 'none';
-        if (chevron) chevron.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
-      }
-
-      function applyScanPreset(preset) {
-        document.querySelectorAll('.preset-chip').forEach(c => {
-          c.classList.toggle('active', c.textContent.trim().toLowerCase() === preset);
-        });
-
-        const setVal = (id, val) => { const el = document.getElementById(id); if (el) el.value = val; };
-        const setCheck = (name, checked) => { const el = document.querySelector(`input[name="${name}"]`); if (el) el.checked = checked; };
-
-        switch (preset) {
-          case 'quick':
-            setVal('maxUrlsInput', 50);
-            setVal('maxDepthInput', 2);
-            setVal('concurrencyInput', 1);
-            setVal('perDomainInput', 1);
-            setVal('requestDelayInput', 1);
-            setVal('reqTimeoutInput', 15);
-            setVal('maxRetriesInput', 1);
-            setCheck('disc_wordpress_api', false);
-            setCheck('disc_pagination', false);
-            break;
-          case 'standard':
-            setVal('maxUrlsInput', 500);
-            setVal('maxDepthInput', 3);
-            setVal('concurrencyInput', 1);
-            setVal('perDomainInput', 1);
-            setVal('requestDelayInput', 1);
-            setVal('reqTimeoutInput', 30);
-            setVal('maxRetriesInput', 3);
-            setCheck('disc_wordpress_api', true);
-            setCheck('disc_pagination', true);
-            break;
-          case 'deep':
-            setVal('maxUrlsInput', 2500);
-            setVal('maxDepthInput', 6);
-            setVal('concurrencyInput', 1);
-            setVal('perDomainInput', 1);
-            setVal('requestDelayInput', 1);
-            setVal('reqTimeoutInput', 45);
-            setVal('maxRetriesInput', 3);
-            setCheck('disc_wordpress_api', true);
-            setCheck('disc_pagination', true);
-            break;
-          case 'custom':
-            // Open panel for customization
-            const p = document.getElementById('advancedConfigPanel');
-            if (p && p.style.display === 'none') toggleScanConfig();
-            break;
-        }
-      }
-
-      function resetScanConfigToDefaults() {
-        applyScanPreset('standard');
-        const sizeSelect = document.getElementById('maxResponseSizeMb');
-        if (sizeSelect) sizeSelect.value = '10';
-        toast('Configuration Reset', 'Default scan configuration restored', 'info');
+          t.style.animation = "toastOut 0.2s ease forwards";
+          setTimeout(() => t.remove(), 200);
+        }, 4000);
       }
 
       // =========================================================================
-      // DEDICATED PER-SCAN INTERACTIVE REPORTING ENGINE
+      // DEDICATED REPORT & INSPECTION DRAWER FUNCTIONS (PRESERVED & INTEGRATED)
       // =========================================================================
-      let currentReportScanId = null;
-      let currentReportData = null;
-      let currentReportTab = 'pages'; // 'pages' | 'findings' | 'lorem' | 'seo' | 'a11y' | 'errors'
-      let reportPageNumber = 1;
-      let reportPageLimit = 20;
-      let activeStatFilter = null; // e.g. { category: 'lorem_ipsum' } or { status: 'clean' }
-
-      const FINDING_GUIDANCE = {
-        'lorem_ipsum': {
-          title: 'Lorem Ipsum Placeholder Text',
-          group: 'Content Quality',
-          why: 'Lorem ipsum dummy text signals unfinished development, degrades credibility with visitors, and harms search engine ranking.',
-          fix: 'Replace Latin placeholder text with approved, finalized production copy.'
-        },
-        'placeholder': {
-          title: 'Template / Demo Placeholder',
-          group: 'Content Quality',
-          why: 'Mock phrases (e.g. "Sample Text", "Insert Name Here") expose incomplete template setup to real users.',
-          fix: 'Provide real data or customized copy matching the intended design component.'
-        },
-        'empty_page': {
-          title: 'Empty / Low Word Count Page',
-          group: 'Content Quality',
-          why: 'Search engines penalize thin content, and visitors receive no useful information.',
-          fix: 'Add substantial, informative body text, or remove this URL if it serves no purpose.'
-        },
-        'incomplete_sections': {
-          title: 'Incomplete / Empty Content Section',
-          group: 'Content Quality',
-          why: 'Leaves visual gaps or empty containers in the website layout.',
-          fix: 'Populate layout containers with relevant content or hide empty sections in template.'
-        },
-        'missing_title': {
-          title: 'Missing Page Title (<title>)',
-          group: 'SEO',
-          why: 'Crucial for search engine results snippets, browser tab titles, and bookmarking.',
-          fix: 'Add a descriptive, unique <title> tag inside <head> (50–60 characters recommended).'
-        },
-        'missing_meta_desc': {
-          title: 'Missing Meta Description',
-          group: 'SEO',
-          why: 'Search engines use meta description for search result snippets, influencing click-through rates.',
-          fix: 'Add <meta name="description" content="..."> summarizing the page content (150–160 chars).'
-        },
-        'missing_h1': {
-          title: 'Missing Primary H1 Heading',
-          group: 'SEO',
-          why: 'H1 establishes the primary topic for assistive technologies and search engine indexing.',
-          fix: 'Add a single, clear <h1> heading near the top of the main content area.'
-        },
-        'multiple_h1': {
-          title: 'Multiple H1 Headings',
-          group: 'SEO',
-          why: 'Multiple H1s dilute the document semantic hierarchy for screen readers and search bots.',
-          fix: 'Keep one primary <h1> and demote secondary section headings to <h2> or <h3>.'
-        },
-        'missing_canonical': {
-          title: 'Missing Canonical Tag',
-          group: 'SEO',
-          why: 'Protects against duplicate content penalties if the page is reachable via multiple URLs or query strings.',
-          fix: 'Add <link rel="canonical" href="..."> in the <head> pointing to the authoritative page URL.'
-        },
-        'heading_structure': {
-          title: 'Heading Hierarchy Issue',
-          group: 'SEO',
-          why: 'Skipping heading levels (e.g. H1 to H3) confuses screen reader navigation.',
-          fix: 'Ensure sequential heading hierarchy (H1 -> H2 -> H3).'
-        },
-        'missing_image_alt': {
-          title: 'Missing Image Alt Attribute',
-          group: 'Accessibility',
-          why: 'Screen readers require alt attributes to describe images to visually impaired visitors. Also improves image SEO.',
-          fix: 'Add descriptive alt="..." text to the <img> tag, or alt="" if the image is purely decorative.'
-        },
-        'missing_lang': {
-          title: 'Missing Language Attribute (<html lang>)',
-          group: 'Accessibility',
-          why: 'Screen readers use the lang attribute to choose correct pronunciation rules and accents.',
-          fix: 'Add the lang attribute to the root element, e.g. <html lang="en">.'
-        },
-        'broken_link': {
-          title: 'Broken Hyperlink (HTTP 4xx / 5xx)',
-          group: 'Technical & Network',
-          why: 'Broken links frustrate visitors, increase bounce rates, and waste search engine crawl budget.',
-          fix: 'Update the href URL to a working destination or remove the obsolete hyperlink.'
-        },
-        'failed_resource': {
-          title: 'Failed External Asset',
-          group: 'Technical & Network',
-          why: 'Missing stylesheets or scripts cause broken visuals or dysfunctional user features.',
-          fix: 'Verify the asset URL exists, returns HTTP 200, and is served over valid HTTPS.'
-        },
-        'duplicate_content': {
-          title: 'Duplicate Page Content',
-          group: 'SEO',
-          why: 'Identical content across multiple URLs causes keyword cannibalization.',
-          fix: 'Add a canonical tag pointing to the original page or redirect duplicate URLs.'
-        }
-      };
-
       async function viewReport(scanId) {
         const numId = Number(scanId);
         if (!scanId || isNaN(numId) || numId <= 0 || !Number.isInteger(numId)) {
@@ -2485,13 +3005,26 @@
         activeStatFilter = null;
         currentReportTab = 'pages';
 
-        // Switch main view to report view
+        // Switch workspace views to report view
+        document.querySelectorAll(".view").forEach((el) => {
+          el.classList.remove("active");
+          el.style.display = "none";
+        });
+        document.querySelectorAll(".top-nav [data-view]").forEach((el) => {
+          el.classList.remove("active");
+        });
+
         const mainGrid = document.getElementById('mainGrid');
         const statsGrid = document.getElementById('statsGrid');
         const reportView = document.getElementById('reportView');
         if (mainGrid) mainGrid.style.display = 'none';
         if (statsGrid) statsGrid.style.display = 'none';
         if (reportView) reportView.style.display = 'block';
+
+        const titleEl = document.querySelector(".topbar-title");
+        if (titleEl) {
+          titleEl.innerHTML = `Workspace <span style="color:var(--text-tertiary);font-weight:400;">/ Audit Report</span>`;
+        }
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
         await loadScanReportData();
@@ -2504,9 +3037,11 @@
         const mainGrid = document.getElementById('mainGrid');
         const statsGrid = document.getElementById('statsGrid');
         const reportView = document.getElementById('reportView');
+        if (reportView) reportView.style.display = 'none';
         if (mainGrid) mainGrid.style.display = 'grid';
         if (statsGrid) statsGrid.style.display = 'grid';
-        if (reportView) reportView.style.display = 'none';
+
+        showView(currentView || 'history');
         loadProjects();
       }
 
@@ -3239,45 +3774,6 @@
         if (!currentReportScanId) return;
         window.open(API_URL + '?action=export&scan_id=' + currentReportScanId + '&format=' + format, '_blank');
       }
-
-      function highlightLoremPhrases(escapedHtml) {
-        if (!escapedHtml) return '';
-        // Safely highlight common Lorem phrases
-        const phrases = [
-          /\blorem\s+ipsum\b/gi,
-          /\bdolor\s+sit\s+amet\b/gi,
-          /\bconsectetur\s+adipiscing\b/gi,
-          /\bsed\s+do\s+eiusmod\b/gi,
-          /\but\s+labore\s+et\s+dolore\b/gi,
-          /\bmagna\s+aliqua\b/gi,
-          /\bduis\s+aute\s+irure\b/gi,
-          /\bexcepteur\s+sint\b/gi,
-          /\bnulla\s+pariatur\b/gi,
-          /\bquis\s+nostrud\b/gi,
-          /\bplaceholder\s+text\b/gi,
-          /\bsample\s+text\b/gi,
-          /\binsert\s+text\s+here\b/gi
-        ];
-
-        let res = escapedHtml;
-        phrases.forEach(regex => {
-          res = res.replace(regex, (match) => `<span class="evidence-highlight">${match}</span>`);
-        });
-        return res;
-      }
-
-      function closeInspectionDrawer(e) {
-        if (e && e.target && e.target.id !== 'inspectionDrawer') return;
-        const drawer = document.getElementById('inspectionDrawer');
-        if (drawer) drawer.style.display = 'none';
-        document.body.style.overflow = '';
-      }
-
-      function exportCurrentReport(format) {
-        if (!currentReportScanId) return;
-        window.open(API_URL + '?action=export&scan_id=' + currentReportScanId + '&format=' + format, '_blank');
-      }
-
     </script>
   </body>
 </html>
