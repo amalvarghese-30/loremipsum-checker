@@ -1891,6 +1891,9 @@
                             <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
                               <input type="checkbox" name="disc_pagination" value="1" checked> Pagination
                             </label>
+                            <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;" title="Render dynamic SPA pages using local Playwright Chromium if installed">
+                              <input type="checkbox" name="js_rendering" value="1"> JS Rendering (Playwright)
+                            </label>
                           </div>
                           <button type="button" onclick="resetScanConfigToDefaults()" style="background: none; border: none; color: var(--deploy-sub); font-size: 11px; cursor: pointer; text-decoration: underline;">Reset to defaults</button>
                         </div>
@@ -2613,8 +2616,8 @@
           const connectionStatus = document.getElementById("connectionStatus");
           if (connectionStatus) connectionStatus.style.display = "none";
           const inc = d.data.projects;
-          allProjects = inc;
           smartRender(inc);
+          allProjects = inc;
           updateStats(inc);
           const hasActive = inc.some((p) => ACTIVE.has(p.status));
           if (hasActive && !isPolling) startPolling();
@@ -2892,8 +2895,17 @@
             if (visibleLogs.has(p.id)) loadLogs(p.id);
             return;
           }
-          if (!ACTIVE.has(p.status) && old && old.status === p.status) {
+          const hasStaleProgressBar = (p.status === "completed" || p.status === "failed") && el.querySelector("[data-bar]");
+          if (!ACTIVE.has(p.status) && old && old.status === p.status && !hasStaleProgressBar) {
             list.insertBefore(el, list.children[i] || null);
+            return;
+          }
+          if (hasStaleProgressBar) {
+            const w = document.createElement("div");
+            w.innerHTML = buildCard(p);
+            el.replaceWith(w.firstElementChild);
+            list.insertBefore(document.getElementById("card-" + p.id), list.children[i] || null);
+            if (visibleLogs.has(p.id)) loadLogs(p.id);
             return;
           }
           if (old && old.status !== p.status) {

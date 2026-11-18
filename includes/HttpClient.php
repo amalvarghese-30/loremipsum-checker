@@ -19,8 +19,8 @@ class HttpClient
     // Track per-domain concurrency and timing for rate control
     private static array $domainRequestTimes = [];
 
-    // Crawler User-Agent — identifiable, not a browser disguise
-    private const DEFAULT_UA = 'LoremIpsumChecker/2.0 (Internal Content Audit Tool)';
+    // Default browser-compatible User-Agent (can be overridden via CRAWLER_USER_AGENT in .env)
+    private const DEFAULT_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36';
 
     // HTTP codes that are temporary failures worth retrying
     public const RETRYABLE_CODES = [408, 425, 429, 500, 502, 503, 504];
@@ -542,7 +542,32 @@ class HttpClient
         $connTimeout = (int)($opts['connection_timeout'] ?? $this->config['connection_timeout']);
         $maxRedirs   = (int)($opts['max_redirects'] ?? $this->config['max_redirects']);
         $verifySsl   = (bool)($opts['verify_ssl'] ?? $this->config['verify_ssl']);
-        $ua          = $opts['user_agent'] ?? $this->config['user_agent'] ?? self::DEFAULT_UA;
+        $envUa       = getenv('CRAWLER_USER_AGENT');
+        $ua          = ($envUa !== false && trim($envUa) !== '')
+            ? trim($envUa)
+            : ($opts['user_agent'] ?? $this->config['user_agent'] ?? self::DEFAULT_UA);
+
+        $headers = [
+            'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+            'Accept-Language: en-US,en;q=0.9',
+            'Cache-Control: no-cache',
+            'Pragma: no-cache',
+            'Upgrade-Insecure-Requests: 1',
+            'Sec-Fetch-Dest: document',
+            'Sec-Fetch-Mode: navigate',
+            'Sec-Fetch-Site: none',
+            'Sec-Fetch-User: ?1',
+            'Sec-CH-UA: "Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
+            'Sec-CH-UA-Mobile: ?0',
+            'Sec-CH-UA-Platform: "Windows"',
+            'Connection: keep-alive',
+        ];
+
+        // Optional custom header for authenticating against your own WAF/Cloudflare staging rules (e.g. X-Audit-Token: secret)
+        $customHeader = getenv('CRAWLER_CUSTOM_HEADER');
+        if ($customHeader !== false && str_contains($customHeader, ':')) {
+            $headers[] = trim($customHeader);
+        }
 
         curl_setopt_array($ch, [
             CURLOPT_URL            => $url,
@@ -554,15 +579,12 @@ class HttpClient
             CURLOPT_SSL_VERIFYPEER => $verifySsl,
             CURLOPT_SSL_VERIFYHOST => $verifySsl ? 2 : 0,
             CURLOPT_USERAGENT      => $ua,
-            CURLOPT_ENCODING       => 'gzip, deflate',
+            CURLOPT_ENCODING       => '', // Accept all supported encodings (gzip, deflate, br)
+            CURLOPT_COOKIEFILE     => '', // Enable in-memory cookie handling across redirects
             CURLOPT_HTTP_VERSION   => CURL_HTTP_VERSION_1_1,
-            CURLOPT_IPRESOLVE      => CURL_IPRESOLVE_V4, // Force IPv4 resolution per production stability fix
-            CURLOPT_HEADER         => false, // We use HEADERFUNCTION instead
-            CURLOPT_HTTPHEADER     => [
-                'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                'Accept-Language: en-US,en;q=0.9',
-                'Connection: keep-alive',
-            ],
+            CURLOPT_IPRESOLVE      => CURL_IPRESOLVE_V4,
+            CURLOPT_HEADER         => false,
+            CURLOPT_HTTPHEADER     => $headers,
         ]);
 
         return $ch;
@@ -824,38 +846,58 @@ class HttpClient
         }
         $lower = strtolower($content);
 
-        $cfSignals = [
-            'cf-browser-verification',
-            'cf_clearance',
-            'cloudflare ray id',
-            '__cf_bm',
-            'challenges.cloudflare.com',
-            'cf-turnstile',
-            'sorry, you have been blocked',
-            'attention required! | cloudflare',
-            'jschl_vc',
-            'jschl_answer',
-        ];
+        // Only evaluate WAF/Cloudflare challenge signatures when HTTP status is an error/challenge code (403, 429, 503)
+        // OR when an HTTP 200 page is explicitly an interstitial challenge page (not a normal article with a Turnstile widget).
+        $isChallengeStatus = in_array($httpCode, [403, 429, 503], true);
 
-        foreach ($cfSignals as $signal) {
-            if (str_contains($lower, $signal)) {
-                return 'Cloudflare protection detected';
+        if ($isChallengeStatus) {
+            $cfSignals = [
+                'cf-browser-verification',
+                'cloudflare ray id',
+                'challenges.cloudflare.com',
+                'cf-turnstile',
+                'sorry, you have been blocked',
+                'attention required! | cloudflare',
+                '<title>just a moment...</title>',
+                'enable javascript and cookies to continue',
+                'jschl_vc',
+                'jschl_answer',
+            ];
+
+            foreach ($cfSignals as $signal) {
+                if (str_contains($lower, $signal)) {
+                    return 'Cloudflare protection detected';
+                }
             }
-        }
 
-        $wafSignals = [
-            'datadome',
-            'px-captcha',
-            '_pxhd',
-            'imperva',
-            'incap_ses',
-            'sucuri/cloudproxy',
-            'ddos protection by',
-        ];
+            $wafSignals = [
+                'datadome',
+                'px-captcha',
+                '_pxhd',
+                'imperva',
+                'incap_ses',
+                'sucuri/cloudproxy',
+                'ddos protection by',
+            ];
 
-        foreach ($wafSignals as $signal) {
-            if (str_contains($lower, $signal)) {
-                return 'WAF/bot-protection detected: ' . $signal;
+            foreach ($wafSignals as $signal) {
+                if (str_contains($lower, $signal)) {
+                    return 'WAF/bot-protection detected: ' . $signal;
+                }
+            }
+        } elseif ($httpCode === 200) {
+            // On HTTP 200, only flag if the document itself is a full-page JS challenge interstitial
+            $interstitialSignals = [
+                'cf-browser-verification',
+                'attention required! | cloudflare',
+                '<title>just a moment...</title>',
+                'jschl_vc',
+                'jschl_answer',
+            ];
+            foreach ($interstitialSignals as $signal) {
+                if (str_contains($lower, $signal)) {
+                    return 'Cloudflare protection detected';
+                }
             }
         }
 

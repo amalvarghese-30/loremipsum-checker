@@ -70,7 +70,7 @@ return [
         'allowed_origins' => array_values(array_filter(
             array_map('trim', explode(',', getenv('APP_ALLOWED_ORIGINS') ?: 'http://localhost'))
         )),
-        'user_agent' => 'LoremIpsumChecker/2.0 (+https://internal.tool)',
+        'user_agent' => getenv('CRAWLER_USER_AGENT') ?: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
     ],
 
     // -------------------------------------------------------------------------
