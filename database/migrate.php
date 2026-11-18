@@ -74,10 +74,12 @@ if ($fresh) {
 
     if ($driver === 'mysql') {
         $pdo->exec('SET FOREIGN_KEY_CHECKS = 0');
+    } elseif ($driver === 'sqlite') {
+        $pdo->exec('PRAGMA foreign_keys = OFF');
     }
 
     $tables = [
-        'scan_logs', 'findings', 'scan_resources', 'page_results',
+        'scan_logs', 'findings', 'page_resource_relations', 'scan_resources', 'page_results',
         'url_discovery_sources', 'discovered_urls', 'scan_settings',
         'scans', 'projects', 'detection_rules', 'schema_migrations',
     ];
@@ -89,6 +91,8 @@ if ($fresh) {
 
     if ($driver === 'mysql') {
         $pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
+    } elseif ($driver === 'sqlite') {
+        $pdo->exec('PRAGMA foreign_keys = ON');
     }
 }
 
@@ -167,6 +171,12 @@ foreach ($files as $file) {
         foreach ($statements as $stmt) {
             $stmt = trim($stmt);
             if ($stmt === '' || $stmt === ';') {
+                continue;
+            }
+
+            // Skip MySQL-only MODIFY COLUMN statements when running on SQLite (SQLite already uses TEXT for ENUMs)
+            if ($driver === 'sqlite' && preg_match('/^ALTER\s+TABLE\s+[`"]?\w+[`"]?\s+MODIFY\s+COLUMN\b/i', $stmt)) {
+                info("SQLite uses TEXT for ENUM columns — skipping MODIFY COLUMN DDL in {$filename}.");
                 continue;
             }
 

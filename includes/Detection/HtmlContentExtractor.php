@@ -67,14 +67,19 @@ class HtmlContentExtractor
             }
         }
 
-        // 1b. Links for broken-link audit
+        // 1b. Links for broken-link audit (filtered for web schemes and resolved against $pageUrl)
         $extractedLinks = [];
+        $normalizer = class_exists('\LoremChecker\Discovery\UrlNormalizer') ? new \LoremChecker\Discovery\UrlNormalizer() : null;
         $aNodes = $dom->getElementsByTagName('a');
         foreach ($aNodes as $a) {
             if ($a->hasAttribute('href')) {
                 $href = trim($a->getAttribute('href'));
-                if ($href !== '' && !str_starts_with($href, '#') && !str_starts_with($href, 'javascript:') && !str_starts_with($href, 'mailto:')) {
-                    $extractedLinks[] = $href;
+                if ($href === '' || $href[0] === '#' || preg_match('/^(javascript|mailto|tel|data|blob|ftp):/i', $href)) {
+                    continue;
+                }
+                $resolvedHref = ($normalizer && $pageUrl !== '') ? ($normalizer->resolveRelative($href, $pageUrl) ?? $href) : $href;
+                if ($resolvedHref !== '' && preg_match('/^https?:\/\//i', $resolvedHref)) {
+                    $extractedLinks[] = $resolvedHref;
                 }
             }
         }

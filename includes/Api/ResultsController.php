@@ -270,7 +270,7 @@ class ResultsController
 
         $discInfo = null;
         if (!empty($page['discovered_url_id'])) {
-            $uStmt = $this->db->prepare('SELECT discovery_source, depth, retry_count, status FROM discovered_urls WHERE id = ?');
+            $uStmt = $this->db->prepare('SELECT discovery_source, crawl_depth, crawl_depth AS depth, retry_count, status FROM discovered_urls WHERE id = ?');
             $uStmt->execute([$page['discovered_url_id']]);
             $discInfo = $uStmt->fetch() ?: null;
         }

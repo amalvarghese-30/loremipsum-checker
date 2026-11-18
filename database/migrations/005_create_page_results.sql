@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `page_results` (
   `final_url` TEXT NULL,
   `http_status` SMALLINT NULL,
   `content_type` VARCHAR(255) NULL,
-  `processing_status` ENUM('clean','findings_detected','failed','needs_review','cloudflare_blocked','bot_blocked') NOT NULL DEFAULT 'clean',
+  `processing_status` ENUM('clean','findings_detected','failed','needs_review','cloudflare_blocked','bot_blocked','rate_limited','not_found','timeout','ssl_error','dns_error','connection_error','error') NOT NULL DEFAULT 'clean',
   `finding_count` INT UNSIGNED NOT NULL DEFAULT 0,
   `duration_ms` INT UNSIGNED NULL,
   `retry_count` TINYINT UNSIGNED NOT NULL DEFAULT 0,

@@ -311,7 +311,14 @@ class AuditModules
         $checkLimit = min(20, count($uniqueLinks)); // Bound checks per page to maintain performance
         $sampled = array_slice($uniqueLinks, 0, $checkLimit);
 
+        $normalizer = class_exists('\LoremChecker\Discovery\UrlNormalizer') ? new \LoremChecker\Discovery\UrlNormalizer() : null;
         foreach ($sampled as $linkUrl) {
+            if ($normalizer && !preg_match('/^https?:\/\//i', (string)$linkUrl)) {
+                $linkUrl = $normalizer->resolveRelative((string)$linkUrl, $pageUrl) ?? '';
+            }
+            if ($linkUrl === '' || !preg_match('/^https?:\/\//i', (string)$linkUrl)) {
+                continue;
+            }
             $resp = $http->fetch($linkUrl, [
                 'timeout'     => 10,
                 'max_retries' => 1,

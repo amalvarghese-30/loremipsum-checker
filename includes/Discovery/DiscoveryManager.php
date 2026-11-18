@@ -104,7 +104,7 @@ class DiscoveryManager
         }
 
         // 5. HTML sitemap pages
-        if ($discCfg['html_sitemap'] ?? true) {
+        if (($discCfg['html_sitemap'] ?? true) && count($allUrls) < $maxUrls) {
             $this->log('INFO', 'Running HTML sitemap discovery', 'discovery');
             $htmlSitemapDisc = new HtmlSitemapDiscovery($this->http, $this->normalizer, $cfg, $this->logFn);
             $htmlSitemapUrls = $htmlSitemapDisc->discover($websiteUrl);
@@ -114,7 +114,7 @@ class DiscoveryManager
         }
 
         // 6. WordPress REST API
-        if ($discCfg['wordpress_api'] ?? true) {
+        if (($discCfg['wordpress_api'] ?? true) && count($allUrls) < $maxUrls) {
             $this->log('INFO', 'Running WordPress API discovery', 'discovery');
             $wpDisc  = new WordPressDiscovery($this->http, $this->normalizer, $cfg, $this->logFn);
             $wpUrls  = $wpDisc->discover($websiteUrl);
@@ -126,12 +126,13 @@ class DiscoveryManager
         }
 
         // 7. Internal link crawling
-        if ($discCfg['internal_crawler'] ?? true) {
+        if (($discCfg['internal_crawler'] ?? true) && count($allUrls) < $maxUrls) {
             $maxDepth = (int)($cfg['crawler']['default_max_depth'] ?? $cfg['crawler']['max_depth'] ?? 3);
+            $remainingBudget = max(1, $maxUrls - count($allUrls) + 1);
 
-            $this->log('INFO', "Running internal crawler (max={$maxUrls}, depth={$maxDepth})", 'discovery');
+            $this->log('INFO', "Running internal crawler (budget={$remainingBudget}, max={$maxUrls}, depth={$maxDepth})", 'discovery');
             $crawler    = new InternalCrawler($this->http, $this->normalizer, $cfg, $this->logFn);
-            $crawlUrls  = $crawler->crawl($websiteUrl, $maxUrls, $maxDepth);
+            $crawlUrls  = $crawler->crawl($websiteUrl, $remainingBudget, $maxDepth);
 
             $this->log('INFO', count($crawlUrls) . ' URL(s) from internal crawler', 'discovery');
             $this->mergeUrls($allUrls, $crawlUrls, $websiteUrl, $maxUrls);

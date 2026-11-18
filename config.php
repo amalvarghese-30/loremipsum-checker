@@ -88,12 +88,12 @@ return [
     // Crawler behaviour
     // -------------------------------------------------------------------------
     'crawler' => [
-        'default_max_urls'  => 500,
-        'default_max_depth' => 3,
-        'follow_redirects'  => true,
-        'max_redirects'     => 10,
+        'default_max_urls'   => (int)(getenv('DEFAULT_MAX_URLS') ?: 500),
+        'default_max_depth'  => (int)(getenv('DEFAULT_MAX_DEPTH') ?: 3),
+        'follow_redirects'   => true,
+        'max_redirects'      => 10,
         'connection_timeout' => 10,
-        'request_timeout'   => 30,
+        'request_timeout'    => (int)(getenv('DEFAULT_REQUEST_TIMEOUT') ?: 30),
     ],
 
     // -------------------------------------------------------------------------
@@ -137,7 +137,7 @@ return [
         'max_retry_delay'          => 60,
         'max_response_size'        => 10485760, // 10 MB
         'request_delay'            => 1,        // seconds between requests to same domain
-        'verify_ssl'               => false,
+        'verify_ssl'               => filter_var(getenv('VERIFY_SSL') ?: 'false', FILTER_VALIDATE_BOOLEAN),
         'worker_heartbeat_interval' => 15,      // seconds
         'stale_worker_threshold'   => 120,      // seconds since last heartbeat before 'interrupted'
     ],
@@ -248,7 +248,7 @@ return [
     'worker' => [
         // PHP_BINARY is a PHP built-in constant with the full path to the
         // current PHP executable — no hardcoding needed.
-        'php_binary' => getenv('PHP_CLI_BINARY') ?: PHP_BINARY,
+        'php_binary' => getenv('PHP_CLI_BINARY') ?: (PHP_SAPI === 'cli' ? PHP_BINARY : (is_executable('/usr/bin/php') ? '/usr/bin/php' : PHP_BINARY)),
         'script'     => __DIR__ . '/worker.php',
     ],
 

@@ -1665,6 +1665,75 @@
         }
       }
 
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(4px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes toastIn {
+        from { opacity: 0; transform: translateY(10px) scale(0.97); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      @keyframes toastOut {
+        from { opacity: 1; transform: translateY(0) scale(1); }
+        to { opacity: 0; transform: translateY(8px) scale(0.96); }
+      }
+      .rep-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 8px;
+        border-radius: 999px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+      }
+      a.evidence-highlight {
+        text-decoration: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        transition: transform 0.14s ease, box-shadow 0.14s ease, background 0.14s ease;
+      }
+      a.evidence-highlight:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 3px 10px rgba(255, 101, 122, 0.35);
+        text-decoration: underline;
+      }
+      .hl-action-btn {
+        background: rgba(255, 101, 122, 0.14);
+        border: 1px solid rgba(255, 101, 122, 0.38);
+        color: #ff657a;
+        padding: 4px 10px;
+        border-radius: var(--r-md);
+        font-size: 11px;
+        font-weight: 700;
+        font-family: "DM Sans", sans-serif;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: all 0.18s ease;
+        white-space: nowrap;
+      }
+      .hl-action-btn:hover {
+        background: #ff657a;
+        color: #ffffff;
+        border-color: #ff657a;
+      }
+      html.light .hl-action-btn {
+        background: #fff0f2;
+        border-color: #f4c0ca;
+        color: #d83d59;
+      }
+      html.light .hl-action-btn:hover {
+        background: #d83d59;
+        color: #ffffff;
+      }
+
     </style>
   </head>
   <body>
@@ -1762,10 +1831,9 @@
                         <span>Start Scan</span>
                         <i class="fas fa-arrow-right" style="font-size:11px;"></i>
                       </button>
-                    </form>
 
-                    <!-- Collapsible Advanced Scan Configuration -->
-                    <div style="margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--deploy-border);">
+                    <!-- Collapsible Advanced Scan Configuration (Inside #checkForm so all controls submit) -->
+                    <div style="grid-column: 1 / -1; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--deploy-border);">
                       <div style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;" onclick="toggleScanConfig()">
                         <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--deploy-sub);">
                           <i class="fas fa-sliders" style="margin-right: 6px;"></i> Advanced Scan Configuration
@@ -1799,7 +1867,7 @@
                           </div>
                           <div>
                             <label class="deploy-label" for="perDomainInput">Per Domain</label>
-                            <input class="deploy-input" id="perDomainInput" name="concurrency_per_domain" type="number" value="1" min="1" max="5" style="padding: 7px 10px; font-size: 12px;">
+                            <input class="deploy-input" id="perDomainInput" name="per_domain_concurrency" type="number" value="1" min="1" max="5" style="padding: 7px 10px; font-size: 12px;">
                           </div>
                           <div>
                             <label class="deploy-label" for="requestDelayInput">Request Delay (ms)</label>
@@ -1807,7 +1875,7 @@
                           </div>
                           <div>
                             <label class="deploy-label" for="reqTimeoutInput">Timeout (s)</label>
-                            <input class="deploy-input" id="reqTimeoutInput" name="request_timeout_sec" type="number" value="30" min="5" max="120" style="padding: 7px 10px; font-size: 12px;">
+                            <input class="deploy-input" id="reqTimeoutInput" name="request_timeout" type="number" value="30" min="5" max="120" style="padding: 7px 10px; font-size: 12px;">
                           </div>
                           <div>
                             <label class="deploy-label" for="maxRetriesInput">Max Retries</label>
@@ -1828,6 +1896,7 @@
                         </div>
                       </div>
                     </div>
+                    </form>
 
                     <!-- Environment Capacity Indicator -->
                     <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--deploy-border); display: flex; justify-content: space-between; align-items: center;">
@@ -2082,6 +2151,18 @@
           <div><strong>Scan history</strong><small>Refresh the latest project and scan records</small></div>
           <button class="history-refresh" onclick="loadProjects();toast('Updated','Scan history refreshed.','success');">Refresh</button>
         </div>
+        <div class="setting-row" style="flex-direction:column;align-items:stretch;">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div><strong>Detection Rules</strong><small>Manage built-in and custom placeholder patterns</small></div>
+            <button type="button" class="history-refresh" onclick="loadDetectionRules()" style="font-size:11px;">Reload Rules</button>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:10px;">
+            <input id="newRuleName" type="text" placeholder="Rule name (e.g. Acme Placeholder)" class="deploy-input" style="font-size:11px;padding:7px 10px;background:var(--surface-2);color:var(--text-primary);border-color:var(--border-2);flex:1;">
+            <input id="newRulePattern" type="text" placeholder="Regex or phrase (e.g. /TBD copy/i)" class="deploy-input" style="font-size:11px;padding:7px 10px;background:var(--surface-2);color:var(--text-primary);border-color:var(--border-2);flex:1.2;">
+            <button type="button" class="history-viewall" onclick="createCustomRule()" style="padding:0 12px;font-size:11px;white-space:nowrap;">+ Add</button>
+          </div>
+          <div id="rulesManagerList" style="max-height:180px;overflow-y:auto;margin-top:10px;display:flex;flex-direction:column;gap:6px;font-size:11px;"></div>
+        </div>
         <div class="setting-row">
           <div><strong>Application</strong><small>Lorem Ipsum Checker · Production Enterprise Engine</small></div>
           <span style="font-size:10px;color:var(--success);font-weight:700;">ACTIVE</span>
@@ -2160,8 +2241,169 @@
       let currentReportTab = 'pages';
       let reportPageNumber = 1;
       const reportPageSize = 10;
+      const reportPageLimit = reportPageSize;
       let activeStatFilter = null;
       let currentReportFindingCategory = null;
+
+      const FINDING_GUIDANCE = {
+        lorem_ipsum: {
+          title: 'Lorem Ipsum Placeholder',
+          group: 'Content Quality',
+          why: 'Unreplaced Latin placeholder text damages brand credibility, user trust, and search indexing.',
+          fix: 'Click the highlighted phrase or "Highlight on Page" to locate this block on the live webpage and replace it with final production copy.'
+        },
+        placeholder: {
+          title: 'Generic Placeholder Copy',
+          group: 'Content Quality',
+          why: 'Template text (e.g. "Sample Text", "Your Content Goes Here", "Coming Soon") signals an unfinished page.',
+          fix: 'Click "Highlight on Page" to jump to the placeholder on the live site and replace it with approved copy.'
+        },
+        developer_mock: {
+          title: 'Developer TODO / FIXME Marker',
+          group: 'Content Quality',
+          why: 'Internal engineering TODO/FIXME markers exposed in public HTML or scripts leak unfinished implementation notes.',
+          fix: 'Resolve the TODO item and remove developer markers from public templates.'
+        },
+        empty_page: {
+          title: 'Low Text Volume / Empty Page',
+          group: 'Content Quality',
+          why: 'Pages with very little visible text appear broken to visitors or rely solely on client-side JS rendering.',
+          fix: 'Add substantive body copy or enable Playwright JS rendering if this route is rendered client-side.'
+        },
+        incomplete_sections: {
+          title: 'Empty Content Section',
+          group: 'Content Quality',
+          why: 'Empty <section> or <article> containers leave blank layout gaps.',
+          fix: 'Populate the section container or remove unused structural markup.'
+        },
+        duplicate_content: {
+          title: 'Duplicate Page Content',
+          group: 'Content Quality',
+          why: 'Identical body copy across multiple URLs dilutes SEO ranking signals.',
+          fix: 'Consolidate duplicate pages with a 301 redirect or canonical tag, or author unique copy.'
+        },
+        missing_title: {
+          title: 'Missing <title> Tag',
+          group: 'SEO',
+          why: 'Search engines and browser tabs rely on <title> as the primary document headline.',
+          fix: 'Add a unique, descriptive <title> (50–60 characters) inside <head>.'
+        },
+        missing_meta_desc: {
+          title: 'Missing Meta Description',
+          group: 'SEO',
+          why: 'Missing meta descriptions reduce search click-through rates on search engine result pages.',
+          fix: 'Add <meta name="description" content="..."> (120–155 characters) inside <head>.'
+        },
+        missing_h1: {
+          title: 'Missing Primary <h1> Heading',
+          group: 'SEO',
+          why: 'Every page should have a primary <h1> heading to establish document hierarchy for SEO and screen readers.',
+          fix: 'Add a clear, descriptive <h1> heading at the top of the page content.'
+        },
+        multiple_h1: {
+          title: 'Multiple <h1> Headings',
+          group: 'SEO',
+          why: 'Multiple <h1> tags can dilute the primary topical focus of the document.',
+          fix: 'Keep a single primary <h1> and convert secondary headings to <h2> or <h3>.'
+        },
+        heading_structure: {
+          title: 'Heading Hierarchy Issue',
+          group: 'SEO',
+          why: 'Skipped or malformed heading levels hurt document outline clarity.',
+          fix: 'Nest headings sequentially (<h1> -> <h2> -> <h3>).'
+        },
+        missing_canonical: {
+          title: 'Missing Canonical Tag',
+          group: 'SEO',
+          why: 'Without a <link rel="canonical"> tag, URL parameters or alternate paths can split SEO authority.',
+          fix: 'Add <link rel="canonical" href="https://..."> inside <head>.'
+        },
+        missing_image_alt: {
+          title: 'Images Missing Alt Attribute',
+          group: 'Accessibility',
+          why: 'Screen readers cannot describe images lacking an alt attribute (WCAG 1.1.1).',
+          fix: 'Add descriptive alt="..." text to informative images, or alt="" for decorative images.'
+        },
+        missing_lang: {
+          title: 'Missing HTML Lang Attribute',
+          group: 'Accessibility',
+          why: 'Screen readers require <html lang="..."> to choose the proper pronunciation engine (WCAG 3.1.1).',
+          fix: 'Add a valid language code (e.g. lang="en") to the root <html> element.'
+        },
+        broken_link: {
+          title: 'Broken Internal Link',
+          group: 'Technical & Network',
+          why: 'Hyperlinks returning HTTP 4xx/5xx errors dead-end visitors and waste search crawl budget.',
+          fix: 'Update the anchor href attribute to a valid URL or remove the broken link.'
+        },
+        failed_resource: {
+          title: 'Failed External Asset',
+          group: 'Technical & Network',
+          why: 'Linked JS/CSS resources returning HTTP errors can break page layout or interactivity.',
+          fix: 'Verify the asset path and ensure the file is deployed and accessible.'
+        }
+      };
+
+      // =========================================================================
+      // COPY HIGHLIGHT TEXT (WICG Scroll-to-Text Fragment #:~:text=...) ENGINE
+      // =========================================================================
+      function encodeTextFragmentPart(str) {
+        return encodeURIComponent(String(str || '').trim())
+          .replace(/-/g, '%2D')
+          .replace(/,/g, '%2C')
+          .replace(/&/g, '%26');
+      }
+
+      function buildTextFragmentUrl(pageUrl, matchedText) {
+        if (!pageUrl) return '#';
+        const baseUrl = String(pageUrl).split('#')[0];
+        if (!matchedText) return baseUrl;
+
+        // Strip internal audit prefixes if someone passes surrounding_context
+        let clean = String(matchedText)
+          .replace(/^Matched:\s*/i, '')
+          .replace(/\s+/g, ' ')
+          .trim();
+        if (!clean) return baseUrl;
+
+        const words = clean.split(' ');
+        // For long paragraph evidence (> 14 words), use WICG range syntax #:~:text=textStart,textEnd
+        // so Chrome, Edge, Brave, Opera, and Safari highlight the entire paragraph block reliably.
+        if (words.length > 14) {
+          const startSnippet = words.slice(0, 6).join(' ');
+          const endSnippet = words.slice(-6).join(' ');
+          return `${baseUrl}#:~:text=${encodeTextFragmentPart(startSnippet)},${encodeTextFragmentPart(endSnippet)}`;
+        }
+
+        return `${baseUrl}#:~:text=${encodeTextFragmentPart(clean)}`;
+      }
+
+      function isTextHighlightableCategory(category, resourceType) {
+        const cat = String(category || 'lorem_ipsum').toLowerCase();
+        const rType = String(resourceType || 'html').toLowerCase();
+        return rType === 'html' && ['lorem_ipsum', 'placeholder', 'developer_mock'].includes(cat);
+      }
+
+      async function copyHighlightLink(pageUrl, matchedText) {
+        const deepUrl = buildTextFragmentUrl(pageUrl, matchedText);
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(deepUrl);
+          } else {
+            const ta = document.createElement('textarea');
+            ta.value = deepUrl;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            ta.remove();
+          }
+          toast('Highlight Link Copied', 'Browser Copy-Highlight URL (#:~:text=...) copied to clipboard.', 'success');
+        } catch (err) {
+          toast('Copy Failed', err.message || 'Unable to copy highlight URL.', 'error');
+        }
+      }
 
       // Theme Management
       function toggleTheme() {
@@ -2236,6 +2478,7 @@
         const select = document.getElementById("themePreference");
         if (select) select.value = document.documentElement.classList.contains("dark") ? "dark" : "light";
         if (modal) modal.classList.add("open");
+        loadDetectionRules();
       }
       function closeSettings() {
         const modal = document.getElementById("settingsModal");
@@ -2264,6 +2507,14 @@
             const fd = new FormData(e.target);
             fd.append("action", "start");
             fd.append("use_sitemap", "auto");
+            const delayMsEl = document.getElementById("requestDelayInput");
+            if (delayMsEl && delayMsEl.value !== "") {
+              fd.set("request_delay", String(Math.max(0, Math.round(Number(delayMsEl.value) / 1000))));
+            }
+            const wpChk = document.querySelector('input[name="disc_wordpress_api"]');
+            if (wpChk) fd.set("disc_wordpress_api", wpChk.checked ? "1" : "0");
+            const pgChk = document.querySelector('input[name="disc_pagination"]');
+            if (pgChk) fd.set("disc_pagination", pgChk.checked ? "1" : "0");
             try {
               btn.disabled = true;
               btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Initiating…';
@@ -2711,7 +2962,7 @@
         }
         const scanIdArg = p.latest_scan_id ? p.latest_scan_id : 'null';
         const loremTitle = `${(pr.lorem_found || 0).toLocaleString()} paragraph findings, ${(pr.lorem_occurrences || pr.lorem_found || 0).toLocaleString()} phrase occurrences across ${(pr.lorem_pages || 0).toLocaleString()} affected pages`;
-        return `<div id="card-${p.id}" class="proj-card anim-enter"><div class="proj-hd-div" style="padding:18px 22px;border-bottom:1px solid var(--border-1);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;"><div style="display:flex;align-items:center;gap:14px;"><div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;${ic.bg}"><i class="fas ${ic.cls}" style="font-size:17px;color:${ic.col};"></i></div><div><h3 class="proj-name">${esc(p.project_name)}</h3><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span class="proj-id">${p.id.split("_")[1] || p.id.slice(-8)}</span><a href="${esc(p.website_url)}" target="_blank" class="proj-link">${host} <i class="fas fa-external-link-alt" style="font-size:8px;"></i></a></div></div></div><div>${buildBadge(p.status)}</div></div><div style="padding:18px 22px;">${ia || (pct > 0 && p.status !== "completed") ? `<div style="margin-bottom:20px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span class="prg-lbl" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Processing</span><span class="prg-pct" style="font-size:11px;font-weight:700;font-family:'DM Mono',monospace;" data-pct>${pct}%</span></div><div class="prg-bar prg-track" style="width:100%;"><div class="prg-fill shimmer-bar" data-bar style="height:100%;border-radius:999px;width:${pct}%;transition:width 0.7s ease;"></div></div></div>` : ""}<div class="proj-card-metrics" style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:18px;"><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">URLs</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-total>${pr.total_urls || 0}</p></div><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Done</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-done>${pr.processed || 0}</p></div><div class="sc-clean" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-c" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Clean</p><p class="sc-val-c" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-clean>${pr.clean || 0}</p></div><div class="sc-amber" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-a" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Issues</p><p class="sc-val-a" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-affected>${pr.affected_pages || 0}</p></div><div class="sc-issue" style="padding:10px 8px;border-radius:10px;" title="${loremTitle}"><p class="sc-lbl-i" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Lorem</p><p class="sc-val-i" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-lorem>${pr.lorem_found || 0}</p></div><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Errors</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;color:var(--error);" data-errors>${pr.errors || 0}</p></div></div><div class="act-div" style="border-top:1px solid var(--border-1);padding-top:14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;"><div style="display:flex;flex-wrap:wrap;gap:7px;">${p.status === "completed" ? `<button onclick="viewReport(${scanIdArg})" class="exp-btn" style="background:var(--accent); color:#FFF; border-color:var(--accent);"><i class="fas fa-chart-pie" style="color:#FFF;"></i> View Report</button><button onclick="exportResults(${scanIdArg},'csv')" class="exp-btn"><i class="fas fa-file-csv" style="color:var(--success);"></i> CSV</button><button onclick="exportResults(${scanIdArg},'json')" class="exp-btn"><i class="fas fa-code" style="color:var(--accent);"></i> JSON</button>` : ""}${p.status === "paused" ? `<button onclick="manageProject('${p.id}','resume')" class="resume-btn"><i class="fas fa-play" style="font-size:9px;"></i> Resume</button>` : ia ? `<button onclick="manageProject('${p.id}','pause')" class="pause-btn"><i class="fas fa-pause" style="font-size:9px;"></i> Pause</button>` : ""}</div><div style="display:flex;align-items:center;gap:8px;"><button id="logbtn-${p.id}" onclick="toggleLogs('${p.id}')" class="log-btn ${lo ? "open" : ""}"><i class="fas fa-terminal" style="font-size:10px;"></i> Console</button><button onclick="deleteProject('${p.id}')" class="del-btn"><i class="fas fa-trash-alt" style="font-size:11px;"></i></button></div></div><div id="logpanel-${p.id}" style="${lo ? "" : "display:none;"}margin-top:14px;" class="anim-enter"><div class="terminal" style="padding:0;font-family:'DM Mono',monospace;"><div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.2);"><div style="display:flex;gap:5px;"><div style="width:10px;height:10px;border-radius:50%;background:#f43f5e;"></div><div style="width:10px;height:10px;border-radius:50%;background:#f59e0b;"></div><div style="width:10px;height:10px;border-radius:50%;background:#22c55e;"></div></div><span style="font-size:9px;color:#a8b2e8;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;">agent_runtime.log</span></div><div id="logs-${p.id}" class="log-txt" style="max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;font-size:11px;line-height:1.7;padding:14px;"><span style="color:#6370a8;font-style:italic;">Initializing socket connection…</span></div></div></div></div></div>`;
+        return `<div id="card-${p.id}" class="proj-card anim-enter"><div class="proj-hd-div" style="padding:18px 22px;border-bottom:1px solid var(--border-1);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;"><div style="display:flex;align-items:center;gap:14px;"><div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;${ic.bg}"><i class="fas ${ic.cls}" style="font-size:17px;color:${ic.col};"></i></div><div><h3 class="proj-name">${esc(p.project_name)}</h3><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"><span class="proj-id">${p.id.split("_")[1] || p.id.slice(-8)}</span><a href="${esc(p.website_url)}" target="_blank" class="proj-link">${host} <i class="fas fa-external-link-alt" style="font-size:8px;"></i></a></div></div></div><div>${buildBadge(p.status)}</div></div><div style="padding:18px 22px;">${ia || (pct > 0 && p.status !== "completed") ? `<div style="margin-bottom:20px;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><span class="prg-lbl" style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;">Processing</span><span class="prg-pct" style="font-size:11px;font-weight:700;font-family:'DM Mono',monospace;" data-pct>${pct}%</span></div><div class="prg-bar prg-track" style="width:100%;"><div class="prg-fill shimmer-bar" data-bar style="height:100%;border-radius:999px;width:${pct}%;transition:width 0.7s ease;"></div></div></div>` : ""}<div class="proj-card-metrics" style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:18px;"><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">URLs</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-total>${pr.total_urls || 0}</p></div><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Done</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-done>${pr.processed || 0}</p></div><div class="sc-clean" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-c" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Clean</p><p class="sc-val-c" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-clean>${pr.clean || 0}</p></div><div class="sc-amber" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-a" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Issues</p><p class="sc-val-a" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-affected>${pr.affected_pages || 0}</p></div><div class="sc-issue" style="padding:10px 8px;border-radius:10px;" title="${loremTitle}"><p class="sc-lbl-i" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Lorem</p><p class="sc-val-i" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;" data-lorem>${pr.lorem_found || 0}</p></div><div class="sc-neutral" style="padding:10px 8px;border-radius:10px;"><p class="sc-lbl-n" style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;">Errors</p><p class="sc-val-n" style="font-size:18px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.025em;color:var(--error);" data-errors>${pr.errors || 0}</p></div></div><div class="act-div" style="border-top:1px solid var(--border-1);padding-top:14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;"><div style="display:flex;flex-wrap:wrap;gap:7px;">${p.status === "completed" ? `<button onclick="viewReport(${scanIdArg})" class="exp-btn" style="background:var(--accent); color:#FFF; border-color:var(--accent);"><i class="fas fa-chart-pie" style="color:#FFF;"></i> View Report</button><button onclick="exportResults(${scanIdArg},'csv')" class="exp-btn"><i class="fas fa-file-csv" style="color:var(--success);"></i> CSV</button><button onclick="exportResults(${scanIdArg},'json')" class="exp-btn"><i class="fas fa-code" style="color:var(--accent);"></i> JSON</button>` : ""}${p.status === "paused" || p.status === "interrupted" ? `<button onclick="manageProject('${p.id}','resume')" class="resume-btn"><i class="fas fa-play" style="font-size:9px;"></i> Resume</button>` : ia ? `<button onclick="manageProject('${p.id}','pause')" class="pause-btn"><i class="fas fa-pause" style="font-size:9px;"></i> Pause</button><button onclick="manageProject('${p.id}','cancel')" class="exp-btn" style="color:var(--error);border-color:var(--error-border);"><i class="fas fa-stop" style="font-size:9px;"></i> Cancel</button>` : ""}</div><div style="display:flex;align-items:center;gap:8px;"><button id="logbtn-${p.id}" onclick="toggleLogs('${p.id}')" class="log-btn ${lo ? "open" : ""}"><i class="fas fa-terminal" style="font-size:10px;"></i> Console</button><button onclick="deleteProject('${p.id}')" class="del-btn"><i class="fas fa-trash-alt" style="font-size:11px;"></i></button></div></div><div id="logpanel-${p.id}" style="${lo ? "" : "display:none;"}margin-top:14px;" class="anim-enter"><div class="terminal" style="padding:0;font-family:'DM Mono',monospace;"><div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.06);background:rgba(0,0,0,0.2);"><div style="display:flex;gap:5px;"><div style="width:10px;height:10px;border-radius:50%;background:#f43f5e;"></div><div style="width:10px;height:10px;border-radius:50%;background:#f59e0b;"></div><div style="width:10px;height:10px;border-radius:50%;background:#22c55e;"></div></div><span style="font-size:9px;color:#a8b2e8;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;">agent_runtime.log</span></div><div id="logs-${p.id}" class="log-txt" style="max-height:200px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;font-size:11px;line-height:1.7;padding:14px;"><span style="color:#6370a8;font-style:italic;">Initializing socket connection…</span></div></div></div></div></div>`;
       }
 
       function sIcon(s) {
@@ -2867,7 +3118,7 @@
           ).json();
           if (d.success) {
             toast(
-              act === "pause" ? "Scan Paused" : "Scan Resumed",
+              act === "pause" ? "Scan Paused" : (act === "cancel" ? "Scan Cancelled" : "Scan Resumed"),
               d.data.message,
               "success",
             );
@@ -2907,7 +3158,7 @@
           box.innerHTML = d.data.logs
             .map(
               (l) =>
-                `<div><span style="color:#6370a8;margin-right:8px;">[${l.created_at.slice(11, 19)}]</span><span style="color:${l.level === "ERROR" ? "var(--error)" : l.level === "WARNING" ? "var(--warning)" : "var(--text-secondary)"};">[${l.level}]</span> <span style="color:var(--text-primary);">${esc(l.message)}</span></div>`,
+                `<div><span style="color:#6370a8;margin-right:8px;">[${((l.timestamp || l.created_at || "").slice(11, 19) || "--:--:--")}]</span><span style="color:${l.level === "ERROR" ? "var(--error)" : l.level === "WARNING" ? "var(--warning)" : "var(--text-secondary)"};">[${l.level}]</span> <span style="color:var(--text-primary);">${esc(l.message)}</span></div>`,
             )
             .join("");
           box.scrollTop = box.scrollHeight;
@@ -3527,6 +3778,10 @@
           const sevBadge = '<span class="rep-badge" style="background:rgba(255,255,255,0.06); color:' + sevCol + '; border:1px solid ' + sevCol + '40;">' + (f.severity || 'medium').toUpperCase() + '</span>';
           const info = FINDING_GUIDANCE[f.detection_category] || {};
           const catTitle = info.title || (f.detection_category || 'lorem_ipsum').replace(/_/g, ' ');
+          const canHighlightOnPage = isTextHighlightableCategory(f.detection_category, f.resource_type);
+          const targetDeepUrl = canHighlightOnPage ? buildTextFragmentUrl(f.page_url, f.matched_text) : (f.page_url || '#');
+          const safeUrlJs = esc(JSON.stringify(f.page_url || '')).replace(/^"|"$/g, '');
+          const safeTextJs = esc(JSON.stringify(f.matched_text || '')).replace(/^"|"$/g, '');
 
           html += `
             <tr>
@@ -3535,21 +3790,31 @@
                 <div style="font-size:10px; color:var(--text-tertiary); font-family:'DM Mono',monospace;">${esc(f.html_element ? '<' + f.html_element + '>' : (f.resource_type || 'html'))}</div>
               </td>
               <td>
-                <div style="max-height:85px; overflow-y:auto; font-size:11.5px; line-height:1.5; color:var(--text-primary); background:var(--surface-2); padding:6px 10px; border-radius:6px; border:1px solid var(--border-2);">
-                  ${highlightLoremPhrases(esc(f.matched_text))}
+                <div style="max-height:95px; overflow-y:auto; font-size:11.5px; line-height:1.55; color:var(--text-primary); background:var(--surface-2); padding:7px 10px; border-radius:6px; border:1px solid var(--border-2);">
+                  ${highlightLoremPhrases(esc(f.matched_text), canHighlightOnPage ? f.page_url : '')}
                 </div>
               </td>
               <td>
                 <span class="rep-badge" style="background:rgba(99,91,255,0.12); color:var(--accent); font-weight:700;">${occ} phrase${occ > 1 ? 's' : ''}</span>
               </td>
               <td>${sevBadge}</td>
-              <td style="max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11px;">
-                <a href="${esc(f.page_url)}" target="_blank" style="color:var(--accent); text-decoration:underline;">${esc(f.page_url)}</a>
+              <td style="max-width:190px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:11px;">
+                <a href="${esc(targetDeepUrl)}" target="_blank" rel="noopener noreferrer" title="${canHighlightOnPage ? 'Open page and highlight matched Lorem Ipsum text' : 'Open page'}" style="color:var(--accent); text-decoration:underline;">${esc(f.page_url)}</a>
               </td>
               <td style="text-align:right;">
-                <button onclick="inspectPageDetails(${f.page_result_id})" class="exp-btn" style="padding:4px 10px; font-size:11px; display:inline-flex;">
-                  <i class="fas fa-eye"></i> View
-                </button>
+                <div style="display:inline-flex; gap:6px; align-items:center; justify-content:flex-end; flex-wrap:wrap;">
+                  ${canHighlightOnPage ? `
+                    <a href="${esc(targetDeepUrl)}" target="_blank" rel="noopener noreferrer" class="hl-action-btn" title="Navigate to webpage and highlight this Lorem Ipsum text on the page">
+                      <i class="fas fa-highlighter"></i> Highlight
+                    </a>
+                    <button type="button" onclick="copyHighlightLink('${safeUrlJs}', '${safeTextJs}')" class="exp-btn" style="padding:4px 8px; font-size:11px; display:inline-flex;" title="Copy direct highlight URL (#:~:text=...)">
+                      <i class="fas fa-link"></i>
+                    </button>
+                  ` : ''}
+                  <button type="button" onclick="inspectPageDetails(${f.page_result_id})" class="exp-btn" style="padding:4px 10px; font-size:11px; display:inline-flex;">
+                    <i class="fas fa-eye"></i> Inspect
+                  </button>
+                </div>
               </td>
             </tr>
           `;
@@ -3679,16 +3944,29 @@
             items.forEach(({ f, info, idx }) => {
               const occ = f.occurrences || 1;
               const sevCol = f.severity === 'high' ? '#FB7185' : (f.severity === 'medium' ? '#FBB024' : '#94A3B8');
-              const highlightedText = highlightLoremPhrases(esc(f.matched_text));
+              const pageTargetUrl = f.page_url || page.final_url || page.requested_url || '';
+              const canHighlightOnPage = isTextHighlightableCategory(f.detection_category, f.resource_type);
+              const deepHighlightUrl = canHighlightOnPage ? buildTextFragmentUrl(pageTargetUrl, f.matched_text) : pageTargetUrl;
+              const highlightedText = highlightLoremPhrases(esc(f.matched_text), canHighlightOnPage ? pageTargetUrl : '');
+              const safeUrlJs = esc(JSON.stringify(pageTargetUrl)).replace(/^"|"$/g, '');
+              const safeTextJs = esc(JSON.stringify(f.matched_text || '')).replace(/^"|"$/g, '');
 
               drawerHtml += `
                 <div class="evidence-box">
-                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; border-bottom:1px solid var(--border-1); padding-bottom:8px;">
-                    <div style="display:flex; align-items:center; gap:8px;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; border-bottom:1px solid var(--border-1); padding-bottom:8px;">
+                    <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
                       <span class="rep-badge" style="background:var(--accent-muted); color:var(--accent); font-weight:700;">#${idx} ${esc(info.title)}</span>
                       ${f.html_element ? `<span style="font-size:10px; color:var(--text-tertiary); font-family:'DM Mono',monospace;">&lt;${esc(f.html_element)}&gt;</span>` : ''}
                     </div>
-                    <div style="display:flex; align-items:center; gap:6px;">
+                    <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
+                      ${canHighlightOnPage ? `
+                        <a href="${esc(deepHighlightUrl)}" target="_blank" rel="noopener noreferrer" class="hl-action-btn" title="Open live webpage and highlight this matched Lorem Ipsum text">
+                          <i class="fas fa-highlighter"></i> Highlight on Live Page
+                        </a>
+                        <button type="button" onclick="copyHighlightLink('${safeUrlJs}', '${safeTextJs}')" class="exp-btn" style="padding:4px 8px; font-size:10.5px; display:inline-flex;" title="Copy direct highlight URL (#:~:text=...)">
+                          <i class="fas fa-copy"></i> Copy Highlight Link
+                        </button>
+                      ` : ''}
                       <span class="rep-badge" style="background:rgba(255,255,255,0.06); color:${sevCol}; border:1px solid ${sevCol}40;">${esc((f.severity || 'medium').toUpperCase())}</span>
                       <span class="rep-badge" style="background:rgba(99,91,255,0.12); color:var(--accent);">
                         ${occ} Occurrence${occ > 1 ? 's' : ''}
@@ -3698,7 +3976,7 @@
 
                   <div style="margin-bottom:8px;">
                     <span style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-tertiary); display:block; margin-bottom:4px;">
-                      Captured Evidence / Matched Text:
+                      Captured Evidence / Matched Text ${canHighlightOnPage ? '<span style="color:var(--accent);font-weight:600;text-transform:none;">(Click any highlighted phrase to jump &amp; highlight on the live site)</span>' : ''}:
                     </span>
                     <div style="font-size:12.5px; line-height:1.6; color:var(--text-primary); white-space:pre-wrap; background:var(--surface-1); padding:8px 12px; border-radius:6px; border:1px solid var(--border-2);">
                       ${highlightedText}
@@ -3738,29 +4016,155 @@
         return Array.isArray(haystack) && haystack.includes(needle);
       }
 
-      function highlightLoremPhrases(escapedHtml) {
+      function highlightLoremPhrases(escapedHtml, pageUrl = '') {
         if (!escapedHtml) return '';
         const phrases = [
           /\blorem\s+ipsum\b/gi,
           /\bdolor\s+sit\s+amet\b/gi,
           /\bconsectetur\s+adipiscing\b/gi,
-          /\bsed\s+do\s+eiusmod\b/gi,
+          /\bsed\s+do\s+eiusmod(?:\s+tempor)?\b/gi,
           /\but\s+labore\s+et\s+dolore\b/gi,
           /\bmagna\s+aliqua\b/gi,
           /\bduis\s+aute\s+irure\b/gi,
-          /\bexcepteur\s+sint\b/gi,
+          /\bexcepteur\s+sint(?:\s+occaecat)?\b/gi,
           /\bnulla\s+pariatur\b/gi,
-          /\bquis\s+nostrud\b/gi,
+          /\bquis\s+nostrud(?:\s+exercitation)?\b/gi,
+          /\byour\s+(?:content|text)\s+goes\s+here\b/gi,
+          /\breplace\s+with\s+(?:actual\s+)?content\b/gi,
           /\bplaceholder\s+text\b/gi,
           /\bsample\s+text\b/gi,
-          /\binsert\s+text\s+here\b/gi
+          /\binsert\s+text\s+here\b/gi,
+          /\bcoming\s+soon\b/gi,
+          /\btest\s+content\b/gi
         ];
+
+        // Decode HTML entities back to plain text when building the full paragraph text fragment URL
+        const rawParagraph = String(escapedHtml)
+          .replace(/&lt;/g, '<')
+          .replace(/&gt;/g, '>')
+          .replace(/&quot;/g, '"')
+          .replace(/&#039;/g, "'")
+          .replace(/&amp;/g, '&');
 
         let res = escapedHtml;
         phrases.forEach(regex => {
-          res = res.replace(regex, (match) => `<span class="evidence-highlight">${match}</span>`);
+          res = res.replace(regex, (match) => {
+            if (pageUrl) {
+              // Build a text fragment URL that highlights the full paragraph or exact phrase on the target page
+              const fragUrl = buildTextFragmentUrl(pageUrl, rawParagraph.length <= 240 ? rawParagraph : match);
+              return `<a href="${esc(fragUrl)}" target="_blank" rel="noopener noreferrer" class="evidence-highlight" title="Click to open ${esc(pageUrl)} and highlight '${esc(match)}' on the webpage">${match} <i class="fas fa-arrow-up-right-from-square" style="font-size:8.5px;"></i></a>`;
+            }
+            return `<span class="evidence-highlight">${match}</span>`;
+          });
         });
         return res;
+      }
+
+      // =========================================================================
+      // CUSTOM DETECTION RULES MANAGER (SETTINGS MODAL)
+      // =========================================================================
+      async function loadDetectionRules() {
+        const box = document.getElementById('rulesManagerList');
+        if (!box) return;
+        box.innerHTML = '<span style="color:var(--text-tertiary);">Loading detection rules...</span>';
+        try {
+          const res = await (await fetch(API_URL + '?action=rules_list')).json();
+          if (!res.success || !res.data || !Array.isArray(res.data.rules)) {
+            box.innerHTML = '<span style="color:var(--error);">Unable to load rules.</span>';
+            return;
+          }
+          const rules = res.data.rules;
+          if (!rules.length) {
+            box.innerHTML = '<span style="color:var(--text-tertiary);">No detection rules configured.</span>';
+            return;
+          }
+          box.innerHTML = rules.map(r => {
+            const isEnabled = Number(r.enabled) === 1;
+            const isBuiltin = Number(r.is_builtin) === 1;
+            return `
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border-1);">
+                <div style="min-width:0;flex:1;">
+                  <div style="font-weight:700;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                    ${esc(r.rule_name)} ${isBuiltin ? '<span style="font-size:9px;color:var(--text-tertiary);font-weight:500;">(built-in)</span>' : '<span style="font-size:9px;color:var(--accent);font-weight:600;">(custom)</span>'}
+                  </div>
+                  <div style="font-family:\'DM Mono\',monospace;font-size:10px;color:var(--text-tertiary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${esc(r.pattern)}</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+                  <button type="button" onclick="toggleDetectionRule(${Number(r.id)}, ${isEnabled ? 0 : 1})" class="exp-btn" style="padding:3px 8px;font-size:10px;color:${isEnabled ? 'var(--success)' : 'var(--text-tertiary)'};">
+                    ${isEnabled ? 'Enabled' : 'Disabled'}
+                  </button>
+                  ${!isBuiltin ? `<button type="button" onclick="deleteDetectionRule(${Number(r.id)})" class="del-btn" style="width:24px;height:24px;"><i class="fas fa-trash-alt" style="font-size:10px;"></i></button>` : ''}
+                </div>
+              </div>
+            `;
+          }).join('');
+        } catch (e) {
+          box.innerHTML = `<span style="color:var(--error);">${esc(e.message)}</span>`;
+        }
+      }
+
+      async function createCustomRule() {
+        const nameEl = document.getElementById('newRuleName');
+        const patEl = document.getElementById('newRulePattern');
+        const name = nameEl?.value?.trim() || '';
+        const pattern = patEl?.value?.trim() || '';
+        if (!name || !pattern) {
+          toast('Validation Error', 'Both a rule name and regex/phrase pattern are required.', 'error');
+          return;
+        }
+        const fd = new FormData();
+        fd.append('action', 'rules_create');
+        fd.append('rule_name', name);
+        fd.append('pattern', pattern);
+        fd.append('detection_category', 'lorem_ipsum');
+        fd.append('severity', 'high');
+        try {
+          const res = await (await fetch(API_URL, { method: 'POST', body: fd })).json();
+          if (res.success) {
+            if (nameEl) nameEl.value = '';
+            if (patEl) patEl.value = '';
+            toast('Rule Added', 'Custom detection rule created.', 'success');
+            loadDetectionRules();
+          } else {
+            toast('Error', res.error || 'Failed to create rule.', 'error');
+          }
+        } catch (e) {
+          toast('Error', e.message, 'error');
+        }
+      }
+
+      async function toggleDetectionRule(ruleId, enabled) {
+        const fd = new FormData();
+        fd.append('action', 'rules_toggle');
+        fd.append('id', String(ruleId));
+        if (enabled) fd.append('enabled', '1');
+        try {
+          const res = await (await fetch(API_URL, { method: 'POST', body: fd })).json();
+          if (res.success) {
+            loadDetectionRules();
+          } else {
+            toast('Error', res.error || 'Failed to update rule.', 'error');
+          }
+        } catch (e) {
+          toast('Error', e.message, 'error');
+        }
+      }
+
+      async function deleteDetectionRule(ruleId) {
+        const fd = new FormData();
+        fd.append('action', 'rules_delete');
+        fd.append('id', String(ruleId));
+        try {
+          const res = await (await fetch(API_URL, { method: 'POST', body: fd })).json();
+          if (res.success) {
+            toast('Rule Deleted', 'Custom rule removed.', 'success');
+            loadDetectionRules();
+          } else {
+            toast('Error', res.error || 'Failed to delete rule.', 'error');
+          }
+        } catch (e) {
+          toast('Error', e.message, 'error');
+        }
       }
 
       function closeInspectionDrawer(e) {

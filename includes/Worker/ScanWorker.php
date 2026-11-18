@@ -81,8 +81,9 @@ class ScanWorker
             }
         }
 
-        // Initialize logging helper
-        $logFn = function (string $level, string $message, string $eventType = 'general') use ($scanId, $projectId) {
+        // Initialize logging helper (also refreshes worker heartbeat so long discoveries never time out)
+        $logFn = function (string $level, string $message, string $eventType = 'general') use ($scanId, $projectId, $pid) {
+            $this->scanRepo->updateHeartbeat($scanId, $pid);
             $this->logRepo->log($scanId, $projectId, $level, $message, $eventType);
             echo "[" . date('Y-m-d H:i:s') . "] [{$level}] {$message}\n";
         };

@@ -384,6 +384,46 @@ class ScanScheduler
         // Compute content hash for duplicate page detection
         $contentHash  = $this->auditModules->computeContentHash($extracted['full_text'] ?? '');
 
+        // Check for duplicate content across already-scanned canonical pages in this scan
+        $dupEnabled = $this->config['audit_modules']['duplicate_content'] ?? true;
+        if ($dupEnabled && ($extracted['word_count'] ?? 0) >= 30 && $contentHash !== '') {
+            $dupStmt = $this->db->prepare('
+                SELECT requested_url FROM page_results
+                WHERE scan_id = ? AND content_hash = ? AND discovered_url_id != ? AND processing_status != "failed"
+                ORDER BY id ASC LIMIT 1
+            ');
+            $dupStmt->execute([$scanId, $contentHash, $urlId]);
+            $dupOriginUrl = $dupStmt->fetchColumn();
+            if ($dupOriginUrl && $dupOriginUrl !== $url && $dupOriginUrl !== $finalUrl) {
+                $dupFinding = [
+                    'page_url'            => $finalUrl,
+                    'resource_url'        => (string)$dupOriginUrl,
+                    'resource_type'       => 'audit',
+                    'matched_text'        => "Duplicate page text matches {$dupOriginUrl}",
+                    'surrounding_context' => "Normalized text content ({$extracted['word_count']} words) is identical to {$dupOriginUrl}.",
+                    'html_element'        => 'body',
+                    'css_selector'        => 'body',
+                    'section_name'        => 'Content Quality',
+                    'line_number'         => null,
+                    'character_position'  => null,
+                    'is_visible'          => true,
+                    'detection_rule_id'   => null,
+                    'detection_category'  => 'duplicate_content',
+                    'severity'            => 'low',
+                    'confidence'          => 'high',
+                    'finding_fingerprint' => hash('sha256', $finalUrl . '|audit|duplicate_content|' . $contentHash),
+                ];
+                $auditFindings[] = $dupFinding;
+                $allFindings[]   = $dupFinding;
+                $hasAudit        = true;
+                $findingCount    = count($allFindings);
+                $auditCount      = count($auditFindings);
+                $hasFindings     = true;
+                $pageStatus      = 'findings_detected';
+                $auditStatus     = $hasLorem ? 'findings_detected' : 'audit_issues';
+            }
+        }
+
         // 3. Persist page result and findings incrementally
         $pageResultId = null;
         $this->db->beginTransaction();

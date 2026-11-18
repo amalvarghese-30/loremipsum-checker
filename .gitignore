@@ -26,3 +26,7 @@ Thumbs.db
 # Large Archives
 *.zip
 loremispum.zip
+
+# SQLite database files
+database/*.sqlite*
+README.zip

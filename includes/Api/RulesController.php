@@ -75,7 +75,7 @@ class RulesController
             'detection_category' => $category,
             'enabled'            => 1,
             'case_sensitive'     => $caseSensitive ? 1 : 0,
-            'severity'           => in_array($severity, ['critical', 'high', 'medium', 'low'], true) ? $severity : 'high',
+            'severity'           => in_array($severity, ['high', 'medium', 'low'], true) ? $severity : 'high',
             'confidence'         => in_array($confidence, ['high', 'medium', 'low'], true) ? $confidence : 'high',
             'source_types'       => $sources,
             'is_builtin'         => 0,
@@ -109,7 +109,7 @@ class RulesController
             'detection_category' => trim($_POST['detection_category'] ?? $rule['detection_category']),
             'enabled'            => isset($_POST['enabled']) ? (!empty($_POST['enabled']) ? 1 : 0) : $rule['enabled'],
             'case_sensitive'     => isset($_POST['case_sensitive']) ? (!empty($_POST['case_sensitive']) ? 1 : 0) : $rule['case_sensitive'],
-            'severity'           => $_POST['severity'] ?? $rule['severity'],
+            'severity'           => in_array($_POST['severity'] ?? '', ['high', 'medium', 'low'], true) ? $_POST['severity'] : $rule['severity'],
             'confidence'         => $_POST['confidence'] ?? $rule['confidence'],
             'source_types'       => $_POST['source_types'] ?? $rule['source_types'],
         ]);

@@ -98,13 +98,21 @@ class ScanController
             }
         }
 
-        // Validate numerical bounds
+        // Validate numerical bounds (supporting both canonical and frontend alias field names)
         $maxUrls = isset($_POST['max_urls']) && is_numeric($_POST['max_urls']) ? max(1, min(50000, (int)$_POST['max_urls'])) : null;
         $maxDepth = isset($_POST['max_depth']) && is_numeric($_POST['max_depth']) ? max(1, min(20, (int)$_POST['max_depth'])) : null;
         $concurrency = isset($_POST['concurrency']) && is_numeric($_POST['concurrency']) ? max(1, min(50, (int)$_POST['concurrency'])) : 1;
-        $perDomainConcurrency = isset($_POST['per_domain_concurrency']) && is_numeric($_POST['per_domain_concurrency']) ? max(1, min(20, (int)$_POST['per_domain_concurrency'])) : 1;
-        $requestDelay = isset($_POST['request_delay']) && is_numeric($_POST['request_delay']) ? max(0, min(60, (int)$_POST['request_delay'])) : 1;
-        $requestTimeout = isset($_POST['request_timeout']) && is_numeric($_POST['request_timeout']) ? max(1, min(300, (int)$_POST['request_timeout'])) : null;
+        $rawPerDomain = $_POST['per_domain_concurrency'] ?? $_POST['concurrency_per_domain'] ?? null;
+        $perDomainConcurrency = ($rawPerDomain !== null && is_numeric($rawPerDomain)) ? max(1, min(20, (int)$rawPerDomain)) : 1;
+        if (isset($_POST['request_delay']) && is_numeric($_POST['request_delay'])) {
+            $requestDelay = max(0, min(60, (int)$_POST['request_delay']));
+        } elseif (isset($_POST['request_delay_ms']) && is_numeric($_POST['request_delay_ms'])) {
+            $requestDelay = max(0, min(60, (int)round(((float)$_POST['request_delay_ms']) / 1000)));
+        } else {
+            $requestDelay = 1;
+        }
+        $rawReqTimeout = $_POST['request_timeout'] ?? $_POST['request_timeout_sec'] ?? null;
+        $requestTimeout = ($rawReqTimeout !== null && is_numeric($rawReqTimeout)) ? max(1, min(300, (int)$rawReqTimeout)) : null;
         $connectionTimeout = isset($_POST['connection_timeout']) && is_numeric($_POST['connection_timeout']) ? max(1, min(120, (int)$_POST['connection_timeout'])) : null;
         $maxRetries = isset($_POST['max_retries']) && is_numeric($_POST['max_retries']) ? max(0, min(10, (int)$_POST['max_retries'])) : null;
         $retryBaseDelay = isset($_POST['retry_base_delay']) && is_numeric($_POST['retry_base_delay']) ? max(1, min(60, (int)$_POST['retry_base_delay'])) : null;
@@ -441,7 +449,11 @@ class ScanController
 
     private function spawnWorker(int $scanId): bool
     {
-        $phpBinary = $this->config['worker']['php_binary'] ?? (getenv('PHP_CLI_BINARY') ?: PHP_BINARY);
+        $phpBinary = $this->config['worker']['php_binary']
+            ?? (getenv('PHP_CLI_BINARY') ?: (PHP_SAPI === 'cli' ? PHP_BINARY : (is_executable('/usr/bin/php') ? '/usr/bin/php' : PHP_BINARY)));
+        if (str_contains((string)$phpBinary, 'php-fpm') && is_executable('/usr/bin/php')) {
+            $phpBinary = '/usr/bin/php';
+        }
         $workerScript = $this->config['worker']['script'] ?? (dirname(__DIR__, 2) . '/worker.php');
 
         if (!file_exists($workerScript)) {
